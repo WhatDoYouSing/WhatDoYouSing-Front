@@ -20,7 +20,6 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         border: 0;
-        font-size: 14px;
         vertical-align: baseline;
     }
     html,
@@ -29,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
         width: 100%;
         height: 100%;
         font-family: "AppleSDGothicNeo", "Pretendard-regular", sans-serif;
-        font-size: 14px;
+        font-size: 62.5%;  // 1rem을 10px로 설정        
         background-color: #ffffff;
     }
     * {
@@ -42,6 +41,10 @@ const GlobalStyles = createGlobalStyle`
         border: 0;
         background: transparent;
         cursor: pointer;
+    }
+
+    body {
+        padding: 0 1.6rem;
     }
 
 `;
