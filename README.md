@@ -27,3 +27,43 @@
  ##### Development 
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/ReduxPersist-764ABC?style=flat-square&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
 <br/>
+
+## 🗂️ 폴더 구조 (추후 업데이트 예정)
+```
+📂 public
+⎪   └─  favicon.ico
+⎪   └─  index.html
+📂 src
+├─ 📂 components
+⎪  ⎪   └─ 📂 _common                    
+⎪  ⎪   ⎪   └─ LyricsItem.jsx
+⎪  ⎪   ⎪   └─ Dropdown.jsx
+⎪  ⎪   ⎪   └─ Emotion.jsx
+⎪  ⎪   ⎪   └─ EmotionGroup.jsx
+⎪  ⎪   └─  AskModal.jsx
+⎪  ⎪   └─  ShareModal.jsx
+⎪  ⎪   └─  CommentBox.jsx
+⎪  ⎪   └─  Reply.jsx
+⎪  ⎪   └─  EmotionCategory.jsx
+⎪  ⎪   └─  MySelectCategory.jsx
+⎪  ⎪   └─  SearchResult.jsx
+├─ 📂 pages
+⎪  ⎪   └─  Loginpage.jsx
+⎪  ⎪   └─  SignUppage.jsx
+⎪  ⎪   └─  Mainpage.jsx
+⎪  ⎪   └─  Detailpage.jsx       
+⎪  ⎪   └─  Surfpage.jsx
+⎪  ⎪   └─  Searchpage.jsx
+⎪  ⎪   └─  Mypage.jsx       
+⎪  📂 statics 
+⎪  ⎪   └─ 📂 fonts
+⎪  ⎪   └─ 📂 styles          
+⎪  ⎪   ⎪   └─ GlobalStyle.js
+├─   App.js
+└─   index.css                
+└─   index.js
+├─ .gitignore
+├─ package.json
+├─ README.md
+```
+<br/>
