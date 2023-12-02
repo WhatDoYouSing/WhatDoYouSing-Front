@@ -45,6 +45,10 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         padding: 0 1.6rem;
+
+        @media (min-width: 900px) {
+            padding: 0 16.8rem;
+  }
     }
 
 `;

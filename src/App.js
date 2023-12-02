@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import MainPage from "./pages/Mainpage";
 import Detailpage from "./pages/Detailpage";
+import SearchPage from "./pages/SearchPage";
+import RecommendPage from "./pages/RecommendPage";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Routes>
           <Route path={"/"} element={<MainPage />}></Route>
           <Route path={"/detail"} element={<Detailpage />}></Route>
+          <Route path={"/search"} element={<SearchPage />}></Route>
+          <Route path={"/recommend"} element={<RecommendPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

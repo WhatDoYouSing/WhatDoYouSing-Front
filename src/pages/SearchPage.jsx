@@ -8,14 +8,12 @@ import DropDownBox from "../components/common/DropDownBox";
 
 import Topbar from "../components/common/MainPage/Topbar";
 
-const MainPage = () => {
+const SearchPage = () => {
   return (
-    <Wrapper>
+    <div>
       <Topbar />
-    </Wrapper>
+    </div>
   );
 };
 
-export default MainPage;
-
-const Wrapper = styled.div``;
+export default SearchPage;
