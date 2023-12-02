@@ -96,7 +96,12 @@ EmotionChip.defaultProps = {
   size: "medium",
 };
 
-export default function EmotionChip({ size, text, isSelected, onClick }) {
+export default function EmotionChip({
+  size,
+  text,
+  isSelected = false,
+  onClick = () => {},
+}) {
   return (
     <Wrapper size={size} onClick={onClick} isSelected={isSelected}>
       <ImgDiv imgSize={size}>

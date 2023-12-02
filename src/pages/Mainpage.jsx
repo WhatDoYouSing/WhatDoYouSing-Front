@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 //components
 import LyricsItem from "../components/common/LyricsItem";
-import EmotionChip from "../components/common/EmotionChip";
 import EmotionList from "../components/common/EmotionList";
+import DropDownBox from "../components/common/DropDownBox";
 
 const MainPage = () => {
   return (
     <div>
       <LyricsItem />
       <EmotionList />
+      <DropDownBox />
     </div>
   );
 };
