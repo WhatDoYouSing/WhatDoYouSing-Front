@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as BasicSmile } from "../../images/basic-smile.svg";
+import { ReactComponent as ClickedSmile } from "../../images/basic-smile-red.svg";
 
 const sizes = {
   small: {
@@ -70,10 +71,17 @@ const Wrapper = styled.div`
   align-items: center;
 
   border-radius: 4rem;
-  border: 0.15rem solid var(--Gray, #d9d9d9);
-  background: var(--White, #fff);
+  border: 0.15rem solid var(--gray);
+  background: var(--white);
 
   ${sizeStyles}
+
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      border-color: var(--pointPink);
+      color: var(--pointPink);
+    `};
 `;
 
 const ImgDiv = styled.div`
@@ -85,16 +93,14 @@ const EmotionText = styled.div`
 `;
 
 EmotionChip.defaultProps = {
-  size: "small",
+  size: "medium",
 };
 
-export default function EmotionChip({ size }) {
-  const text = "감정";
-  console.log(size);
+export default function EmotionChip({ size, text, isSelected, onClick }) {
   return (
-    <Wrapper size={size}>
+    <Wrapper size={size} onClick={onClick} isSelected={isSelected}>
       <ImgDiv imgSize={size}>
-        <BasicSmile />
+        {isSelected ? <ClickedSmile /> : <BasicSmile />}
       </ImgDiv>
       <EmotionText fontSize={size}>{text}</EmotionText>
     </Wrapper>
