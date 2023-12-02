@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Reply from "../BottomSheet/Reply";
-import profile from "../../images/profile.svg";
-import heart from "../../images/heart.svg";
-import heartclick from "../../images/heartclick.svg";
-import submiticon from "../../images/submiticon.svg";
+// import Reply from "../BottomSheet/Reply";
+import profile from "../images/profile.svg";
+import like from "../images/like.svg";
+import likeclick from "../images/likeclick.svg";
 
 const CommentBox = ({}) => {
   return (
@@ -15,49 +14,27 @@ const CommentBox = ({}) => {
           <img src={`${profile}`} alt="profileimg"></img>
         </ProfileContainer>
         <ContentContainer>
-          <Id>{author}</Id>
-          <Content>{commentContent}</Content>
+          <Id>채오니</Id>
+          <Content>
+            나 혼자선 이 세상도 별 다를게 없겠지 내 하루를 물들여줘 너만의
+            단어들로
+          </Content>
           <Plus>
-            {clickIcon ? (
-              <img
-                src={heartclick}
-                alt="heartclick"
-                onClick={handleLIkeDelete}
-              ></img>
+            {/* {clickIcon ? (
+              <img src={likeclick} alt="likeclick"></img>
             ) : (
-              <img src={heart} alt="heart" onClick={handleLIkeClick}></img>
-            )}
-            <div
-              style={{
-                color: clickIcon ? "#A397FF" : "rgba(255, 255, 255, 0.7)",
-              }}
-            >
-              {commentLike}
-            </div>
-            {clickIcon ? (
-              <div
-                onClick={handleLIkeDelete}
-                style={{
-                  color: "#A397FF",
-                }}
-              >
-                좋아요 취소
-              </div>
-            ) : (
-              <div onClick={handleLIkeClick}>좋아요</div>
-            )}
+              <img src={like} alt="like"></img>
+            )} */}
+            <img src={like} alt="like"></img>
+            <div>6</div>
             <span>·</span>
-            <div onClick={() => handleButtonClick(author)}>답글달기</div>
-            {author === nickname && (
-              <>
-                <span>·</span>
-                <div onClick={() => handleDelete(commentId)}>삭제</div>
-              </>
-            )}
+            <div>답글달기</div>
+            <span>·</span>
+            <div>삭제하기</div>
           </Plus>
         </ContentContainer>
       </Container>
-      {replies &&
+      {/* {replies &&
         replies.map((reply) => (
           <Reply
             key={reply.linecomcom_id}
@@ -72,9 +49,9 @@ const CommentBox = ({}) => {
             handleReplyDelete={handleReplyDelete}
             nickname={nickname}
           ></Reply>
-        ))}
+        ))} */}
 
-      {showReplyForm && (
+      {/* {showReplyForm && (
         <>
           <Mention>{mentionedUser} 님에게 답글</Mention>
           <InputBoxPosition>
@@ -93,7 +70,7 @@ const CommentBox = ({}) => {
             ></img>
           </InputBoxPosition>
         </>
-      )}
+      )} */}
     </>
   );
 };
@@ -129,7 +106,7 @@ const ContentContainer = styled.div`
 `;
 
 const Id = styled.div`
-  color: white;
+  color: var(--veryDarkGray);
   font-size: 12px;
   font-weight: 600;
   line-height: normal;
@@ -138,7 +115,7 @@ const Id = styled.div`
 const Content = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
-  color: white;
+  color: var(--veryDarkGray);
   font-size: 12px;
   font-weight: 500;
   line-height: 125%;
@@ -163,6 +140,11 @@ const Plus = styled.div`
 
   div {
     cursor: pointer;
+    color: var(--darkGray);
+  }
+
+  span {
+    color: var(--darkGray);
   }
 `;
 
