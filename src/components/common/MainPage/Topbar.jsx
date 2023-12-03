@@ -60,7 +60,7 @@ const Topbar = () => {
 export default Topbar;
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -71,10 +71,7 @@ const Wrapper = styled.div`
   background: var(--black);
 
   color: var(--white);
-
-  @media (min-width: 900px) {
-    padding: 0 16.8rem;
-  }
+  z-index: 9999;
 `;
 
 const Container = styled.div`
@@ -84,6 +81,10 @@ const Container = styled.div`
 
   width: 100%;
   padding: 0 1.6rem 2.7rem;
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem 2.7rem;
+  }
 `;
 
 const NavBar = styled.div`

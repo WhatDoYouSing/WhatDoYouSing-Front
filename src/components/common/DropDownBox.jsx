@@ -59,7 +59,4 @@ const Container = styled.label`
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-
-  border: 1px solid var(--gray);
-  //추후 테두리 삭제
 `;
