@@ -24,11 +24,11 @@ const Topbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(null);
 
   useEffect(() => {
     const currentTabId = ITEM_LIST.findIndex((item) => item.path === pathname);
-    setCurrentTab(currentTabId !== -1 ? currentTabId : 0);
+    setCurrentTab(currentTabId !== -1 ? currentTabId : null);
   }, [pathname]);
 
   const handleItemClick = (id) => {
@@ -50,7 +50,7 @@ const Topbar = () => {
             </NavItem>
           ))}
         </NavBar>
-        <UserProfile></UserProfile>
+        <UserProfile onClick={() => navigate("/my")}></UserProfile>
       </Container>
       <RoundDiv />
     </Wrapper>
@@ -115,6 +115,7 @@ const UserProfile = styled.div`
   background-color: var(--gray);
 
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 const RoundDiv = styled.div`

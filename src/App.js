@@ -5,6 +5,7 @@ import MainPage from "./pages/Mainpage";
 import Detailpage from "./pages/Detailpage";
 import SearchPage from "./pages/SearchPage";
 import RecommendPage from "./pages/RecommendPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path={"/detail"} element={<Detailpage />}></Route>
           <Route path={"/search"} element={<SearchPage />}></Route>
           <Route path={"/recommend"} element={<RecommendPage />}></Route>
+          <Route path={"/my"} element={<MyPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

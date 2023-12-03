@@ -43,3 +43,7 @@ const ScrollArea = styled.div`
   scroll-snap-align: start;
   display: inline-block;
 `;
+
+//scroll snap을 쓰면 될 거라고 생각했는데... 안일했습니다...
+//useRef 써서 자체 세로 캐러셀을 만들어야 될 것 같아요
+//시간 날 때 각 잡고 좀 더 만들어볼게요!!
