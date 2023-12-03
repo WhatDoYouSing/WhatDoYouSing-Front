@@ -99,6 +99,7 @@ const NavItem = styled.div`
   font-weight: 500;
   line-height: 130%;
   letter-spacing: -0.016rem;
+  cursor: pointer;
 
   ${({ selected }) =>
     selected &&
