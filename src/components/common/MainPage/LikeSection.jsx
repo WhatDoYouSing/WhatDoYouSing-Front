@@ -5,7 +5,7 @@ import { ReactComponent as More } from "../../../images/more.svg";
 import { ReactComponent as SampleHeart } from "../../../images/sample-heart.svg";
 
 //components
-import LyricsItem from "../LyricsItem";
+import LikeCarousel from "./LikeCarousel";
 import EmotionChip from "../EmotionChip";
 
 const LikeSection = () => {
@@ -20,7 +20,7 @@ const LikeSection = () => {
           <SampleHeart /> 234,345
         </Like>
       </LikeDiv>
-      <LyricsItem />
+      <LikeCarousel />
     </Wrapper>
   );
 };
