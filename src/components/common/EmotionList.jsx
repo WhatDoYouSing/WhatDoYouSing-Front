@@ -79,7 +79,7 @@ const ShortWrapper = styled.div`
   align-items: center;
   gap: 0.8rem;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1216px) {
     display: none;
   }
 `;
@@ -98,7 +98,7 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1216px) {
     display: none;
   }
 `;

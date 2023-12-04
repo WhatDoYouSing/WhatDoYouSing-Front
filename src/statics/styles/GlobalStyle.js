@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const fonts = {
   AppleSDGothicNeo: "AppleSDGothicNeo",
@@ -45,6 +47,10 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         padding: 0 1.6rem;
+
+        @media (min-width: 1100px) {
+            padding: 0 16.8rem;
+  }
     }
 
 `;
