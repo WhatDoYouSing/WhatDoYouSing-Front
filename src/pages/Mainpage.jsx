@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-//img test
-// svg 파일 이렇게 하면 컴포넌트로 쓸 수 있을 듯!!
-import { ReactComponent as BasicSmile } from "../images/basic-smile.svg";
-import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 //components
-import LyricsItem from "../components/common/LyricsItem";
+
+import Topbar from "../components/common/MainPage/Topbar";
+import LikeSection from "../components/common/MainPage/LikeSection";
+import ChartSection from "../components/common/MainPage/ChartSection";
+import SearchSection from "../components/common/MainPage/SearchSection";
 
 const MainPage = () => {
   return (
-    <div>
-      <LyricsItem />
-      <StyledSVG />
-      <LikeClick width="50" height="50" />
-    </div>
+    <Wrapper>
+      <Topbar />
+      <LikeSection />
+      <ChartSection />
+      <SearchSection />
+    </Wrapper>
   );
 };
 
 export default MainPage;
 
-const StyledSVG = styled(BasicSmile)`
-  width: 50px;
-  height: 50px;
+const Wrapper = styled.div`
+  margin-top: 11.6rem;
 `;

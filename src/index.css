@@ -235,3 +235,82 @@
   font-display: swap;
   unicode-range: U+AC00-D7A3, U+0030-0039;
 }
+
+/* Dots */
+
+.slick-dots-custom {
+  position: absolute;
+  bottom: -25px;
+
+  display: block;
+
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+
+  text-align: center;
+}
+.slick-dots-custom li {
+  position: relative;
+
+  display: inline-block;
+
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+
+  cursor: pointer;
+}
+.slick-dots-custom li button {
+  font-size: 0;
+  line-height: 0;
+
+  display: block;
+
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+
+  cursor: pointer;
+
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+.slick-dots-custom li button:hover,
+.slick-dots-custom li button:focus {
+  outline: none;
+}
+.slick-dots-custom li button:hover:before,
+.slick-dots-custom li button:focus:before {
+  opacity: 1;
+}
+.slick-dots-custom li button:before {
+  font-family: "slick";
+  font-size: 6px;
+  line-height: 20px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 20px;
+  height: 20px;
+
+  content: "•";
+  text-align: center;
+
+  opacity: 1;
+  color: #d9d9d9;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots-custom li.slick-active button:before {
+  opacity: 1;
+  color: #ff005c;
+}
