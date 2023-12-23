@@ -1,40 +1,59 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // import Reply from "../BottomSheet/Reply";
 import profile from "../images/profile.svg";
-import like from "../images/like.svg";
-import likeclick from "../images/likeclick.svg";
+import { ReactComponent as Like } from "../images/like.svg";
+import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-const CommentBox = ({}) => {
+const CommentBox = ({ clickIcon }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+  };
+
+  const [addReply, setAddReply] = useState(false);
+  const handleReply = () => {
+    setAddReply(!addReply);
+  };
+
   return (
     <>
-      <Container>
-        <ProfileContainer>
-          <img src={`${profile}`} alt="profileimg"></img>
-        </ProfileContainer>
-        <ContentContainer>
-          <Id>채오니</Id>
-          <Content>
-            나 혼자선 이 세상도 별 다를게 없겠지 내 하루를 물들여줘 너만의
-            단어들로
-          </Content>
-          <Plus>
-            {/* {clickIcon ? (
-              <img src={likeclick} alt="likeclick"></img>
-            ) : (
-              <img src={like} alt="like"></img>
-            )} */}
-            <img src={like} alt="like"></img>
-            <div>6</div>
-            <span>·</span>
-            <div>답글달기</div>
-            <span>·</span>
-            <div>삭제하기</div>
-          </Plus>
-        </ContentContainer>
-      </Container>
-      {/* {replies &&
+      <Background
+        style={{ backgroundColor: addReply ? "#FFF5F5" : "var(--white)" }}
+      >
+        <Container>
+          <ProfileContainer>
+            <img src={`${profile}`} alt="profileimg"></img>
+          </ProfileContainer>
+          <ContentContainer>
+            <Id>채오니</Id>
+            <Content>
+              나 혼자선 이 세상도 별 다를게 없겠지 내 하루를 물들여줘 너만의
+              단어들로
+            </Content>
+            <Plus>
+              <LikeBtn onClick={handleLike}>
+                {isLiked ? <LikeClick /> : <Like />}
+              </LikeBtn>
+              <Count
+                isLiked={isLiked}
+                style={{
+                  color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
+                }}
+              >
+                {likeCount}
+              </Count>
+              <span>·</span>
+              <AddReply onClick={handleReply}>답글달기</AddReply>
+              <span>·</span>
+              <div>삭제하기</div>
+            </Plus>
+          </ContentContainer>
+        </Container>
+        {/* {replies &&
         replies.map((reply) => (
           <Reply
             key={reply.linecomcom_id}
@@ -51,7 +70,7 @@ const CommentBox = ({}) => {
           ></Reply>
         ))} */}
 
-      {/* {showReplyForm && (
+        {/* {showReplyForm && (
         <>
           <Mention>{mentionedUser} 님에게 답글</Mention>
           <InputBoxPosition>
@@ -71,16 +90,23 @@ const CommentBox = ({}) => {
           </InputBoxPosition>
         </>
       )} */}
+      </Background>
     </>
   );
 };
 
 export default CommentBox;
 
+const Background = styled.div`
+  width: calc(100% + 1.6rem * 2);
+  margin-left: -1.6rem;
+`;
+
 const Container = styled.div`
-  width: 350px;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  padding: 2.5rem 1.6rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -147,6 +173,10 @@ const Plus = styled.div`
     color: var(--darkGray);
   }
 `;
+
+const LikeBtn = styled.div``;
+const Count = styled.div``;
+const AddReply = styled.div``;
 
 const InputBoxPosition = styled.div`
   z-index: 2;
