@@ -1,9 +1,9 @@
-import { styled } from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { ReactComponent as Heart } from "../../images/heart.svg";
 
-const GotoSong = () => {
+const GotoSong = ({ disabled }) => {
   return (
     <Wrapper>
       <SongDiv>
@@ -15,7 +15,7 @@ const GotoSong = () => {
           <Heart />
           234,345
         </LikeBtn>
-        <GoListen>이 노래 들으러 가기</GoListen>
+        <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
       </Buttons>
     </Wrapper>
   );
@@ -93,4 +93,10 @@ const GoListen = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: var(--gray);
+    `};
 `;
