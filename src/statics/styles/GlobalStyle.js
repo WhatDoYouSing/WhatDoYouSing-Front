@@ -48,7 +48,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         padding: 0 1.6rem;
 
-        @media (min-width: 1100px) {
+        @media (min-width: 1200px) {
             padding: 0 16.8rem;
   }
     }

@@ -7,6 +7,10 @@ import SearchPage from "./pages/SearchPage";
 import RecommendPage from "./pages/RecommendPage";
 import MyPage from "./pages/MyPage";
 
+import InitialPage from "./pages/InitialPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+
 function App() {
   return (
     <>
@@ -14,6 +18,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<MainPage />}></Route>
+          <Route path={"/initial"} element={<InitialPage />}></Route>
+          <Route path={"/login"} element={<LoginPage />}></Route>
+          <Route path={"/signup"} element={<SignupPage />}></Route>
           <Route path={"/detail"} element={<Detailpage />}></Route>
           <Route path={"/search"} element={<SearchPage />}></Route>
           <Route path={"/recommend"} element={<RecommendPage />}></Route>
