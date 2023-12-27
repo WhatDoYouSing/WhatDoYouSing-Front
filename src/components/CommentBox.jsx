@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 
 // import Reply from "../BottomSheet/Reply";
@@ -6,7 +6,7 @@ import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-const CommentBox = ({ clickIcon }) => {
+const CommentBox = ({ onReply }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
   const handleLike = () => {
@@ -17,6 +17,7 @@ const CommentBox = ({ clickIcon }) => {
   const [addReply, setAddReply] = useState(false);
   const handleReply = () => {
     setAddReply(!addReply);
+    onReply();
   };
 
   return (
@@ -47,49 +48,18 @@ const CommentBox = ({ clickIcon }) => {
                 {likeCount}
               </Count>
               <span>·</span>
-              <AddReply onClick={handleReply}>답글달기</AddReply>
+              <AddReply
+                onClick={() => {
+                  handleReply();
+                }}
+              >
+                답글달기
+              </AddReply>
               <span>·</span>
               <div>삭제하기</div>
             </Plus>
           </ContentContainer>
         </Container>
-        {/* {replies &&
-        replies.map((reply) => (
-          <Reply
-            key={reply.linecomcom_id}
-            replyId={reply.linecomcom_id}
-            mention={reply.mention}
-            content={reply.content}
-            author={reply.linecomcom_user.nickname}
-            profile={reply.linecomcom_user.profile}
-            showReplyForm={showReplyForm}
-            setShowReplyForm={setShowReplyForm}
-            setMention={setMentionedUser}
-            handleReplyDelete={handleReplyDelete}
-            nickname={nickname}
-          ></Reply>
-        ))} */}
-
-        {/* {showReplyForm && (
-        <>
-          <Mention>{mentionedUser} 님에게 답글</Mention>
-          <InputBoxPosition>
-            <Inputbox>
-              <div>@{mentionedUser}</div>
-              <input
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-                onKeyDown={(e) => handleReply(e)}
-              ></input>
-            </Inputbox>
-            <img
-              onClick={() => handleReplyClick()}
-              src={submiticon}
-              alt="submiticon"
-            ></img>
-          </InputBoxPosition>
-        </>
-      )} */}
       </Background>
     </>
   );

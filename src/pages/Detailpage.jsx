@@ -12,6 +12,7 @@ import AskModal from "../components/AskModal";
 const Detailpage = () => {
   //이 노래 들으러 가기 비활성화
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
+
   return (
     <div>
       <Wrapper>

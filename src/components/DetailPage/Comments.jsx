@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import CommentBox from "../CommentBox";
 import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 
 const Comments = () => {
+  const isSticky = useRef(null);
+  const handleReplyFocus = () => {
+    isSticky.current.focus();
+  };
+
   return (
     <Wrapper>
       <CommentCount>댓글 0개</CommentCount>
       <CommentInput>
-        <input placeholder="댓글을 남겨보세요."></input>
+        <input ref={isSticky} placeholder="댓글을 남겨보세요."></input>
         <SubmitBtn />
       </CommentInput>
-      <CommentBox />
-      <CommentBox />
-      <CommentBox />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
+      <CommentBox onReply={handleReplyFocus} />
     </Wrapper>
   );
 };
