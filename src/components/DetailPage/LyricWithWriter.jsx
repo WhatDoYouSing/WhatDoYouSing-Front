@@ -32,7 +32,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  // 기디 코멘트 따라 미디어 쿼리별 grid 설정할 예정
 `;
 
 const ProfileWrapper = styled.div`
