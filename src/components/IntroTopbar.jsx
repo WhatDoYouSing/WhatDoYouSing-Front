@@ -3,25 +3,49 @@ import { styled, css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { ReactComponent as Delete } from "../images/delete.svg";
+import { ReactComponent as Back } from "../images/back.svg";
 
 const IntroTopbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const isLogin = location.pathname === "/login";
   const isSignUp = location.pathname === "/signup";
+  const isProfile = location.pathname === "/profile";
 
   return (
     <Wrapper>
       <Container>
         <ImgDiv>
-          <Delete
-            onClick={() => {
-              navigate("/initial");
-            }}
-          />
+          {isProfile ? (
+            <Back
+              onClick={() => {
+                navigate(-1);
+              }}
+            />
+          ) : (
+            <Delete
+              onClick={() => {
+                navigate("/initial");
+              }}
+            />
+          )}
         </ImgDiv>
-        <Title>{isSignUp ? "회원가입" : "로그인"}</Title>
-        {isSignUp ? <NextBtn>다음으로</NextBtn> : <></>}
+        <Title>
+          {isProfile ? "프로필 설정" : isSignUp ? "회원가입" : "로그인"}
+        </Title>
+        {isProfile || isSignUp ? (
+          <NextBtn
+            onClick={() => {
+              const nextPath = isSignUp ? "/profile" : "/";
+              navigate(nextPath);
+            }}
+          >
+            {isSignUp ? "다음으로" : "가입하기"}
+          </NextBtn>
+        ) : (
+          <></>
+        )}
       </Container>
     </Wrapper>
   );
@@ -53,7 +77,7 @@ const Container = styled.div`
   width: 100%;
   padding: 0 1.6rem 2.7rem;
 
-  @media (min-width: 1100px) {
+  @media (min-width: 1200px) {
     padding: 0 16.8rem 2.7rem;
   }
 `;
@@ -61,6 +85,8 @@ const Container = styled.div`
 const ImgDiv = styled.div`
   position: absolute;
   left: 1.6rem;
+
+  cursor: pointer;
 `;
 
 const Title = styled.div`

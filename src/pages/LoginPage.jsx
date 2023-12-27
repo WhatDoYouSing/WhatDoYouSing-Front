@@ -85,10 +85,10 @@ const LoginBtn = styled.button`
   align-self: stretch;
 
   border-radius: 1.2rem;
-  border: 0.15rem var(--Gray, #d9d9d9);
-  background: var(--White, #fff);
+  border: 0.15rem solid var(--gray);
+  background: var(--white);
 
-  margin: 1.6rem 0;
+  margin: 3.2rem 0;
 
   color: var(--black);
   text-align: center;
