@@ -28,7 +28,6 @@ const Wrapper = styled.div`
   left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 
   width: 100%;
@@ -46,6 +45,8 @@ const Title = styled.div`
   font-weight: 800;
   line-height: normal;
   letter-spacing: -0.04rem;
+  margin-left: 10rem;
+  margin-right: 5.3rem;
 `;
 
 const PostBtn = styled.div`
