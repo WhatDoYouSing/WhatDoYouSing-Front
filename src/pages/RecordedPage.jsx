@@ -1,0 +1,83 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+
+import TopBack from "../components/RecordedPage/TopBack";
+import Saved from "../components/RecordedPage/Saved";
+import Bookmarked from "../components/RecordedPage/Bookmarked";
+
+const RecordedPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("saved");
+  const handleCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
+  return (
+    <div>
+      <Wrapper>
+        <TopBack />
+        <Filter>
+          <span
+            onClick={() => handleCategory("saved")}
+            className={selectedCategory === "saved" ? "selected" : "unselected"}
+          >
+            저장
+          </span>
+          <span
+            onClick={() => handleCategory("bookmarked")}
+            className={
+              selectedCategory === "bookmarked" ? "selected" : "unselected"
+            }
+          >
+            내가 남긴
+          </span>
+        </Filter>
+        <Line />
+        {selectedCategory === "saved" && <Saved />}
+        {selectedCategory === "bookmarked" && <Bookmarked />}
+      </Wrapper>
+    </div>
+  );
+};
+
+export default RecordedPage;
+
+const Wrapper = styled.div`
+  margin-top: 11.6rem;
+`;
+
+const Filter = styled.div`
+  display: flex;
+  flex-direction: row;
+  span {
+    width: 7.8rem;
+  }
+
+  .selected {
+    color: var(--pointPink);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 20.8px */
+    letter-spacing: -0.016rem;
+
+    border-bottom: 2px solid var(--pointPink);
+    padding-bottom: 0.7rem;
+  }
+  .unselected {
+    color: var(--black);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 20.8px */
+    letter-spacing: -0.016rem;
+  }
+`;
+
+const Line = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 35.8rem;
+  border-bottom: 1px solid var(--gray);
+`;
