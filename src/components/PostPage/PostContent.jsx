@@ -27,7 +27,7 @@ const PostContent = () => {
           <textarea
             onChange={onLyricHandler}
             maxLength={60}
-            placeholder="인용하고 싶은 가사를 &#13;&#10;60자 이내로 적어주세 &#13;&#10;요!"
+            placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
             rows={3}
           ></textarea>
         </Lyric>
@@ -37,13 +37,15 @@ const PostContent = () => {
           <span className="ex"> (공백 제외)</span>
         </Limit>
         <Line />
-        <Title>
-          <span className="title" style={{ marginBottom: "4rem" }}>
-            나의 감정 (최대 1개)
-          </span>
-          <span className="star">*</span>
-        </Title>
-        <EmotionList />
+        <EmotionDiv>
+          <Title>
+            <span className="title" style={{ marginBottom: "4rem" }}>
+              나의 감정 (최대 1개)
+            </span>
+            <span className="star">*</span>
+          </Title>
+          <EmotionList />
+        </EmotionDiv>
         <Line style={{ marginTop: "4rem" }} />
         <Title>
           <span className="title" style={{ marginBottom: "3.2rem" }}>
@@ -119,6 +121,7 @@ const Title = styled.div`
 `;
 
 const Lyric = styled.div`
+  width: 100%;
   margin-bottom: 2.4rem;
   textarea {
     width: 100%;
@@ -131,9 +134,11 @@ const Lyric = styled.div`
     line-height: 105%;
     letter-spacing: -0.12rem;
     border: none;
+    outline: none;
   }
 
   textarea::placeholder {
+    width: 100%;
     align-self: stretch;
     color: var(--gray);
     font-size: 4rem;
@@ -165,6 +170,10 @@ const Line = styled.div`
   line-height: 0.1rem;
   margin: 0.8rem 0;
   margin-bottom: 5rem;
+`;
+
+const EmotionDiv = styled.div`
+  width: 100%;
 `;
 
 const Detail = styled.div`
