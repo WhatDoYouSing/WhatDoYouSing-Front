@@ -37,19 +37,21 @@ const Wrapper = styled.div`
 
 const SearchBar = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   align-items: flex-start;
   gap: 0.8rem;
-  padding: 1.5rem 0;
+  padding: 1.5rem 0 3rem 0;
 
   input {
     height: 4.8rem;
     flex: 1 0 0;
-    width: 30.2rem;
+    width: 100%;
     flex-shrink: 0;
     border: none;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
+    outline: none;
   }
 
   input::placeholder {
