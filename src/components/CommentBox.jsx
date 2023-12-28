@@ -93,7 +93,7 @@ const ProfileContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  width: 296px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-left: 10px;
