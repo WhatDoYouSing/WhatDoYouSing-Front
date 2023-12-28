@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import TopClose from "../components/PostPage/TopClose";
+import IntroTopbar from "../components/IntroTopbar";
 import PostContent from "../components/PostPage/PostContent";
 
 const Postpage = () => {
   return (
     <div>
       <Wrapper>
-        <TopClose />
+        <IntroTopbar
+          text="게시글 작성"
+          actBtn={true}
+          btnText="게시하기"
+          nextPath="/detail"
+        />
         <PostContent />
       </Wrapper>
     </div>

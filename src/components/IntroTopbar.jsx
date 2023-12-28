@@ -16,7 +16,6 @@ const IntroTopbar = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isSignUp = location.pathname === "/signup";
 
   return (
     <Wrapper>

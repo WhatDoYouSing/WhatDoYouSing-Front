@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import TopBack from "../components/RecordedPage/TopBack";
+import IntroTopbar from "../components/IntroTopbar";
 import Saved from "../components/RecordedPage/Saved";
 import Bookmarked from "../components/RecordedPage/Bookmarked";
 
@@ -14,7 +14,7 @@ const RecordedPage = () => {
   return (
     <div>
       <Wrapper>
-        <TopBack />
+        <IntroTopbar text="내활동" del={false} />
         <Filter>
           <span
             onClick={() => handleCategory("saved")}
@@ -48,6 +48,7 @@ const Wrapper = styled.div`
 const Filter = styled.div`
   display: flex;
   flex-direction: row;
+
   span {
     width: 7.8rem;
   }
@@ -62,7 +63,7 @@ const Filter = styled.div`
     letter-spacing: -0.016rem;
 
     border-bottom: 2px solid var(--pointPink);
-    padding-bottom: 0.7rem;
+    padding-bottom: 0.6rem;
   }
   .unselected {
     color: var(--black);
@@ -78,6 +79,6 @@ const Filter = styled.div`
 const Line = styled.div`
   display: flex;
   justify-content: center;
-  width: 35.8rem;
+  width: 100%;
   border-bottom: 1px solid var(--gray);
 `;
