@@ -16,6 +16,7 @@ const IntroTopbar = ({
   const navigate = useNavigate();
   const location = useLocation();
 
+
   return (
     <Wrapper>
       <Container>
