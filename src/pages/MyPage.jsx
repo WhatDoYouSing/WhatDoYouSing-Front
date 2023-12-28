@@ -49,7 +49,7 @@ const MyPage = () => {
         <UserProfile />
         <div className="info">
           <UserID>{user} 님</UserID>
-          <LogBtn>로그아웃</LogBtn>
+          <LogBtn onClick={() => navigate("/initial")}>로그아웃</LogBtn>
         </div>
       </UserInfo>
       <Grid>
@@ -117,6 +117,8 @@ const LogBtn = styled.div`
   line-height: 150%;
   letter-spacing: -0.112rem;
   text-decoration-line: underline;
+
+  cursor: pointer;
 `;
 
 const Grid = styled.div`
