@@ -1,10 +1,20 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import EmotionChip from "./EmotionChip";
 
-const LyricsItem = ({ showComment = true }) => {
+const LyricsItem = ({
+  showComment = true,
+  showChip = false,
+  text = "쾌감",
+}) => {
   return (
     <Wrapper showComment={showComment}>
+      {showChip && (
+        <ChipDiv>
+          <EmotionChip text={text} size="small" />
+        </ChipDiv>
+      )}
       <TitleLyrics showComment={showComment}>
         이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아 우린
         여기 서있고 지울 수 없을거야
@@ -31,7 +41,10 @@ const Wrapper = styled.div`
   width: ${(props) => (props.showComment ? "100%" : "74%")};
   // 기디 코멘트 따라 미디어 쿼리별 grid 설정할 예정
 `;
-
+const ChipDiv = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
+`;
 const TitleLyrics = styled.div`
   display: flex;
   margin-bottom: 1.6rem;

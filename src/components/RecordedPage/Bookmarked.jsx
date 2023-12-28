@@ -6,7 +6,7 @@ import BookmarkedComment from "../RecordedPage/BookmarkedComment";
 import BookmarkedEmotion from "../RecordedPage/BookmarkedEmotion";
 
 const Bookmarked = () => {
-  const [selectedCategory, setSelectedCategory] = useState("saved");
+  const [selectedCategory, setSelectedCategory] = useState("comment");
   const handleCategory = (category) => {
     setSelectedCategory(category);
   };

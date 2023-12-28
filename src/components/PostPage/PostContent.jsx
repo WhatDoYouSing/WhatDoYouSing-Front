@@ -189,6 +189,7 @@ const Detail = styled.div`
     line-height: 150%; /* 21px */
     letter-spacing: -0.098rem;
     border: none;
+    outline: none;
   }
   textarea::placeholder {
     color: var(--gray);
@@ -219,6 +220,7 @@ const Source = styled.div`
     border: none;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
+    outline: none;
   }
 
   input::placeholder {
