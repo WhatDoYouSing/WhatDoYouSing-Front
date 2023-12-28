@@ -25,6 +25,10 @@ const Wrapper = styled.section`
   z-index: 100;
 
   cursor: pointer;
+
+  @media (min-width: 1200px) {
+    right: 18.4rem;
+  }
 `;
 
 const ImgDiv = styled.div`
