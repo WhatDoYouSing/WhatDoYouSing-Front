@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import LyricsItem from "../common/LyricsItem";
 
 const BookmarkedLyric = () => {
+  const lyricItems = Array.from({ length: 10 });
   return (
     <div>
-      <Wrapper></Wrapper>
+      <Wrapper>
+        {lyricItems.map((id) => (
+          <LyricsItem showComment={true} showChip={true} />
+        ))}
+      </Wrapper>
     </div>
   );
 };
@@ -18,4 +24,5 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   align-self: stretch;
+  gap: 4rem;
 `;
