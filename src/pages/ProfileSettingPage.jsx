@@ -20,6 +20,7 @@ const profiles = [
 ];
 
 const ProfileSettingPage = () => {
+  const [isSelected, setIsSelected] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState({
     rowIndex: null,
     profileIndex: null,
@@ -27,11 +28,18 @@ const ProfileSettingPage = () => {
 
   const handleChipClick = (rowIndex, profileIndex) => {
     setSelectedProfile({ rowIndex, profileIndex });
+    setIsSelected(true);
   };
 
   return (
     <Wrapper>
-      <IntroTopbar />
+      <IntroTopbar
+        text="프로필 설정"
+        del={false}
+        actBtn={true}
+        btnText="가입하기"
+        isFilled={isSelected}
+      />
       <Guide>
         거의 다 왔어요! <br /> 사용할 프로필을 선택해 주세요.
       </Guide>
@@ -110,11 +118,13 @@ const ProfileBox = styled.div`
   width: 16.2rem;
   height: 16.2rem;
   border-radius: 50%;
-
   background-color: var(--lightGray);
+
   ${({ isSelected }) =>
     isSelected &&
     css`
       filter: drop-shadow(0px 0px 1.4rem rgba(255, 0, 92, 0.2));
     `};
+
+  cursor: pointer;
 `;
