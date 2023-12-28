@@ -54,7 +54,9 @@ const MyPage = () => {
       </UserInfo>
       <Grid>
         <Action>
-          <div className="title">내 활동</div>
+          <div className="title" onClick={() => navigate("/recorded")}>
+            내 활동
+          </div>
           {path_list.map(({ id, name, path, className }) => (
             <div key={id} onClick={() => navigate(path)} className={className}>
               {name}

@@ -55,14 +55,18 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   align-self: stretch;
-  padding: 1.6rem 0;
+
+  @media (min-width: 1200px) {
+    padding: 0 22.6rem;
+  }
 `;
 
 const Filter = styled.div`
   display: flex;
-  width: 35.8rem;
+  width: 100%;
   align-items: flex-start;
   gap: 1.4rem;
+  padding: 1.6rem 0;
 
   span {
     display: flex;
@@ -87,5 +91,9 @@ const Filter = styled.div`
   .selected {
     color: var(--pointPink);
     border: 1.5px solid var(--pointPink);
+  }
+
+  @media (min-width: 1200px) {
+    padding: 4rem 0;
   }
 `;
