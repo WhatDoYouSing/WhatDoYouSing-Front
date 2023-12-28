@@ -6,6 +6,8 @@ import Detailpage from "./pages/Detailpage";
 import SearchPage from "./pages/SearchPage";
 import RecommendPage from "./pages/RecommendPage";
 import MyPage from "./pages/MyPage";
+import PostPage from "./pages/Postpage";
+import RecordedPage from "./pages/RecordedPage";
 
 import InitialPage from "./pages/InitialPage";
 import LoginPage from "./pages/LoginPage";
@@ -27,6 +29,8 @@ function App() {
           <Route path={"/search"} element={<SearchPage />}></Route>
           <Route path={"/recommend"} element={<RecommendPage />}></Route>
           <Route path={"/my"} element={<MyPage />}></Route>
+          <Route path={"/post"} element={<PostPage />}></Route>
+          <Route path={"/recorded"} element={<RecordedPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
