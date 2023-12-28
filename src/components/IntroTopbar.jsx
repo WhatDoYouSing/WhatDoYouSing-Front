@@ -5,43 +5,46 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Delete } from "../images/delete.svg";
 import { ReactComponent as Back } from "../images/back.svg";
 
-const IntroTopbar = () => {
+const IntroTopbar = ({
+  text = "로그인",
+  del = true,
+  actBtn = false,
+  btnText = "다음으로",
+  nextPath = "/",
+  isFilled = false,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isLogin = location.pathname === "/login";
   const isSignUp = location.pathname === "/signup";
-  const isProfile = location.pathname === "/profile";
 
   return (
     <Wrapper>
       <Container>
         <ImgDiv>
-          {isProfile ? (
-            <Back
-              onClick={() => {
-                navigate(-1);
-              }}
-            />
-          ) : (
+          {del ? (
             <Delete
               onClick={() => {
                 navigate("/initial");
               }}
             />
+          ) : (
+            <Back
+              onClick={() => {
+                navigate(-1);
+              }}
+            />
           )}
         </ImgDiv>
-        <Title>
-          {isProfile ? "프로필 설정" : isSignUp ? "회원가입" : "로그인"}
-        </Title>
-        {isProfile || isSignUp ? (
+        <Title>{text}</Title>
+        {actBtn ? (
           <NextBtn
+            isFilled={isFilled}
             onClick={() => {
-              const nextPath = isSignUp ? "/profile" : "/";
               navigate(nextPath);
             }}
           >
-            {isSignUp ? "다음으로" : "가입하기"}
+            {btnText}
           </NextBtn>
         ) : (
           <></>
@@ -109,9 +112,9 @@ const NextBtn = styled.button`
 
   flex-shrink: 0;
   border-radius: 1.6rem;
-  background: var(--lightGray);
-
-  color: var(--darkGray);
+  background-color: ${(props) =>
+    props.isFilled ? "var(--black)" : "var(--lightGray)"};
+  color: ${(props) => (props.isFilled ? "var(--white)" : "var(--darkGray)")};
   text-align: center;
 
   font-size: 1.4rem;
