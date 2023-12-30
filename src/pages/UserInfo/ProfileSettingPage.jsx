@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { styled, css } from "styled-components";
 
-import IntroTopbar from "../components/IntroTopbar";
+import IntroTopbar from "../../components/IntroTopbar";
 
-import { ReactComponent as LP } from "../images/profile-LP.svg";
-import { ReactComponent as Mike } from "../images/profile-mike.svg";
-import { ReactComponent as Headset } from "../images/profile-headset.svg";
+import { ReactComponent as LP } from "../../images/profile-LP.svg";
+import { ReactComponent as Mike } from "../../images/profile-mike.svg";
+import { ReactComponent as Headset } from "../../images/profile-headset.svg";
 
-import { ReactComponent as FilledLP } from "../images/profile-LP-filled.svg";
-import { ReactComponent as FilledMike } from "../images/profile-mike-filled.svg";
-import { ReactComponent as FilledHeadset } from "../images/profile-headset-filled.svg";
+import { ReactComponent as FilledLP } from "../../images/profile-LP-filled.svg";
+import { ReactComponent as FilledMike } from "../../images/profile-mike-filled.svg";
+import { ReactComponent as FilledHeadset } from "../../images/profile-headset-filled.svg";
 
 const profiles = [
   [{ id: "LP", none_filled: <LP />, filled: <FilledLP /> }],
