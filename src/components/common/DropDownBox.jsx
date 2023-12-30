@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+
+import useClickOutside from "../../hooks/useClickOutside";
 
 import { ReactComponent as Open } from "../../images/dropdown-open.svg";
 import { ReactComponent as Close } from "../../images/dropdown-close.svg";
@@ -11,24 +13,25 @@ import DropDown from "./DropDown";
 const DropDownBox = () => {
   const [isDropdownView, setDropdownView] = useState(false);
   const [selectedOption, setSelectedOption] = useState("좋아요 순");
+  const dropdownRef = useRef(null);
+
+  useClickOutside(dropdownRef, () => {
+    if (isDropdownView) {
+      setDropdownView(false);
+    }
+  });
 
   const handleClickContainer = () => {
     setDropdownView(!isDropdownView);
   };
-  //   const handleBlurContainer = () => {
-  //     setTimeout(() => {
-  //       setDropdownView(false);
-  //     }, 200);
-  //   };
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    console.log(option);
+    setDropdownView(false);
   };
   return (
-    // <Wrapper onBlur={handleBlurContainer}>
     <Wrapper>
-      <Container onClick={handleClickContainer}>
+      <Container onMouseDown={handleClickContainer} ref={dropdownRef}>
         <div>{selectedOption}</div>
         {isDropdownView ? <Close /> : <Open />}
       </Container>

@@ -2,42 +2,41 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import IntroTopbar from "../components/IntroTopbar";
-import Footer from "../components/common/Footer";
+import IntroTopbar from "../../components/IntroTopbar";
+import Footer from "../../components/common/Footer";
 
-import { ReactComponent as Symbol } from "../images/symbol.svg"; ///추후 아이콘 확정되면 수정 예정
-import { ReactComponent as Check } from "../images/checkbox-off.svg";
+import { ReactComponent as Symbol } from "../../images/symbol.svg";
+import { ReactComponent as Watermark } from "../../images/watermark-kor.svg";
+import { ReactComponent as WatermarkE } from "../../images/watermark-eng.svg";
 
-const UserDeletePage = () => {
+const UserModifyIntroPage = () => {
   const navigate = useNavigate();
 
   return (
     <>
       <Wrapper>
-        <IntroTopbar text="회원탈퇴" />
+        <IntroTopbar text="회원정보 수정" />
         <Box>
           <ImgBoxS>
             <Symbol />
           </ImgBoxS>
-          <span>정말... 떠나시겠어요?</span>
+          <ImgBoxW>
+            <Watermark />
+          </ImgBoxW>
+          <ImgBoxE>
+            <WatermarkE />
+          </ImgBoxE>
         </Box>
         <SideBox>
           <Login>회원정보 수정</Login>
-          <Info>비밀번호를 입력하세요.</Info>
+          <span>비밀번호를 입력하세요.</span>
           <InputBox>
             <Input
               type="password"
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
-          <InfoBox>
-            <Check />
-            <DelInfo>
-              회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없습니다.
-              정말로 탈퇴하시겠습니까?
-            </DelInfo>
-          </InfoBox>
-          <LoginBtn onClick={() => navigate("/")}>회원 탈퇴</LoginBtn>
+          <LoginBtn onClick={() => navigate("/modify")}>확인</LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />
@@ -45,7 +44,7 @@ const UserDeletePage = () => {
   );
 };
 
-export default UserDeletePage;
+export default UserModifyIntroPage;
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,18 +69,16 @@ const ColumnStyle = styled.div`
 `;
 
 const Box = styled(ColumnStyle)`
-  margin: 23.7rem 0 6.4rem;
+  margin: 23.7rem 0 4.2rem;
   gap: 2.5rem;
-
-  span {
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 800;
-  }
-
+  /* 
   @media (min-width: 1200px) {
     margin: 0;
     gap: 2.8rem;
+  } */
+
+  @media (max-width: 1200px) {
+    display: none;
   }
 `;
 
@@ -95,13 +92,39 @@ const ImgBoxS = styled.div`
   }
 `;
 
+const ImgBoxW = styled.div`
+  width: 12.8rem;
+  height: 3rem;
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
+`;
+
+const ImgBoxE = styled.div`
+  width: 17rem;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`;
+
 const SideBox = styled(ColumnStyle)`
   width: 100%;
-  margin: 0;
+  margin: 23.7rem 0 4.2rem;
+  gap: 2.5rem;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  span {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 800;
+    text-align: start;
+  }
 
   @media (min-width: 1200px) {
     padding: 10rem;
@@ -111,14 +134,6 @@ const SideBox = styled(ColumnStyle)`
 
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
   }
-`;
-
-const Info = styled.span`
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 800;
-  text-align: start;
 `;
 
 const Login = styled.div`
@@ -137,8 +152,7 @@ const Login = styled.div`
 
 const InputBox = styled(ColumnStyle)`
   width: 100%;
-
-  margin-bottom: 6.4rem;
+  gap: 1.6rem;
 `;
 
 const Input = styled.input`
@@ -161,22 +175,6 @@ const Input = styled.input`
   }
 `;
 
-const InfoBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.8rem;
-`;
-
-const DelInfo = styled.span`
-  flex: 1 0 0;
-  color: var(--Dark-Gray, #a0a0a0);
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 500;
-
-  word-break: keep-all;
-`;
-
 const LoginBtn = styled.button`
   display: flex;
   padding: 2rem 4.8rem;
@@ -190,7 +188,7 @@ const LoginBtn = styled.button`
   border: 0.15rem solid var(--gray);
   background: var(--white);
 
-  margin: 1.6rem 0;
+  margin: 3.2rem 0;
 
   color: var(--black);
   text-align: center;

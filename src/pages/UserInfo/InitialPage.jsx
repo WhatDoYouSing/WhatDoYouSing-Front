@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-import IntroTopbar from "../components/IntroTopbar";
+import IntroTopbar from "../../components/IntroTopbar";
 
-import { ReactComponent as Symbol } from "../images/symbol.svg";
-import { ReactComponent as Watermark } from "../images/watermark-kor.svg";
-import { ReactComponent as WatermarkE } from "../images/watermark-eng.svg";
+import { ReactComponent as Symbol } from "../../images/symbol.svg";
+import { ReactComponent as Watermark } from "../../images/watermark-kor.svg";
+import { ReactComponent as WatermarkE } from "../../images/watermark-eng.svg";
+import { ReactComponent as Kakao } from "../../images/kakao.svg";
 
-const LoginPage = () => {
+const InitialPage = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <IntroTopbar />
@@ -24,17 +27,32 @@ const LoginPage = () => {
       </Box>
       <SideBox>
         <Login>로그인</Login>
-        <InputBox>
-          <Input type="text" placeholder="아이디" />
-          <Input type="password" placeholder="비밀번호" />
-        </InputBox>
-        <LoginBtn>로그인</LoginBtn>
+        <BtnBox>
+          <SignupBtn
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            회원가입
+          </SignupBtn>
+          <LoginBtn
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </LoginBtn>
+          <KakaoBtn>
+            <Kakao />
+            카카오 로그인
+          </KakaoBtn>
+        </BtnBox>
       </SideBox>
     </Wrapper>
   );
 };
 
-export default LoginPage;
+export default InitialPage;
 
 const Wrapper = styled.div`
   display: flex;
@@ -100,8 +118,8 @@ const SideBox = styled(ColumnStyle)`
     padding: 10rem;
     flex-direction: column;
     align-items: flex-start;
-    border-radius: 16px;
-    border: 1.5px solid var(--lightGray);
+    border-radius: 1.6rem;
+    border: 1.5px solid var(--Light-Gray, #fafafa);
     background: var(--white);
 
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
@@ -109,7 +127,7 @@ const SideBox = styled(ColumnStyle)`
 `;
 
 const Login = styled.div`
-  color: var(--black);
+  color: var(--Black, #262121);
   text-align: center;
 
   font-size: 3.2rem;
@@ -122,49 +140,41 @@ const Login = styled.div`
   }
 `;
 
-const InputBox = styled(ColumnStyle)`
+const BtnBox = styled(ColumnStyle)`
+  gap: 1rem;
   width: 100%;
-  gap: 1.6rem;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  height: 4.8rem;
-  background: var(--white);
-  padding: 0 1rem;
+const Btn = styled.div`
+  display: flex;
+  width: 29.8rem;
+  padding: 2rem 4.8rem;
+  justify-content: center;
+  align-items: center;
 
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 500;
+  border-radius: 1.2rem;
 
-  border: none;
-  outline: none;
-  border-bottom: 0.2rem solid var(--black);
-  transition: border-bottom-color 0.3s ease;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
 
-  &::placeholder {
-    color: var(--gray);
+  @media (min-width: 1200px) {
+    width: 100%;
   }
 `;
 
-const LoginBtn = styled.button`
-  display: flex;
-  padding: 2rem 4.8rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const SignupBtn = styled(Btn)`
+  background: var(--Black, #262121);
+  color: var(--White, #fff);
+`;
+
+const LoginBtn = styled(Btn)`
+  border: 1.5px solid var(--Gray, #d9d9d9);
+  background: var(--White, #fff);
+`;
+
+const KakaoBtn = styled(Btn)`
+  background: #fee500;
+  color: #3b1d1d;
   gap: 1.6rem;
-  align-self: stretch;
-
-  border-radius: 1.2rem;
-  border: 0.15rem solid var(--gray);
-  background: var(--white);
-
-  margin: 3.2rem 0;
-
-  color: var(--black);
-  text-align: center;
-
-  font-size: 2rem;
-  font-weight: 600;
 `;
