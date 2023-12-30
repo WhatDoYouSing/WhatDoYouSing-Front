@@ -14,6 +14,10 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfileSettingPage from "./pages/ProfileSettingPage";
 
+import UserModifyIntroPage from "./pages/UserModifyIntroPage";
+import UserModifyPage from "./pages/UserModifyPage";
+import UserDeletePage from "./pages/UserDeletePage";
+
 function App() {
   return (
     <>
@@ -31,6 +35,12 @@ function App() {
           <Route path={"/my"} element={<MyPage />}></Route>
           <Route path={"/post"} element={<PostPage />}></Route>
           <Route path={"/recorded"} element={<RecordedPage />}></Route>
+          <Route
+            path={"/modifyintro"}
+            element={<UserModifyIntroPage />}
+          ></Route>
+          <Route path={"/modify"} element={<UserModifyPage />}></Route>
+          <Route path={"/delete"} element={<UserDeletePage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
