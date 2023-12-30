@@ -47,6 +47,8 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         padding: 0 1.6rem;
+        display: flex;
+        flex-direction: column;
 
         @media (min-width: 1200px) {
             padding: 0 16.8rem;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import IntroTopbar from "../components/IntroTopbar";
+import Footer from "../components/common/Footer";
 
 import { ReactComponent as Symbol } from "../images/symbol.svg"; ///추후 아이콘 확정되면 수정 예정
 import { ReactComponent as Check } from "../images/checkbox-off.svg";
@@ -11,33 +12,36 @@ const UserDeletePage = () => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
-      <IntroTopbar text="회원탈퇴" />
-      <Box>
-        <ImgBoxS>
-          <Symbol />
-        </ImgBoxS>
-        <span>정말... 떠나시겠어요?</span>
-      </Box>
-      <SideBox>
-        <Login>회원정보 수정</Login>
-        <Info>비밀번호를 입력하세요.</Info>
-        <InputBox>
-          <Input
-            type="password"
-            placeholder="본인의 비밀번호를 입력해 주세요."
-          />
-        </InputBox>
-        <InfoBox>
-          <Check />
-          <DelInfo>
-            회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없습니다.
-            정말로 탈퇴하시겠습니까?
-          </DelInfo>
-        </InfoBox>
-        <LoginBtn onClick={() => navigate("/")}>회원 탈퇴</LoginBtn>
-      </SideBox>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <IntroTopbar text="회원탈퇴" />
+        <Box>
+          <ImgBoxS>
+            <Symbol />
+          </ImgBoxS>
+          <span>정말... 떠나시겠어요?</span>
+        </Box>
+        <SideBox>
+          <Login>회원정보 수정</Login>
+          <Info>비밀번호를 입력하세요.</Info>
+          <InputBox>
+            <Input
+              type="password"
+              placeholder="본인의 비밀번호를 입력해 주세요."
+            />
+          </InputBox>
+          <InfoBox>
+            <Check />
+            <DelInfo>
+              회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없습니다.
+              정말로 탈퇴하시겠습니까?
+            </DelInfo>
+          </InfoBox>
+          <LoginBtn onClick={() => navigate("/")}>회원 탈퇴</LoginBtn>
+        </SideBox>
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
@@ -47,12 +51,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 15.8rem;
 
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
-    height: 100%;
+    min-height: 100%;
   }
 `;
 
