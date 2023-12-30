@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import IntroTopbar from "../components/IntroTopbar";
+import Footer from "../components/common/Footer";
 
 import { ReactComponent as Symbol } from "../images/symbol.svg";
 import { ReactComponent as Watermark } from "../images/watermark-kor.svg";
@@ -12,31 +13,34 @@ const UserModifyIntroPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
-      <IntroTopbar text="회원정보 수정" />
-      <Box>
-        <ImgBoxS>
-          <Symbol />
-        </ImgBoxS>
-        <ImgBoxW>
-          <Watermark />
-        </ImgBoxW>
-        <ImgBoxE>
-          <WatermarkE />
-        </ImgBoxE>
-      </Box>
-      <SideBox>
-        <Login>회원정보 수정</Login>
-        <span>비밀번호를 입력하세요.</span>
-        <InputBox>
-          <Input
-            type="password"
-            placeholder="본인의 비밀번호를 입력해 주세요."
-          />
-        </InputBox>
-        <LoginBtn onClick={() => navigate("/modify")}>확인</LoginBtn>
-      </SideBox>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <IntroTopbar text="회원정보 수정" />
+        <Box>
+          <ImgBoxS>
+            <Symbol />
+          </ImgBoxS>
+          <ImgBoxW>
+            <Watermark />
+          </ImgBoxW>
+          <ImgBoxE>
+            <WatermarkE />
+          </ImgBoxE>
+        </Box>
+        <SideBox>
+          <Login>회원정보 수정</Login>
+          <span>비밀번호를 입력하세요.</span>
+          <InputBox>
+            <Input
+              type="password"
+              placeholder="본인의 비밀번호를 입력해 주세요."
+            />
+          </InputBox>
+          <LoginBtn onClick={() => navigate("/modify")}>확인</LoginBtn>
+        </SideBox>
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
@@ -46,12 +50,15 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 15.8rem;
 
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
-    height: 100%;
+    min-height: 100%;
   }
 `;
 
