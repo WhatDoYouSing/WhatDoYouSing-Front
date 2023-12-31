@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 //components
 import Topbar from "../components/common/MainPage/Topbar";
+import Footer from "../components/common/Footer";
 
 const path_list = [
   {
@@ -43,36 +44,47 @@ const MyPage = () => {
   const user = "Zimni";
 
   return (
-    <Wrapper>
-      <Topbar />
-      <UserInfo>
-        <UserProfile />
-        <div className="info">
-          <UserID>{user} 님</UserID>
-          <LogBtn onClick={() => navigate("/initial")}>로그아웃</LogBtn>
-        </div>
-      </UserInfo>
-      <Grid>
-        <Action>
-          <div className="title" onClick={() => navigate("/recorded")}>
-            내 활동
+    <>
+      {" "}
+      <Wrapper>
+        <Topbar />
+        <UserInfo>
+          <UserProfile />
+          <div className="info">
+            <UserID>{user} 님</UserID>
+            <LogBtn onClick={() => navigate("/initial")}>로그아웃</LogBtn>
           </div>
-          {path_list.map(({ id, name, path, className }) => (
-            <div key={id} onClick={() => navigate(path)} className={className}>
-              {name}
+        </UserInfo>
+        <Grid>
+          <Action>
+            <div className="title" onClick={() => navigate("/recorded")}>
+              내 활동
             </div>
-          ))}
-        </Action>
-        <MemberManaging>회원정보 수정</MemberManaging>
-        <MemberManaging>회원 탈퇴</MemberManaging>
-      </Grid>
-    </Wrapper>
+            {path_list.map(({ id, name, path, className }) => (
+              <div
+                key={id}
+                onClick={() => navigate(path)}
+                className={className}
+              >
+                {name}
+              </div>
+            ))}
+          </Action>
+          <MemberManaging>회원정보 수정</MemberManaging>
+          <MemberManaging>회원 탈퇴</MemberManaging>
+        </Grid>
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
 export default MyPage;
 
 const Wrapper = styled.div`
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 15.8rem;
   margin-top: 11.6rem;
 `;
 
