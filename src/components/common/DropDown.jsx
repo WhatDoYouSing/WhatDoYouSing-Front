@@ -11,7 +11,7 @@ const DropDown = ({ selectedOption, handleSelect }) => {
         <ListItem
           key={option}
           value={option}
-          onClick={() => handleSelect(option)}
+          onMouseDown={() => handleSelect(option)}
           isSelected={selectedOption === option}
         >
           {option}

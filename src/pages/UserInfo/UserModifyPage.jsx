@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-import IntroTopbar from "../components/IntroTopbar";
+import IntroTopbar from "../../components/IntroTopbar";
+import Footer from "../../components/common/Footer";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -79,133 +80,138 @@ const SignupPage = () => {
   //나중에 중복확인을 아이디 규격 참일 때 가능하게 설정하고, 중복 확인 참일 때 활성화되도록 수정
 
   return (
-    <Wrapper>
-      <IntroTopbar
-        text="회원가입"
-        actBtn={true}
-        nextPath="/profile"
-        isFilled={requiredFieldsValid}
-      />
-      <Box>
-        <Guide>
-          아이디 <span>*</span>
-        </Guide>
-        <Contents>
-          <InputID
-            type="text"
-            placeholder="예 : abcd1234"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            onFocus={() => setUsernameFocused(true)}
-          />
-          <Check>중복확인</Check>
-        </Contents>
-        {isUsernameFocused ? (
-          usernameValid ? (
-            <Condition style={{ color: "var(--black)" }}>
-              아이디가 조건에 맞아요. 중복 확인을 진행해 주세요.
-            </Condition>
-          ) : (
-            <Condition style={{ color: "var(--pointPink)" }}>
-              아이디가 형식에 맞지 않아요. 다시 입력해 주세요.
-            </Condition>
-          )
-        ) : (
-          <Condition>영문과 숫자를 조합하여 6자 이상</Condition>
-        )}
-
-        {duplicate === true && (
-          <Condition style={{ color: "var(--pointPink)" }}>
-            같은 아이디가 이미 존재해요. 다시 입력해 주세요.
-          </Condition>
-        )}
-        {duplicate === false && (
-          <Condition style={{ color: "var(--black)" }}>
-            아이디 중복확인이 완료되었어요.
-          </Condition>
-        )}
-      </Box>
-
-      <PasswordDiv>
-        <Box>
-          <Guide>
-            비밀번호 <span>*</span>
-          </Guide>
-          <Input
-            type="password"
-            placeholder="비밀번호를 입력해 주세요."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onFocus={() => setPasswordFocused(true)}
-          />
-          {isPasswordFocused ? (
-            <Condition
-              style={{
-                color: passwordValid ? "var(--black)" : "var(--pointPink)",
-              }}
-            >
-              {passwordValid
-                ? "비밀번호가 조건에 맞아요."
-                : "영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상이어야 해요."}
-            </Condition>
-          ) : (
-            <Condition>
-              영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상
-            </Condition>
-          )}
-        </Box>
-        <Box>
-          <Guide>
-            비밀번호 확인 <span>*</span>
-          </Guide>
-          <Input
-            type="password"
-            placeholder="위에서 입력한 비밀번호를 한 번 더 입력해 주세요."
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          />
-          {passwordMatch && passwordValid ? (
-            <Condition style={{ color: "var(--black)" }}>
-              비밀번호가 일치합니다.
-            </Condition>
-          ) : (
-            <Condition
-              style={{
-                color: passwordMatch ? "var(--darkGray)" : "var(--pointPink)",
-              }}
-            >
-              {passwordMatch
-                ? "영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상"
-                : "비밀번호가 일치하지 않아요."}
-            </Condition>
-          )}
-        </Box>
-      </PasswordDiv>
-      <Box>
-        <Guide>
-          닉네임 <span>*</span>
-        </Guide>
-        <Input
-          type="text"
-          placeholder="창밖을보라에서 사용할 닉네임을 입력해 주세요."
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          onFocus={() => setNicknameFocused(true)}
+    <>
+      {" "}
+      <Wrapper>
+        <IntroTopbar
+          text="회원정보 수정"
+          actBtn={true}
+          nextPath="/"
+          btnText="수정완료"
+          isFilled={requiredFieldsValid}
         />
-        {isNicknameFocused ? (
-          <Condition
-            style={{
-              color: nicknameValid ? "var(--black)" : "var(--pointPink)",
-            }}
-          >
-            {nicknameValid
-              ? "닉네임이 조건에 맞아요."
-              : "1자 이상 10자 이하여야 해요."}
-          </Condition>
-        ) : (
-          <Condition>10자 이하</Condition>
-        )}
-      </Box>
-    </Wrapper>
+        <Box>
+          <Guide>
+            아이디 <span>*</span>
+          </Guide>
+          <Contents>
+            <InputID
+              type="text"
+              placeholder="예 : abcd1234"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              onFocus={() => setUsernameFocused(true)}
+            />
+            <Check>중복확인</Check>
+          </Contents>
+          {isUsernameFocused ? (
+            usernameValid ? (
+              <Condition style={{ color: "var(--black)" }}>
+                아이디가 조건에 맞아요. 중복 확인을 진행해 주세요.
+              </Condition>
+            ) : (
+              <Condition style={{ color: "var(--pointPink)" }}>
+                아이디가 형식에 맞지 않아요. 다시 입력해 주세요.
+              </Condition>
+            )
+          ) : (
+            <Condition>영문과 숫자를 조합하여 6자 이상</Condition>
+          )}
+
+          {duplicate === true && (
+            <Condition style={{ color: "var(--pointPink)" }}>
+              같은 아이디가 이미 존재해요. 다시 입력해 주세요.
+            </Condition>
+          )}
+          {duplicate === false && (
+            <Condition style={{ color: "var(--black)" }}>
+              아이디 중복확인이 완료되었어요.
+            </Condition>
+          )}
+        </Box>
+
+        <PasswordDiv>
+          <Box>
+            <Guide>
+              비밀번호 <span>*</span>
+            </Guide>
+            <Input
+              type="password"
+              placeholder="비밀번호를 입력해 주세요."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setPasswordFocused(true)}
+            />
+            {isPasswordFocused ? (
+              <Condition
+                style={{
+                  color: passwordValid ? "var(--black)" : "var(--pointPink)",
+                }}
+              >
+                {passwordValid
+                  ? "비밀번호가 조건에 맞아요."
+                  : "영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상이어야 해요."}
+              </Condition>
+            ) : (
+              <Condition>
+                영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상
+              </Condition>
+            )}
+          </Box>
+          <Box>
+            <Guide>
+              비밀번호 확인 <span>*</span>
+            </Guide>
+            <Input
+              type="password"
+              placeholder="위에서 입력한 비밀번호를 한 번 더 입력해 주세요."
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+            />
+            {passwordMatch && passwordValid ? (
+              <Condition style={{ color: "var(--black)" }}>
+                비밀번호가 일치합니다.
+              </Condition>
+            ) : (
+              <Condition
+                style={{
+                  color: passwordMatch ? "var(--darkGray)" : "var(--pointPink)",
+                }}
+              >
+                {passwordMatch
+                  ? "영문, 숫자, 특수문자 중 2개 이상 조합하여 10자 이상"
+                  : "비밀번호가 일치하지 않아요."}
+              </Condition>
+            )}
+          </Box>
+        </PasswordDiv>
+        <Box>
+          <Guide>
+            닉네임 <span>*</span>
+          </Guide>
+          <Input
+            type="text"
+            placeholder="창밖을보라에서 사용할 닉네임을 입력해 주세요."
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            onFocus={() => setNicknameFocused(true)}
+          />
+          {isNicknameFocused ? (
+            <Condition
+              style={{
+                color: nicknameValid ? "var(--black)" : "var(--pointPink)",
+              }}
+            >
+              {nicknameValid
+                ? "닉네임이 조건에 맞아요."
+                : "1자 이상 10자 이하여야 해요."}
+            </Condition>
+          ) : (
+            <Condition>10자 이하</Condition>
+          )}
+        </Box>
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
@@ -215,6 +221,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 15.8rem;
 
   margin-top: 12.9rem;
 

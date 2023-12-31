@@ -9,10 +9,14 @@ import MyPage from "./pages/MyPage";
 import PostPage from "./pages/Postpage";
 import RecordedPage from "./pages/RecordedPage";
 
-import InitialPage from "./pages/InitialPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import ProfileSettingPage from "./pages/ProfileSettingPage";
+import InitialPage from "./pages/UserInfo/InitialPage";
+import LoginPage from "./pages/UserInfo/LoginPage";
+import SignupPage from "./pages/UserInfo/SignupPage";
+import ProfileSettingPage from "./pages/UserInfo/ProfileSettingPage";
+
+import UserModifyIntroPage from "./pages/UserInfo/UserModifyIntroPage";
+import UserModifyPage from "./pages/UserInfo/UserModifyPage";
+import UserDeletePage from "./pages/UserInfo/UserDeletePage";
 
 function App() {
   return (
@@ -31,6 +35,12 @@ function App() {
           <Route path={"/my"} element={<MyPage />}></Route>
           <Route path={"/post"} element={<PostPage />}></Route>
           <Route path={"/recorded"} element={<RecordedPage />}></Route>
+          <Route
+            path={"/modifyintro"}
+            element={<UserModifyIntroPage />}
+          ></Route>
+          <Route path={"/modify"} element={<UserModifyPage />}></Route>
+          <Route path={"/delete"} element={<UserDeletePage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
