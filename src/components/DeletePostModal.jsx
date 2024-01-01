@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-//게시글 삭제, 댓글 삭제, 신고하기 공용 모달
-const AskModal = () => {
+//게시글 삭제 모달
+const DeletePostModal = () => {
   return (
     <>
       <Wrapper>
@@ -14,9 +14,13 @@ const AskModal = () => {
   );
 };
 
-export default AskModal;
+export default DeletePostModal;
 
 const Wrapper = styled.div`
+  position: absolute;
+  z-index: 9999;
+  top: 20rem;
+  left: 5rem;
   display: flex;
   flex-direction: column;
   width: 30rem;
