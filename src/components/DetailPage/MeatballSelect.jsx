@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const options = ["게시글 삭제", "게시글 신고"];
 
-const MeatballSelect = ({ selectedMeatball, handleSelect, onSelect }) => {
+const MeatballSelect = ({ deleteSel, reportSel }) => {
   const handleOptionClick = (option) => {
     console.log("Selected option:", option);
-    handleSelect(option);
-
-    onSelect(option);
+    option === "게시글 삭제" ? deleteSel() : reportSel();
   };
 
   return (
@@ -20,7 +18,6 @@ const MeatballSelect = ({ selectedMeatball, handleSelect, onSelect }) => {
             key={option}
             value={option}
             onMouseDown={() => handleOptionClick(option)}
-            isSelected={selectedMeatball === option}
           >
             {option}
           </ListItem>
