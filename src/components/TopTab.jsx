@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../images/back.svg";
@@ -10,7 +10,22 @@ import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
-const TopTab = ({ onSelect }) => {
+const TopTab = ({ deleteModal, reportModal }) => {
+  const [deleteSelect, setDeleteSelect] = useState(false); //게시물 삭제
+  const [reportSelect, setReportSelect] = useState(false); //게시물 신고
+  //자식(MeatballSelect)에게 받기
+  const deleteSel = () => {
+    setDeleteSelect(true);
+  };
+  const reportSel = () => {
+    setReportSelect(true);
+  };
+  //부모(Detailpage)에게 전달
+  useEffect(() => {
+    deleteModal(deleteSelect);
+    reportModal(reportSelect);
+  }, [deleteSelect, reportSelect]);
+
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -56,7 +71,8 @@ const TopTab = ({ onSelect }) => {
               selectedMeatball={selectedMeatball}
               handleSelect={handleSelect}
               ref={meatballRef}
-              onSelect={handleMeatballSelect}
+              deleteSel={deleteSel}
+              reportSel={reportSel}
             />
           )}
         </Others>
