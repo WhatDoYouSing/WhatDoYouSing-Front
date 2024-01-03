@@ -4,7 +4,12 @@ import styled from "styled-components";
 import IntroTopbar from "../components/IntroTopbar";
 import PostContent from "../components/PostPage/PostContent";
 
-const Postpage = () => {
+const Postpage = (props) => {
+  const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
+  const onBtn = (requiredFieldsValid) => {
+    setRequiredFieldsValid(requiredFieldsValid);
+  };
+
   return (
     <div>
       <Wrapper>
@@ -13,8 +18,9 @@ const Postpage = () => {
           actBtn={true}
           btnText="게시하기"
           nextPath="/detail"
+          isFilled={requiredFieldsValid}
         />
-        <PostContent />
+        <PostContent onBtn={onBtn} />
       </Wrapper>
     </div>
   );

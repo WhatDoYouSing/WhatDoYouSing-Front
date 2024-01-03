@@ -17,7 +17,7 @@ const emotionLongData = [
   ["평온", "위로", "센치함", "쓸쓸함", "그리움", "슬픔"],
 ];
 
-const EmotionList = () => {
+const EmotionList = ({ onEmotionSelect }) => {
   //과연 이 방법이 최선인지는 모르겠지만...🥲 최선을 다해보았습니다
   //다른 좋은 방법 있으면 언제든 수정 부탁합니다~~!!
 
@@ -28,6 +28,7 @@ const EmotionList = () => {
 
   const handleChipClick = (rowIndex, chipIndex) => {
     setSelectedChip({ rowIndex, chipIndex });
+    onEmotionSelect(emotionData[rowIndex][chipIndex]);
   };
   return (
     <>
