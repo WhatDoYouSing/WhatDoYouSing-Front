@@ -4,20 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 const options = ["게시글 삭제", "게시글 신고"];
 
-const MeatballSelect = ({ selectedMeatball, handleSelect }) => {
+const MeatballSelect = ({ deleteSel, reportSel }) => {
+  const handleOptionClick = (option) => {
+    console.log("Selected option:", option);
+    option === "게시글 삭제" ? deleteSel() : reportSel();
+  };
+
   return (
-    <Wrapper>
-      {options.map((option) => (
-        <ListItem
-          key={option}
-          value={option}
-          onClick={() => handleSelect(option)}
-          isSelected={selectedMeatball === option}
-        >
-          {option}
-        </ListItem>
-      ))}
-    </Wrapper>
+    <>
+      <Wrapper className="meatball-select">
+        {options.map((option) => (
+          <ListItem
+            key={option}
+            value={option}
+            onMouseDown={() => handleOptionClick(option)}
+          >
+            {option}
+          </ListItem>
+        ))}
+      </Wrapper>
+    </>
   );
 };
 
@@ -25,11 +31,12 @@ export default MeatballSelect;
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 5.5rem;
+  z-index: 9990;
+  top: 100%;
+  right: 1.5rem;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-
   border-radius: 1.6rem;
   background: var(--white);
 
@@ -46,12 +53,12 @@ const ListItem = styled.div`
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-
+  /* 
   ${({ isSelected }) =>
     isSelected &&
     css`
       color: var(--pointPink);
-    `};
+    `}; */
 
   cursor: pointer;
 `;

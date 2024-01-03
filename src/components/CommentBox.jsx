@@ -6,9 +6,10 @@ import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-const CommentBox = ({ onReply }) => {
+const CommentBox = ({ content, onReply }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
@@ -31,10 +32,7 @@ const CommentBox = ({ onReply }) => {
           </ProfileContainer>
           <ContentContainer>
             <Id>채오니</Id>
-            <Content>
-              나 혼자선 이 세상도 별 다를게 없겠지 내 하루를 물들여줘 너만의
-              단어들로
-            </Content>
+            <Content>{content}</Content>
             <Plus>
               <LikeBtn onClick={handleLike}>
                 {isLiked ? <LikeClick /> : <Like />}
