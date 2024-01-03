@@ -16,12 +16,20 @@ const SearchSection = () => {
       <Grid>
         <SectionDiv>
           <TopDiv>다른 방식으로 검색</TopDiv>
-          <LatestSearch>
-            <ImgDiv>
-              <BasicSmile />
-            </ImgDiv>
-            최신순
-          </LatestSearch>
+          <SearchDiv>
+            <SearchItem>
+              <ImgDiv>
+                <BasicSmile />
+              </ImgDiv>
+              최신순
+            </SearchItem>
+            <SearchItem>
+              <ImgDiv>
+                <BasicSmile />
+              </ImgDiv>
+              댓글순
+            </SearchItem>
+          </SearchDiv>
         </SectionDiv>
         <AD>광고 자리입니다~~~!!</AD>
       </Grid>
@@ -59,7 +67,12 @@ const Grid = styled.div`
   gap: 2.4rem;
 `;
 
-const LatestSearch = styled.button`
+const SearchDiv = styled.div`
+  display: flex;
+  gap: 2.4rem;
+`;
+
+const SearchItem = styled.button`
   display: flex;
   width: 100%;
   height: 6.4rem;
@@ -70,7 +83,7 @@ const LatestSearch = styled.button`
 
   border-radius: 1.6rem;
   border: 0.15rem solid var(--gray);
-  background: var(--Light-Gray, #fafafa);
+  background: var(--lightGray);
 
   color: var(--black);
   font-size: 1.6rem;
@@ -92,7 +105,8 @@ const AD = styled.div`
 
   margin-bottom: 2.5rem;
 
-  background: var(--Gray, #d9d9d9);
+  background: var(--gray);
+  border-radius: 1.6rem;
 
   color: #fff;
   font-size: 1.8rem;

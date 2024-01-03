@@ -315,3 +315,11 @@
   opacity: 1;
   color: #ff005c;
 }
+
+.slick-slide {
+  padding: 3rem 0;
+}
+
+.slider .slick-list {
+  margin: -3rem 0;
+}
