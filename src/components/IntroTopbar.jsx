@@ -8,6 +8,7 @@ import { ReactComponent as Back } from "../images/back.svg";
 const IntroTopbar = ({
   text = "로그인",
   del = true,
+  delPath = "/initial",
   actBtn = false,
   btnText = "다음으로",
   nextPath = "/",
@@ -16,7 +17,6 @@ const IntroTopbar = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-
   return (
     <Wrapper>
       <Container>
@@ -24,7 +24,7 @@ const IntroTopbar = ({
           {del ? (
             <Delete
               onClick={() => {
-                navigate("/initial");
+                navigate(delPath);
               }}
             />
           ) : (
