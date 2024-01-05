@@ -4,6 +4,16 @@ import CommentBox from "../CommentBox";
 import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 
 const Comments = () => {
+  const [comment, setComment] = useState("");
+  const [commentList, setCommentList] = useState([]);
+
+  const handleComment = () => {
+    if (comment.trim() !== "") {
+      setCommentList((prevList) => [...prevList, comment]);
+      setComment(""); // 댓글 입력 창 초기화
+    }
+  };
+
   const isSticky = useRef(null);
   const handleReplyFocus = () => {
     isSticky.current.focus();
@@ -11,18 +21,23 @@ const Comments = () => {
 
   return (
     <Wrapper>
-      <CommentCount>댓글 0개</CommentCount>
+      <CommentCount>댓글 {commentList.length}개</CommentCount>
       <CommentInput>
-        <input ref={isSticky} placeholder="댓글을 남겨보세요."></input>
-        <SubmitBtn />
+        <input
+          ref={isSticky}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="댓글을 남겨보세요."
+        ></input>
+        <SubmitBtn onClick={handleComment} />
       </CommentInput>
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
-      <CommentBox onReply={handleReplyFocus} />
+      {commentList.map((commentContent, index) => (
+        <CommentBox
+          key={index}
+          content={commentContent}
+          onReply={handleReplyFocus}
+        />
+      ))}
     </Wrapper>
   );
 };
