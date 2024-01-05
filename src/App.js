@@ -8,6 +8,7 @@ import RecommendPage from "./pages/RecommendPage";
 import MyPage from "./pages/MyPage";
 import PostPage from "./pages/Postpage";
 import RecordedPage from "./pages/RecordedPage";
+import ResultPage from "./pages/ResultPage";
 
 import InitialPage from "./pages/UserInfo/InitialPage";
 import LoginPage from "./pages/UserInfo/LoginPage";
@@ -36,6 +37,7 @@ function App() {
           <Route path={"/my"} element={<MyPage />}></Route>
           <Route path={"/post"} element={<PostPage />}></Route>
           <Route path={"/recorded"} element={<RecordedPage />}></Route>
+          <Route path={"/result"} element={<ResultPage />}></Route>
           <Route
             path={"/modifyintro"}
             element={<UserModifyIntroPage />}

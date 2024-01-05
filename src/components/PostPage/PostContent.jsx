@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
 
-const PostContent = () => {
+const PostContent = (props) => {
+  //글자수
   const [lyricCount, setLyricCount] = useState(0);
-  const onLyricHandler = (e) => {
-    setLyricCount(e.target.value.length);
+  const [detailCount, setDetailCount] = useState(0);
+
+  //유효성 검사
+  const [lyric, setLyric] = useState("");
+  const [emotion, setEmotion] = useState("");
+  const [detail, setDetail] = useState("");
+  const [song, setSong] = useState("");
+  const [singer, setSinger] = useState("");
+
+  const handleEmotionSelect = (selectedEmotion) => {
+    setEmotion(selectedEmotion + 1);
   };
 
-  const [detailCount, setDetailCount] = useState(0);
-  const onDetailHandler = (e) => {
-    setDetailCount(e.target.value.length);
-  };
+  //버튼 활성화
+  useEffect(() => {
+    // const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
+    const isRequiredFieldsValid = lyric && emotion && song && singer;
+    props.onBtn(isRequiredFieldsValid);
+  }, [lyric, emotion, song, singer]);
 
   return (
     <div>
@@ -25,7 +37,11 @@ const PostContent = () => {
         </Title>
         <Lyric>
           <textarea
-            onChange={onLyricHandler}
+            value={lyric}
+            onChange={(e) => {
+              setLyric(e.target.value);
+              setLyricCount(e.target.value.replace(/\s/g, "").length);
+            }}
             maxLength={60}
             placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
             rows={3}
@@ -44,7 +60,7 @@ const PostContent = () => {
             </span>
             <span className="star">*</span>
           </Title>
-          <EmotionList />
+          <EmotionList onEmotionSelect={handleEmotionSelect} />
         </EmotionDiv>
         <Line style={{ marginTop: "4rem" }} />
         <Title>
@@ -55,7 +71,11 @@ const PostContent = () => {
         </Title>
         <Detail>
           <textarea
-            onChange={onDetailHandler}
+            value={detail}
+            onChange={(e) => {
+              setDetail(e.target.value);
+              setDetailCount(e.target.value.replace(/\s/g, "").length);
+            }}
             maxLength={150}
             placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
           ></textarea>
@@ -74,11 +94,19 @@ const PostContent = () => {
         </Title>
         <Source>
           <div className="smallTitle">노래 제목</div>
-          <input placeholder="노래 제목을 남겨주세요!" />
+          <input
+            value={song}
+            onChange={(e) => setSong(e.target.value)}
+            placeholder="노래 제목을 남겨주세요!"
+          />
         </Source>
         <Source>
           <div className="smallTitle">가수 이름</div>
-          <input placeholder="가수 이름을 남겨주세요!" />
+          <input
+            value={singer}
+            onChange={(e) => setSinger(e.target.value)}
+            placeholder="가수 이름을 남겨주세요!"
+          />
         </Source>
         <Line style={{ marginTop: "5rem" }} />
         <Title>
