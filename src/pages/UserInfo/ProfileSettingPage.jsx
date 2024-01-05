@@ -3,32 +3,28 @@ import { styled, css } from "styled-components";
 
 import IntroTopbar from "../../components/IntroTopbar";
 
-import { ReactComponent as LP } from "../../images/profile-LP.svg";
-import { ReactComponent as Mike } from "../../images/profile-mike.svg";
-import { ReactComponent as Headset } from "../../images/profile-headset.svg";
+import henry from "../../images/icons/henry-prof.svg";
+import cherry from "../../images/icons/cherry-prof.svg";
+import luke from "../../images/icons/luke-prof.svg";
+import doong_ee from "../../images/icons/doong-ee-prof.svg";
 
-import { ReactComponent as FilledLP } from "../../images/profile-LP-filled.svg";
-import { ReactComponent as FilledMike } from "../../images/profile-mike-filled.svg";
-import { ReactComponent as FilledHeadset } from "../../images/profile-headset-filled.svg";
+import filled_henry from "../../images/icons/henry-prof-filled.svg";
+import filled_cherry from "../../images/icons/cherry-prof-filled.svg";
+import filled_luke from "../../images/icons/luke-prof-filled.svg";
+import filled_doong_ee from "../../images/icons/doong-ee-prof-filled.svg";
 
 const profiles = [
-  [{ id: "LP", none_filled: <LP />, filled: <FilledLP /> }],
-  [
-    { id: "Mike", none_filled: <Mike />, filled: <FilledMike /> },
-    { id: "Headset", none_filled: <Headset />, filled: <FilledHeadset /> },
-  ],
+  { id: "Henry", none_filled: henry, filled: filled_henry },
+  { id: "Cherry", none_filled: cherry, filled: filled_cherry },
+  { id: "Luke", none_filled: luke, filled: filled_luke },
+  { id: "Doongee", none_filled: doong_ee, filled: filled_doong_ee },
 ];
 
 const ProfileSettingPage = () => {
-  const [isSelected, setIsSelected] = useState(false);
-  const [selectedProfile, setSelectedProfile] = useState({
-    rowIndex: null,
-    profileIndex: null,
-  });
+  const [selectedProfile, setSelectedProfile] = useState(null);
 
-  const handleChipClick = (rowIndex, profileIndex) => {
-    setSelectedProfile({ rowIndex, profileIndex });
-    setIsSelected(true);
+  const handleChipClick = (selectedIndex) => {
+    setSelectedProfile(selectedIndex);
   };
 
   return (
@@ -38,30 +34,22 @@ const ProfileSettingPage = () => {
         del={false}
         actBtn={true}
         btnText="가입하기"
-        isFilled={isSelected}
+        isFilled={selectedProfile !== null}
       />
       <Guide>
         거의 다 왔어요! <br /> 사용할 프로필을 선택해 주세요.
       </Guide>
       <ProfileDiv>
-        {profiles.map((row, rowIndex) => (
-          <Row key={rowIndex}>
-            {row.map(({ none_filled, filled }, profileIndex) => (
-              <ProfileBox
-                key={profileIndex}
-                isSelected={
-                  selectedProfile.rowIndex === rowIndex &&
-                  selectedProfile.profileIndex === profileIndex
-                }
-                onClick={() => handleChipClick(rowIndex, profileIndex)}
-              >
-                {selectedProfile.rowIndex === rowIndex &&
-                selectedProfile.profileIndex === profileIndex
-                  ? filled
-                  : none_filled}
-              </ProfileBox>
-            ))}
-          </Row>
+        {profiles.map(({ none_filled, filled }, profileIndex) => (
+          <ProfileBox
+            key={profileIndex}
+            isSelected={selectedProfile === profileIndex}
+            onClick={() => handleChipClick(profileIndex)}
+          >
+            <Image
+              src={selectedProfile === profileIndex ? filled : none_filled}
+            />
+          </ProfileBox>
         ))}
       </ProfileDiv>
     </Wrapper>
@@ -99,17 +87,13 @@ const Guide = styled.div`
 
 const ProfileDiv = styled.div`
   margin: 9.4rem;
-  display: flex;
-  flex-wrap: wrap;
-`;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 1.6rem;
 `;
+
+const Image = styled.img``;
 
 const ProfileBox = styled.div`
   display: flex;

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
-import { ReactComponent as Symbol } from "../../images/symbol.svg"; ///추후 아이콘 확정되면 수정 예정
+import { ReactComponent as Symbol } from "../../images/icons/doong-ee3.svg";
 import { ReactComponent as Check } from "../../images/checkbox-off.svg";
 
 const UserDeletePage = () => {
@@ -14,7 +14,7 @@ const UserDeletePage = () => {
   return (
     <>
       <Wrapper>
-        <IntroTopbar text="회원탈퇴" />
+        <IntroTopbar text="회원탈퇴" delPath="/my" />
         <Box>
           <ImgBoxS>
             <Symbol />
