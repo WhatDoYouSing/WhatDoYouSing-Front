@@ -1,12 +1,39 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 import IntroTopbar from "../components/IntroTopbar";
 import Saved from "../components/RecordedPage/Saved";
 import Bookmarked from "../components/RecordedPage/Bookmarked";
 
 const RecordedPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("saved");
+  const { id } = useParams();
+  let pageType;
+  let firstCategory;
+
+  switch (id) {
+    case "1":
+      firstCategory = "saved";
+      pageType = "saved";
+      break;
+    case "2":
+      firstCategory = "bookmarked";
+      pageType = "lyric";
+      break;
+    case "3":
+      firstCategory = "bookmarked";
+      pageType = "comment";
+      break;
+    case "4":
+      firstCategory = "bookmarked";
+      pageType = "emotion";
+      break;
+    default:
+      firstCategory = "saved";
+      pageType = "saved";
+  }
+
+  const [selectedCategory, setSelectedCategory] = useState(firstCategory);
   const handleCategory = (category) => {
     setSelectedCategory(category);
   };
@@ -33,7 +60,9 @@ const RecordedPage = () => {
         </Filter>
         <Line />
         {selectedCategory === "saved" && <Saved />}
-        {selectedCategory === "bookmarked" && <Bookmarked />}
+        {selectedCategory === "bookmarked" && (
+          <Bookmarked pageType={pageType} />
+        )}
       </Wrapper>
     </div>
   );

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as BasicSmile } from "../../images/basic-smile.svg";
-import { ReactComponent as ClickedSmile } from "../../images/basic-smile-red.svg";
+import basicSmile from "../../images/basic-smile.svg";
+import clickedSmile from "../../images/basic-smile-red.svg";
 
 export default function EmotionChipWithNum({
   text,
+  src,
   num,
   isSelected = false,
   onClick = () => {},
   hideTextAndCount = false,
   disabled = false,
 }) {
+  const srcList =
+    Array.isArray(src) && src.length >= 2 ? src : [basicSmile, basicSmile];
   const handleClick = () => {
     if (!disabled) {
       onClick();
@@ -30,7 +33,9 @@ export default function EmotionChipWithNum({
         isSelected={isSelected}
         disabled={disabled}
       >
-        <ImgDiv>{isSelected ? <ClickedSmile /> : <BasicSmile />}</ImgDiv>
+        <ImgDiv>
+          <Img src={isSelected ? srcList[1] : srcList[0]}></Img>
+        </ImgDiv>
         {!hideTextAndCount && <EmotionText>{text}</EmotionText>}
       </Wrapper>
       {!hideTextAndCount && <Count>{num}</Count>}
@@ -39,9 +44,10 @@ export default function EmotionChipWithNum({
 }
 const Container = styled.div`
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem;
 
   ${({ isSelected, disabled }) =>
     isSelected &&
@@ -54,6 +60,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: auto;
   border-radius: 4rem;
   border: 0.15rem solid var(--gray);
@@ -75,18 +82,18 @@ const ImgDiv = styled.div`
   width: 1.6rem;
   height: 1.6rem;
 `;
+
+const Img = styled.img``;
+
 const EmotionText = styled.div`
   font-size: 1.4rem;
   font-weight: 500;
   white-space: nowrap;
 `;
 const Count = styled.div`
-  width: 1.3rem;
-  height: 1.6rem;
   color: var(--black);
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-left: 0.5rem;
 `;
