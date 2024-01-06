@@ -8,6 +8,7 @@ import GotoSong from "../components/DetailPage/GotoSong";
 import EmotionBox from "../components/DetailPage/EmotionBox";
 import Comments from "../components/DetailPage/Comments";
 
+import ShareModal from "../components/DetailPage/ShareModal";
 import DeletePostModal from "../components/DeletePostModal";
 
 import useClickOutside from "../hooks/useClickOutside";
@@ -16,13 +17,21 @@ const Detailpage = () => {
   //이 노래 들으러 가기 비활성화
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
 
+  const shareModalRef = useRef();
+  const [share, setShare] = useClickOutside(shareModalRef, false);
+
   const deleteModalRef = useRef(); //게시물 삭제 모달
   const [deletePost, setDeletePost] = useClickOutside(deleteModalRef, false);
 
   return (
     <>
       <Wrapper>
-        <TopTab deletePost={deletePost} setDeletePost={setDeletePost} />
+        <TopTab
+          share={share}
+          setShare={setShare}
+          deletePost={deletePost}
+          setDeletePost={setDeletePost}
+        />
         <LyricWithWriter />
         <GotoSong disabled={isListenBtnDisabled} />
         <EmotionBox />
@@ -35,6 +44,11 @@ const Detailpage = () => {
             deletePost={deletePost}
             setDeletePost={setDeletePost}
           />
+        </ModalWrapper>
+      )}
+      {share && (
+        <ModalWrapper>
+          <ShareModal ref={shareModalRef} share={share} setShare={setShare} />
         </ModalWrapper>
       )}
     </>
