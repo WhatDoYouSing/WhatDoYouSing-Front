@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import Footer from "../components/common/Footer";
 import IntroTopbar from "../components/IntroTopbar";
 import Saved from "../components/RecordedPage/Saved";
 import Bookmarked from "../components/RecordedPage/Bookmarked";
@@ -12,7 +13,7 @@ const RecordedPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Wrapper>
         <IntroTopbar text="내활동" del={false} />
         <Filter>
@@ -35,7 +36,8 @@ const RecordedPage = () => {
         {selectedCategory === "saved" && <Saved />}
         {selectedCategory === "bookmarked" && <Bookmarked />}
       </Wrapper>
-    </div>
+      <Footer />
+    </>
   );
 };
 
@@ -43,6 +45,10 @@ export default RecordedPage;
 
 const Wrapper = styled.div`
   margin-top: 11.6rem;
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 15.8rem;
+  margin-bottom: 2.4rem;
 `;
 
 const Filter = styled.div`
