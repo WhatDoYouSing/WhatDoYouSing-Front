@@ -16,8 +16,9 @@ import SignupPage from "./pages/UserInfo/SignupPage";
 import ProfileSettingPage from "./pages/UserInfo/ProfileSettingPage";
 
 import UserModifyIntroPage from "./pages/UserInfo/UserModifyIntroPage";
-import UserModifyPage from "./pages/UserInfo/UserModifyPage";
 import UserDeletePage from "./pages/UserInfo/UserDeletePage";
+import PasModifyPage from "./pages/UserInfo/PasModifyPage";
+import NicModifyPage from "./pages/UserInfo/NicModifyPage";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
             path={"/modifyintro"}
             element={<UserModifyIntroPage />}
           ></Route>
-          <Route path={"/modify"} element={<UserModifyPage />}></Route>
+          <Route path={"/pas-modify"} element={<PasModifyPage />}></Route>
+          <Route path={"/nic-modify"} element={<NicModifyPage />}></Route>
           <Route path={"/delete"} element={<UserDeletePage />}></Route>
         </Routes>
       </BrowserRouter>

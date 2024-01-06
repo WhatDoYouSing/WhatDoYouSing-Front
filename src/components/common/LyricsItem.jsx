@@ -39,7 +39,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.showComment ? "100%" : "74%")};
-  // 기디 코멘트 따라 미디어 쿼리별 grid 설정할 예정
 `;
 const ChipDiv = styled.div`
   display: flex;
@@ -64,7 +63,7 @@ const LyricsComment = styled.div`
   margin-bottom: 4rem;
 
   overflow: hidden;
-  color: var(--Black, #262121);
+  color: var(--black);
   text-overflow: ellipsis;
 
   font-size: 1.4rem;
@@ -79,7 +78,7 @@ const SongDiv = styled.div`
   flex-direction: column;
   gap: 0.8rem;
 
-  color: var(--Gray, #d9d9d9);
+  color: var(--gray);
 
   font-size: 1.6rem;
   font-style: normal;
