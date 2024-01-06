@@ -1,7 +1,10 @@
 import { styled } from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import EmotionChipWithNum from "./EmotionChipWithNum";
+import EmotionSelectMoal from "./EmotionSelectModal";
+
+import useClickOutside from "../../hooks/useClickOutside";
 
 //recoil
 import { useRecoilValue } from "recoil";
@@ -9,6 +12,8 @@ import { emotionListAtom } from "../../assets/recoil/recoil";
 
 const EmotionBox = () => {
   const emotions = useRecoilValue(emotionListAtom);
+  const dropdownRef = useRef(null);
+  const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
 
   const emotionCountData = [
     { icons: "", count: "" },
@@ -32,30 +37,53 @@ const EmotionBox = () => {
   });
 
   const handleChipClick = (index) => {
-    setSelectedChip({ index });
+    if (index === 0) {
+      setIsOpen(!isOpen);
+    } else {
+      setSelectedChip((prevSelectedChip) => ({
+        index: prevSelectedChip.index === index ? null : index,
+      }));
+    }
+  };
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <>
+    <Wrapper>
       <Emotions>
-        {emotionCountData.map((emotion, index) => (
-          <EmotionChipWithNum
-            key={index}
-            text={emotion.icons.text}
-            src={emotion.icons.src}
-            num={emotion.count}
-            hideTextAndCount={index === 0}
-            disabled={index === 0}
-            isSelected={selectedChip.index === index}
-            onClick={() => handleChipClick(index)}
-          />
-        ))}
+        {emotionCountData.map((emotion, index) =>
+          emotion.count !== 0 ? (
+            <EmotionChipWithNum
+              key={index}
+              text={emotion.icons.text}
+              src={emotion.icons.src}
+              num={emotion.count}
+              hideTextAndCount={index === 0}
+              disabled={index === 0}
+              isSelected={selectedChip.index === index}
+              onClick={() => handleChipClick(index)}
+            />
+          ) : null
+        )}
       </Emotions>
-    </>
+      {isOpen && (
+        <EmotionSelectMoal
+          onEmotionSelect={handleChipClick}
+          closeModal={handleModal}
+          ref={dropdownRef}
+        />
+      )}
+    </Wrapper>
   );
 };
 
 export default EmotionBox;
+
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const Emotions = styled.div`
   display: flex;

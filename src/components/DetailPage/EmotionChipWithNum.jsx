@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import basicSmile from "../../images/basic-smile.svg";
-import clickedSmile from "../../images/basic-smile-red.svg";
+import plus from "../../images/plus.svg";
 
 export default function EmotionChipWithNum({
   text,
@@ -13,12 +12,9 @@ export default function EmotionChipWithNum({
   hideTextAndCount = false,
   disabled = false,
 }) {
-  const srcList =
-    Array.isArray(src) && src.length >= 2 ? src : [basicSmile, basicSmile];
+  const srcList = Array.isArray(src) && src.length >= 2 ? src : [plus, plus];
   const handleClick = () => {
-    if (!disabled) {
-      onClick();
-    }
+    onClick();
   };
 
   return (
@@ -28,11 +24,7 @@ export default function EmotionChipWithNum({
       hideTextAndCount={hideTextAndCount}
       disabled={disabled}
     >
-      <Wrapper
-        onClick={handleClick}
-        isSelected={isSelected}
-        disabled={disabled}
-      >
+      <Wrapper isSelected={isSelected} disabled={disabled}>
         <ImgDiv>
           <Img src={isSelected ? srcList[1] : srcList[0]}></Img>
         </ImgDiv>
@@ -91,7 +83,6 @@ const EmotionText = styled.div`
   white-space: nowrap;
 `;
 const Count = styled.div`
-  color: var(--black);
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;

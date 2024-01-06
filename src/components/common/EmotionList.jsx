@@ -8,7 +8,12 @@ import EmotionChip from "./EmotionChip";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-const EmotionList = ({ onEmotionSelect = null }) => {
+const EmotionList = ({
+  onEmotionSelect = null,
+  closeModal,
+  size = "medium",
+  big = true,
+}) => {
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const emotions = useRecoilValue(emotionListAtom);
 
@@ -42,7 +47,10 @@ const EmotionList = ({ onEmotionSelect = null }) => {
   const handleChipClick = (emotion) => {
     setSelectedEmotion(emotion);
     if (onEmotionSelect) {
-      onEmotionSelect(emotion);
+      onEmotionSelect(emotion.id);
+      if (!big) {
+        closeModal();
+      }
     }
   };
   return (
@@ -55,6 +63,7 @@ const EmotionList = ({ onEmotionSelect = null }) => {
                 key={chipIndex}
                 text={emotion.text}
                 src={emotion.src}
+                size={size}
                 isSelected={selectedEmotion === emotion}
                 onClick={() => handleChipClick(emotion)}
               />
@@ -92,7 +101,7 @@ const ShortWrapper = styled.div`
   gap: 0.8rem;
 
   @media (min-width: 1216px) {
-    display: none;
+    display: ${(props) => (props.big ? "none" : "flex")};
   }
 `;
 
@@ -104,7 +113,7 @@ const GridDiv = styled.div`
 `;
 
 const Wrapper = styled.div`
-  display: flex;
+  display: ${(props) => (props.big ? "flex" : "none")};
   flex-direction: column;
   justify-content: center;
   align-items: center;
