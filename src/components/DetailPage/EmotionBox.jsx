@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import React, { useState, useRef } from "react";
 
 import EmotionChipWithNum from "./EmotionChipWithNum";
-import EmotionSelectMoal from "./EmotionSelectModal";
+import EmotionSelectModal from "./EmotionSelectModal";
 
 import useClickOutside from "../../hooks/useClickOutside";
 
@@ -69,7 +69,7 @@ const EmotionBox = () => {
         )}
       </Emotions>
       {isOpen && (
-        <EmotionSelectMoal
+        <EmotionSelectModal
           onEmotionSelect={handleChipClick}
           closeModal={handleModal}
           ref={dropdownRef}

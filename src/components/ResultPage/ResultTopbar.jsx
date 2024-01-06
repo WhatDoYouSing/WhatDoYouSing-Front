@@ -29,13 +29,13 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   display: flex;
+  align-items: flex-end;
 
   width: 100%;
-  height: auto;
+  height: 11.4rem;
   background: var(--white);
   color: var(--black);
   z-index: 9999;
-  margin-top: 2.5rem;
 
   input {
     width: 100%;
