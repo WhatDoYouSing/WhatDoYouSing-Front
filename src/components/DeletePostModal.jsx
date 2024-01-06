@@ -1,26 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 //게시글 삭제 모달
-const DeletePostModal = () => {
+const DeletePostModal = ({ deletePost, setDeletePost }) => {
+  const handleClickDel = () => {
+    setDeletePost(!deletePost); //모달 닫기
+  };
+
   return (
-    <>
-      <Wrapper>
-        <TitleAsk>게시글 삭제</TitleAsk>
-        <AskComment>정말 게시글을 삭제하시겠습니까?</AskComment>
-        <Button>게시글 삭제</Button>
-      </Wrapper>
-    </>
+    <Container>
+      <TitleAsk>게시글 삭제</TitleAsk>
+      <AskComment>정말 게시글을 삭제하시겠습니까?</AskComment>
+      <Button onMouseDown={handleClickDel}>게시글 삭제</Button>
+    </Container>
   );
 };
 
 export default DeletePostModal;
 
-const Wrapper = styled.div`
-  position: absolute;
-  z-index: 9999;
-  top: 20rem;
-  left: 5rem;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 30rem;
@@ -52,7 +50,7 @@ const AskComment = styled.div`
   letter-spacing: -0.32px;
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   width: 26.8rem;
   height: 4.8rem;
   border-radius: 10px;

@@ -45,9 +45,8 @@ const MyPage = () => {
 
   return (
     <>
-      {" "}
+      <Topbar />
       <Wrapper>
-        <Topbar />
         <UserInfo>
           <UserProfile />
           <div className="info">
@@ -68,19 +67,20 @@ const MyPage = () => {
               </div>
             ))}
           </Action>
-          <Action>
-            <div className="title">회원 정보</div>
-            <IDDiv>
-              <Nav>아이디 </Nav>
-              <span>{user}</span>
-            </IDDiv>
-            <Nav onClick={() => navigate("/pas-modify")}>비밀번호 변경</Nav>
-            <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
-          </Action>
-
-          <MemberManaging onClick={() => navigate("/delete")}>
-            회원 탈퇴
-          </MemberManaging>
+          <div>
+            <Action>
+              <div className="title">회원 정보</div>
+              <IDDiv>
+                <Nav>아이디 </Nav>
+                <span>{user}</span>
+              </IDDiv>
+              <Nav onClick={() => navigate("/pas-modify")}>비밀번호 변경</Nav>
+              <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
+            </Action>
+            <MemberManaging onClick={() => navigate("/delete")}>
+              회원 탈퇴
+            </MemberManaging>
+          </div>
         </Grid>
       </Wrapper>
       <Footer />
@@ -147,7 +147,7 @@ const LogBtn = styled.div`
 const Grid = styled.div`
   @media (min-width: 1100px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 

@@ -32,16 +32,7 @@ const EmotionBox = () => {
   };
 
   return (
-    <Wrapper>
-      <div
-        style={{
-          width: "100%",
-          borderBottom: "0.05rem solid var(--black)",
-          opacity: "0.2",
-          lineHeight: "0.1em",
-          margin: "0.8rem 0",
-        }}
-      ></div>
+    <>
       <Emotions>
         {emotionCountData.map((emotion, index) => (
           <EmotionChipWithNum
@@ -55,26 +46,24 @@ const EmotionBox = () => {
           />
         ))}
       </Emotions>
-    </Wrapper>
+    </>
   );
 };
 
 export default EmotionBox;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-`;
-
 const Emotions = styled.div`
   display: flex;
   padding: 1rem 0rem;
   align-items: flex-start;
+  padding: 1rem 0;
+  margin-top: 0.8rem;
   gap: 0.8rem;
   align-self: stretch;
   overflow-x: auto;
+
+  width: "100%";
+  border-top: 0.025rem solid var(--gray);
 
   /* 스크롤바 감추기 */
   scrollbar-width: thin;
