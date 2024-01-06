@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../images/back.svg";
 import { ReactComponent as Share } from "../images/share.svg";
 import { ReactComponent as BookmarkOff } from "../images/bookmark-off.svg";
+import { ReactComponent as BookmarkOn } from "../images/bookmark-on.svg";
 import { ReactComponent as Meatball } from "../images/meatball.svg";
 
 import MeatballSelect from "./DetailPage/MeatballSelect";
@@ -26,6 +27,7 @@ const TopTab = ({ deletePost, setDeletePost }) => {
         <Back onClick={goBack} />
         <Others>
           <Share />
+
           <BookmarkOff />
           <Meatball onClick={() => setIsOpen(!isOpen)} ref={meatballRef} />
           {isOpen && (
@@ -34,6 +36,7 @@ const TopTab = ({ deletePost, setDeletePost }) => {
               setIsOpen={setIsOpen}
               deletePost={deletePost}
               setDeletePost={setDeletePost}
+
             />
           )}
         </Others>
