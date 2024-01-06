@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import EmotionList from "../common/EmotionList";
 
-const EmotionSelectMoal = ({ closeModal, onEmotionSelect }) => {
+const EmotionSelectModal = ({ closeModal, onEmotionSelect }) => {
   return (
     <Container>
       <EmotionList
@@ -16,7 +16,7 @@ const EmotionSelectMoal = ({ closeModal, onEmotionSelect }) => {
   );
 };
 
-export default EmotionSelectMoal;
+export default EmotionSelectModal;
 
 const Container = styled.div`
   position: absolute;
