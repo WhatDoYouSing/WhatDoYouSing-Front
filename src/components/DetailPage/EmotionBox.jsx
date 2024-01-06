@@ -1,27 +1,31 @@
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import EmotionChipWithNum from "./EmotionChipWithNum";
 
+//recoil
+import { useRecoilValue } from "recoil";
+import { emotionListAtom } from "../../assets/recoil/recoil";
+
 const EmotionBox = () => {
+  const emotions = useRecoilValue(emotionListAtom);
+
   const emotionCountData = [
-    { text: "", count: "" },
-    { text: "쾌감", count: 10 },
-    { text: "벅참", count: 0 },
-    { text: "신남", count: 2 },
-    { text: "행복", count: 4 },
-    { text: "희망", count: 19 },
-    { text: "설렘", count: 2 },
-    { text: "평온", count: 3 },
-    { text: "위로", count: 0 },
-    { text: "센치함", count: 13 },
-    { text: "쓸쓸함", count: 4 },
-    { text: "그리움", count: 5 },
-    { text: "슬픔", count: 12 },
-    { text: "기타", count: 13 },
-    //count수는 임의 목데이터, 추후 연결
+    { icons: "", count: "" },
+    { icons: emotions[0], count: 10 },
+    { icons: emotions[1], count: 0 },
+    { icons: emotions[2], count: 2 },
+    { icons: emotions[3], count: 4 },
+    { icons: emotions[4], count: 19 },
+    { icons: emotions[5], count: 2 },
+    { icons: emotions[6], count: 3 },
+    { icons: emotions[7], count: 0 },
+    { icons: emotions[8], count: 13 },
+    { icons: emotions[9], count: 4 },
+    { icons: emotions[10], count: 5 },
+    { icons: emotions[11], count: 12 },
   ];
+  //count수는 임의 목데이터, 추후 연결
 
   const [selectedChip, setSelectedChip] = useState({
     index: null,
@@ -37,7 +41,8 @@ const EmotionBox = () => {
         {emotionCountData.map((emotion, index) => (
           <EmotionChipWithNum
             key={index}
-            text={emotion.text}
+            text={emotion.icons.text}
+            src={emotion.icons.src}
             num={emotion.count}
             hideTextAndCount={index === 0}
             disabled={index === 0}
