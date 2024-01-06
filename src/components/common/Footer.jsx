@@ -18,7 +18,11 @@ const Footer = () => {
           <Title>Likelion Ewha 11th Graduation Project</Title>
         </InfoDiv>
         <IconDiv>
-          <ImgDiv onClick={() => handleIconClick("https://www.likealion.org")}>
+          <ImgDiv
+            onClick={() =>
+              handleIconClick("https://www.instagram.com/likelion_ewha/")
+            }
+          >
             <LikeLion />
           </ImgDiv>
           <ImgDiv onClick={() => handleIconClick("https://www.instagram.com")}>
@@ -30,9 +34,7 @@ const Footer = () => {
             <Github />
           </ImgDiv>
         </IconDiv>
-        <Copyright>
-          Copyright © What do you sing. All Rights Reserved.
-        </Copyright>
+        <Copyright>Copyright © WDYS. All Rights Reserved.</Copyright>
       </Container>
     </Wrapper>
   );
