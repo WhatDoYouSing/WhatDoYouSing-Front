@@ -10,7 +10,9 @@ const path_list = [
   {
     id: 0,
     name: "저장",
+
     path: "/recorded/1",
+
     className: "very-dark",
   },
   {
@@ -22,19 +24,25 @@ const path_list = [
   {
     id: 2,
     name: "가사",
+
     path: "/recorded/2",
+
     className: "dark",
   },
   {
     id: 3,
     name: "댓글",
+
     path: "/recorded/3",
+
     className: "dark",
   },
   {
     id: 4,
     name: "감정",
+
     path: "/recorded/4",
+
     className: "dark",
   },
 ];

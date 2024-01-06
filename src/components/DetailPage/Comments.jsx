@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import CommentBox from "../CommentBox";
 import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
+import noContent from "../../images/noContent.svg";
+// import noContent from "../../images/noContent.png";
 
 const Comments = () => {
   const [comment, setComment] = useState("");
@@ -31,6 +33,16 @@ const Comments = () => {
         ></input>
         <SubmitBtn onClick={handleComment} />
       </CommentInput>
+      {commentList.length === 0 ? (
+        <NoneDiv>
+          <img src={noContent} width={"105rem"} height={"105rem"} />
+          {/* <NoContent width={"10.5rem"} height={"10.5rem"} fill="#a0a0a0" /> */}
+          <div className="noneMent">
+            댓글이 없어요.
+            <br /> 첫 댓글을 남겨보시는 건 어때요?
+          </div>
+        </NoneDiv>
+      ) : null}
       {commentList.map((commentContent, index) => (
         <CommentBox
           key={index}
@@ -81,5 +93,24 @@ const CommentInput = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+  }
+`;
+
+const NoneDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 6.4rem 0;
+  .noneMent {
+    color: var(--Dark-Gray, #a0a0a0);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.032rem;
+    margin-top: 1.6rem;
   }
 `;
