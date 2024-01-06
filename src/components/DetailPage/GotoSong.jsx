@@ -103,7 +103,6 @@ const Buttons = styled.div`
 const LikeBtn = styled.button`
   display: flex;
   position: relative;
-  z-index: 9999;
   padding: 1.2rem 2rem;
   flex-direction: row;
   justify-content: center;
