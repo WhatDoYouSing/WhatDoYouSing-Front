@@ -26,7 +26,7 @@ const Saved = () => {
 
 export default Saved;
 
-const Wrapper = styled.div`
+const Wrapper2 = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

@@ -6,16 +6,7 @@ import CommentBox from "../CommentBox";
 const BookmarkedComment = () => {
   return (
     <Wrapper>
-      <CommentWrapper>
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-        <CommentBox />
-      </CommentWrapper>
+      <CommentWrapper></CommentWrapper>
     </Wrapper>
   );
 };
