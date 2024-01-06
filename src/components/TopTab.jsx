@@ -17,6 +17,11 @@ const TopTab = ({ deletePost, setDeletePost }) => {
     navigate(-1);
   };
 
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const handleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
   //외부 클릭시 닫힘
   const meatballRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(meatballRef, false);
@@ -27,8 +32,11 @@ const TopTab = ({ deletePost, setDeletePost }) => {
         <Back onClick={goBack} />
         <Others>
           <Share />
-
-          <BookmarkOff />
+          {isBookmarked ? (
+            <BookmarkOn onClick={handleBookmark} />
+          ) : (
+            <BookmarkOff onClick={handleBookmark} />
+          )}
           <Meatball onClick={() => setIsOpen(!isOpen)} ref={meatballRef} />
           {isOpen && (
             <MeatballSelect
@@ -36,7 +44,6 @@ const TopTab = ({ deletePost, setDeletePost }) => {
               setIsOpen={setIsOpen}
               deletePost={deletePost}
               setDeletePost={setDeletePost}
-
             />
           )}
         </Others>

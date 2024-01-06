@@ -30,7 +30,6 @@ const GotoSong = ({ disabled }) => {
 
     // 새로운 랜덤한 note 애니메이션을 위해 노트 ID를 변경
     setNoteId((prevNoteId) => prevNoteId + 1);
-    console.log(noteId);
   };
 
   return (
@@ -101,10 +100,9 @@ const Buttons = styled.div`
   gap: 0.8rem;
 `;
 
-const LikeBtn = styled.div`
+const LikeBtn = styled.button`
   display: flex;
   position: relative;
-  z-index: 9999;
   padding: 1.2rem 2rem;
   flex-direction: row;
   justify-content: center;
