@@ -13,42 +13,38 @@ const Bookmarked = () => {
 
   return (
     <div>
-      <Wrapper>
+      <Wrapper3>
         <Filter>
           <span
-            onClick={() => handleCategory("lyric")}
-            className={selectedCategory === "lyric" ? "selected" : "unselected"}
+            onClick={() => handleCategory(2)}
+            className={selectedCategory === 2 ? "selected2" : "unselected2"}
           >
             가사
           </span>
           <span
-            onClick={() => handleCategory("comment")}
-            className={
-              selectedCategory === "comment" ? "selected" : "unselected"
-            }
+            onClick={() => handleCategory(3)}
+            className={selectedCategory === 3 ? "selected2" : "unselected2"}
           >
             댓글
           </span>
           <span
-            onClick={() => handleCategory("emotion")}
-            className={
-              selectedCategory === "emotion" ? "selected" : "unselected"
-            }
+            onClick={() => handleCategory(4)}
+            className={selectedCategory === 4 ? "selected2" : "unselected2"}
           >
             감정
           </span>
         </Filter>
-        {selectedCategory === "lyric" && <BookmarkedLyric />}
-        {selectedCategory === "comment" && <BookmarkedComment />}
-        {selectedCategory === "emotion" && <BookmarkedEmotion />}
-      </Wrapper>
+        {selectedCategory === 2 && <BookmarkedLyric />}
+        {selectedCategory === 3 && <BookmarkedComment />}
+        {selectedCategory === 4 && <BookmarkedEmotion />}
+      </Wrapper3>
     </div>
   );
 };
 
 export default Bookmarked;
 
-const Wrapper = styled.div`
+const Wrapper3 = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -88,7 +84,7 @@ const Filter = styled.div`
     line-height: normal;
   }
 
-  .selected {
+  .selected2 {
     color: var(--pointPink);
     border: 1.5px solid var(--pointPink);
   }
