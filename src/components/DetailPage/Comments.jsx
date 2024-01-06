@@ -30,6 +30,7 @@ const Comments = () => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="댓글을 남겨보세요."
+          style={{ outline: "none" }}
         ></input>
         <SubmitBtn onClick={handleComment} />
       </CommentInput>

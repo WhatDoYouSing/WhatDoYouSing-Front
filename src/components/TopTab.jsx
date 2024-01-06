@@ -11,7 +11,14 @@ import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
-const TopTab = ({ share, setShare, deletePost, setDeletePost }) => {
+const TopTab = ({
+  share,
+  setShare,
+  deletePost,
+  setDeletePost,
+  reportPost,
+  setReportPost,
+}) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -48,6 +55,8 @@ const TopTab = ({ share, setShare, deletePost, setDeletePost }) => {
               setIsOpen={setIsOpen}
               deletePost={deletePost}
               setDeletePost={setDeletePost}
+              reportPost={reportPost}
+              setReportPost={setReportPost}
             />
           )}
         </Others>
