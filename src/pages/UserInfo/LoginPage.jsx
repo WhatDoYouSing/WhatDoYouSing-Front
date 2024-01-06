@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import IntroTopbar from "../../components/IntroTopbar";
 
 import { ReactComponent as Symbol } from "../../images/symbol.svg";
-import { ReactComponent as Watermark } from "../../images/watermark-kor.svg";
-import { ReactComponent as WatermarkE } from "../../images/watermark-eng.svg";
+import wordmark from "../../images/icons/wordmark-kor.svg";
+import wordmarkE from "../../images/icons/wordmark-eng.svg";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <IntroTopbar />
@@ -16,10 +19,10 @@ const LoginPage = () => {
           <Symbol />
         </ImgBoxS>
         <ImgBoxW>
-          <Watermark />
+          <Wordmark src={wordmark} />
         </ImgBoxW>
         <ImgBoxE>
-          <WatermarkE />
+          <Wordmark src={wordmarkE} />
         </ImgBoxE>
       </Box>
       <SideBox>
@@ -28,7 +31,7 @@ const LoginPage = () => {
           <Input type="text" placeholder="아이디" />
           <Input type="password" placeholder="비밀번호" />
         </InputBox>
-        <LoginBtn>로그인</LoginBtn>
+        <LoginBtn onClick={() => navigate("/")}>로그인</LoginBtn>
       </SideBox>
     </Wrapper>
   );
@@ -66,8 +69,8 @@ const Box = styled(ColumnStyle)`
 `;
 
 const ImgBoxS = styled.div`
-  width: 10.2rem;
-  height: 10.1rem;
+  width: 12rem;
+  height: 12rem;
 
   @media (min-width: 1200px) {
     width: 18rem;
@@ -76,8 +79,8 @@ const ImgBoxS = styled.div`
 `;
 
 const ImgBoxW = styled.div`
-  width: 12.8rem;
-  height: 3rem;
+  width: 12rem;
+  height: 2.6rem;
 
   @media (min-width: 1200px) {
     display: none;
@@ -85,12 +88,14 @@ const ImgBoxW = styled.div`
 `;
 
 const ImgBoxE = styled.div`
-  width: 17rem;
+  width: 18rem;
 
   @media (max-width: 1200px) {
     display: none;
   }
 `;
+
+const Wordmark = styled.img``;
 
 const SideBox = styled(ColumnStyle)`
   width: 100%;
