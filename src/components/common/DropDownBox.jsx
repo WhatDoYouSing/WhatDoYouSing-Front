@@ -11,31 +11,21 @@ import { ReactComponent as Close } from "../../images/dropdown-close.svg";
 import DropDown from "./DropDown";
 
 const DropDownBox = () => {
-  const [isDropdownView, setDropdownView] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("좋아요 순");
   const dropdownRef = useRef(null);
-
-  useClickOutside(dropdownRef, () => {
-    if (isDropdownView) {
-      setDropdownView(false);
-    }
-  });
-
-  const handleClickContainer = () => {
-    setDropdownView(!isDropdownView);
-  };
+  const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
+  const [selectedOption, setSelectedOption] = useState("좋아요 순");
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    setDropdownView(false);
+    setIsOpen(false);
   };
   return (
     <Wrapper>
-      <Container onMouseDown={handleClickContainer} ref={dropdownRef}>
+      <Container onMouseDown={() => setIsOpen(!isOpen)} ref={dropdownRef}>
         <div>{selectedOption}</div>
-        {isDropdownView ? <Close /> : <Open />}
+        {isOpen ? <Close /> : <Open />}
       </Container>
-      {isDropdownView && (
+      {isOpen && (
         <DropDown selectedOption={selectedOption} handleSelect={handleSelect} />
       )}
     </Wrapper>

@@ -4,10 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const options = ["게시글 삭제", "게시글 신고"];
 
-const MeatballSelect = ({ deleteSel, reportSel }) => {
+const MeatballSelect = ({
+  isOpen,
+  setIsOpen,
+  deletePost,
+  setDeletePost,
+  reportSel,
+}) => {
   const handleOptionClick = (option) => {
-    console.log("Selected option:", option);
-    option === "게시글 삭제" ? deleteSel() : reportSel();
+    option === "게시글 삭제" ? setDeletePost(!deletePost) : reportSel();
+    setIsOpen(!isOpen);
   };
 
   return (
