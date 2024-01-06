@@ -11,43 +11,15 @@ import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
-const TopTab = () => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-  };
-
+const TopTab = ({ deletePost, setDeletePost }) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
 
-  //미트볼 클릭 여부
-  const [isMeatballClicked, setMeatballClicked] = useState(false);
-  const handleMeatball = () => {
-    setMeatballClicked(!isMeatballClicked);
-    console.log("isMeatballClicked:", !isMeatballClicked);
-  };
-
-  //선택한 미트볼 옵션
-  const [selectedMeatball, setSelectedMeatball] = useState();
-  const handleSelect = (option) => {
-    setSelectedMeatball(option);
-  };
-
   //외부 클릭시 닫힘
   const meatballRef = useRef(null);
-
-  useClickOutside(meatballRef, () => {
-    if (isMeatballClicked) {
-      setMeatballClicked(!isMeatballClicked);
-    }
-  });
-
-  // 선택된 미트볼 옵션을 처리할 콜백 함수
-  const handleMeatballSelect = (option) => {
-    console.log("TopTab에 전달된 미트볼 option:", option);
-  };
+  const [isOpen, setIsOpen] = useClickOutside(meatballRef, false);
 
   return (
     <>
@@ -55,17 +27,16 @@ const TopTab = () => {
         <Back onClick={goBack} />
         <Others>
           <Share />
-          {isBookmarked ? (
-            <BookmarkOn onClick={handleBookmark} />
-          ) : (
-            <BookmarkOff onClick={handleBookmark} />
-          )}
-          <Meatball onMouseDown={handleMeatball} ref={meatballRef} />
-          {isMeatballClicked && (
+
+          <BookmarkOff />
+          <Meatball onClick={() => setIsOpen(!isOpen)} ref={meatballRef} />
+          {isOpen && (
             <MeatballSelect
-              selectedMeatball={selectedMeatball}
-              handleSelect={handleSelect}
-              ref={meatballRef}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              deletePost={deletePost}
+              setDeletePost={setDeletePost}
+
             />
           )}
         </Others>
@@ -88,7 +59,7 @@ const Wrapper = styled.div`
   height: 11.3rem;
   background-color: var(--white);
   color: var(--black);
-  z-index: 999;
+  z-index: 99;
 `;
 
 const Others = styled.div`

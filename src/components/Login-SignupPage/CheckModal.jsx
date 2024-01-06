@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 //회원정보 확인 모달
 const CheckModal = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Wrapper>
@@ -14,7 +17,7 @@ const CheckModal = () => {
           </AskComment>
           <AskComment>정말 이 회원정보로 가입하시겠어요?</AskComment>
         </ComDiv>
-        <Button>네. 회원정보 기억했어요!</Button>
+        <Button onClick={() => navigate("/")}>네. 회원정보 기억했어요!</Button>
       </Wrapper>
     </>
   );
@@ -28,9 +31,6 @@ const Wrapper = styled.div`
   width: 30rem;
   height: auto;
 
-  //추후 삭제 확인용 border
-  border: 1px solid #000;
-
   padding: 20px 16px;
   flex-direction: column;
   align-items: center;
@@ -38,6 +38,7 @@ const Wrapper = styled.div`
   background-color: var(--white);
   color: var(--black);
   text-align: center;
+  z-index: 101;
 `;
 
 const Title = styled.div`
@@ -69,4 +70,17 @@ const Button = styled.button`
   border-radius: 1rem;
   background: var(--pointPink);
   color: var(--white);
+`;
+
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 100;
 `;

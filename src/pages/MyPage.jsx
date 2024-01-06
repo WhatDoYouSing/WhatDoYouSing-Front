@@ -45,9 +45,8 @@ const MyPage = () => {
 
   return (
     <>
-      {" "}
+      <Topbar />
       <Wrapper>
-        <Topbar />
         <UserInfo>
           <UserProfile />
           <div className="info">
@@ -57,9 +56,7 @@ const MyPage = () => {
         </UserInfo>
         <Grid>
           <Action>
-            <div className="title" onClick={() => navigate("/recorded")}>
-              내 활동
-            </div>
+            <div className="title">내 활동</div>
             {path_list.map(({ id, name, path, className }) => (
               <div
                 key={id}
@@ -70,8 +67,20 @@ const MyPage = () => {
               </div>
             ))}
           </Action>
-          <MemberManaging>회원정보 수정</MemberManaging>
-          <MemberManaging>회원 탈퇴</MemberManaging>
+          <div>
+            <Action>
+              <div className="title">회원 정보</div>
+              <IDDiv>
+                <Nav>아이디 </Nav>
+                <span>{user}</span>
+              </IDDiv>
+              <Nav onClick={() => navigate("/pas-modify")}>비밀번호 변경</Nav>
+              <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
+            </Action>
+            <MemberManaging onClick={() => navigate("/delete")}>
+              회원 탈퇴
+            </MemberManaging>
+          </div>
         </Grid>
       </Wrapper>
       <Footer />
@@ -85,7 +94,7 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
-  margin-top: 11.6rem;
+  padding-top: 11.6rem;
 `;
 
 const UserInfo = styled.div`
@@ -138,7 +147,7 @@ const LogBtn = styled.div`
 const Grid = styled.div`
   @media (min-width: 1100px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
@@ -182,6 +191,33 @@ const Action = styled.div`
   }
 `;
 
+const IDDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    max-width: 17.1rem;
+    text-overflow: ellipsis;
+
+    color: var(--darkGray);
+
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.32px;
+  }
+`;
+
+const Nav = styled.div`
+  color: var(--veryDarkGray);
+
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.032rem;
+  cursor: pointer;
+`;
+
 const MemberManaging = styled.div`
   margin-bottom: 3.2rem;
 
@@ -190,4 +226,6 @@ const MemberManaging = styled.div`
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.04rem;
+
+  cursor: pointer;
 `;

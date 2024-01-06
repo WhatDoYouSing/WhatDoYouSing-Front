@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const useClickOutside = (ref, callback) => {
+const useClickOutside = (ref, initialState) => {
+  const [isOpen, setIsOpen] = useState(initialState);
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        callback();
+    const pageClickEvent = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setIsOpen(!isOpen);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isOpen) {
+      window.addEventListener("click", pageClickEvent);
+    }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("click", pageClickEvent);
     };
-  }, [ref, callback]);
+  }, [isOpen, ref]);
+  return [isOpen, setIsOpen];
 };
-
 export default useClickOutside;
