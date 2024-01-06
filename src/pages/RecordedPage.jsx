@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
+//페이지
 import IntroTopbar from "../components/IntroTopbar";
-import Saved from "../components/RecordedPage/Saved";
-import Bookmarked from "../components/RecordedPage/Bookmarked";
+//저장
+import { ReactComponent as Search } from "../images/search.svg";
+import LyricsItem from "../components/common/LyricsItem";
+//내가 남긴
+import BookmarkedLyric from "../components/RecordedPage/BookmarkedLyric";
+import BookmarkedComment from "../components/RecordedPage/BookmarkedComment";
+import BookmarkedEmotion from "../components/RecordedPage/BookmarkedEmotion";
 
 const RecordedPage = () => {
   const { id } = useParams();
@@ -38,22 +44,23 @@ const RecordedPage = () => {
     setSelectedCategory(category);
   };
 
+  //저장
+  const savedItems = Array.from({ length: 10 }, (_, index) => index + 1);
+
   return (
     <div>
       <Wrapper>
         <IntroTopbar text="내활동" del={false} />
         <Filter>
           <span
-            onClick={() => handleCategory("saved")}
-            className={selectedCategory === "saved" ? "selected" : "unselected"}
+            onClick={() => handleCategory(1)}
+            className={selectedCategory === 1 ? "selected" : ""}
           >
             저장
           </span>
           <span
-            onClick={() => handleCategory("bookmarked")}
-            className={
-              selectedCategory === "bookmarked" ? "selected" : "unselected"
-            }
+            onClick={() => handleCategory(2)}
+            className={selectedCategory !== 1 ? "selected" : ""}
           >
             내가 남긴
           </span>
@@ -80,6 +87,13 @@ const Filter = styled.div`
 
   span {
     width: 7.8rem;
+    color: var(--black);
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 20.8px */
+    letter-spacing: -0.016rem;
   }
 
   .selected {
@@ -94,15 +108,6 @@ const Filter = styled.div`
     border-bottom: 2px solid var(--pointPink);
     padding-bottom: 0.6rem;
   }
-  .unselected {
-    color: var(--black);
-    text-align: center;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 130%; /* 20.8px */
-    letter-spacing: -0.016rem;
-  }
 `;
 
 const Line = styled.div`
@@ -111,3 +116,57 @@ const Line = styled.div`
   width: 100%;
   border-bottom: 1px solid var(--gray);
 `;
+
+//Saved
+const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+`;
+
+const SearchBar = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1.5rem 0 3rem 0;
+
+  input {
+    height: 4.8rem;
+    flex: 1 0 0;
+    width: 100%;
+    flex-shrink: 0;
+    border: none;
+    border-bottom: 0.15rem solid var(--black);
+    background: var(--white);
+    outline: none;
+  }
+
+  input::placeholder {
+    color: var(--darkGray);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.032rem;
+  }
+`;
+
+const ItemDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  > div:nth-child(odd) {
+    align-self: flex-start;
+  }
+
+  > div:nth-child(even) {
+    align-self: flex-end;
+  }
+`;
+
+
