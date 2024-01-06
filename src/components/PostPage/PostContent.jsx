@@ -16,7 +16,7 @@ const PostContent = (props) => {
   const [singer, setSinger] = useState("");
 
   const handleEmotionSelect = (selectedEmotion) => {
-    setEmotion(selectedEmotion + 1);
+    setEmotion(selectedEmotion);
   };
 
   //버튼 활성화
