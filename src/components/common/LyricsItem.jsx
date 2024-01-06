@@ -8,8 +8,10 @@ const LyricsItem = ({
   showChip = false,
   text = "쾌감",
 }) => {
+  const navigate = useNavigate();
+
   return (
-    <Wrapper showComment={showComment}>
+    <Wrapper showComment={showComment} onClick={() => navigate("/detail")}>
       {showChip && (
         <ChipDiv>
           <EmotionChip text={text} size="small" />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Search } from "../images/search.svg";
 
@@ -11,6 +12,8 @@ import DropDownBox from "../components/common/DropDownBox";
 import Topbar from "../components/common/MainPage/Topbar";
 
 const SearchPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Topbar />
@@ -19,7 +22,7 @@ const SearchPage = () => {
         <InputDiv>
           <Input placeholder="가사를 검색해보세요!" />
           <ImgDiv>
-            <Search />
+            <Search onClick={() => navigate("/result")} />
           </ImgDiv>
         </InputDiv>
       </SearchDiv>

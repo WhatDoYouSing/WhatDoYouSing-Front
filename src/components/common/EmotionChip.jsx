@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as BasicSmile } from "../../images/basic-smile.svg";
-import { ReactComponent as ClickedSmile } from "../../images/basic-smile-red.svg";
 
 const sizes = {
   small: {

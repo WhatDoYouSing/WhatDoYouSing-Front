@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import ResultTopbar from "../components/ResultPage/ResultTopbar";
 import FilterResult from "../components/ResultPage/FilterResult";
+import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 
 const ResultPage = () => {
   return (
@@ -11,6 +12,7 @@ const ResultPage = () => {
         <ResultTopbar />
         <FilterResult />
       </Wrapper>
+      <FloatingBtn />
     </>
   );
 };

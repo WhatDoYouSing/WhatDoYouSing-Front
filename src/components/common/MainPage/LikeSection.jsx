@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { useRecoilValue } from "recoil";
+import { emotionListAtom } from "../../../assets/recoil/recoil";
 
 import { ReactComponent as More } from "../../../images/more.svg";
 import { ReactComponent as SampleHeart } from "../../../images/sample-heart.svg";
@@ -9,13 +13,20 @@ import LikeCarousel from "./LikeCarousel";
 import EmotionChip from "../EmotionChip";
 
 const LikeSection = () => {
+  const navigate = useNavigate();
+  const emotions = useRecoilValue(emotionListAtom);
+
   return (
     <Wrapper>
-      <NavLike>
+      <NavLike onClick={() => navigate("/result")}>
         LIKE <More />
       </NavLike>
       <LikeDiv>
-        <EmotionChip size="small" text="쾌감" />
+        <EmotionChip
+          size="small"
+          text={emotions[0].text}
+          src={emotions[0].src}
+        />
         <Like>
           <SampleHeart /> 234,345
         </Like>
