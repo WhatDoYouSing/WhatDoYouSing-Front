@@ -26,8 +26,8 @@ const Detailpage = () => {
   return (
     <div>
       <Wrapper>
-        <TopTab deleteModal={deleteModal} reportModal={reportModal} />
-        {deletePost && <DeletePostModal />}
+        <TopTab />
+        {/* {deletePost && <DeletePostModal />} */}
         <LyricWithWriter />
         <GotoSong disabled={isListenBtnDisabled} />
         <EmotionBox />
