@@ -4,12 +4,20 @@ import React, { useState } from "react";
 import { ReactComponent as ProfileImg } from "../../images/profile.svg";
 import EmotionChip from "../common/EmotionChip";
 
+import { useRecoilValue } from "recoil";
+import { emotionListAtom } from "../../assets/recoil/recoil";
+
 const LyricWithWriter = () => {
+  const emotions = useRecoilValue(emotionListAtom);
   return (
     <Wrapper>
       <ProfileWrapper>
         <ProfileImg />
-        <EmotionChip size="small" text={`쾌감`} />
+        <EmotionChip
+          size="small"
+          text={emotions[0].text}
+          src={emotions[0].src}
+        />
       </ProfileWrapper>
       <TitleLyrics>
         이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아 우린

@@ -15,6 +15,7 @@ const Postpage = (props) => {
       <Wrapper>
         <IntroTopbar
           text="게시글 작성"
+          delPath="/"
           actBtn={true}
           btnText="게시하기"
           nextPath="/detail"

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 //페이지
 import IntroTopbar from "../components/IntroTopbar";
@@ -12,7 +13,33 @@ import BookmarkedComment from "../components/RecordedPage/BookmarkedComment";
 import BookmarkedEmotion from "../components/RecordedPage/BookmarkedEmotion";
 
 const RecordedPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState(1);
+  const { id } = useParams();
+  let pageType;
+  let firstCategory;
+
+  switch (id) {
+    case "1":
+      firstCategory = "saved";
+      pageType = "saved";
+      break;
+    case "2":
+      firstCategory = "bookmarked";
+      pageType = "lyric";
+      break;
+    case "3":
+      firstCategory = "bookmarked";
+      pageType = "comment";
+      break;
+    case "4":
+      firstCategory = "bookmarked";
+      pageType = "emotion";
+      break;
+    default:
+      firstCategory = "saved";
+      pageType = "saved";
+  }
+
+  const [selectedCategory, setSelectedCategory] = useState(firstCategory);
   const handleCategory = (category) => {
     setSelectedCategory(category);
   };
@@ -39,57 +66,9 @@ const RecordedPage = () => {
           </span>
         </Filter>
         <Line />
-        {selectedCategory === 1 && (
-          <div>
-            <Wrapper2>
-              <SearchBar>
-                <input placeholder="저장한 가사 총 122개"></input>
-                <Search />
-              </SearchBar>
-              <ItemDiv>
-                {savedItems.map((id) => (
-                  <LyricsItem showComment={false} />
-                ))}
-              </ItemDiv>
-            </Wrapper2>
-          </div>
-        )}
-        {(selectedCategory === 2 ||
-          selectedCategory === 3 ||
-          selectedCategory === 4) && (
-          <div>
-            <Wrapper3>
-              <Filter2>
-                <span
-                  onClick={() => handleCategory(2)}
-                  className={
-                    selectedCategory === 2 ? "selected2" : "unselected2"
-                  }
-                >
-                  가사
-                </span>
-                <span
-                  onClick={() => handleCategory(3)}
-                  className={
-                    selectedCategory === 3 ? "selected2" : "unselected2"
-                  }
-                >
-                  댓글
-                </span>
-                <span
-                  onClick={() => handleCategory(4)}
-                  className={
-                    selectedCategory === 4 ? "selected2" : "unselected2"
-                  }
-                >
-                  감정
-                </span>
-              </Filter2>
-              {selectedCategory === 2 && <BookmarkedLyric />}
-              {selectedCategory === 3 && <BookmarkedComment />}
-              {selectedCategory === 4 && <BookmarkedEmotion />}
-            </Wrapper3>
-          </div>
+        {selectedCategory === "saved" && <Saved />}
+        {selectedCategory === "bookmarked" && (
+          <Bookmarked pageType={pageType} />
         )}
       </Wrapper>
     </div>
@@ -190,53 +169,4 @@ const ItemDiv = styled.div`
   }
 `;
 
-//내가 남긴
-const Wrapper3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-self: stretch;
 
-  @media (min-width: 1200px) {
-    padding: 0 22.6rem;
-  }
-`;
-
-const Filter2 = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  gap: 1.4rem;
-  padding: 1.6rem 0;
-
-  span {
-    display: flex;
-    padding: 1.9rem 2rem;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-    flex: 1 0 0;
-    border-radius: 4rem;
-    border: 1.5px solid var(--gray);
-    background: var(--white);
-
-    width: 2.8rem;
-    height: 1.6rem;
-    color: var(--black);
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-
-  .selected2 {
-    color: var(--pointPink);
-    border: 1.5px solid var(--pointPink);
-  }
-
-  @media (min-width: 1200px) {
-    padding: 4rem 0;
-  }
-`;
