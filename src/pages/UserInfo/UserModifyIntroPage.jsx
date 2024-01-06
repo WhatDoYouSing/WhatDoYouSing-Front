@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
@@ -10,12 +10,25 @@ import wordmark from "../../images/icons/wordmark-kor.svg";
 import wordmarkE from "../../images/icons/wordmark-eng.svg";
 
 const UserModifyIntroPage = () => {
+  const type = useParams();
   const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    if (type.id === "pas") {
+      console.log(type);
+      navigate("/pas-modify");
+    } else if (type.id === "nic") {
+      console.log(type);
+      navigate("/nic-modify");
+    } else {
+      console.log(type);
+    }
+  };
 
   return (
     <>
       <Wrapper>
-        <IntroTopbar text="회원정보 수정" />
+        <IntroTopbar text="회원정보 수정" delPath="/my" />
         <Box>
           <ImgBoxS>
             <Symbol />
@@ -36,7 +49,7 @@ const UserModifyIntroPage = () => {
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
-          <LoginBtn onClick={() => navigate("/modify")}>확인</LoginBtn>
+          <LoginBtn onClick={handleNavigate}>확인</LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />
