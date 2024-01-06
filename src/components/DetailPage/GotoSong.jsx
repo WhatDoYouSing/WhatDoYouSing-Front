@@ -46,6 +46,7 @@ const GotoSong = ({ disabled }) => {
                 style={{ position: "absolute" }}
                 data-aos="zoom-in-up"
                 data-aos-duration="300"
+                data-aos-offset="5"
               >
                 <LikeInteraction noteId={noteId} />
               </div>
