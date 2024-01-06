@@ -1,5 +1,6 @@
 import GlobalStyle from "./statics/styles/GlobalStyle";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 import MainPage from "./pages/Mainpage";
 import Detailpage from "./pages/Detailpage";
@@ -22,7 +23,7 @@ import NicModifyPage from "./pages/UserInfo/NicModifyPage";
 
 function App() {
   return (
-    <>
+    <RecoilRoot>
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
@@ -36,10 +37,10 @@ function App() {
           <Route path={"/recommend"} element={<RecommendPage />}></Route>
           <Route path={"/my"} element={<MyPage />}></Route>
           <Route path={"/post"} element={<PostPage />}></Route>
-          <Route path={"/recorded"} element={<RecordedPage />}></Route>
+          <Route path={"/recorded/:id"} element={<RecordedPage />}></Route>
           <Route path={"/result"} element={<ResultPage />}></Route>
           <Route
-            path={"/modifyintro"}
+            path={"/modifyintro/:id"}
             element={<UserModifyIntroPage />}
           ></Route>
           <Route path={"/pas-modify"} element={<PasModifyPage />}></Route>
@@ -47,7 +48,7 @@ function App() {
           <Route path={"/delete"} element={<UserDeletePage />}></Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </RecoilRoot>
   );
 }
 

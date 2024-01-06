@@ -10,31 +10,31 @@ const path_list = [
   {
     id: 0,
     name: "저장",
-    path: "/",
+    path: "/recorded/1",
     className: "very-dark",
   },
   {
     id: 1,
     name: "내가 남긴",
-    path: "/",
+    path: "/recorded/2",
     className: "very-dark",
   },
   {
     id: 2,
     name: "가사",
-    path: "/",
+    path: "/recorded/2",
     className: "dark",
   },
   {
     id: 3,
     name: "댓글",
-    path: "/",
+    path: "/recorded/3",
     className: "dark",
   },
   {
     id: 4,
     name: "감정",
-    path: "/",
+    path: "/recorded/4",
     className: "dark",
   },
 ];
@@ -74,12 +74,17 @@ const MyPage = () => {
                 <Nav>아이디 </Nav>
                 <span>{user}</span>
               </IDDiv>
-              <Nav onClick={() => navigate("/pas-modify")}>비밀번호 변경</Nav>
-              <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
+              <Nav onClick={() => navigate("/modifyintro/pas")}>
+                비밀번호 변경
+              </Nav>
+              <Nav onClick={() => navigate("/modifyintro/nic")}>
+                닉네임 변경
+              </Nav>
             </Action>
-            <MemberManaging onClick={() => navigate("/delete")}>
-              회원 탈퇴
-            </MemberManaging>
+            <ActionEx>
+              <div className="title">기타</div>
+              <Nav onClick={() => navigate("/delete")}>회원 탈퇴</Nav>
+            </ActionEx>
           </div>
         </Grid>
       </Wrapper>
@@ -189,6 +194,10 @@ const Action = styled.div`
     letter-spacing: -0.032rem;
     cursor: pointer;
   }
+`;
+
+const ActionEx = styled(Action)`
+  border-bottom: none;
 `;
 
 const IDDiv = styled.div`
