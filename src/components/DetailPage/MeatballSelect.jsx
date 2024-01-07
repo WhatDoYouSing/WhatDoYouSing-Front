@@ -9,10 +9,13 @@ const MeatballSelect = ({
   setIsOpen,
   deletePost,
   setDeletePost,
-  reportSel,
+  reportPost,
+  setReportPost,
 }) => {
   const handleOptionClick = (option) => {
-    option === "게시글 삭제" ? setDeletePost(!deletePost) : reportSel();
+    option === "게시글 삭제"
+      ? setDeletePost(!deletePost)
+      : setReportPost(!reportPost);
     setIsOpen(!isOpen);
   };
 
@@ -59,12 +62,6 @@ const ListItem = styled.div`
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-  /* 
-  ${({ isSelected }) =>
-    isSelected &&
-    css`
-      color: var(--pointPink);
-    `}; */
 
   cursor: pointer;
 `;
