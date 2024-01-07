@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
+//recoil
+import { useRecoilValue, useRecoilState } from "recoil";
+import { profileListAtom } from "../../../assets/recoil/recoil";
+
 const ITEM_LIST = [
   {
     id: 0,
@@ -23,7 +27,11 @@ const ITEM_LIST = [
 const Topbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const profileList = useRecoilValue(profileListAtom);
+  const isLogin = localStorage.getItem("token") !== null;
 
+  const [profile, setProfile] = useState(null);
+  const [isFilled, setIsFilled] = useState("none_filled");
   const [currentTab, setCurrentTab] = useState(null);
 
   useEffect(() => {
@@ -31,9 +39,20 @@ const Topbar = () => {
     setCurrentTab(currentTabId !== -1 ? currentTabId : null);
   }, [pathname]);
 
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      setProfile(localStorage.getItem("user_profile") || "");
+    } else {
+    }
+  }, []);
+
   const handleItemClick = (id) => {
     setCurrentTab(id);
     navigate(ITEM_LIST[id].path);
+  };
+
+  const handleMyClick = () => {
+    navigate("/my");
   };
 
   return (
@@ -50,7 +69,21 @@ const Topbar = () => {
             </NavItem>
           ))}
         </NavBar>
-        <UserProfile onClick={() => navigate("/my")}></UserProfile>
+        {isLogin ? (
+          <>
+            <UserProfile onClick={handleMyClick}>
+              <Img
+                src={
+                  pathname === "/my"
+                    ? profileList[profile]?.filled
+                    : profileList[profile]?.none_filled
+                }
+              />
+            </UserProfile>
+          </>
+        ) : (
+          <NavItem onClick={() => navigate("/initial")}>로그인</NavItem>
+        )}
       </Container>
       <RoundDiv />
     </Wrapper>
@@ -109,13 +142,20 @@ const NavItem = styled.div`
 `;
 
 const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 4rem;
   height: 4rem;
   flex-shrink: 0;
-  background-color: var(--gray);
+  background-color: var(--lightGray);
 
   border-radius: 50%;
   cursor: pointer;
+`;
+const Img = styled.img`
+  width: 2.2rem;
+  height: 2.2rem;
 `;
 
 const RoundDiv = styled.div`

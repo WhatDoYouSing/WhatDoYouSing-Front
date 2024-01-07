@@ -61,8 +61,8 @@ const EmotionList = ({
             {row.map((emotion, chipIndex) => (
               <EmotionChip
                 key={chipIndex}
-                text={emotion.text}
-                src={emotion.src}
+                text={emotion?.text}
+                src={emotion?.src}
                 size={size}
                 isSelected={selectedEmotion === emotion}
                 onClick={() => handleChipClick(emotion)}
@@ -78,8 +78,8 @@ const EmotionList = ({
               <EmotionChip
                 key={chipIndex}
                 size="large"
-                text={emotion.text}
-                src={emotion.src}
+                text={emotion?.text}
+                src={emotion?.src}
                 isSelected={selectedEmotion === emotion}
                 onClick={() => handleChipClick(emotion)}
               />
