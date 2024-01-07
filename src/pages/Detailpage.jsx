@@ -10,6 +10,7 @@ import Comments from "../components/DetailPage/Comments";
 
 import ShareModal from "../components/DetailPage/ShareModal";
 import DeletePostModal from "../components/DeletePostModal";
+import ReportPostModal from "../components/DetailPage/ReportPostModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
@@ -22,6 +23,8 @@ const Detailpage = () => {
 
   const deleteModalRef = useRef(); //게시물 삭제 모달
   const [deletePost, setDeletePost] = useClickOutside(deleteModalRef, false);
+  const reportModalRef = useRef(); //게시물 신고 모달
+  const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
 
   return (
     <>
@@ -31,6 +34,8 @@ const Detailpage = () => {
           setShare={setShare}
           deletePost={deletePost}
           setDeletePost={setDeletePost}
+          reportPost={reportPost}
+          setReportPost={setReportPost}
         />
         <LyricWithWriter />
         <GotoSong disabled={isListenBtnDisabled} />
@@ -43,6 +48,15 @@ const Detailpage = () => {
             ref={deleteModalRef}
             deletePost={deletePost}
             setDeletePost={setDeletePost}
+          />
+        </ModalWrapper>
+      )}
+      {reportPost && (
+        <ModalWrapper>
+          <ReportPostModal
+            ref={reportModalRef}
+            reportPost={reportPost}
+            setReportPost={setReportPost}
           />
         </ModalWrapper>
       )}

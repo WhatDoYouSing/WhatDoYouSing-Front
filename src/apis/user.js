@@ -128,7 +128,7 @@ export const PatchPassword = async (new_password) => {
 // DELETE : 회원 탈퇴
 export const DelAccount = async (password) => {
   try {
-    const response = await axiosInstance.patch("/accounts/delete/", {
+    const response = await axiosInstance.delete("/accounts/delete/", {
       password: password,
     });
     console.log(response.data);

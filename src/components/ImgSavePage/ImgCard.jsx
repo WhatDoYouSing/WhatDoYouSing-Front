@@ -9,20 +9,17 @@ const ImgCard = ({ captureRef }) => {
       <Wrapper ref={captureRef}>
         <Container>
           <Lyric>
-            이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아 우린
-            여기 서있고 지울 수 없을거야
+            공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공
           </Lyric>
           <Detail>
-            이 순간을 기억하고, 우리가 함께했음을 기억하고, 또 <br />
-            우리는 가리려해도 절대 가려지지 않는 존재들임을 <br />
-            기억하자!
+            최대자수우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우
           </Detail>
           <More>
             <Info>
               <Song>1+1</Song>
               <Singer>나상현씨밴드</Singer>
             </Info>
-            <Character width={60} height={60} />
+            <Character width={79} height={79} />
           </More>
         </Container>
       </Wrapper>
@@ -33,7 +30,7 @@ const ImgCard = ({ captureRef }) => {
 export default ImgCard;
 
 const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,11 +38,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 35.2556rem;
-  height: 40.436rem;
+  height: auto;
   padding: 3.972rem 2.2653rem;
   align-items: flex-start;
-
-  border-radius: 1.6516rem;
+  border-radius: 16.516px;
   background: var(--white);
 `;
 
@@ -67,9 +63,7 @@ const Lyric = styled.div`
   letter-spacing: -0.103rem;
 `;
 
-const Detail = styled.p`
-  white-space: pre-line;
-  display: flex;
+const Detail = styled.div`
   width: 22.743rem;
   /* height: 5.4rem; */
   overflow: hidden;
@@ -81,12 +75,13 @@ const Detail = styled.p`
   line-height: 150%; /* 18.023px */
   letter-spacing: -0.0841rem;
   margin-top: 1.373rem;
-  margin-bottom: 3.433rem;
+  /* margin-bottom: 3.433rem; */
 `;
 
 const More = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
   width: 100%;
   gap: 9rem;
 `;
