@@ -14,8 +14,10 @@ import ReportPostModal from "../components/DetailPage/ReportPostModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
+import { GetLyricsDetail } from "../apis/detail";
+
 const Detailpage = () => {
-  //이 노래 들으러 가기 비활성화
+  //이 노래 들으러 가기 비활성화 -- data로부터 값받아 설정해줄것!
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
 
   const shareModalRef = useRef();
@@ -25,6 +27,20 @@ const Detailpage = () => {
   const [deletePost, setDeletePost] = useClickOutside(deleteModalRef, false);
   const reportModalRef = useRef(); //게시물 신고 모달
   const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
+
+  //렌더링 설정
+  const [render, setRender] = useState(4);
+  //가사 상세 데이터
+  const [thisData, setThisData] = useState({});
+
+  useEffect(() => {
+    const GetLyricsDetailData = async (lyrics_id) => {
+      const response = await GetLyricsDetail(lyrics_id);
+      setThisData(response);
+      console.log(response);
+    };
+    GetLyricsDetailData(1);
+  }, []);
 
   return (
     <>
@@ -37,10 +53,10 @@ const Detailpage = () => {
           reportPost={reportPost}
           setReportPost={setReportPost}
         />
-        <LyricWithWriter />
-        <GotoSong disabled={isListenBtnDisabled} />
+        <LyricWithWriter lyricContent={thisData} />
+        <GotoSong lyricContent={thisData} disabled={isListenBtnDisabled} />
         <EmotionBox />
-        <Comments />
+        <Comments postId={thisData.id} render={render} setRender={setRender} />
       </Wrapper>
       {deletePost && (
         <ModalWrapper>

@@ -5,8 +5,11 @@ import styled, { css } from "styled-components";
 import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
+import Reply from "./Reply";
 
-const CommentBox = ({ content, onReply }) => {
+import { DelComment } from "../apis/comment";
+
+const CommentBox = ({ content, onReply, render, setRender }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
 
@@ -21,6 +24,16 @@ const CommentBox = ({ content, onReply }) => {
     onReply();
   };
 
+  //댓글 삭제
+  const handleDelete = () => {
+    const DelComData = async (comment_pk) => {
+      const response = await DelComment(comment_pk);
+      setRender(render + 1);
+      console.log(response);
+    };
+    DelComData(content.comment_id);
+  };
+
   return (
     <>
       <Background
@@ -31,8 +44,15 @@ const CommentBox = ({ content, onReply }) => {
             <img src={`${profile}`} alt="profileimg"></img>
           </ProfileContainer>
           <ContentContainer>
-            <Id>채오니</Id>
-            <Content>{content}</Content>
+            <Id>{content.author_nickname}</Id>
+            <Content>{content.com_content}</Content>
+            {content.recomments_count > 0 && (
+              <Replies>
+                {content.recomments.map((reply, index) => (
+                  <Reply key={index} replyContent={reply} />
+                ))}
+              </Replies>
+            )}
             <Plus>
               <LikeBtn onClick={handleLike}>
                 {isLiked ? <LikeClick /> : <Like />}
@@ -54,7 +74,7 @@ const CommentBox = ({ content, onReply }) => {
                 답글달기
               </AddReply>
               <span>·</span>
-              <div>삭제하기</div>
+              <div onClick={handleDelete}>삭제하기</div>
             </Plus>
           </ContentContainer>
         </Container>
@@ -95,7 +115,6 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  font-family: "Pretendard-Regular";
   font-style: normal;
 `;
 
@@ -145,6 +164,7 @@ const Plus = styled.div`
 const LikeBtn = styled.div``;
 const Count = styled.div``;
 const AddReply = styled.div``;
+const Replies = styled.div``;
 
 const InputBoxPosition = styled.div`
   z-index: 2;
