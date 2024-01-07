@@ -33,7 +33,7 @@ function App() {
           <Route path={"/login"} element={<LoginPage />}></Route>
           <Route path={"/signup"} element={<SignupPage />}></Route>
           <Route path={"/profile"} element={<ProfileSettingPage />}></Route>
-          <Route path={"/detail"} element={<Detailpage />}></Route>
+          <Route path={"/detail/:postid"} element={<Detailpage />}></Route>
           <Route path={"/search"} element={<SearchPage />}></Route>
           <Route path={"/recommend"} element={<RecommendPage />}></Route>
           <Route path={"/my"} element={<MyPage />}></Route>

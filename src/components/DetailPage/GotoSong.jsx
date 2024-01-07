@@ -8,7 +8,7 @@ import LikeInteraction from "./LikeInteraction";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-const GotoSong = ({ disabled }) => {
+const GotoSong = ({ lyricContent, disabled }) => {
   const [showLikeInteraction, setShowLikeInteraction] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [noteId, setNoteId] = useState(1);
@@ -36,8 +36,8 @@ const GotoSong = ({ disabled }) => {
     <>
       <Wrapper>
         <SongDiv>
-          <SongTitle>1 + 1</SongTitle>
-          <SongSinger>나상현씨밴드</SongSinger>
+          <SongTitle>{lyricContent.title}</SongTitle>
+          <SongSinger>{lyricContent.singer}</SongSinger>
         </SongDiv>
         <Buttons>
           <LikeBtn onMouseDown={handleLikeBtnClick}>
@@ -52,7 +52,7 @@ const GotoSong = ({ disabled }) => {
               </div>
             )}
             {isLiked ? <FullHeart /> : <Heart />}
-            234,345
+            {lyricContent.likes_count}
           </LikeBtn>
           <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
         </Buttons>
