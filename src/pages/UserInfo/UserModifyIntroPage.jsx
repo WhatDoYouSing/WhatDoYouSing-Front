@@ -16,15 +16,16 @@ const UserModifyIntroPage = () => {
   const type = useParams();
   const navigate = useNavigate();
 
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleNavigate = () => {
-    const isChecked = PostCheckPassword(newPassword);
-    if (isChecked.access && type.id === "pas") {
+  const handleNavigate = async () => {
+    const isChecked = await PostCheckPassword(password);
+    console.log(password, isChecked);
+    if (isChecked["access"] && type.id === "pas") {
       navigate("/pas-modify");
-    } else if (isChecked.access && type.id === "nic") {
+    } else if (isChecked["access"] && type.id === "nic") {
       navigate("/nic-modify");
-    } else if (!isChecked.access) {
+    } else if (!isChecked["access"]) {
       alert("비밀번호를 다시 확인해주세요.");
     } else {
       alert("오류 발생!ㅠ.ㅠ");
@@ -52,8 +53,8 @@ const UserModifyIntroPage = () => {
           <InputBox>
             <Input
               type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
