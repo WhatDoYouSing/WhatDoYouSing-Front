@@ -13,14 +13,13 @@ const ImgSavePage = () => {
   const captureRef = useRef(null);
 
   const handleCapture = () => {
-    captureRef.current.style.whiteSpace = "pre-line";
-
+    html2canvas(captureRef.current, { scale: 4 });
     html2canvas(captureRef.current).then((canvas) => {
       const imgData = canvas.toDataURL("imgae/png");
 
       const newWindow = window.open("", "_blank");
       newWindow.document.write(
-        `<html><head><title>Captured Image</title></head><body style="background-color: black; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;"><img src="${imgData}" alt="Captured Image" /></body></html>`
+        `<html><head><title>Captured Image</title></head><body style="background-color: black; display: flex; align-items: center; justify-content: center;  width: 100vw; margin: 0;"><img src="${imgData}" alt="Captured Image" style="top:80%; left: 80%; width: 80%; border-radius: 64px"/></body></html>`
       );
     });
   };
@@ -48,7 +47,7 @@ const ImgSavePage = () => {
 export default ImgSavePage;
 
 const Wrapper = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
   top: 0;
   left: 0;
