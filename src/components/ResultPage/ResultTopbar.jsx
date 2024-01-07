@@ -13,7 +13,7 @@ const ResultTopbar = () => {
       <Wrapper>
         <Back
           onClick={() => {
-            navigate("/search");
+            navigate(-1);
           }}
         />
         <input placeholder="(검색한 가사)" />

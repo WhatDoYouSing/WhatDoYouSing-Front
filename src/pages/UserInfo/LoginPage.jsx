@@ -25,14 +25,13 @@ const LoginPage = () => {
   };
 
   //로그인 함수
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (formData.userid.trim() === "") {
       alert("아이디를 입력해주세요.");
     } else if (formData.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
     } else {
-      console.log("여기까진 됨");
-      PostLogin(formData.userid, formData.password);
+      const isOK = await PostLogin(formData.userid, formData.password);
     }
   };
 

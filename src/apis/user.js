@@ -9,8 +9,10 @@ export const PostLogin = async (user_id, password) => {
       password: password,
     });
 
-    localStorage.setItem("userId", response.data.data.id);
+    localStorage.setItem("user_id", response.data.data.id);
+    localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
+    localStorage.setItem("user_profile", response.data.data.profile_num);
 
     console.log(response.data);
     window.location.replace("/");
@@ -21,8 +23,6 @@ export const PostLogin = async (user_id, password) => {
       alert(error.response.data.error.non_field_errors);
     }
     console.error("로그인 실패", error.response);
-
-    return Promise.reject(error);
   }
 };
 
@@ -36,7 +36,7 @@ export const PostSignup = async (user_id, password, nickname, navigate) => {
     });
     console.log(response.data);
     alert("가입이 완료되었습니다.");
-    navigate("/profile");
+    navigate("/login");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -59,12 +59,13 @@ export const PostCheckId = async (username) => {
   }
 };
 
-// POST : 프로필 사진 선택
+// PATCH : 프로필 사진 선택 //수정 예정!!
 export const PostProfile = async (profile) => {
   try {
-    const response = await axiosInstance.post("/accounts/profile/", {
+    const response = await axiosInstance.patch("/accounts/profile/", {
       profile: profile,
     });
+
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {

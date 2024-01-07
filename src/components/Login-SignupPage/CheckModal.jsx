@@ -15,8 +15,14 @@ const CheckModal = () => {
   const signupForm = useRecoilValue(SignupState);
   const profile = useRecoilValue(ProfileState);
 
-  const handleClick = () => {
-    PostSignup(signupForm.username, signupForm.password, signupForm.nickname);
+  const handleClick = async () => {
+    console.log(signupForm, profile);
+    PostSignup(
+      signupForm.username,
+      signupForm.password,
+      signupForm.nickname,
+      navigate
+    );
     PostProfile(profile);
     navigate("/");
   };

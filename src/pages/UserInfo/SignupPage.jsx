@@ -40,13 +40,15 @@ const SignupPage = () => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
 
   //중복 확인 API 로직
-  const handleDuplicate = () => {
+  const handleDuplicate = async () => {
     if (username.trim() === "") {
       alert("아이디를 입력해주세요.");
       return;
     }
-    const isChecked = PostCheckId(username);
-    setDuplicate(isChecked.duplicate);
+    const isChecked = await PostCheckId(username);
+
+    setDuplicate(isChecked["duplicate"]);
+    console.log(isChecked, isChecked["duplicate"], duplicate);
   };
 
   // 아이디 규격 확인
@@ -92,7 +94,7 @@ const SignupPage = () => {
   useEffect(() => {
     const isRequiredFieldsValid =
       usernameValid &&
-      duplicate &&
+      !duplicate &&
       passwordValid &&
       passwordMatch &&
       nicknameValid;
@@ -133,18 +135,22 @@ const SignupPage = () => {
             {duplicate == null ? "중복확인" : "확인완료"}
           </Check>
         </Contents>
-        {isUsernameFocused ? (
-          usernameValid ? (
-            <Condition style={{ color: "var(--black)" }}>
-              아이디가 조건에 맞아요. 중복 확인을 진행해 주세요.
-            </Condition>
-          ) : (
-            <Condition style={{ color: "var(--pointPink)" }}>
-              아이디가 형식에 맞지 않아요. 다시 입력해 주세요.
-            </Condition>
-          )
-        ) : (
-          <Condition>영문과 숫자를 조합하여 6자 이상</Condition>
+        {duplicate == null && (
+          <>
+            {isUsernameFocused ? (
+              usernameValid ? (
+                <Condition style={{ color: "var(--black)" }}>
+                  아이디가 조건에 맞아요. 중복 확인을 진행해 주세요.
+                </Condition>
+              ) : (
+                <Condition style={{ color: "var(--pointPink)" }}>
+                  아이디가 형식에 맞지 않아요. 다시 입력해 주세요.
+                </Condition>
+              )
+            ) : (
+              <Condition>영문과 숫자를 조합하여 6자 이상</Condition>
+            )}
+          </>
         )}
 
         {duplicate === true && (
@@ -320,11 +326,11 @@ const Check = styled.button`
   gap: 0.8rem;
   border-radius: 1.6rem;
   background-color: ${(props) =>
-    props.duplicate == null ? "var(--black)" : "var(--white)"};
+    props.duplicate == false ? "var(--white)" : "var(--black)"};
   color: ${(props) =>
-    props.duplicate == null ? "var(--white)" : "var(--black)"};
+    props.duplicate == false ? "var(--black)" : "var(--white)"};
   border: ${(props) =>
-    props.duplicate == null
+    props.duplicate == false
       ? "1.5px solid var(--black)"
       : "1.5px solid var(--black)"};
   text-align: center;

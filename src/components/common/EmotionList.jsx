@@ -8,6 +8,8 @@ import EmotionChip from "./EmotionChip";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
+import emotionData from "../../assets/data/EmotionData";
+
 const EmotionList = ({
   onEmotionSelect = null,
   closeModal,
@@ -16,6 +18,8 @@ const EmotionList = ({
 }) => {
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const emotions = useRecoilValue(emotionListAtom);
+  // const emotiondata = emotionData;
+  // console.log(emotions, emotiondata);
 
   const emotionData = [
     [emotions[0], emotions[1]],
@@ -61,8 +65,8 @@ const EmotionList = ({
             {row.map((emotion, chipIndex) => (
               <EmotionChip
                 key={chipIndex}
-                text={emotion.text}
-                src={emotion.src}
+                text={emotion?.text}
+                src={emotion?.src}
                 size={size}
                 isSelected={selectedEmotion === emotion}
                 onClick={() => handleChipClick(emotion)}
@@ -78,8 +82,8 @@ const EmotionList = ({
               <EmotionChip
                 key={chipIndex}
                 size="large"
-                text={emotion.text}
-                src={emotion.src}
+                text={emotion?.text}
+                src={emotion?.src}
                 isSelected={selectedEmotion === emotion}
                 onClick={() => handleChipClick(emotion)}
               />
