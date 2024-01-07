@@ -74,7 +74,7 @@ export const GetSearchEmoLike = async (searchEmo, searchPage) => {
       `/sings/emosearchlikes/?emo=${searchEmo}&page=${searchPage}`
     );
 
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -87,7 +87,7 @@ export const GetSearchEmoCom = async (searchEmo, searchPage) => {
       `/sings/emosearchcomments/?emo=${searchEmo}&page=${searchPage}`
     );
 
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }

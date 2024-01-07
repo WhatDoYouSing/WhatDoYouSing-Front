@@ -5,18 +5,7 @@ export const GetLyricsList = async () => {
   try {
     const response = await axiosInstance.get(`/posts/`);
 
-    return Promise.resolve(response);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-// GET : 가사 상세 조회
-export const GetLyricsDetail = async (lyrics_id) => {
-  try {
-    const response = await axiosInstance.get(`/posts/${lyrics_id}/`);
-
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -48,13 +37,13 @@ export const PostLyrics = async (
 };
 
 // DELETE : 가사 삭제
-export const DelLyrics = async (lyrics_id) => {
+export const DelLyrics = async (pk) => {
   try {
-    const response = await axiosInstance.delete(`/posts/${lyrics_id}/`, {
-      lyrics_id: lyrics_id,
+    const response = await axiosInstance.delete(`/posts/${pk}/`, {
+      pk: pk,
     });
 
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }
