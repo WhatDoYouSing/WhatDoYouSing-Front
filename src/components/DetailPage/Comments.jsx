@@ -1,24 +1,43 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
+
 import CommentBox from "../CommentBox";
+
 import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 import noContent from "../../images/noContent.svg";
-// import noContent from "../../images/noContent.png";
+import { GetComment, PostComment } from "../../apis/comment";
 
-const Comments = () => {
+const Comments = ({ postId, render, setRender }) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
-
-  const handleComment = () => {
-    if (comment.trim() !== "") {
-      setCommentList((prevList) => [...prevList, comment]);
-      setComment(""); // 댓글 입력 창 초기화
-    }
-  };
 
   const isSticky = useRef(null);
   const handleReplyFocus = () => {
     isSticky.current.focus();
+  };
+
+  //댓글 조회
+  useEffect(() => {
+    const GetComData = async (postId) => {
+      const response = await GetComment(postId);
+      setCommentList(response.data);
+      console.log(response.data);
+    };
+    GetComData(postId);
+  }, []);
+
+  //댓글 작성
+  const handleSubmit = () => {
+    if (comment.trim() === "") return null;
+    if (localStorage.getItem("token")) {
+      const PostComData = async (postId, comment) => {
+        const response = await PostComment(postId, comment);
+        console.log(response);
+        setRender(render + 1);
+      };
+      PostComData(postId, comment);
+      setComment("");
+    } else alert("로그인이 필요합니다.");
   };
 
   return (
@@ -32,12 +51,11 @@ const Comments = () => {
           placeholder="댓글을 남겨보세요."
           style={{ outline: "none" }}
         ></input>
-        <SubmitBtn onClick={handleComment} />
+        <SubmitBtn onClick={handleSubmit} />
       </CommentInput>
       {commentList.length === 0 ? (
         <NoneDiv>
           <img src={noContent} width={"105rem"} height={"105rem"} />
-          {/* <NoContent width={"10.5rem"} height={"10.5rem"} fill="#a0a0a0" /> */}
           <div className="noneMent">
             댓글이 없어요.
             <br /> 첫 댓글을 남겨보시는 건 어때요?
@@ -49,6 +67,8 @@ const Comments = () => {
           key={index}
           content={commentContent}
           onReply={handleReplyFocus}
+          render={render}
+          setRender={setRender}
         />
       ))}
     </Wrapper>
