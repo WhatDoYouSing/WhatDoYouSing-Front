@@ -7,6 +7,7 @@ import { ReactComponent as Back } from "../images/back.svg";
 
 const IntroTopbar = ({
   text = "로그인",
+  backPath = -1,
   del = true,
   delPath = "/initial",
   actBtn = false,
@@ -32,7 +33,7 @@ const IntroTopbar = ({
           ) : (
             <Back
               onClick={() => {
-                navigate(-1);
+                navigate(backPath);
               }}
             />
           )}
