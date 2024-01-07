@@ -8,8 +8,6 @@ import EmotionChip from "./EmotionChip";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-import emotion_Data from "../../assets/data/EmotionData";
-
 const EmotionList = ({
   onEmotionSelect = null,
   closeModal,
@@ -18,8 +16,6 @@ const EmotionList = ({
 }) => {
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const emotions = useRecoilValue(emotionListAtom);
-  const emotion_data = emotion_Data[0];
-  console.log(emotions[0], emotion_data);
 
   const emotionData = [
     [emotions[0], emotions[1]],
