@@ -188,7 +188,10 @@ const ProfileDiv = styled.div`
   gap: 1.6rem;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 8.2rem;
+  height: 8.2rem;
+`;
 
 const ProfileBox = styled.div`
   display: flex;
