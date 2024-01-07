@@ -3,10 +3,17 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import IntroTopbar from "../../components/IntroTopbar";
-import CheckModal from "../../components/Login-SignupPage/CheckModal";
+
+//recoil
+import { useSetRecoilState } from "recoil";
+import { SignupState } from "../../assets/recoil/apiRecoil";
+
+//api
+import { PostCheckId } from "../../apis/user";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const setSignupForm = useSetRecoilState(SignupState);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,10 +39,21 @@ const SignupPage = () => {
   //버튼 활성화
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
 
+  //중복 확인 API 로직
+  const handleDuplicate = () => {
+    if (username.trim() === "") {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+    const isChecked = PostCheckId(username);
+    setDuplicate(isChecked.duplicate);
+  };
+
   // 아이디 규격 확인
   useEffect(() => {
     const isUsernameValid = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(username);
     setUsernameValid(isUsernameValid);
+    setDuplicate(null);
   }, [username]);
 
   // 비밀번호 유효성 확인
@@ -73,10 +91,22 @@ const SignupPage = () => {
   //버튼 활성화
   useEffect(() => {
     const isRequiredFieldsValid =
-      usernameValid && passwordValid && passwordMatch && nicknameValid;
+      usernameValid &&
+      duplicate &&
+      passwordValid &&
+      passwordMatch &&
+      nicknameValid;
+
+    if (isRequiredFieldsValid) {
+      setSignupForm({
+        username: username,
+        password: password,
+        nickname: nickname,
+      }); // 참일 때 signupForm 설정
+    }
 
     setRequiredFieldsValid(isRequiredFieldsValid);
-  }, [usernameValid, passwordValid, passwordMatch, nicknameValid]);
+  }, [usernameValid, duplicate, passwordValid, passwordMatch, nicknameValid]);
   //나중에 중복확인을 아이디 규격 참일 때 가능하게 설정하고, 중복 확인 참일 때 활성화되도록 수정
 
   return (
@@ -99,7 +129,9 @@ const SignupPage = () => {
             onChange={(e) => setUsername(e.target.value)}
             onFocus={() => setUsernameFocused(true)}
           />
-          <Check>중복확인</Check>
+          <Check onClick={handleDuplicate} duplicate={duplicate}>
+            {duplicate == null ? "중복확인" : "확인완료"}
+          </Check>
         </Contents>
         {isUsernameFocused ? (
           usernameValid ? (
@@ -282,14 +314,19 @@ const InputID = styled(Input)``;
 const Check = styled.button`
   display: flex;
   min-width: 8.1rem;
-  padding: 1.2rem 1.6rem;
+  padding: 1.2rem 1.45rem;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
   border-radius: 1.6rem;
-  background: var(--black);
-
-  color: var(--white);
+  background-color: ${(props) =>
+    props.duplicate == null ? "var(--black)" : "var(--white)"};
+  color: ${(props) =>
+    props.duplicate == null ? "var(--white)" : "var(--black)"};
+  border: ${(props) =>
+    props.duplicate == null
+      ? "1.5px solid var(--black)"
+      : "1.5px solid var(--black)"};
   text-align: center;
 
   font-size: 1.4rem;

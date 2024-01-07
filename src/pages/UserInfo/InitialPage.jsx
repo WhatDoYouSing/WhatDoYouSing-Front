@@ -13,7 +13,7 @@ const InitialPage = () => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <IntroTopbar />
+      <IntroTopbar delPath="/" />
       <Box>
         <ImgBoxS>
           <Symbol />
