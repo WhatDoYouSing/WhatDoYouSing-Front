@@ -6,6 +6,10 @@ import CheckModal from "../../components/Login-SignupPage/CheckModal";
 
 import useClickOutside from "../../hooks/useClickOutside";
 
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { ProfileState } from "../../assets/recoil/apiRecoil";
+
 import { ReactComponent as Back } from "../../images/back.svg";
 
 import henry from "../../images/icons/henry-prof.svg";
@@ -27,13 +31,14 @@ const profiles = [
 
 const ProfileSettingPage = () => {
   const navigate = useNavigate();
-
+  const selectedProfileIndex = useSetRecoilState(ProfileState);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const checkModalRef = useRef(); //게시물 삭제 모달
   const [isOpen, setIsOpen] = useClickOutside(checkModalRef, false);
 
   const handleChipClick = (selectedIndex) => {
     setSelectedProfile(selectedIndex);
+    selectedProfileIndex(selectedIndex + 1);
   };
 
   return (

@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+//recoil
+import { useRecoilValue } from "recoil";
+import { SignupState, ProfileState } from "../../assets/recoil/apiRecoil";
+
+//api
+import { PostSignup, PostProfile } from "../../apis/user";
+
 //회원정보 확인 모달
 const CheckModal = () => {
   const navigate = useNavigate();
+  const signupForm = useRecoilValue(SignupState);
+  const profile = useRecoilValue(ProfileState);
+
+  const handleClick = () => {
+    PostSignup(signupForm.username, signupForm.password, signupForm.nickname);
+    PostProfile(profile);
+    navigate("/");
+  };
 
   return (
     <>
@@ -17,7 +32,7 @@ const CheckModal = () => {
           </AskComment>
           <AskComment>정말 이 회원정보로 가입하시겠어요?</AskComment>
         </ComDiv>
-        <Button onClick={() => navigate("/")}>네. 회원정보 기억했어요!</Button>
+        <Button onClick={handleClick}>네. 회원정보 기억했어요!</Button>
       </Wrapper>
     </>
   );
