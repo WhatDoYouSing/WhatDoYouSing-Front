@@ -23,7 +23,7 @@ const LikeInteraction = ({ noteId }) => {
 const Wrapper = styled.div`
   position: absolute;
   z-index: 300;
-  top: -8rem;
+  top: -11rem;
   left: -4rem;
   .ch {
     position: relative;

@@ -9,19 +9,25 @@ import { ReactComponent as Symbol } from "../../images/symbol.svg";
 import wordmark from "../../images/icons/wordmark-kor.svg";
 import wordmarkE from "../../images/icons/wordmark-eng.svg";
 
+//api
+import { PostCheckPassword } from "../../apis/user";
+
 const UserModifyIntroPage = () => {
   const type = useParams();
   const navigate = useNavigate();
 
+  const [newPassword, setNewPassword] = useState("");
+
   const handleNavigate = () => {
-    if (type.id === "pas") {
-      console.log(type);
+    const isChecked = PostCheckPassword(newPassword);
+    if (isChecked.access && type.id === "pas") {
       navigate("/pas-modify");
-    } else if (type.id === "nic") {
-      console.log(type);
+    } else if (isChecked.access && type.id === "nic") {
       navigate("/nic-modify");
+    } else if (!isChecked.access) {
+      alert("비밀번호를 다시 확인해주세요.");
     } else {
-      console.log(type);
+      alert("오류 발생!ㅠ.ㅠ");
     }
   };
 
@@ -46,6 +52,8 @@ const UserModifyIntroPage = () => {
           <InputBox>
             <Input
               type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
