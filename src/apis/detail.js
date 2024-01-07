@@ -5,7 +5,7 @@ export const GetLyricsDetail = async (lyrics_id) => {
   try {
     const response = await axiosInstance.get(`/posts/${lyrics_id}/`);
 
-    return Promise.resolve(response.data);
+    return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error);
   }

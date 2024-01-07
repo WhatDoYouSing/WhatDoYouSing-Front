@@ -1,117 +1,122 @@
-// import React from "react";
-// import styled from "styled-components";
+import React, { useState } from "react";
+import styled from "styled-components";
 
-// const Reply = ({}) => {
-//   return (
-//     <>
-//       <Container>
-//         <ProfileContainer>
-//           <img src={`${profile}`} alt="profileimg"></img>
-//         </ProfileContainer>
-//         <ContentContainer>
-//           <Id>{author}</Id>
-//           <Content>
-//             <span>@{mention}</span>
-//             {content}
-//           </Content>
-//           <Plus>
-//             <div
-//               onClick={() => {
-//                 setShowReplyForm(!showReplyForm);
-//                 setMention(author);
-//               }}
-//             >
-//               답글달기
-//             </div>
-//             {author === nickname && (
-//               <>
-//                 <span>·</span>
-//                 <div onClick={() => handleReplyDelete(replyId)}>삭제</div>
-//               </>
-//             )}
-//           </Plus>
-//         </ContentContainer>
-//       </Container>
-//     </>
-//   );
-// };
+import profile from "../images/profile.svg";
+import { ReactComponent as Like } from "../images/like.svg";
+import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-// export default Reply;
+const Reply = ({ replyContent }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(replyContent.relikes_count || 0);
 
-// const Container = styled.div`
-//   width: 296px;
-//   display: flex;
-//   flex-direction: row;
-//   padding: 15px;
-//   box-sizing: border-box;
-//   margin-left: 53px;
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+  };
 
-//   border-radius: 10px;
-//   background: var(--sub-background, #242237);
-// `;
+  return (
+    <>
+      <Container>
+        <ProfileContainer>
+          <img src={`${profile}`} alt="profileimg"></img>
+        </ProfileContainer>
+        <ContentContainer>
+          <Id>{replyContent.author_nickname}</Id>
+          <Content>{replyContent.com_content}</Content>
+          <Plus>
+            <LikeBtn onClick={handleLike}>
+              {isLiked ? <LikeClick /> : <Like />}
+            </LikeBtn>
+            <Count
+              isLiked={isLiked}
+              style={{
+                color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
+              }}
+            >
+              {likeCount}
+            </Count>
+          </Plus>
+        </ContentContainer>
+      </Container>
+    </>
+  );
+};
 
-// const ProfileContainer = styled.div`
-//   width: 44px;
-//   height: 44px;
-//   border-radius: 50%;
+export default Reply;
 
-//   img {
-//     width: 44px;
-//     height: 44px;
-//     border-radius: 50%;
-//     object-fit: cover;
-//   }
-// `;
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 2.5rem 1.6rem;
+  margin-left: 5rem;
+`;
 
-// const ContentContainer = styled.div`
-//   width: 296px;
-//   display: flex;
-//   flex-direction: column;
-//   margin-left: 10px;
-//   font-family: "Pretendard-Regular";
-//   font-style: normal;
-// `;
+const ProfileContainer = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 
-// const Id = styled.div`
-//   color: white;
+  img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+`;
 
-//   font-size: 12px;
-//   font-style: normal;
-//   font-weight: 600;
-//   line-height: normal;
-// `;
+const ContentContainer = styled.div`
+  width: 296px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-style: normal;
+`;
 
-// const Content = styled.div`
-//   margin-top: 5px;
-//   margin-bottom: 10px;
-//   color: white;
-//   font-size: 12px;
-//   font-weight: 500;
-//   line-height: 125%;
+const Id = styled.div`
+  color: white;
 
-//   span {
-//     color: var(--sub-purple, #a397ff);
-//   }
-// `;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
 
-// const Plus = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   gap: 2px;
+const Content = styled.div`
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 125%;
+`;
 
-//   color: rgba(255, 255, 255, 0.7);
-//   font-size: 10px;
-//   font-weight: 500;
-//   line-height: normal;
+const Plus = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
 
-//   img {
-//     width: 9px;
-//     height: 9.212px;
-//     cursor: pointer;
-//   }
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: normal;
 
-//   div {
-//     cursor: pointer;
-//   }
-// `;
+  img {
+    width: 9px;
+    height: 9.212px;
+    cursor: pointer;
+  }
+
+  div {
+    cursor: pointer;
+    color: var(--darkGray);
+  }
+
+  span {
+    color: var(--darkGray);
+  }
+`;
+
+const LikeBtn = styled.div``;
+const Count = styled.div``;
