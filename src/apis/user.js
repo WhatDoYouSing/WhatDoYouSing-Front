@@ -143,7 +143,7 @@ export const DelAccount = async (password) => {
 
 //GET
 // GET : 카카오 로그인
-export const KaKaoLogin = async (code) => {
+export const KaKaoLogin = async () => {
   try {
     const response = await axiosInstance.get(`/accounts/kakao/`);
     const ACCESS_TOKEN = response.data.data.access_token;
