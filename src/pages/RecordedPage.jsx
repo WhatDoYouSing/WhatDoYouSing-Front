@@ -60,7 +60,7 @@ const RecordedPage = () => {
         </Filter>
         <Line />
         {selectedCategory === "saved" && <Saved />}
-        {/* {selectedCategory === "bookmarked" && <Bookmarked />} */}
+
         {selectedCategory === "bookmarked" && (
           <Bookmarked pageType={pageType} />
         )}

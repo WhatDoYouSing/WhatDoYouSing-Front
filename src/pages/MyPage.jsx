@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 //components
 import Topbar from "../components/common/MainPage/Topbar";
 import Footer from "../components/common/Footer";
+
+//recoil
+import { useRecoilValue, useRecoilState } from "recoil";
+import { profileListAtom } from "../assets/recoil/recoil";
+import { LoginState } from "../assets/recoil/apiRecoil";
 
 const path_list = [
   {
@@ -49,17 +54,44 @@ const path_list = [
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const user = "Zimni";
+  // const isLogin = useRecoilValue(LoginState);
+  const isLogin = localStorage.getItem("token") !== null;
+  const profileList = useRecoilValue(profileListAtom);
 
-  return (
+  const Logout = () => {
+    window.localStorage.removeItem("user_id");
+    window.localStorage.removeItem("nickname");
+    window.localStorage.removeItem("user_profile");
+    window.localStorage.removeItem("token");
+
+    navigate("/");
+  };
+
+  const [userID, setUserID] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [profile, setProfile] = useState(1);
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/initial");
+    } else if (isLogin) {
+      setUserID(localStorage.getItem("user_id") || "");
+      setUserName(localStorage.getItem("nickname") || "");
+      setProfile(localStorage.getItem("user_profile") || "");
+    }
+  }, []);
+
+  return isLogin ? (
     <>
       <Topbar />
       <Wrapper>
         <UserInfo>
-          <UserProfile />
+          <UserProfile>
+            <Img src={profileList[profile]?.none_filled} />
+          </UserProfile>
           <div className="info">
-            <UserID>{user} 님</UserID>
-            <LogBtn onClick={() => navigate("/initial")}>로그아웃</LogBtn>
+            <UserID>{userName} 님</UserID>
+            <LogBtn onClick={Logout}>로그아웃</LogBtn>
           </div>
         </UserInfo>
         <Grid>
@@ -80,7 +112,7 @@ const MyPage = () => {
               <div className="title">회원 정보</div>
               <IDDiv>
                 <Nav>아이디 </Nav>
-                <span>{user}</span>
+                <span>{userID}</span>
               </IDDiv>
               <Nav onClick={() => navigate("/modifyintro/pas")}>
                 비밀번호 변경
@@ -98,7 +130,7 @@ const MyPage = () => {
       </Wrapper>
       <Footer />
     </>
-  );
+  ) : null;
 };
 
 export default MyPage;
@@ -129,11 +161,19 @@ const UserInfo = styled.div`
   }
 `;
 
+const Img = styled.img`
+  width: 3.6rem;
+  height: 3.6rem;
+`;
+
 const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 6.8rem;
   height: 6.8rem;
   border-radius: 50%;
-  background-color: var(--gray);
+  background-color: var(--lightGray);
 `;
 
 const UserID = styled.div`
