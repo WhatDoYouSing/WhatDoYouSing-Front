@@ -11,10 +11,21 @@ import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
-const TopTab = ({ deletePost, setDeletePost }) => {
+const TopTab = ({
+  share,
+  setShare,
+  deletePost,
+  setDeletePost,
+  reportPost,
+  setReportPost,
+}) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
+  };
+
+  const handleShare = () => {
+    setShare(!share);
   };
 
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -31,7 +42,7 @@ const TopTab = ({ deletePost, setDeletePost }) => {
       <Wrapper>
         <Back onClick={goBack} />
         <Others>
-          <Share />
+          <Share onClick={handleShare} />
           {isBookmarked ? (
             <BookmarkOn onClick={handleBookmark} />
           ) : (
@@ -44,6 +55,8 @@ const TopTab = ({ deletePost, setDeletePost }) => {
               setIsOpen={setIsOpen}
               deletePost={deletePost}
               setDeletePost={setDeletePost}
+              reportPost={reportPost}
+              setReportPost={setReportPost}
             />
           )}
         </Others>
@@ -74,4 +87,17 @@ const Others = styled.div`
   height: auto;
   flex-direction: row;
   cursor: pointer;
+`;
+
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 100;
 `;
