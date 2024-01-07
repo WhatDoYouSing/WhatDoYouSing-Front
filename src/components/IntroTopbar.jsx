@@ -15,7 +15,9 @@ const IntroTopbar = ({
   isFilled = false,
 }) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const handleClick = () => {
+    navigate(nextPath);
+  };
 
   return (
     <Wrapper>
@@ -37,12 +39,7 @@ const IntroTopbar = ({
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn
-            isFilled={isFilled}
-            onClick={() => {
-              navigate(nextPath);
-            }}
-          >
+          <NextBtn isFilled={isFilled} onClick={handleClick}>
             {btnText}
           </NextBtn>
         ) : (

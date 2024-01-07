@@ -10,60 +10,58 @@ const Bookmarked = ({ pageType }) => {
   const handleCategory = (category) => {
     setSelectedCategory(category);
   };
-
   return (
     <div>
-      <Wrapper3>
+      <Wrapper>
         <Filter>
           <span
-            onClick={() => handleCategory(2)}
-            className={selectedCategory === 2 ? "selected2" : "unselected2"}
+            onClick={() => handleCategory("lyric")}
+            className={selectedCategory === "lyric" ? "selected" : "unselected"}
           >
             가사
           </span>
           <span
-            onClick={() => handleCategory(3)}
-            className={selectedCategory === 3 ? "selected2" : "unselected2"}
+            onClick={() => handleCategory("comment")}
+            className={
+              selectedCategory === "comment" ? "selected" : "unselected"
+            }
           >
             댓글
           </span>
           <span
-            onClick={() => handleCategory(4)}
-            className={selectedCategory === 4 ? "selected2" : "unselected2"}
+            onClick={() => handleCategory("emotion")}
+            className={
+              selectedCategory === "emotion" ? "selected" : "unselected"
+            }
           >
             감정
           </span>
         </Filter>
-        {selectedCategory === 2 && <BookmarkedLyric />}
-        {selectedCategory === 3 && <BookmarkedComment />}
-        {selectedCategory === 4 && <BookmarkedEmotion />}
-      </Wrapper3>
+        {selectedCategory === "lyric" && <BookmarkedLyric />}
+        {selectedCategory === "comment" && <BookmarkedComment />}
+        {selectedCategory === "emotion" && <BookmarkedEmotion />}
+      </Wrapper>
     </div>
   );
 };
-
 export default Bookmarked;
-
-const Wrapper3 = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
   align-self: stretch;
-
   @media (min-width: 1200px) {
     padding: 0 22.6rem;
   }
 `;
-
 const Filter = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
   gap: 1.4rem;
   padding: 1.6rem 0;
-
   span {
     display: flex;
     padding: 1.9rem 2rem;
@@ -74,7 +72,6 @@ const Filter = styled.div`
     border-radius: 4rem;
     border: 1.5px solid var(--gray);
     background: var(--white);
-
     width: 2.8rem;
     height: 1.6rem;
     color: var(--black);
@@ -83,12 +80,10 @@ const Filter = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-
-  .selected2 {
+  .selected {
     color: var(--pointPink);
     border: 1.5px solid var(--pointPink);
   }
-
   @media (min-width: 1200px) {
     padding: 4rem 0;
   }

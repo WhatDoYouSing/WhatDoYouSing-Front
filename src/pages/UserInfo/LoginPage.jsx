@@ -8,8 +8,33 @@ import { ReactComponent as Symbol } from "../../images/symbol.svg";
 import wordmark from "../../images/icons/wordmark-kor.svg";
 import wordmarkE from "../../images/icons/wordmark-eng.svg";
 
+//api
+import { PostLogin } from "../../apis/user";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  //아이디/비밀번호 입력
+  const [formData, setFormData] = useState({
+    user_id: "",
+    password: "",
+  });
+
+  const handleInputChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  //로그인 함수
+  const handleLogin = () => {
+    if (formData.userid.trim() === "") {
+      alert("아이디를 입력해주세요.");
+    } else if (formData.password.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else {
+      console.log("여기까진 됨");
+      PostLogin(formData.userid, formData.password);
+    }
+  };
 
   return (
     <Wrapper>
@@ -28,10 +53,22 @@ const LoginPage = () => {
       <SideBox>
         <Login>로그인</Login>
         <InputBox>
-          <Input type="text" placeholder="아이디" />
-          <Input type="password" placeholder="비밀번호" />
+          <Input
+            type="text"
+            name="userid"
+            value={formData.userid}
+            onChange={handleInputChange}
+            placeholder="아이디"
+          />
+          <Input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="비밀번호"
+          />
         </InputBox>
-        <LoginBtn onClick={() => navigate("/")}>로그인</LoginBtn>
+        <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
       </SideBox>
     </Wrapper>
   );
