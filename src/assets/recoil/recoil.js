@@ -9,6 +9,6 @@ export const emotionListAtom = atom({
 });
 
 export const profileListAtom = atom({
-  key: "emotionListAtom",
+  key: "profileListAtom",
   default: userProfileData,
 });
