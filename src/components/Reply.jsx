@@ -33,7 +33,7 @@ const Reply = ({ replyContent }) => {
                 color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
               }}
             >
-              {likeCount}
+              {replyContent.relikes_count}
             </Count>
           </Plus>
         </ContentContainer>
@@ -48,8 +48,8 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem;
-  margin-left: 5rem;
+  padding: 2.5rem 0;
+  margin-left: -1rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -74,8 +74,7 @@ const ContentContainer = styled.div`
 `;
 
 const Id = styled.div`
-  color: white;
-
+  color: var(--veryDarkGray);
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -85,7 +84,7 @@ const Id = styled.div`
 const Content = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
-  color: white;
+  color: var(--veryDarkGray);
   font-size: 12px;
   font-weight: 500;
   line-height: 125%;

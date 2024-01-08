@@ -106,6 +106,7 @@ const CommentInput = styled.div`
     align-items: center;
     gap: 0.8rem;
     flex: 1 0 0;
+    margin-bottom: 2.5rem;
 
     border-radius: 2rem;
     border: 0.15rem solid var(--gray);
