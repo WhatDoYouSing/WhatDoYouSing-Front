@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
 
 //components
@@ -28,18 +29,24 @@ const Detailpage = () => {
   const reportModalRef = useRef(); //게시물 신고 모달
   const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
 
-  //렌더링 설정
-  const [render, setRender] = useState(4);
+  //params로 id 받기
+  let { postid } = useParams();
   //가사 상세 데이터
   const [thisData, setThisData] = useState({});
+  //렌더링 설정
+  const [render, setRender] = useState(1);
+
+  // console.log(postid);
 
   useEffect(() => {
-    const GetLyricsDetailData = async (lyrics_id) => {
-      const response = await GetLyricsDetail(lyrics_id);
-      setThisData(response);
-      console.log(response);
+    // console.log(postid);
+    const GetLyricDetailData = async (pk) => {
+      const response = await GetLyricsDetail(pk);
+      console.log(pk);
+      setThisData(response.data);
+      console.log(response.data);
     };
-    GetLyricsDetailData(1);
+    GetLyricDetailData(postid);
   }, []);
 
   return (
@@ -56,7 +63,7 @@ const Detailpage = () => {
         <LyricWithWriter lyricContent={thisData} />
         <GotoSong lyricContent={thisData} disabled={isListenBtnDisabled} />
         <EmotionBox />
-        <Comments postId={thisData.id} render={render} setRender={setRender} />
+        <Comments postId={postid} render={render} setRender={setRender} />
       </Wrapper>
       {deletePost && (
         <ModalWrapper>

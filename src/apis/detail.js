@@ -1,11 +1,11 @@
 import { axiosInstance } from "../apis/http";
 
 // GET : 가사 상세 조회
-export const GetLyricsDetail = async (lyrics_id) => {
+export const GetLyricsDetail = async (pk) => {
   try {
-    const response = await axiosInstance.get(`/posts/${lyrics_id}/`);
+    const response = await axiosInstance.get(`/posts/${pk}/`);
 
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }

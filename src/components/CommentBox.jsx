@@ -46,13 +46,7 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
           <ContentContainer>
             <Id>{content.author_nickname}</Id>
             <Content>{content.com_content}</Content>
-            {content.recomments_count > 0 && (
-              <Replies>
-                {content.recomments.map((reply, index) => (
-                  <Reply key={index} replyContent={reply} />
-                ))}
-              </Replies>
-            )}
+
             <Plus>
               <LikeBtn onClick={handleLike}>
                 {isLiked ? <LikeClick /> : <Like />}
@@ -63,7 +57,7 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
                   color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
                 }}
               >
-                {likeCount}
+                {content.com_count}
               </Count>
               <span>·</span>
               <AddReply
@@ -76,6 +70,13 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
               <span>·</span>
               <div onClick={handleDelete}>삭제하기</div>
             </Plus>
+            {content.recomments_count > 0 && (
+              <Replies>
+                {content.recomments.map((reply, index) => (
+                  <Reply key={index} replyContent={reply} />
+                ))}
+              </Replies>
+            )}
           </ContentContainer>
         </Container>
       </Background>
@@ -94,7 +95,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem;
+  padding: 0 1.6rem 2.5rem 1.6rem;
 `;
 
 const ProfileContainer = styled.div`
