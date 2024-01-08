@@ -5,6 +5,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Delete } from "../images/delete.svg";
 import { ReactComponent as Back } from "../images/back.svg";
 
+//recoil
+import { useRecoilValue } from "recoil";
+import { PasModifyState, NicModifyState } from "../assets/recoil/apiRecoil";
+
+//api
+import { PatchPassword, PatchNickname } from "../apis/user";
+
 const IntroTopbar = ({
   text = "로그인",
   backPath = -1,
@@ -16,8 +23,28 @@ const IntroTopbar = ({
   isFilled = false,
 }) => {
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(nextPath);
+
+  const newPassword = useRecoilValue(PasModifyState);
+  const newNickname = useRecoilValue(NicModifyState);
+
+  const handleClick = async () => {
+    switch (text) {
+      case "비밀번호 변경":
+        PatchPassword(newPassword);
+        console.log(newPassword);
+        // navigate(nextPath);
+        break;
+      case "닉네임 변경":
+        console.log(newNickname);
+        PatchNickname(newNickname);
+        // navigate(nextPath);
+        break;
+      case "게시글 작성":
+        break;
+
+      default:
+        navigate(nextPath);
+    }
   };
 
   return (

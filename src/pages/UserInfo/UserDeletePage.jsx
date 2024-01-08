@@ -8,8 +8,24 @@ import Footer from "../../components/common/Footer";
 import { ReactComponent as Symbol } from "../../images/icons/doong-ee3.svg";
 import { ReactComponent as Check } from "../../images/checkbox-off.svg";
 
+//api
+import { DelAccount } from "../../apis/user";
+
 const UserDeletePage = () => {
   const navigate = useNavigate();
+
+  const [password, setPassword] = useState("");
+
+  const handleDelBtn = async (password) => {
+    if (password.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else {
+      setPassword(password.trim());
+      const result = await DelAccount(password);
+      console.log(result);
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -27,6 +43,8 @@ const UserDeletePage = () => {
           <InputBox>
             <Input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
@@ -37,7 +55,7 @@ const UserDeletePage = () => {
               정말로 탈퇴하시겠습니까?
             </DelInfo>
           </InfoBox>
-          <LoginBtn onClick={() => navigate("/")}>회원 탈퇴</LoginBtn>
+          <LoginBtn onClick={() => handleDelBtn(password)}>회원 탈퇴</LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />

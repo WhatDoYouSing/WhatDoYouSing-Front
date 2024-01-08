@@ -7,3 +7,9 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.defaults.withCredentials = true;
+
+const token = localStorage.getItem("token") ?? false;
+
+axiosInstance.defaults.headers.common["Authorization"] = token
+  ? `Bearer ${token}`
+  : null;
