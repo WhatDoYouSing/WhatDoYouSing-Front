@@ -10,10 +10,12 @@ import { GetComment, PostComment } from "../../apis/comment";
 const Comments = ({ postId, render, setRender }) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
+  const [activeReply, setActiveReply] = useState(null);
 
   const isSticky = useRef(null);
-  const handleReplyFocus = () => {
+  const handleReplyFocus = (index) => {
     isSticky.current.focus();
+    setActiveReply(index);
   };
 
   //댓글 조회
@@ -24,7 +26,7 @@ const Comments = ({ postId, render, setRender }) => {
       console.log(response.data);
     };
     GetComData(postId);
-  }, []);
+  }, [render]);
 
   //댓글 작성
   const handleSubmit = () => {
@@ -32,7 +34,7 @@ const Comments = ({ postId, render, setRender }) => {
     if (localStorage.getItem("token")) {
       const PostComData = async (postId, comment) => {
         const response = await PostComment(postId, comment);
-        console.log(response);
+        //console.log(response);
         setRender(render + 1);
       };
       PostComData(postId, comment);
@@ -64,11 +66,14 @@ const Comments = ({ postId, render, setRender }) => {
       ) : null}
       {commentList.map((commentContent, index) => (
         <CommentBox
-          key={index}
+          key={commentContent.comment_id}
           content={commentContent}
-          onReply={handleReplyFocus}
+          onReply={() => handleReplyFocus(index)}
           render={render}
           setRender={setRender}
+          isActive={activeReply === index}
+          activeReplyIndex={activeReply}
+          // author={commentContent.author}
         />
       ))}
     </Wrapper>
@@ -106,7 +111,6 @@ const CommentInput = styled.div`
     align-items: center;
     gap: 0.8rem;
     flex: 1 0 0;
-    margin-bottom: 2.5rem;
 
     border-radius: 2rem;
     border: 0.15rem solid var(--gray);
