@@ -36,7 +36,7 @@ export const DropdownState = atom({
 //홈 관련 state
 export const LikeListState = atom({
   key: "LikeListState",
-  default: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
+  default: null,
 });
 
 export const LankingListState = atom({
