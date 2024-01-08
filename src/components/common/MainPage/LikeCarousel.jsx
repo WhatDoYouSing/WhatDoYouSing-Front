@@ -5,6 +5,13 @@ import Slider from "react-slick";
 //components
 import LyricsItem from "../LyricsItem";
 
+//recoil
+import { useRecoilValue } from "recoil";
+import {
+  LikeListState,
+  LankingListState,
+} from "../../../assets/recoil/apiRecoil";
+
 const LikeCarousel = () => {
   const settings = {
     arrows: false,
@@ -17,14 +24,29 @@ const LikeCarousel = () => {
     pauseOnHover: true,
     swipeToSlide: true,
   };
+
+  const likesList = useRecoilValue(LikeListState);
+  const [likeList, setLikeList] = useState(likesList);
+
+  const handleConsol = (item) => {
+    console.log(item);
+  };
+
+  console.log(likesList[0], likeList);
   return (
     <Wrapper>
       <Slider {...settings} dotsClass="slick-dots-custom">
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
+        {likeList.map((item) => (
+          <LyricsItem
+            key={item.id}
+            emotion={item.sings_emotion}
+            likes={item.likes_count}
+            lyrics={item.lyrics}
+            content={item.content}
+            title={item.title}
+            singer={item.singer}
+          />
+        ))}
       </Slider>
     </Wrapper>
   );

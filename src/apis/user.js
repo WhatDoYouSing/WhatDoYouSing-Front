@@ -10,9 +10,10 @@ export const PostLogin = async (user_id, password) => {
     });
 
     localStorage.setItem("user_id", response.data.data.id);
+    localStorage.setItem("username", response.data.data.username);
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
-    localStorage.setItem("user_profile", response.data.data.profile_num);
+    localStorage.setItem("user_profile", response.data.data.profile);
 
     console.log(response.data);
     window.location.replace("/");
@@ -27,12 +28,19 @@ export const PostLogin = async (user_id, password) => {
 };
 
 // POST : 회원가입
-export const PostSignup = async (user_id, password, nickname, navigate) => {
+export const PostSignup = async (
+  user_id,
+  password,
+  nickname,
+  profile,
+  navigate
+) => {
   try {
     const response = await axiosInstance.post("/accounts/signup/", {
       username: user_id,
       password: password,
       nickname: nickname,
+      profile: profile,
     });
     console.log(response.data);
     alert("가입이 완료되었습니다.");
@@ -59,7 +67,7 @@ export const PostCheckId = async (username) => {
   }
 };
 
-// PATCH : 프로필 사진 선택 //수정 예정!!
+// PATCH : 프로필 사진 선택
 export const PostProfile = async (profile) => {
   try {
     const response = await axiosInstance.patch("/accounts/profile/", {
@@ -94,12 +102,13 @@ export const PostCheckPassword = async (password) => {
 
 //PATCH
 // PATCH : 닉네임 수정 / 카카오 닉네임 생성
-export const PatchNicname = async (nickname) => {
+export const PatchNickname = async (nickname) => {
   try {
-    const response = await axiosInstance.patch("/accounts/update/nickname", {
+    const response = await axiosInstance.patch("/accounts/update/nickname/", {
       nickname: nickname,
     });
     console.log(response.data);
+    localStorage.setItem("nickname", response.data.data.nickname);
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -112,7 +121,7 @@ export const PatchNicname = async (nickname) => {
 // PATCH : 비밀번호 수정
 export const PatchPassword = async (new_password) => {
   try {
-    const response = await axiosInstance.patch("/accounts/update/password", {
+    const response = await axiosInstance.patch("/accounts/update/password/", {
       new_password: new_password,
     });
     console.log(response.data);
@@ -129,7 +138,7 @@ export const PatchPassword = async (new_password) => {
 // DELETE : 회원 탈퇴
 export const DelAccount = async (password) => {
   try {
-    const response = await axiosInstance.delete("/accounts/delete/", {
+    const response = await axiosInstance.post("/accounts/delete/", {
       password: password,
     });
     console.log(response.data);
@@ -146,7 +155,7 @@ export const DelAccount = async (password) => {
 // GET : 카카오 로그인
 export const KaKaoLogin = async () => {
   try {
-    const response = await axiosInstance.get(`/accounts/kakao/`);
+    const response = await axiosInstance.get("/accounts/kakao/");
     const ACCESS_TOKEN = response.data.data.access_token;
     const REFRESH_TOKEN = response.data.data.refresh_token;
 

@@ -10,13 +10,20 @@ import { ReactComponent as Close } from "../../images/dropdown-close.svg";
 //components
 import DropDown from "./DropDown";
 
-const DropDownBox = () => {
+//recoil
+import { useSetRecoilState } from "recoil";
+import { DropdownState } from "../../assets/recoil/apiRecoil";
+
+const DropDownBox = ({ setSelOption }) => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
-  const [selectedOption, setSelectedOption] = useState("좋아요 순");
+  const [selectedOption, setSelectedOption] = useState("댓글 순");
+  const setOption = useSetRecoilState(DropdownState);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
+    // setOption(selectedOption);
+    setSelOption(selectedOption);
     setIsOpen(false);
   };
   return (

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import IntroTopbar from "../../components/IntroTopbar";
 
@@ -12,11 +11,9 @@ import wordmarkE from "../../images/icons/wordmark-eng.svg";
 import { PostLogin } from "../../apis/user";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
   //아이디/비밀번호 입력
   const [formData, setFormData] = useState({
-    user_id: "",
+    userid: "",
     password: "",
   });
 
@@ -26,9 +23,9 @@ const LoginPage = () => {
 
   //로그인 함수
   const handleLogin = async () => {
-    if (formData.userid.trim() === "") {
+    if (formData?.userid.trim() === "") {
       alert("아이디를 입력해주세요.");
-    } else if (formData.password.trim() === "") {
+    } else if (formData?.password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
     } else {
       const isOK = await PostLogin(formData.userid, formData.password);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //components
@@ -10,7 +10,51 @@ import ChartSection from "../components/common/MainPage/ChartSection";
 import SearchSection from "../components/common/MainPage/SearchSection";
 import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 
+//api
+import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
+
+//recoil
+import { useSetRecoilState } from "recoil";
+import { LikeListState, LankingListState } from "../assets/recoil/apiRecoil";
+
 const MainPage = () => {
+  // const [likesList, setLikesList] = useState(null);
+  // const [optionList, setOptionList] = useState(["기본값"]);
+  const setLikeList = useSetRecoilState(LikeListState);
+  const setLankingList = useSetRecoilState(LankingListState);
+  useEffect(() => {
+    const handleInfo = async () => {
+      const sortedLatestList = await GetSortLatest();
+      // const sortedLikeList = await GetSortLike();
+      // const sortedComeList = await GetSortCom();
+      setLikeList(sortedLatestList.data.Likes);
+      setLankingList(sortedLatestList.data.LankingList);
+    };
+
+    handleInfo();
+  }, []);
+
+  // const handleClick = async () => {
+  //   switch (selectedOption) {
+  //     case "최신순":
+  //       const sortedLatestList = await GetSortLatest();
+  //       setChartList(sortedLatestList);
+  //       break;
+  //     case "좋아요 순":
+  //       const sortedLikeList = await GetSortLike();
+  //       setChartList(sortedLikeList);
+  //       break;
+  //     case "댓글순":
+  //       const sortedComeList = await GetSortCom();
+  //       setChartList(sortedComeList);
+  //       break;
+
+  //     default:
+  //       const defComeList = await GetSortCom();
+  //       setChartList(defComeList);
+  //   }
+  // };
+
   return (
     <>
       <Wrapper>

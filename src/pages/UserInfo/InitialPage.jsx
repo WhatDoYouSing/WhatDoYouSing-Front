@@ -9,6 +9,9 @@ import wordmark from "../../images/icons/wordmark-kor.svg";
 import wordmarkE from "../../images/icons/wordmark-eng.svg";
 import { ReactComponent as Kakao } from "../../images/kakao.svg";
 
+//api
+import { KaKaoLogin } from "../../apis/user";
+
 const InitialPage = () => {
   const navigate = useNavigate();
   return (
@@ -42,7 +45,7 @@ const InitialPage = () => {
           >
             로그인
           </LoginBtn>
-          <KakaoBtn>
+          <KakaoBtn onClick={KaKaoLogin}>
             <Kakao />
             카카오 로그인
           </KakaoBtn>
