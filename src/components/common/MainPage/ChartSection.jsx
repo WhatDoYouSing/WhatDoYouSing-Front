@@ -5,10 +5,42 @@ import { styled } from "styled-components";
 import LyricsItem from "../LyricsItem";
 import DropDownBox from "../DropDownBox";
 
+//api
+import { GetSortLatest, GetSortLike, GetSortCom } from "../../../apis/main";
+
+//recoil
+import { useRecoilValue } from "recoil";
+import { DropdownState } from "../../../assets/recoil/apiRecoil";
+
 const ChartSection = () => {
   const chartItems = Array.from({ length: 10 }, (_, index) => index + 1);
   const column1 = chartItems.slice(0, 5);
   const column2 = chartItems.slice(5);
+
+  const selectedOption = useRecoilValue(DropdownState);
+
+  const handleClick = async () => {
+    switch (selectedOption) {
+      case "최신순":
+        const sortedLatestList = await GetSortLatest();
+        break;
+      case "좋아요 순":
+        const sortedLikeList = await GetSortLike();
+        break;
+      case "댓글순":
+        const sortedComeList = await GetSortCom();
+        break;
+
+      default:
+    }
+  };
+
+  const MainPage = () => {
+    useEffect(() => {
+      const handleInfo = async () => {};
+      handleInfo();
+    }, []);
+  };
 
   return (
     <Wrapper>

@@ -17,3 +17,29 @@ export const ProfileState = atom({
   key: "ProfileState",
   default: null,
 });
+
+export const PasModifyState = atom({
+  key: "PasModifyState",
+  default: null,
+});
+
+export const NicModifyState = atom({
+  key: "NicModifyState",
+  default: null,
+});
+
+export const DropdownState = atom({
+  key: "DropdownState",
+  default: "댓글순",
+});
+
+//홈 관련 state
+export const LikeListState = atom({
+  key: "LikeListState",
+  default: null,
+});
+
+export const LankingListState = atom({
+  key: "LankingListState",
+  default: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+});
