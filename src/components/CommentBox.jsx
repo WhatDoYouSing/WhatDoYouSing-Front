@@ -14,20 +14,27 @@ import { userProfileSelector } from "../assets/recoil/recoil";
 const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+  const [addReply, setAddReply] = useState(false);
+
+  // 로그인 여부 확인 및 현재 사용자 정보 가져오기
+  const isLoggedIn = !!localStorage.getItem("token");
+  const currentUserNickname = localStorage.getItem("userNickname");
+  // 작성자와 현재 사용자를 비교하여 삭제 버튼 표시 여부 결정
+  const showDeleteButton =
+    isLoggedIn && currentUserNickname === content.author_nickname;
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
-  const [addReply, setAddReply] = useState(false);
   const handleReply = () => {
     if (isActive) {
       setAddReply(!addReply);
-      onReply();
+      onReply(content.comment_id);
     } else {
       setAddReply(true);
-      onReply();
+      onReply(content.comment_id);
     }
   };
 
@@ -84,8 +91,13 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
             </Plus>
             {content.recomments_count > 0 && (
               <Replies>
-                {content.recomments.map((reply, index) => (
-                  <Reply key={index} replyContent={reply} />
+                {content.recomments.map((reply) => (
+                  <Reply
+                    key={reply.comment_id}
+                    replyContent={reply}
+                    render={render}
+                    setRender={setRender}
+                  />
                 ))}
               </Replies>
             )}
