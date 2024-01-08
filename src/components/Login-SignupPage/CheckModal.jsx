@@ -21,6 +21,7 @@ const CheckModal = () => {
       signupForm.username,
       signupForm.password,
       signupForm.nickname,
+      profile,
       navigate
     );
     PostProfile(profile);

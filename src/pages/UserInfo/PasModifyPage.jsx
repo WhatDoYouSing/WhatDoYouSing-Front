@@ -5,16 +5,19 @@ import styled, { css } from "styled-components";
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
+//recoil
+import { useSetRecoilState } from "recoil";
+import { PasModifyState } from "../../assets/recoil/apiRecoil";
+
 const PasModifyPage = () => {
   const navigate = useNavigate();
+  const setNewPassword = useSetRecoilState(PasModifyState);
 
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   //규격 확인
-  const [usernameValid, setUsernameValid] = useState(null);
   const [passwordValid, setPasswordValid] = useState(null);
-  const [nicknameValid, setNicknameValid] = useState(null);
 
   //입력 시작 판단 state
   const [isPasswordFocused, setPasswordFocused] = useState(null);
@@ -55,6 +58,9 @@ const PasModifyPage = () => {
     const isRequiredFieldsValid = passwordValid && passwordMatch;
 
     setRequiredFieldsValid(isRequiredFieldsValid);
+    if (isRequiredFieldsValid) {
+      setNewPassword(password); // 참일 때 setNewPassword 설정
+    }
   }, [passwordValid, passwordMatch]);
 
   return (

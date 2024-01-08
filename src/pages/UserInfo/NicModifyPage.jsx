@@ -5,8 +5,13 @@ import styled, { css } from "styled-components";
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
+//recoil
+import { useSetRecoilState } from "recoil";
+import { NicModifyState } from "../../assets/recoil/apiRecoil";
+
 const NicModifyPage = () => {
   const [nickname, setNickname] = useState("");
+  const setNewNicname = useSetRecoilState(NicModifyState);
 
   //규격 확인
   const [nicknameValid, setNicknameValid] = useState(null);
@@ -24,11 +29,23 @@ const NicModifyPage = () => {
     setNicknameValid(isNicknameValid);
   }, [nickname]);
 
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setNewNicname(nickname);
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [nickname, setNewNicname]);
+
   //버튼 활성화
   useEffect(() => {
     setRequiredFieldsValid(nicknameValid);
+    if (requiredFieldsValid) {
+      setNewNicname(nickname); // 참일 때 setNewPassword 설정
+    }
   }, [nicknameValid]);
-  //나중에 중복확인을 아이디 규격 참일 때 가능하게 설정하고, 중복 확인 참일 때 활성화되도록 수정
 
   return (
     <>

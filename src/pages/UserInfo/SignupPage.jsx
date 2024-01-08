@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import IntroTopbar from "../../components/IntroTopbar";
 
 //recoil
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { SignupState } from "../../assets/recoil/apiRecoil";
 
 //api
@@ -48,7 +48,6 @@ const SignupPage = () => {
     const isChecked = await PostCheckId(username);
 
     setDuplicate(isChecked["duplicate"]);
-    console.log(isChecked, isChecked["duplicate"], duplicate);
   };
 
   // 아이디 규격 확인
@@ -83,11 +82,30 @@ const SignupPage = () => {
     setPasswordMatch(password === passwordConfirm);
   }, [password, passwordConfirm]);
 
+  const handleNicChange = (e) => {
+    setUsername(e.target.value);
+  };
+
   // 닉네임 유효성 확인
   useEffect(() => {
     // 예시: 10자 이하로 유효하다고 가정
     const isNicknameValid = nickname.length > 0 && nickname.length <= 10;
     setNicknameValid(isNicknameValid);
+  }, [nickname]);
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setSignupForm({
+        username: username,
+        password: password,
+        nickname: nickname,
+      });
+      console.log("update +", nickname);
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
   }, [nickname]);
 
   //버튼 활성화
@@ -204,7 +222,7 @@ const SignupPage = () => {
           />
           {passwordMatch && passwordValid ? (
             <Condition style={{ color: "var(--black)" }}>
-              비밀번호가 일치합니다.
+              비밀번호가 일치해요.
             </Condition>
           ) : (
             <Condition

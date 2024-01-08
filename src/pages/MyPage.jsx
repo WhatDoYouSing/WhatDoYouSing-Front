@@ -9,7 +9,9 @@ import Footer from "../components/common/Footer";
 //recoil
 import { useRecoilValue, useRecoilState } from "recoil";
 import { profileListAtom } from "../assets/recoil/recoil";
-import { LoginState } from "../assets/recoil/apiRecoil";
+
+//api
+import { GetMyPage } from "../apis/my";
 
 const path_list = [
   {
@@ -60,6 +62,7 @@ const MyPage = () => {
 
   const Logout = () => {
     window.localStorage.removeItem("user_id");
+    window.localStorage.removeItem("username");
     window.localStorage.removeItem("nickname");
     window.localStorage.removeItem("user_profile");
     window.localStorage.removeItem("token");
@@ -75,9 +78,15 @@ const MyPage = () => {
     if (!isLogin) {
       navigate("/initial");
     } else if (isLogin) {
-      setUserID(localStorage.getItem("user_id") || "");
+      setUserID(localStorage.getItem("username") || "");
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
+
+      const handleInfo = async () => {
+        const myInfo = await GetMyPage();
+        console.log(myInfo);
+      };
+      handleInfo();
     }
   }, []);
 
@@ -87,7 +96,7 @@ const MyPage = () => {
       <Wrapper>
         <UserInfo>
           <UserProfile>
-            <Img src={profileList[profile]?.none_filled} />
+            <Img src={profileList[profile - 1]?.none_filled} />
           </UserProfile>
           <div className="info">
             <UserID>{userName} 님</UserID>
