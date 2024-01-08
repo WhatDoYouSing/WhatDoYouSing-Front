@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import EmotionChip from "./EmotionChip";
 
-import { ReactComponent as More } from "../../images/more.svg";
 import { ReactComponent as SampleHeart } from "../../images/sample-heart.svg";
 
 import { useRecoilValue } from "recoil";
@@ -27,9 +26,6 @@ const LyricsItem = ({
     <>
       {showComment && (
         <>
-          <NavLike onClick={() => navigate("/result")}>
-            LIKE <More />
-          </NavLike>
           <LikeDiv>
             <EmotionChip
               size="small"
@@ -65,22 +61,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.showComment ? "100%" : "74%")};
-`;
-
-const NavLike = styled.div`
-  display: flex;
-  align-items: center;
-  height: 4.8rem;
-  gap: 0.4rem;
-
-  color: var(--Black, #262121);
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -0.04rem;
-
-  border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
 `;
 
 const LikeDiv = styled.div`

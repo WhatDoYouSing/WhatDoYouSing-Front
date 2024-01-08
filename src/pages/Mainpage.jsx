@@ -14,24 +14,25 @@ import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
 
 //recoil
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { LikeListState, LankingListState } from "../assets/recoil/apiRecoil";
 
 const MainPage = () => {
-  // const [likesList, setLikesList] = useState(null);
-  // const [optionList, setOptionList] = useState(["기본값"]);
   const setLikeList = useSetRecoilState(LikeListState);
   const setLankingList = useSetRecoilState(LankingListState);
+  const likeList = useRecoilValue(LikeListState);
+
   useEffect(() => {
     const handleInfo = async () => {
       const sortedLatestList = await GetSortLatest();
-      // const sortedLikeList = await GetSortLike();
-      // const sortedComeList = await GetSortCom();
+      const sortedLikeList = await GetSortLike();
+      const sortedComeList = await GetSortCom();
       setLikeList(sortedLatestList.data.Likes);
       setLankingList(sortedLatestList.data.LankingList);
     };
 
     handleInfo();
+    console.log(likeList);
   }, []);
 
   // const handleClick = async () => {
