@@ -8,8 +8,10 @@ import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 import Reply from "./Reply";
 
 import { DelComment } from "../apis/comment";
+import { useRecoilValue } from "recoil";
+import { userProfileSelector } from "../assets/recoil/recoil";
 
-const CommentBox = ({ content, onReply, render, setRender }) => {
+const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
 
@@ -20,9 +22,17 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
 
   const [addReply, setAddReply] = useState(false);
   const handleReply = () => {
-    setAddReply(!addReply);
-    onReply();
+    if (isActive) {
+      setAddReply(!addReply);
+      onReply();
+    } else {
+      setAddReply(true);
+      onReply();
+    }
   };
+
+  //프로필 정보 가져오기
+  // const userProfile = useRecoilValue(userProfileSelector({ author }));
 
   //댓글 삭제
   const handleDelete = () => {
@@ -31,13 +41,15 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
       setRender(render + 1);
       console.log(response);
     };
+    // console.log(content.comment_id);
+    // console.log("삭제 성공");
     DelComData(content.comment_id);
   };
 
   return (
     <>
       <Background
-        style={{ backgroundColor: addReply ? "#FFF5F5" : "var(--white)" }}
+        style={{ backgroundColor: isActive ? "#FFF5F5" : "var(--white)" }}
       >
         <Container>
           <ProfileContainer>
@@ -57,7 +69,7 @@ const CommentBox = ({ content, onReply, render, setRender }) => {
                   color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
                 }}
               >
-                {content.com_count}
+                {content.likes_count}
               </Count>
               <span>·</span>
               <AddReply
@@ -95,7 +107,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 0 1.6rem 2.5rem 1.6rem;
+  padding: 2.5rem 1.6rem 2.5rem 1.6rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -127,6 +139,7 @@ const Id = styled.div`
 `;
 
 const Content = styled.div`
+  width: 100%;
   margin-top: 5px;
   margin-bottom: 10px;
   color: var(--veryDarkGray);

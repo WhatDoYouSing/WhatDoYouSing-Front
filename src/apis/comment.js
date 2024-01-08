@@ -30,9 +30,12 @@ export const PostComment = async (pk, com_content) => {
 // DELETE : 댓글 삭제
 export const DelComment = async (comment_pk) => {
   try {
-    const response = await axiosInstance.delete(`/comments/${comment_pk}/`, {
-      comment_pk: comment_pk,
-    });
+    const response = await axiosInstance.delete(
+      `/comments/del/${comment_pk}/`,
+      {
+        comment_pk: comment_pk,
+      }
+    );
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
