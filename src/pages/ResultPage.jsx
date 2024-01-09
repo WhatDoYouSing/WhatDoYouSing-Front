@@ -15,20 +15,6 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { SearchDropdownState } from "../assets/recoil/apiRecoil";
 
 const ResultPage = () => {
-  const selectedOption = useRecoilValue(SearchDropdownState);
-  // const [bookmarkedList, setBookmarkedList] = useState();
-  // const [bookmarkedList2, setBookmarkedList2] = useState();
-  // const [bookmarkedList3, setBookmarkedList3] = useState();
-
-  // useEffect(() => {
-  //   const handleClick = async () => {
-  //     const savedList = await GetSearchLatest("", "", 1);
-  //     const savedList2 = await GetSearchLike("", "", 1);
-  //     const savedList3 = await GetSearchCom("", "", 1);
-  //   };
-
-  //   handleClick();
-  // }, []);
   return (
     <>
       <Wrapper>
@@ -47,4 +33,8 @@ export default ResultPage;
 const Wrapper = styled.div`
   padding: 11.4rem 0 15.8rem;
   min-height: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

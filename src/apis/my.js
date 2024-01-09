@@ -12,11 +12,14 @@ export const GetMyPage = async () => {
 };
 
 // GET : 사용자가 저장한 게시글 모아보기
-export const GetMySaved = async (page) => {
+export const GetMySaved = async (keyword, page) => {
   try {
-    const response = await axiosInstance.get(`/mypage/scraps/?page=${page}`, {
-      page: page,
-    });
+    const response = await axiosInstance.get(
+      `/mypage/scraps/?keyword=${keyword}&?page=${page}`,
+      {
+        page: page,
+      }
+    );
     return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
