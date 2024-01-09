@@ -123,7 +123,7 @@ const Container = styled.div`
 const NavBar = styled.div`
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 3.2rem;
 `;
 
 const NavItem = styled.div`

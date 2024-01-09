@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -10,23 +10,38 @@ import wordmark from "../../images/icons/wordmark-kor.svg";
 import wordmarkE from "../../images/icons/wordmark-eng.svg";
 
 //api
-import { PostCheckPassword } from "../../apis/user";
+// import { PostCheckPassword } from "../../apis/user";
+
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { PasCheckState } from "../../assets/recoil/apiRecoil";
 
 const UserModifyIntroPage = () => {
   const type = useParams();
   const navigate = useNavigate();
+  const setCheckPassword = useSetRecoilState(PasCheckState);
+  const checkPassword = useRecoilValue(PasCheckState);
 
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setCheckPassword(password);
+    }, 500);
+
+    console.log(checkPassword);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [password, setCheckPassword]);
+
   const handleNavigate = async () => {
-    const isChecked = await PostCheckPassword(password);
-    console.log(password, isChecked);
-    if (isChecked && type.id === "pas") {
+    console.log(password);
+    if (type.id === "pas") {
       navigate("/pas-modify");
-    } else if (isChecked && type.id === "nic") {
+    } else if (type.id === "nic") {
       navigate("/nic-modify");
-    } else if (!isChecked) {
-      alert("비밀번호를 다시 확인해주세요.");
     } else {
       alert("오류 발생!ㅠ.ㅠ");
     }

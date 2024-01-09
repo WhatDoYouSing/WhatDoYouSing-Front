@@ -8,12 +8,34 @@ import EmotionChip from "../EmotionChip";
 
 import { ReactComponent as More } from "../../../images/more.svg";
 
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import {
+  SelectEmotionState,
+  SearchDropdownState,
+  KeywordState,
+} from "../../../assets/recoil/apiRecoil";
+
 const LikeSection = () => {
   const navigate = useNavigate();
+  const setSearchKeyword = useSetRecoilState(KeywordState);
+  const setSelectOption = useSetRecoilState(SearchDropdownState);
+  const setSearchEmotion = useSetRecoilState(SelectEmotionState);
+
+  useEffect(() => {
+    setSearchKeyword("");
+    setSearchEmotion("");
+    setSelectOption("최신순");
+  }, []);
+
+  const moveSearchLatest = () => {
+    setSelectOption("좋아요순");
+    navigate("/result");
+  };
 
   return (
     <Wrapper>
-      <NavLike onClick={() => navigate("/result")}>
+      <NavLike onClick={moveSearchLatest}>
         LIKE <More />
       </NavLike>
       <LikeCarousel />

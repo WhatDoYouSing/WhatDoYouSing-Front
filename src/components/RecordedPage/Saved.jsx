@@ -15,32 +15,40 @@ const Saved = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(null); // 전체 부스 개수
   const [totalPage, setTotalPage] = useState(1); // 전체 페이지
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     const handleClick = async (currentPage) => {
-      const savedList = await GetMySaved(currentPage);
+      const savedList = await GetMySaved(keyword, currentPage);
       setSavedList(savedList["내가 스크랩한 게시물"]);
       setTotalItems(savedList.total);
       setCurrentPage(savedList.current_page);
       setTotalPage(savedList.total_page);
     };
 
-    handleClick(currentPage);
-  }, [currentPage]);
+    handleClick(keyword, currentPage);
+
+    console.log(savedList);
+  }, [keyword, currentPage]);
 
   return (
     <div>
       <Wrapper>
         <SearchBar>
-          <input placeholder="저장한 가사를 검색해보세요!"></input>
+          <input
+            placeholder="저장한 가사를 검색해보세요!"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          ></input>
           <Search />
         </SearchBar>
         <SearchResult>총 {totalItems}개</SearchResult>
         <ItemDiv>
-          {savedList.map((item) => (
+          {savedList.map((item, index) => (
             <ResultLyrics
               showComment={false}
               id={item.id}
+              isReverse={index % 2 !== 0}
               lyrics={item.lyrics}
               content={item.content}
               title={item.title}
