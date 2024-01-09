@@ -7,7 +7,11 @@ import { ReactComponent as Back } from "../images/back.svg";
 
 //recoil
 import { useRecoilValue } from "recoil";
-import { PasModifyState, NicModifyState } from "../assets/recoil/apiRecoil";
+import {
+  PasCheckState,
+  PasModifyState,
+  NicModifyState,
+} from "../assets/recoil/apiRecoil";
 
 //api
 import { PatchPassword, PatchNickname } from "../apis/user";
@@ -23,15 +27,15 @@ const IntroTopbar = ({
   isFilled = false,
 }) => {
   const navigate = useNavigate();
-
+  const existingPassword = useRecoilValue(PasCheckState);
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
 
   const handleClick = async () => {
     switch (text) {
       case "비밀번호 변경":
-        PatchPassword(newPassword);
-        console.log(newPassword);
+        PatchPassword(existingPassword, newPassword);
+        console.log(existingPassword, newPassword);
         navigate(nextPath);
         break;
       case "닉네임 변경":

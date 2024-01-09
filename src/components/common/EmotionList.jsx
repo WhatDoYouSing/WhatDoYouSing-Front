@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 //components
 import EmotionChip from "./EmotionChip";
 
 //recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
+import { SelectEmotionState } from "../../assets/recoil/apiRecoil";
 
 const EmotionList = ({
+  isSearch = false,
   onEmotionSelect = null,
   closeModal,
   size = "medium",
   big = true,
 }) => {
-  const [selectedEmotion, setSelectedEmotion] = useState(null);
-  const emotions = useRecoilValue(emotionListAtom);
+  const navigate = useNavigate();
+  const [selectedEmotion, setSelectedEmotion] = useState(null); //
+  const emotions = useRecoilValue(emotionListAtom); //감정 list
+  const setSelectedChip = useSetRecoilState(SelectEmotionState); //검색용 index
 
   const emotionData = [
     [emotions[0], emotions[1]],
@@ -51,6 +56,12 @@ const EmotionList = ({
       if (!big) {
         closeModal();
       }
+    }
+
+    if (isSearch) {
+      setSelectedChip(emotion.id - 1);
+      console.log(emotion.id - 1);
+      navigate("/result");
     }
   };
   return (

@@ -37,10 +37,11 @@ const Saved = () => {
         </SearchBar>
         <SearchResult>총 {totalItems}개</SearchResult>
         <ItemDiv>
-          {savedList.map((item) => (
+          {savedList.map((item, index) => (
             <ResultLyrics
               showComment={false}
               id={item.id}
+              isReverse={index % 2 !== 0}
               lyrics={item.lyrics}
               content={item.content}
               title={item.title}

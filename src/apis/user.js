@@ -87,7 +87,7 @@ export const PostProfile = async (profile) => {
 // POST : 수정 전 비밀번호 확인
 export const PostCheckPassword = async (password) => {
   try {
-    const response = await axiosInstance.post("/accounts/access/", {
+    const response = await axiosInstance.get("/accounts/access/", {
       password: password,
     });
     console.log(response.data);
@@ -119,9 +119,10 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 비밀번호 수정
-export const PatchPassword = async (new_password) => {
+export const PatchPassword = async (current_password, new_password) => {
   try {
     const response = await axiosInstance.patch("/accounts/update/password/", {
+      current_password: current_password,
       new_password: new_password,
     });
     console.log(response.data);
