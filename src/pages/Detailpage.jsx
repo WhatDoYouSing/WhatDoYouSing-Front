@@ -99,7 +99,12 @@ const Detailpage = () => {
       )}
       {share && (
         <ModalWrapper>
-          <ShareModal ref={shareModalRef} share={share} setShare={setShare} />
+          <ShareModal
+            ref={shareModalRef}
+            share={share}
+            setShare={setShare}
+            data={thisData}
+          />
         </ModalWrapper>
       )}
     </>

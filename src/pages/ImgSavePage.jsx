@@ -10,7 +10,10 @@ import html2canvas from "html2canvas";
 
 const ImgSavePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const captureRef = useRef(null);
+
+  const data = location.state?.data;
 
   const handleCapture = () => {
     html2canvas(captureRef.current, { scale: 4 });
@@ -31,14 +34,14 @@ const ImgSavePage = () => {
           <Container>
             <Close
               onClick={() => {
-                navigate("/detail");
+                navigate(`/detail/${data.id}`);
               }}
             />
             <Title>이미지 저장</Title>
             <Save width={18} height={18} onClick={handleCapture} />
           </Container>
         </TopBar>
-        <ImgCard captureRef={captureRef} />
+        <ImgCard captureRef={captureRef} data={data} />
       </Wrapper>
     </>
   );

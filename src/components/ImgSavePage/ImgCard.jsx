@@ -3,21 +3,17 @@ import { styled, css } from "styled-components";
 
 import { ReactComponent as Character } from "../../images/icons/henry3.svg";
 
-const ImgCard = ({ captureRef }) => {
+const ImgCard = ({ captureRef, data }) => {
   return (
     <>
       <Wrapper ref={captureRef}>
         <Container>
-          <Lyric>
-            공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공공
-          </Lyric>
-          <Detail>
-            최대자수우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우우
-          </Detail>
+          <Lyric>{data.lyrics}</Lyric>
+          <Detail>{data.content}</Detail>
           <More>
             <Info>
-              <Song>1+1</Song>
-              <Singer>나상현씨밴드</Singer>
+              <Song>{data.title}</Song>
+              <Singer>{data.singer}</Singer>
             </Info>
             <Character width={79} height={79} />
           </More>
