@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { ReactComponent as Heart } from "../../images/heart.svg";
 import { ReactComponent as FullHeart } from "../../images/full-heart.svg";
@@ -8,7 +8,9 @@ import LikeInteraction from "./LikeInteraction";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-const GotoSong = ({ lyricContent, disabled }) => {
+import { PostDetailLike } from "../../apis/detail";
+
+const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
   const [showLikeInteraction, setShowLikeInteraction] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [noteId, setNoteId] = useState(1);
@@ -30,6 +32,14 @@ const GotoSong = ({ lyricContent, disabled }) => {
 
     // 새로운 랜덤한 note 애니메이션을 위해 노트 ID를 변경
     setNoteId((prevNoteId) => prevNoteId + 1);
+
+    //가사 좋아요 post
+    const PostLike = async (postId) => {
+      const response = await PostDetailLike(postId);
+      setRender(render + 1);
+      console.log(response);
+    };
+    PostLike(lyricContent.id);
   };
 
   return (
@@ -54,7 +64,9 @@ const GotoSong = ({ lyricContent, disabled }) => {
             {isLiked ? <FullHeart /> : <Heart />}
             {lyricContent.likes_count}
           </LikeBtn>
-          <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
+          <Link to={`${lyricContent.link}`}>
+            <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
+          </Link>
         </Buttons>
       </Wrapper>
     </>
@@ -75,6 +87,7 @@ const Wrapper = styled.div`
 
 const SongDiv = styled.div`
   display: flex;
+  width: 171px;
   flex-direction: column;
   gap: 0.8rem;
 
@@ -122,6 +135,7 @@ const LikeBtn = styled.button`
 
 const GoListen = styled.div`
   display: flex;
+  width: 154.31px;
   padding: 1.2rem 2rem;
   justify-content: center;
   align-items: center;

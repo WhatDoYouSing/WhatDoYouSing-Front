@@ -20,6 +20,13 @@ import { GetLyricsDetail } from "../apis/detail";
 const Detailpage = () => {
   //이 노래 들으러 가기 비활성화 -- data로부터 값받아 설정해줄것!
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
+  const setLinked = () => {
+    if (
+      thisData.link === null
+        ? setIsListenBtnDisabled(false)
+        : setIsListenBtnDisabled(true)
+    );
+  };
 
   const shareModalRef = useRef();
   const [share, setShare] = useClickOutside(shareModalRef, false);
@@ -47,7 +54,7 @@ const Detailpage = () => {
       console.log(response.data);
     };
     GetLyricDetailData(postid);
-  }, []);
+  }, [render]);
 
   return (
     <>
@@ -62,7 +69,12 @@ const Detailpage = () => {
           postId={postid}
         />
         <LyricWithWriter lyricContent={thisData} />
-        <GotoSong lyricContent={thisData} disabled={isListenBtnDisabled} />
+        <GotoSong
+          lyricContent={thisData}
+          render={render}
+          setRender={setRender}
+          disabled={isListenBtnDisabled}
+        />
         <EmotionBox />
         <Comments postId={postid} render={render} setRender={setRender} />
       </Wrapper>

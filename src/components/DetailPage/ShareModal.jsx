@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
-const ShareModal = ({ share, setShare }) => {
+const ShareModal = ({ share, setShare, link }) => {
   const navigate = useNavigate();
 
   return (
