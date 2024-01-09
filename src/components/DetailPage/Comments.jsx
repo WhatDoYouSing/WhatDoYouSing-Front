@@ -40,15 +40,16 @@ const Comments = ({ postId, render, setRender }) => {
         };
         PostComData(postId, comment);
       } else {
-        const PostReData = async (comment_id, comment) => {
-          const response = await PostReply(comment_id, comment);
+        const PostReData = async (comment_id, postId, comment) => {
+          const response = await PostReply(comment_id, postId, comment);
           console.log(response);
           setActiveReply(null);
           setRender(render + 1);
           console.log(comment_id);
         };
-        PostReData(activeReply, comment);
+        PostReData(activeReply, postId, comment);
       }
+
       setComment("");
     } else alert("로그인이 필요합니다.");
   };

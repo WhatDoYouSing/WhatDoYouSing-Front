@@ -32,7 +32,7 @@ export const PostLyrics = async (
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
-    console.error("중복확인 실패", error.response);
+    console.error("가사등록 실패", error.response);
   }
 };
 

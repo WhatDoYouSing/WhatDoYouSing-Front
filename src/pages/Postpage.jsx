@@ -10,6 +10,11 @@ const Postpage = (props) => {
     setRequiredFieldsValid(requiredFieldsValid);
   };
 
+  const [postId, setPostId] = useState("");
+  const handlePostIdReceived = (receivedPostId) => {
+    setPostId(receivedPostId);
+  };
+
   return (
     <div>
       <Wrapper>
@@ -18,8 +23,9 @@ const Postpage = (props) => {
           delPath="/"
           actBtn={true}
           btnText="게시하기"
-          nextPath="/detail"
+          nextPath={`/detail/${postId}`}
           isFilled={requiredFieldsValid}
+          onPostIdReceived={handlePostIdReceived}
         />
         <PostContent onBtn={onBtn} />
       </Wrapper>

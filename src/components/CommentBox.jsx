@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,9 @@ const CommentBox = ({
   showReply = true,
 }) => {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(
+    localStorage.getItem(`comment_${content.comment_id}_isLiked`) === "true"
+  );
   // const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
   const [addReply, setAddReply] = useState(false);
   const profiles = useRecoilValue(profileListAtom);
@@ -72,6 +74,14 @@ const CommentBox = ({
       }
     }
   };
+
+  useEffect(() => {
+    // isLiked가 변경될 때마다 localStorage를 업데이트합니다.
+    localStorage.setItem(
+      `comment_${content.comment_id}_isLiked`,
+      isLiked.toString()
+    );
+  }, [content.comment_id, isLiked]);
 
   return (
     <>
@@ -130,6 +140,7 @@ const CommentBox = ({
                     replyContent={reply}
                     render={render}
                     setRender={setRender}
+                    commentId={content.comment_id}
                   />
                 ))}
               </Replies>

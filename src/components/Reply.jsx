@@ -1,20 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-import { DelReply } from "../apis/comment";
+import { DelReply, PostReplyLike } from "../apis/comment";
+import { useRecoilValue } from "recoil";
+import { profileListAtom } from "../assets/recoil/recoil";
 
-const Reply = ({ replyContent, render, setRender }) => {
-  const [isLiked, setIsLiked] = useState(false);
+const Reply = ({ replyContent, render, setRender, commentId }) => {
+  const [isLiked, setIsLiked] = useState(
+    localStorage.getItem(`reply_${replyContent.recomment_id}_isLiked`) ===
+      "true"
+  );
   const [likeCount, setLikeCount] = useState(replyContent.relikes_count || 0);
+  //const profiles = useRecoilValue(profileListAtom);
+
+  // 로그인 여부 확인 및 현재 사용자 정보 가져오기
+  const isLoggedIn = !!localStorage.getItem("token");
+  const currentUserID = +localStorage.getItem("user_id");
+  // 작성자와 현재 사용자를 비교하여 삭제 버튼 표시 여부 결정
+  const showDeleteButton = isLoggedIn && currentUserID === replyContent.author;
 
   const handleLike = () => {
+    const PostReLike = async (comment_pk, recomment_pk) => {
+      const response = await PostReplyLike(comment_pk, recomment_pk);
+      setRender(render + 1);
+      console.log(response);
+    };
+    PostReLike(commentId, replyContent.recomment_id);
     setIsLiked(!isLiked);
-    setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+    //setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
+
+  useEffect(() => {
+    localStorage.setItem(
+      `reply_${replyContent.recomment_id}_isLiked`,
+      isLiked.toString()
+    );
+  }, [replyContent.recomment_id, isLiked]);
 
   //답댓글 삭제
   const handleDeleteRe = () => {
@@ -47,8 +72,12 @@ const Reply = ({ replyContent, render, setRender }) => {
             >
               {replyContent.relikes_count}
             </Count>
-            <span>·</span>
-            <div onClick={handleDeleteRe}>삭제하기</div>
+            {showDeleteButton && (
+              <>
+                <span>·</span>
+                <div onClick={handleDeleteRe}>삭제하기</div>
+              </>
+            )}
           </Plus>
         </ContentContainer>
       </Container>
