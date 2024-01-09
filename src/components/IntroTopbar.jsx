@@ -11,6 +11,7 @@ import {
   PasModifyState,
   NicModifyState,
   LyricState,
+  PasCheckState,
 } from "../assets/recoil/apiRecoil";
 
 //api
@@ -29,7 +30,7 @@ const IntroTopbar = ({
   onPostIdReceived,
 }) => {
   const navigate = useNavigate();
-
+  const existingPassword = useRecoilValue(PasCheckState);
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
   const newLyricPost = useRecoilValue(LyricState);
@@ -38,8 +39,8 @@ const IntroTopbar = ({
   const handleClick = async () => {
     switch (text) {
       case "비밀번호 변경":
-        PatchPassword(newPassword);
-        console.log(newPassword);
+        PatchPassword(existingPassword, newPassword);
+        console.log(existingPassword, newPassword);
         navigate(nextPath);
         break;
       case "닉네임 변경":

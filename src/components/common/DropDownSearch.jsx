@@ -12,18 +12,23 @@ import DropDown from "./DropDown";
 
 //recoil
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { DropdownState } from "../../assets/recoil/apiRecoil";
+import { SearchDropdownState } from "../../assets/recoil/apiRecoil";
 
-const DropDownBox = () => {
+const DropDownSearch = () => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
   const [selectedOption, setSelectedOption] = useState("댓글순");
-  const setOption = useSetRecoilState(DropdownState);
+  const setOption = useSetRecoilState(SearchDropdownState);
+  const settingSearchOption = useRecoilValue(SearchDropdownState);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setSelectedOption(settingSearchOption); //버튼 눌러서 검색할 때 state 설정
+  }, []);
 
   useEffect(() => {
     const handleFirstState = () => {
@@ -45,7 +50,7 @@ const DropDownBox = () => {
   );
 };
 
-export default DropDownBox;
+export default DropDownSearch;
 
 const Wrapper = styled.div`
   position: relative;

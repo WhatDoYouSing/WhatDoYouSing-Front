@@ -126,9 +126,7 @@ const MyPage = () => {
               <Nav onClick={() => navigate("/modifyintro/pas")}>
                 비밀번호 변경
               </Nav>
-              <Nav onClick={() => navigate("/modifyintro/nic")}>
-                닉네임 변경
-              </Nav>
+              <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
             </Action>
             <ActionEx>
               <div className="title">기타</div>
