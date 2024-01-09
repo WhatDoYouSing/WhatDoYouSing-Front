@@ -8,13 +8,15 @@ import { ReactComponent as Back } from "../images/back.svg";
 //recoil
 import { useRecoilValue } from "recoil";
 import {
-  PasCheckState,
   PasModifyState,
   NicModifyState,
+  LyricState,
+  PasCheckState,
 } from "../assets/recoil/apiRecoil";
 
 //api
 import { PatchPassword, PatchNickname } from "../apis/user";
+import { PostLyrics } from "../apis/lyrics";
 
 const IntroTopbar = ({
   text = "로그인",
@@ -25,11 +27,14 @@ const IntroTopbar = ({
   btnText = "다음으로",
   nextPath = "/",
   isFilled = false,
+  onPostIdReceived,
 }) => {
   const navigate = useNavigate();
   const existingPassword = useRecoilValue(PasCheckState);
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
+  const newLyricPost = useRecoilValue(LyricState);
+  console.log(newLyricPost);
 
   const handleClick = async () => {
     switch (text) {
@@ -44,6 +49,21 @@ const IntroTopbar = ({
         navigate(nextPath);
         break;
       case "게시글 작성":
+        const response = await PostLyrics(
+          newLyricPost.lyrics,
+          newLyricPost.content,
+          newLyricPost.title,
+          newLyricPost.singer,
+          newLyricPost.link,
+          newLyricPost.sings_emotion
+        );
+        const postId = response.data.id;
+
+        console.log(newLyricPost);
+        console.log(postId);
+        onPostIdReceived(postId);
+
+        navigate(`/detail/${postId}`);
         break;
 
       default:

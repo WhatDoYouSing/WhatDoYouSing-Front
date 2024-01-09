@@ -5,18 +5,25 @@ import { ReactComponent as ProfileImg } from "../../images/profile.svg";
 import EmotionChip from "../common/EmotionChip";
 
 import { useRecoilValue } from "recoil";
-import { emotionListAtom } from "../../assets/recoil/recoil";
+import { emotionListAtom, profileListAtom } from "../../assets/recoil/recoil";
 
 const LyricWithWriter = ({ lyricContent }) => {
   const emotions = useRecoilValue(emotionListAtom);
+  const profiles = useRecoilValue(profileListAtom);
+
   return (
     <Wrapper>
       <ProfileWrapper>
-        <ProfileImg />
+        <ProfileContainer>
+          <img
+            src={profiles[lyricContent.author_profile - 1]?.none_filled}
+            alt="profileimg"
+          ></img>
+        </ProfileContainer>
         <EmotionChip
           size="small"
-          text={emotions[0].text}
-          src={emotions[0].src}
+          text={emotions[lyricContent.sings_emotion]?.text}
+          src={emotions[lyricContent.sings_emotion]?.src}
         />
       </ProfileWrapper>
       <TitleLyrics>{lyricContent.lyrics}</TitleLyrics>
@@ -43,6 +50,21 @@ const ProfileWrapper = styled.div`
   gap: 0.8rem;
   padding-top: 1.6rem;
   padding-bottom: 2rem;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--gray);
+
+  img {
+    width: 21px;
+    height: 21px;
+  }
 `;
 
 const TitleLyrics = styled.div`

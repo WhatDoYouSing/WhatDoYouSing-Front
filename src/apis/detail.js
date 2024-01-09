@@ -24,11 +24,11 @@ export const PostDetailLike = async (pk) => {
   }
 };
 
-// POST : 가사 상세페이지 감정 등록
-export const PostDetailEmo = async (post_pk) => {
+// PATCH : 가사 상세페이지 감정 수정
+export const PatchDetailEmo = async (pk, content) => {
   try {
-    const response = await axiosInstance.post(`/posts/${post_pk}/emotions/`, {
-      post_pk: post_pk,
+    const response = await axiosInstance.patch(`/posts/${pk}/emotions/`, {
+      content: content,
     });
     console.log(response.data);
     return Promise.resolve(response.data);
@@ -37,24 +37,37 @@ export const PostDetailEmo = async (post_pk) => {
   }
 };
 
-// GET : 가사 상세페이지 감정 조회
-export const GetDetailEmo = async (post_pk) => {
-  try {
-    const response = await axiosInstance.get(`/posts/${post_pk}/emotions/`);
+// // POST : 가사 상세페이지 감정 등록
+// export const PostDetailEmo = async (post_pk) => {
+//   try {
+//     const response = await axiosInstance.post(`/posts/${post_pk}/emotions/`, {
+//       post_pk: post_pk,
+//     });
+//     console.log(response.data);
+//     return Promise.resolve(response.data);
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };
 
-    return Promise.resolve(response.data);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+// // GET : 가사 상세페이지 감정 조회
+// export const GetDetailEmo = async (post_pk) => {
+//   try {
+//     const response = await axiosInstance.get(`/posts/${post_pk}/emotions/`);
 
-// DELETE : 가사 상세페이지 감정 삭제
-export const DelLyrics = async (post_pk) => {
-  try {
-    const response = await axiosInstance.delete(`/posts/${post_pk}/`);
+//     return Promise.resolve(response.data);
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };
 
-    return Promise.resolve(response.data);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+// // DELETE : 가사 상세페이지 감정 삭제
+// export const DelLyrics = async (post_pk) => {
+//   try {
+//     const response = await axiosInstance.delete(`/posts/${post_pk}/`);
+
+//     return Promise.resolve(response.data);
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };

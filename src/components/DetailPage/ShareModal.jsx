@@ -1,20 +1,36 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
-const ShareModal = ({ share, setShare }) => {
+const ShareModal = ({ share, setShare, data }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleCopyClipBoard = async () => {
+    const textToCopy = `http://whatdoyousing.com${location.pathname}`;
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      alert("클립보드에 링크가 복사되었어요.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendImgData = () => {
+    const imgData = { data: data };
+    navigate("/save", { state: imgData });
+  };
 
   return (
     <Container>
       <Title>공유하기</Title>
       <UrlDiv>
-        <Url>https://youtu.be/nzwA9UpGl1k?si=jpFs03IVG5BUWCh5</Url>
-        <Btn>복사</Btn>
+        <Url>{`http://whatdoyousing.com${location.pathname}`}</Url>
+        <Btn onClick={handleCopyClipBoard}>복사</Btn>
       </UrlDiv>
-      <ImgDiv onClick={() => navigate("/save")}>
+      <ImgDiv onClick={sendImgData}>
         <SaveImg>이미지로 저장하기</SaveImg>
         <SvgDiv>
           <Save width={16} height={16} />

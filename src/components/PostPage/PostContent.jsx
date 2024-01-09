@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
+import { LyricState } from "../../assets/recoil/apiRecoil";
+import { useSetRecoilState } from "recoil";
 
 const PostContent = (props) => {
+  const setPostForm = useSetRecoilState(LyricState);
+
   //글자수
   const [lyricCount, setLyricCount] = useState(0);
   const [detailCount, setDetailCount] = useState(0);
@@ -14,6 +18,7 @@ const PostContent = (props) => {
   const [detail, setDetail] = useState("");
   const [song, setSong] = useState("");
   const [singer, setSinger] = useState("");
+  const [link, setLink] = useState("");
 
   const handleEmotionSelect = (selectedEmotion) => {
     setEmotion(selectedEmotion);
@@ -28,25 +33,45 @@ const PostContent = (props) => {
 
   const handleLyricChange = (e) => {
     const inputText = e.target.value;
-    const sanitizedText = inputText.replace(/\s/g, "");
     const maxLength = 60;
 
-    setLyric(sanitizedText.slice(0, maxLength));
+    setLyric(inputText.slice(0, maxLength));
     setLyricCount(
-      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+      inputText.replace(/\s/g, "").length > maxLength
+        ? maxLength
+        : inputText.replace(/\s/g, "").length
     );
   };
 
   const handleDetailChange = (e) => {
     const inputText = e.target.value;
-    const sanitizedText = inputText.replace(/\s/g, "");
     const maxLength = 150;
 
-    setDetail(sanitizedText.slice(0, maxLength));
+    setDetail(inputText.slice(0, maxLength));
     setDetailCount(
-      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+      inputText.replace(/\s/g, "").length > maxLength
+        ? maxLength
+        : inputText.replace(/\s/g, "").length
     );
   };
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setPostForm({
+        lyrics: lyric,
+        content: detail,
+        title: song,
+        singer: singer,
+        link: link,
+        sings_emotion: emotion,
+      });
+      console.log("update");
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [lyric, detail, song, singer, link, emotion]);
 
   return (
     <div>
@@ -146,7 +171,11 @@ const PostContent = (props) => {
           </span>
         </Title>
         <Source style={{ marginBottom: "8.3rem" }}>
-          <input placeholder="노래를 들을 수 있는 링크를 남겨주세요!" />
+          <input
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="노래를 들을 수 있는 링크를 남겨주세요!"
+          />
         </Source>
       </Wrapper>
     </div>

@@ -64,6 +64,19 @@ export const MyEmotionState = atom({
   default: 0,
 });
 
+
+export const LyricState = atom({
+  key: "LyricState",
+  default: {
+    lyrics: "",
+    content: "",
+    title: "",
+    singer: "",
+    link: "",
+    sings_emotion: "",
+  },
+});
+
 export const SelectEmotionState = atom({
   key: "SelectEmotionState",
   default: "",
