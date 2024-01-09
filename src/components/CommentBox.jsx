@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // import Reply from "../BottomSheet/Reply";
 import profile from "../images/profile.svg";
@@ -9,19 +10,27 @@ import Reply from "./Reply";
 
 import { DelComment, PostCommentLike } from "../apis/comment";
 import { useRecoilValue } from "recoil";
-import { userProfileSelector } from "../assets/recoil/recoil";
+import { profileListAtom } from "../assets/recoil/recoil";
 
-const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
+const CommentBox = ({
+  content,
+  onReply,
+  render,
+  setRender,
+  isActive,
+  showReply = true,
+}) => {
+  const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(false);
   // const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
   const [addReply, setAddReply] = useState(false);
+  const profiles = useRecoilValue(profileListAtom);
 
   // 로그인 여부 확인 및 현재 사용자 정보 가져오기
   const isLoggedIn = !!localStorage.getItem("token");
-  const currentUserNickname = localStorage.getItem("userNickname");
+  const currentUserID = +localStorage.getItem("user_id");
   // 작성자와 현재 사용자를 비교하여 삭제 버튼 표시 여부 결정
-  const showDeleteButton =
-    isLoggedIn && currentUserNickname === content.author_nickname;
+  const showDeleteButton = isLoggedIn && currentUserID === content.author;
 
   const handleLike = () => {
     const PostComLike = async (comment_pk, liked) => {
@@ -31,7 +40,6 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
     };
     PostComLike(content.comment_id, isLiked);
     setIsLiked(!isLiked);
-    console.log(isLiked);
     // setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
@@ -45,9 +53,6 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
     }
   };
 
-  //프로필 정보 가져오기
-  // const userProfile = useRecoilValue(userProfileSelector({ author }));
-
   //댓글 삭제
   const handleDelete = () => {
     const DelComData = async (comment_pk) => {
@@ -55,19 +60,31 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
       setRender(render + 1);
       console.log(response);
     };
-    // console.log(content.comment_id);
-    // console.log("삭제 성공");
     DelComData(content.comment_id);
+  };
+
+  const handleNavigate = () => {
+    if (!showReply) {
+      if (content.post === null) {
+        alert("해당 게시글은 삭제되었습니다!");
+      } else {
+        navigate(`/detail/${content.post}`);
+      }
+    }
   };
 
   return (
     <>
       <Background
+        onClick={handleNavigate}
         style={{ backgroundColor: isActive ? "#FFF5F5" : "var(--white)" }}
       >
         <Container>
           <ProfileContainer>
-            <img src={`${profile}`} alt="profileimg"></img>
+            <img
+              src={profiles[content.author_profile - 1]?.none_filled}
+              alt="profileimg"
+            ></img>
           </ProfileContainer>
           <ContentContainer>
             <Id>{content.author_nickname}</Id>
@@ -85,16 +102,25 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
               >
                 {content.likes_count}
               </Count>
-              <span>·</span>
-              <AddReply
-                onClick={() => {
-                  handleReply();
-                }}
-              >
-                답글달기
-              </AddReply>
-              <span>·</span>
-              <div onClick={handleDelete}>삭제하기</div>
+              {showReply && (
+                <>
+                  <span>·</span>
+                  <AddReply
+                    onClick={() => {
+                      handleReply();
+                    }}
+                  >
+                    답글달기
+                  </AddReply>
+                </>
+              )}
+
+              {showDeleteButton && (
+                <>
+                  <span>·</span>
+                  <div onClick={handleDelete}>삭제하기</div>
+                </>
+              )}
             </Plus>
             {content.recomments_count > 0 && (
               <Replies>
@@ -130,15 +156,17 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  width: 44px;
-  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
+  background-color: var(--lightGray);
 
   img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 21px;
+    height: 21px;
   }
 `;
 

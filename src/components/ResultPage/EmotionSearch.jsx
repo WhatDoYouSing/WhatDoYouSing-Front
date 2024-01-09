@@ -4,22 +4,26 @@ import React, { useState, useRef } from "react";
 import EmotionChipWithNum from "../DetailPage/EmotionChipWithNum";
 
 //recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
+import { MyEmotionState } from "../../assets/recoil/apiRecoil";
 
 const EmotionSearch = () => {
   const emotions = useRecoilValue(emotionListAtom);
+  const setSelectedMyEmotion = useSetRecoilState(MyEmotionState);
+  const selectedMyEmotion = useRecoilValue(MyEmotionState);
 
-  const [selectedChip, setSelectedChip] = useState({
-    index: null,
-  });
+  const [selectedChip, setSelectedChip] = useState(0); // 객체가 아닌 숫자로 상태 설정
 
   const handleChipClick = (index) => {
-    setSelectedChip((prevSelectedChip) => ({
-      index: prevSelectedChip.index === index ? null : index,
-    }));
+    setSelectedChip((prevSelectedChip) =>
+      prevSelectedChip === index ? null : index
+    );
+    setSelectedMyEmotion((prevSelectedChip) =>
+      prevSelectedChip === index ? null : index
+    );
   };
-
+  console.log(selectedMyEmotion);
   return (
     <>
       <Emotions>
@@ -28,7 +32,7 @@ const EmotionSearch = () => {
             key={index}
             text={emotion.text}
             src={emotion.src}
-            isSelected={selectedChip.index === index}
+            isSelected={selectedChip === index}
             onClick={() => handleChipClick(index)}
           />
         ))}
