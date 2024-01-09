@@ -243,7 +243,7 @@ const SignupPage = () => {
         </Guide>
         <Input
           type="text"
-          placeholder="창밖을보라에서 사용할 닉네임을 입력해 주세요."
+          placeholder="예 : lyrics"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           onFocus={() => setNicknameFocused(true)}

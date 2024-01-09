@@ -21,11 +21,11 @@ const UserModifyIntroPage = () => {
   const handleNavigate = async () => {
     const isChecked = await PostCheckPassword(password);
     console.log(password, isChecked);
-    if (isChecked["access"] && type.id === "pas") {
+    if (isChecked && type.id === "pas") {
       navigate("/pas-modify");
-    } else if (isChecked["access"] && type.id === "nic") {
+    } else if (isChecked && type.id === "nic") {
       navigate("/nic-modify");
-    } else if (!isChecked["access"]) {
+    } else if (!isChecked) {
       alert("비밀번호를 다시 확인해주세요.");
     } else {
       alert("오류 발생!ㅠ.ㅠ");

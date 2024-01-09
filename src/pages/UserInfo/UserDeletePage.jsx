@@ -21,9 +21,8 @@ const UserDeletePage = () => {
       alert("비밀번호를 입력해주세요.");
     } else {
       setPassword(password.trim());
-      const result = await DelAccount(password);
+      const result = await DelAccount(password, navigate);
       console.log(result);
-      navigate("/");
     }
   };
 

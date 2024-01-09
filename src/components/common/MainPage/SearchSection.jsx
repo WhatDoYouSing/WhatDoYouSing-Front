@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as BasicSmile } from "../../../images/basic-smile.svg";
+import comments from "../../../images/comments.svg";
+import lastest from "../../../images/latest.svg";
 
 //components
 import EmotionList from "../EmotionList";
 
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { SearchDropdownState } from "../../../assets/recoil/apiRecoil";
+
 const SearchSection = () => {
+  const navigate = useNavigate();
+  const setSelectOption = useSetRecoilState(SearchDropdownState);
+
+  const moveSearchLatest = () => {
+    setSelectOption("최신순");
+    navigate("/result");
+  };
+
+  const moveSearchComm = () => {
+    setSelectOption("댓글순");
+    navigate("/result");
+  };
+
   return (
     <Wrapper>
       <SectionDiv>
@@ -17,15 +36,15 @@ const SearchSection = () => {
         <SectionDiv>
           <TopDiv>다른 방식으로 검색</TopDiv>
           <SearchDiv>
-            <SearchItem>
+            <SearchItem onClick={moveSearchLatest}>
               <ImgDiv>
-                <BasicSmile />
+                <Img src={comments} />
               </ImgDiv>
               최신순
             </SearchItem>
-            <SearchItem>
+            <SearchItem onClick={moveSearchComm}>
               <ImgDiv>
-                <BasicSmile />
+                <Img src={lastest} />
               </ImgDiv>
               댓글순
             </SearchItem>
@@ -95,6 +114,8 @@ const ImgDiv = styled.div`
   width: 1.6rem;
   height: 1.6rem;
 `;
+
+const Img = styled.img``;
 
 const AD = styled.div`
   display: flex;

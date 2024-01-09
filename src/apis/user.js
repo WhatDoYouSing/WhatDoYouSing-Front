@@ -136,12 +136,18 @@ export const PatchPassword = async (new_password) => {
 
 //DELETE
 // DELETE : 회원 탈퇴
-export const DelAccount = async (password) => {
+export const DelAccount = async (password, navigate) => {
   try {
     const response = await axiosInstance.post("/accounts/delete/", {
       password: password,
     });
     console.log(response.data);
+    window.localStorage.removeItem("user_id");
+    window.localStorage.removeItem("username");
+    window.localStorage.removeItem("nickname");
+    window.localStorage.removeItem("user_profile");
+    window.localStorage.removeItem("token");
+    navigate("/");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
