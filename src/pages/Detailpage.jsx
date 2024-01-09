@@ -59,6 +59,7 @@ const Detailpage = () => {
           setDeletePost={setDeletePost}
           reportPost={reportPost}
           setReportPost={setReportPost}
+          postId={postid}
         />
         <LyricWithWriter lyricContent={thisData} />
         <GotoSong lyricContent={thisData} disabled={isListenBtnDisabled} />
@@ -71,6 +72,7 @@ const Detailpage = () => {
             ref={deleteModalRef}
             deletePost={deletePost}
             setDeletePost={setDeletePost}
+            postId={postid}
           />
         </ModalWrapper>
       )}

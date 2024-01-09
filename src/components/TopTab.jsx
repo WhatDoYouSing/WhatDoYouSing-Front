@@ -11,6 +11,8 @@ import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
+import { PostScrap, PostCancelScrap } from "../apis/archieve";
+
 const TopTab = ({
   share,
   setShare,
@@ -18,6 +20,7 @@ const TopTab = ({
   setDeletePost,
   reportPost,
   setReportPost,
+  postId,
 }) => {
   const navigate = useNavigate();
   const goBack = () => {
@@ -28,9 +31,22 @@ const TopTab = ({
     setShare(!share);
   };
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(
+    localStorage.getItem("isBookmarked") === "true"
+  );
+  useEffect(() => {
+    localStorage.setItem("isBookmarked", isBookmarked);
+  }, [isBookmarked]);
+
   const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
+    if (localStorage.getItem("token")) {
+      const Scrap = async (postId) => {
+        const response = await PostScrap(postId);
+        setIsBookmarked(!isBookmarked);
+        console.log(response);
+      };
+      Scrap(postId);
+    }
   };
 
   //외부 클릭시 닫힘
