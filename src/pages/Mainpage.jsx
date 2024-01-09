@@ -15,46 +15,48 @@ import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
 
 //recoil
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { LikeListState, LankingListState } from "../assets/recoil/apiRecoil";
+import {
+  LikeListState,
+  LankingListState,
+  DropdownState,
+} from "../assets/recoil/apiRecoil";
 
 const MainPage = () => {
   const setLikeList = useSetRecoilState(LikeListState);
   const setLankingList = useSetRecoilState(LankingListState);
-  const likeList = useRecoilValue(LikeListState);
+
+  const selectedOption = useRecoilValue(DropdownState);
 
   useEffect(() => {
-    const handleInfo = async () => {
-      const sortedLatestList = await GetSortLatest();
-      const sortedLikeList = await GetSortLike();
-      const sortedComeList = await GetSortCom();
-      setLikeList(sortedLatestList.data.Likes);
-      setLankingList(sortedLatestList.data.LankingList);
+    const handleClick = async () => {
+      console.log(selectedOption);
+      switch (selectedOption) {
+        case "최신순":
+          const sortedLatestList = await GetSortLatest();
+          setLikeList(sortedLatestList.data.Likes);
+          setLankingList(sortedLatestList.data.LankingList);
+          break;
+        case "좋아요순":
+          const sortedLikeList = await GetSortLike();
+          setLikeList(sortedLikeList.data.Likes);
+          setLankingList(sortedLikeList.data.LankingList);
+          break;
+        case "댓글순":
+          const sortedComeList = await GetSortCom();
+          setLikeList(sortedComeList.data.Likes);
+          setLankingList(sortedComeList.data.LankingList);
+          break;
+
+        default:
+          const defComeList = await GetSortCom();
+          setLikeList(defComeList.data.Likes);
+          setLankingList(defComeList.data.LankingList);
+      }
     };
 
-    handleInfo();
-    console.log(likeList);
-  }, []);
-
-  // const handleClick = async () => {
-  //   switch (selectedOption) {
-  //     case "최신순":
-  //       const sortedLatestList = await GetSortLatest();
-  //       setChartList(sortedLatestList);
-  //       break;
-  //     case "좋아요 순":
-  //       const sortedLikeList = await GetSortLike();
-  //       setChartList(sortedLikeList);
-  //       break;
-  //     case "댓글순":
-  //       const sortedComeList = await GetSortCom();
-  //       setChartList(sortedComeList);
-  //       break;
-
-  //     default:
-  //       const defComeList = await GetSortCom();
-  //       setChartList(defComeList);
-  //   }
-  // };
+    handleClick();
+    console.log(selectedOption);
+  }, [selectedOption]);
 
   return (
     <>

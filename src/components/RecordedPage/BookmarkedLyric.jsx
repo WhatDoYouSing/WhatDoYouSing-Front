@@ -1,15 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LyricsItem from "../common/LyricsItem";
+import Pagination from "../Pagination";
+
+//api
+import { GetMyLyrics } from "../../apis/my";
 
 const BookmarkedLyric = () => {
-  const lyricItems = Array.from({ length: 10 });
+  const [bookmarkedList, setBookmarkedList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [totalPage, setTotalPage] = useState(1); // 전체 페이지
+
+  useEffect(() => {
+    const handleClick = async (currentPage) => {
+      const savedList = await GetMyLyrics(currentPage);
+      setBookmarkedList(savedList["내가 작성한 게시물"]);
+
+      setCurrentPage(savedList.current_page);
+      setTotalPage(savedList.total_page);
+    };
+
+    handleClick(currentPage);
+  }, [currentPage]);
+
   return (
     <div>
       <Wrapper>
-        {lyricItems.map((id) => (
-          <LyricsItem showComment={true} showChip={true} />
-        ))}
+        <LyricsWrapper>
+          {bookmarkedList.map((item) => (
+            <LyricsItem
+              showComment={true}
+              showChip={true}
+              key={item.id}
+              id={item.id}
+              emotion={item.sings_emotion}
+              likes={item.likes_count}
+              lyrics={item.lyrics}
+              content={item.content}
+              title={item.title}
+              singer={item.singer}
+            />
+          ))}
+        </LyricsWrapper>
+        <Pagination
+          total={totalPage}
+          page={currentPage}
+          setPage={setCurrentPage}
+        />
       </Wrapper>
     </div>
   );
@@ -21,8 +58,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LyricsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   align-self: stretch;
   gap: 4rem;
 `;

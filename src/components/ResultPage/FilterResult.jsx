@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 //components
-import Footer from "../common/Footer";
+
 import LyricsItem from "../common/LyricsItem";
 import DropDownBox from "../common/DropDownBox";
 
@@ -16,7 +16,7 @@ const FilterResult = () => {
       <Wrapper>
         <TopDiv>
           <div className="count">{result.length}개의 가사를 찾았어요!</div>
-          <DropDownBox />
+          <DropDownBox isSearch={true} />
         </TopDiv>
         {result.length === 0 ? (
           <NoneDiv>
@@ -28,7 +28,6 @@ const FilterResult = () => {
           </NoneDiv>
         ) : null}
       </Wrapper>
-      <Footer />
     </>
   );
 };
@@ -38,8 +37,6 @@ export default FilterResult;
 const Wrapper = styled.section`
   margin-top: 0.5rem;
   height: auto;
-  padding-bottom: 15.8rem;
-  min-height: 100%;
 `;
 
 const TopDiv = styled.div`

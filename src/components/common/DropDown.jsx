@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const options = ["최신순", "좋아요 순", "댓글순"];
+const options = ["최신순", "좋아요순", "댓글순"];
 
 const DropDown = ({ selectedOption, handleSelect }) => {
   return (

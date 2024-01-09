@@ -260,6 +260,7 @@ const ActionEx = styled(Action)`
 const IDDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   span {
     max-width: 17.1rem;
