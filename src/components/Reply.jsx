@@ -5,13 +5,25 @@ import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-const Reply = ({ replyContent }) => {
+import { DelReply } from "../apis/comment";
+
+const Reply = ({ replyContent, render, setRender }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(replyContent.relikes_count || 0);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+  };
+
+  //답댓글 삭제
+  const handleDeleteRe = () => {
+    const DelReData = async (recomment_pk) => {
+      const response = await DelReply(recomment_pk);
+      setRender(render + 1);
+      console.log(response);
+    };
+    DelReData(replyContent.recomment_id);
   };
 
   return (
@@ -35,6 +47,8 @@ const Reply = ({ replyContent }) => {
             >
               {replyContent.relikes_count}
             </Count>
+            <span>·</span>
+            <div onClick={handleDeleteRe}>삭제하기</div>
           </Plus>
         </ContentContainer>
       </Container>
