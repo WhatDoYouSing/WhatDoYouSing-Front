@@ -30,7 +30,7 @@ const SearchSection = () => {
     <Wrapper>
       <SectionDiv>
         <TopDiv>감정별 검색</TopDiv>
-        <EmotionList />
+        <EmotionList isSearch={true} />
       </SectionDiv>
       <Grid>
         <SectionDiv>

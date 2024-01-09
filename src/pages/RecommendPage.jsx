@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //components
@@ -7,8 +7,20 @@ import Topbar from "../components/common/MainPage/Topbar";
 
 import { ReactComponent as Reload } from "../images/reload.svg";
 
+//api
+import { GetRecommend } from "../apis/main";
+
 const RecommendPage = () => {
   const chartItems = Array.from({ length: 3 }, (_, index) => index + 1);
+
+  useEffect(() => {
+    const handleClick = async () => {
+      const savedList = await GetRecommend();
+      console.log(savedList);
+    };
+
+    handleClick();
+  }, []);
 
   return (
     <>

@@ -5,8 +5,33 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Back } from "../../images/back.svg";
 import { ReactComponent as Search } from "../../images/search.svg";
 
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { KeywordState } from "../../assets/recoil/apiRecoil";
+
 const ResultTopbar = () => {
   const navigate = useNavigate();
+  const setSearchKeyword = useSetRecoilState(KeywordState);
+  const searchKeyword = useSetRecoilState(KeywordState);
+
+  const [keyword, setKeyword] = useState("");
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  useEffect(() => {
+    if (isInputFocused) {
+      const delayTimer = setTimeout(() => {
+        // 입력이 0.5초 동안 멈추면 작업 수행
+        setSearchKeyword(keyword);
+      }, 500);
+
+      // cleanup 함수
+      return () => clearTimeout(delayTimer);
+    }
+  }, [keyword]);
+
+  // useEffect(() => {
+  //   setKeyword(searchKeyword);
+  // }, []);
 
   return (
     <>
@@ -16,7 +41,12 @@ const ResultTopbar = () => {
             navigate(-1);
           }}
         />
-        <input placeholder="가사를 검색해보세요!" />
+        <input
+          placeholder="가사를 검색해보세요!"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          onFocus={() => setIsInputFocused(true)}
+        />
         <Search />
       </Wrapper>
     </>
