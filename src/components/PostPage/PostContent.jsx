@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
+import { LyricState } from "../../assets/recoil/apiRecoil";
+import { useSetRecoilState } from "recoil";
 
 const PostContent = (props) => {
+  const setPostForm = useSetRecoilState(LyricState);
+
   //글자수
   const [lyricCount, setLyricCount] = useState(0);
   const [detailCount, setDetailCount] = useState(0);
@@ -28,23 +32,25 @@ const PostContent = (props) => {
 
   const handleLyricChange = (e) => {
     const inputText = e.target.value;
-    const sanitizedText = inputText.replace(/\s/g, "");
     const maxLength = 60;
 
-    setLyric(sanitizedText.slice(0, maxLength));
+    setLyric(inputText.slice(0, maxLength));
     setLyricCount(
-      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+      inputText.replace(/\s/g, "").length > maxLength
+        ? maxLength
+        : inputText.replace(/\s/g, "").length
     );
   };
 
   const handleDetailChange = (e) => {
     const inputText = e.target.value;
-    const sanitizedText = inputText.replace(/\s/g, "");
     const maxLength = 150;
 
-    setDetail(sanitizedText.slice(0, maxLength));
+    setDetail(inputText.slice(0, maxLength));
     setDetailCount(
-      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+      inputText.replace(/\s/g, "").length > maxLength
+        ? maxLength
+        : inputText.replace(/\s/g, "").length
     );
   };
 
