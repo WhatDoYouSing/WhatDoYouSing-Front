@@ -13,7 +13,6 @@ import { useRecoilValue } from "recoil";
 import { MyEmotionState } from "../../assets/recoil/apiRecoil";
 
 const BookmarkedEmotion = () => {
-  const lyricItems = Array.from({ length: 10 });
   const [bookmarkedList, setBookmarkedList] = useState([]);
   const emotionState = useRecoilValue(MyEmotionState);
 

@@ -7,27 +7,38 @@ import EmotionChipWithNum from "../DetailPage/EmotionChipWithNum";
 //recoil
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
-import { MyEmotionState } from "../../assets/recoil/apiRecoil";
+import {
+  MyEmotionState,
+  SelectEmotionState,
+} from "../../assets/recoil/apiRecoil";
 
 const EmotionSearch = () => {
   const emotions = useRecoilValue(emotionListAtom);
+
+  const selectedMyEmotion = useRecoilValue(MyEmotionState); //my 검색 결과로 떴을 때
+  const selectedSearchEmotion = useRecoilValue(SelectEmotionState);
+
   const setSelectedMyEmotion = useSetRecoilState(MyEmotionState);
-  const selectedMyEmotion = useRecoilValue(MyEmotionState);
+  const setSelectedSearchEmotion = useSetRecoilState(SelectEmotionState);
 
   const location = useLocation();
   const isResultPage = location.pathname === "/result";
 
-  const [selectedChip, setSelectedChip] = useState(isResultPage ? null : 0);
+  const [selectedChip, setSelectedChip] = useState(
+    isResultPage ? selectedSearchEmotion : 0
+  );
 
   const handleChipClick = (index) => {
     setSelectedChip((prevSelectedChip) =>
       prevSelectedChip === index ? null : index
     );
-    setSelectedMyEmotion((prevSelectedChip) =>
-      prevSelectedChip === index ? null : index
-    );
+    setSelectedMyEmotion(index);
+
+    if (isResultPage) {
+      setSelectedSearchEmotion(index);
+    }
   };
-  console.log(selectedMyEmotion);
+  console.log(selectedMyEmotion, selectedSearchEmotion);
   return (
     <>
       <Emotions>

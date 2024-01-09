@@ -29,7 +29,6 @@ const MainPage = () => {
 
   useEffect(() => {
     const handleClick = async () => {
-      console.log(selectedOption);
       switch (selectedOption) {
         case "최신순":
           const sortedLatestList = await GetSortLatest();
@@ -55,7 +54,6 @@ const MainPage = () => {
     };
 
     handleClick();
-    console.log(selectedOption);
   }, [selectedOption]);
 
   return (

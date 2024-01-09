@@ -18,6 +18,11 @@ export const ProfileState = atom({
   default: null,
 });
 
+export const PasCheckState = atom({
+  key: "PasCheckState",
+  default: null,
+});
+
 export const PasModifyState = atom({
   key: "PasModifyState",
   default: null,
@@ -58,3 +63,13 @@ export const MyEmotionState = atom({
   key: "MyEmotionState",
   default: 0,
 });
+
+export const SelectEmotionState = atom({
+  key: "SelectEmotionState",
+  default: "",
+}); //감정칩으로 검색 들어갔을 때
+
+export const KeywordState = atom({
+  key: "KeywordState",
+  default: "",
+}); //검색 키워드

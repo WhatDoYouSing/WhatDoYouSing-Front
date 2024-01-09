@@ -1,15 +1,13 @@
 import { axiosInstance } from "../apis/http";
 
 // GET : 가사 검색 최신순 정렬
-export const GetSearchLyricsLatest = async (
-  searchKeyword,
-  searchEmo,
-  searchPage
-) => {
+export const GetSearchLatest = async (searchKeyword, searchEmo, searchPage) => {
   try {
     const response = await axiosInstance.get(
       `/sings/searchlatest/?keyword=${searchKeyword}&emo=${searchEmo}&page=${searchPage}`
     );
+
+    console.log(response.data);
 
     return Promise.resolve(response);
   } catch (error) {
@@ -18,15 +16,12 @@ export const GetSearchLyricsLatest = async (
 };
 
 // GET : 가사 검색 좋아요순 정렬
-export const GetSearchLyricsLike = async (
-  searchKeyword,
-  searchEmo,
-  searchPage
-) => {
+export const GetSearchLike = async (searchKeyword, searchEmo, searchPage) => {
   try {
     const response = await axiosInstance.get(
       `/sings/searchlikes/?keyword=${searchKeyword}&emo=${searchEmo}&page=${searchPage}`
     );
+    console.log(response.data);
 
     return Promise.resolve(response);
   } catch (error) {
@@ -35,15 +30,12 @@ export const GetSearchLyricsLike = async (
 };
 
 // GET : 가사 검색 댓글순 정렬
-export const GetSearchLyricsCom = async (
-  searchKeyword,
-  searchEmo,
-  searchPage
-) => {
+export const GetSearchCom = async (searchKeyword, searchEmo, searchPage) => {
   try {
     const response = await axiosInstance.get(
       `/sings/searchcomments/?keyword=${searchKeyword}&emo=${searchEmo}&page=${searchPage}`
     );
+    console.log(response.data);
 
     return Promise.resolve(response);
   } catch (error) {
