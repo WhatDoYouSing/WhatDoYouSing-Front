@@ -7,13 +7,13 @@ import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 import Reply from "./Reply";
 
-import { DelComment } from "../apis/comment";
+import { DelComment, PostCommentLike } from "../apis/comment";
 import { useRecoilValue } from "recoil";
 import { userProfileSelector } from "../assets/recoil/recoil";
 
 const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+  // const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
   const [addReply, setAddReply] = useState(false);
 
   // 로그인 여부 확인 및 현재 사용자 정보 가져오기
@@ -24,8 +24,15 @@ const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
     isLoggedIn && currentUserNickname === content.author_nickname;
 
   const handleLike = () => {
+    const PostComLike = async (comment_pk, liked) => {
+      const response = await PostCommentLike(comment_pk, liked);
+      setRender(render + 1);
+      console.log(response);
+    };
+    PostComLike(content.comment_id, isLiked);
     setIsLiked(!isLiked);
-    setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+    console.log(isLiked);
+    // setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
   const handleReply = () => {

@@ -11,7 +11,7 @@ export const GetLyricsList = async () => {
   }
 };
 
-// POST : 아이디 중복 확인
+// POST : 가사 업로드
 export const PostLyrics = async (
   lyrics,
   content,
@@ -39,11 +39,11 @@ export const PostLyrics = async (
 // DELETE : 가사 삭제
 export const DelLyrics = async (pk) => {
   try {
-    const response = await axiosInstance.delete(`/posts/${pk}/`, {
+    const response = await axiosInstance.delete(`/posts/del/${pk}/`, {
       pk: pk,
     });
 
-    return Promise.resolve(response.data);
+    return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error);
   }

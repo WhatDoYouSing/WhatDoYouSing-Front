@@ -1,10 +1,21 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
+import { DelLyrics } from "../apis/lyrics";
 
 //게시글 삭제 모달
-const DeletePostModal = ({ deletePost, setDeletePost }) => {
+const DeletePostModal = ({ deletePost, setDeletePost, postId }) => {
+  const navigate = useNavigate();
+
   const handleClickDel = () => {
-    setDeletePost(!deletePost); //모달 닫기
+    const DelLyricData = async (postId) => {
+      const response = await DelLyrics(postId);
+      console.log(response);
+      setDeletePost(!deletePost); //모달 닫기
+      navigate("/"); //메인페이지로 이동
+      console.log("가사삭제성공");
+    };
+    DelLyricData(postId);
   };
 
   return (

@@ -72,6 +72,7 @@ const Detailpage = () => {
             ref={deleteModalRef}
             deletePost={deletePost}
             setDeletePost={setDeletePost}
+            postId={postid}
           />
         </ModalWrapper>
       )}

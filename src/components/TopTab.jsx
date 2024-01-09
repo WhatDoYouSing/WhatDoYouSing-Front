@@ -31,7 +31,13 @@ const TopTab = ({
     setShare(!share);
   };
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(
+    localStorage.getItem("isBookmarked") === "true"
+  );
+  useEffect(() => {
+    localStorage.setItem("isBookmarked", isBookmarked);
+  }, [isBookmarked]);
+
   const handleBookmark = () => {
     if (localStorage.getItem("token")) {
       const Scrap = async (postId) => {
