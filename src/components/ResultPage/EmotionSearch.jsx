@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import React, { useState, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import EmotionChipWithNum from "../DetailPage/EmotionChipWithNum";
 
@@ -13,7 +14,10 @@ const EmotionSearch = () => {
   const setSelectedMyEmotion = useSetRecoilState(MyEmotionState);
   const selectedMyEmotion = useRecoilValue(MyEmotionState);
 
-  const [selectedChip, setSelectedChip] = useState(0); // 객체가 아닌 숫자로 상태 설정
+  const location = useLocation();
+  const isResultPage = location.pathname === "/result";
+
+  const [selectedChip, setSelectedChip] = useState(isResultPage ? null : 0);
 
   const handleChipClick = (index) => {
     setSelectedChip((prevSelectedChip) =>

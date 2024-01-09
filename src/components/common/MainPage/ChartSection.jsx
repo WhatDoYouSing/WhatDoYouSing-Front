@@ -90,13 +90,14 @@ const ChartDiv = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 20%;
   gap: 2rem;
 `;
 
 const ChartItem = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  /* align-items: flex-start;
+  justify-content: flex-end; */
 
   width: 100%;
 
