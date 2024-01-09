@@ -67,7 +67,7 @@ const Navigate = styled.div``;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.showComment ? "100%" : "74%")};
+  width: ${(props) => (props.showComment ? "100%" : "100%")};
 `;
 
 const LikeDiv = styled.div`
