@@ -21,6 +21,9 @@ const TopTab = ({
   reportPost,
   setReportPost,
   postId,
+  render,
+  setRender,
+  thisData,
 }) => {
   const navigate = useNavigate();
   const goBack = () => {
@@ -31,12 +34,11 @@ const TopTab = ({
     setShare(!share);
   };
 
-  const [isBookmarked, setIsBookmarked] = useState(
-    localStorage.getItem("isBookmarked") === "true"
-  );
+  const [isBookmarked, setIsBookmarked] = useState();
   useEffect(() => {
-    localStorage.setItem("isBookmarked", isBookmarked);
-  }, [isBookmarked]);
+    setIsBookmarked(thisData.scrap);
+    console.log(thisData.scrap);
+  }, [render]);
 
   const handleBookmark = () => {
     if (localStorage.getItem("token")) {

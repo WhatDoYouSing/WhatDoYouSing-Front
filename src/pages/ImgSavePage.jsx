@@ -14,6 +14,7 @@ const ImgSavePage = () => {
   const captureRef = useRef(null);
 
   const data = location.state?.data;
+  // console.log("감정id: ", data.sings_emotion);
 
   const handleCapture = () => {
     html2canvas(captureRef.current, { scale: 4 });
