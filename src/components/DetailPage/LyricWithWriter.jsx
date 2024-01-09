@@ -7,7 +7,7 @@ import EmotionChip from "../common/EmotionChip";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-const LyricWithWriter = () => {
+const LyricWithWriter = ({ lyricContent }) => {
   const emotions = useRecoilValue(emotionListAtom);
   return (
     <Wrapper>
@@ -19,16 +19,10 @@ const LyricWithWriter = () => {
           src={emotions[0].src}
         />
       </ProfileWrapper>
-      <TitleLyrics>
-        이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아 우린
-        여기 서있고 지울 수 없을거야
-      </TitleLyrics>
+      <TitleLyrics>{lyricContent.lyrics}</TitleLyrics>
 
-      <LyricsComment>
-        이 순간을 기억하고, 우리가 함께했음을 기억하고, 또 우리는 가리려해도
-        절대 가려지지 않는 존재들임을 기억하자!
-      </LyricsComment>
-      <Writer>by.Zimni</Writer>
+      <LyricsComment>{lyricContent.content}</LyricsComment>
+      <Writer>{lyricContent.author_nickname}</Writer>
     </Wrapper>
   );
 };

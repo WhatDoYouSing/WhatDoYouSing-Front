@@ -5,34 +5,74 @@ import styled, { css } from "styled-components";
 import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
+import Reply from "./Reply";
 
-const CommentBox = ({ content, onReply }) => {
+import { DelComment, PostCommentLike } from "../apis/comment";
+import { useRecoilValue } from "recoil";
+import { userProfileSelector } from "../assets/recoil/recoil";
+
+const CommentBox = ({ content, onReply, render, setRender, isActive }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+  // const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
+  const [addReply, setAddReply] = useState(false);
+
+  // 로그인 여부 확인 및 현재 사용자 정보 가져오기
+  const isLoggedIn = !!localStorage.getItem("token");
+  const currentUserNickname = localStorage.getItem("userNickname");
+  // 작성자와 현재 사용자를 비교하여 삭제 버튼 표시 여부 결정
+  const showDeleteButton =
+    isLoggedIn && currentUserNickname === content.author_nickname;
 
   const handleLike = () => {
+    const PostComLike = async (comment_pk, liked) => {
+      const response = await PostCommentLike(comment_pk, liked);
+      setRender(render + 1);
+      console.log(response);
+    };
+    PostComLike(content.comment_id, isLiked);
     setIsLiked(!isLiked);
-    setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+    console.log(isLiked);
+    // setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
-  const [addReply, setAddReply] = useState(false);
   const handleReply = () => {
-    setAddReply(!addReply);
-    onReply();
+    if (isActive) {
+      setAddReply(!addReply);
+      onReply(content.comment_id);
+    } else {
+      setAddReply(true);
+      onReply(content.comment_id);
+    }
+  };
+
+  //프로필 정보 가져오기
+  // const userProfile = useRecoilValue(userProfileSelector({ author }));
+
+  //댓글 삭제
+  const handleDelete = () => {
+    const DelComData = async (comment_pk) => {
+      const response = await DelComment(comment_pk);
+      setRender(render + 1);
+      console.log(response);
+    };
+    // console.log(content.comment_id);
+    // console.log("삭제 성공");
+    DelComData(content.comment_id);
   };
 
   return (
     <>
       <Background
-        style={{ backgroundColor: addReply ? "#FFF5F5" : "var(--white)" }}
+        style={{ backgroundColor: isActive ? "#FFF5F5" : "var(--white)" }}
       >
         <Container>
           <ProfileContainer>
             <img src={`${profile}`} alt="profileimg"></img>
           </ProfileContainer>
           <ContentContainer>
-            <Id>채오니</Id>
-            <Content>{content}</Content>
+            <Id>{content.author_nickname}</Id>
+            <Content>{content.com_content}</Content>
+
             <Plus>
               <LikeBtn onClick={handleLike}>
                 {isLiked ? <LikeClick /> : <Like />}
@@ -43,7 +83,7 @@ const CommentBox = ({ content, onReply }) => {
                   color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
                 }}
               >
-                {likeCount}
+                {content.likes_count}
               </Count>
               <span>·</span>
               <AddReply
@@ -54,8 +94,20 @@ const CommentBox = ({ content, onReply }) => {
                 답글달기
               </AddReply>
               <span>·</span>
-              <div>삭제하기</div>
+              <div onClick={handleDelete}>삭제하기</div>
             </Plus>
+            {content.recomments_count > 0 && (
+              <Replies>
+                {content.recomments.map((reply) => (
+                  <Reply
+                    key={reply.comment_id}
+                    replyContent={reply}
+                    render={render}
+                    setRender={setRender}
+                  />
+                ))}
+              </Replies>
+            )}
           </ContentContainer>
         </Container>
       </Background>
@@ -74,7 +126,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem;
+  padding: 2.5rem 1.6rem 2.5rem 1.6rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -95,7 +147,6 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  font-family: "Pretendard-Regular";
   font-style: normal;
 `;
 
@@ -107,6 +158,7 @@ const Id = styled.div`
 `;
 
 const Content = styled.div`
+  width: 100%;
   margin-top: 5px;
   margin-bottom: 10px;
   color: var(--veryDarkGray);
@@ -145,6 +197,7 @@ const Plus = styled.div`
 const LikeBtn = styled.div``;
 const Count = styled.div``;
 const AddReply = styled.div``;
+const Replies = styled.div``;
 
 const InputBoxPosition = styled.div`
   z-index: 2;

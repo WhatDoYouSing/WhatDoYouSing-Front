@@ -26,6 +26,28 @@ const PostContent = (props) => {
     props.onBtn(isRequiredFieldsValid);
   }, [lyric, emotion, song, singer]);
 
+  const handleLyricChange = (e) => {
+    const inputText = e.target.value;
+    const sanitizedText = inputText.replace(/\s/g, "");
+    const maxLength = 60;
+
+    setLyric(sanitizedText.slice(0, maxLength));
+    setLyricCount(
+      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+    );
+  };
+
+  const handleDetailChange = (e) => {
+    const inputText = e.target.value;
+    const sanitizedText = inputText.replace(/\s/g, "");
+    const maxLength = 150;
+
+    setDetail(sanitizedText.slice(0, maxLength));
+    setDetailCount(
+      sanitizedText.length > maxLength ? maxLength : sanitizedText.length
+    );
+  };
+
   return (
     <div>
       <Wrapper>
@@ -37,11 +59,16 @@ const PostContent = (props) => {
         </Title>
         <Lyric>
           <textarea
+            // value={lyric}
+            // onChange={(e) => {
+            //   setLyric(e.target.value);
+            //   setLyricCount(e.target.value.replace(/\s/g, "").length);
+            // }}
+            // maxLength={60}
+            // placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
+            // rows={3}
             value={lyric}
-            onChange={(e) => {
-              setLyric(e.target.value);
-              setLyricCount(e.target.value.replace(/\s/g, "").length);
-            }}
+            onChange={handleLyricChange}
             maxLength={60}
             placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
             rows={3}
@@ -71,11 +98,15 @@ const PostContent = (props) => {
         </Title>
         <Detail>
           <textarea
+            // value={detail}
+            // onChange={(e) => {
+            //   setDetail(e.target.value);
+            //   setDetailCount(e.target.value.replace(/\s/g, "").length);
+            // }}
+            // maxLength={150}
+            // placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
             value={detail}
-            onChange={(e) => {
-              setDetail(e.target.value);
-              setDetailCount(e.target.value.replace(/\s/g, "").length);
-            }}
+            onChange={handleDetailChange}
             maxLength={150}
             placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
           ></textarea>
