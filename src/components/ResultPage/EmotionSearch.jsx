@@ -35,7 +35,9 @@ const EmotionSearch = () => {
     setSelectedMyEmotion(index);
 
     if (isResultPage) {
-      setSelectedSearchEmotion(index);
+      setSelectedSearchEmotion((prevSelectedChip) =>
+        prevSelectedChip === index ? "" : index
+      );
     }
   };
   console.log(selectedMyEmotion, selectedSearchEmotion);

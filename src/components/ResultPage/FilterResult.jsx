@@ -76,7 +76,7 @@ const FilterResult = () => {
     };
 
     handleClick(currentPage);
-  }, [selectedOption, selectedEmotion, currentPage]);
+  }, [selectedOption, selectedEmotion, selectedKeyword, currentPage]);
 
   return (
     <>
