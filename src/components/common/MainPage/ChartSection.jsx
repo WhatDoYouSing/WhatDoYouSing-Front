@@ -27,6 +27,7 @@ const ChartSection = () => {
               {index + 1}
               <LyricsItem
                 showComment={false}
+                id={item.id}
                 lyrics={item.lyrics}
                 content={item.content}
                 title={item.title}
@@ -41,6 +42,7 @@ const ChartSection = () => {
               {index + 6}
               <LyricsItem
                 showComment={false}
+                id={item.id}
                 lyrics={item.lyrics}
                 content={item.content}
                 title={item.title}
@@ -95,6 +97,8 @@ const ChartItem = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
+
+  width: 100%;
 
   gap: 1.6rem;
 

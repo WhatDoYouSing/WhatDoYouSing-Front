@@ -32,6 +32,7 @@ const LikeCarousel = () => {
             <LyricsItem
               showHeart={true}
               key={item.id}
+              id={item.id}
               emotion={item.sings_emotion}
               likes={item.likes_count}
               lyrics={item.lyrics}

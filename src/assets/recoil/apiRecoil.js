@@ -48,3 +48,13 @@ export const SearchDropdownState = atom({
   key: "SearchDropdownState",
   default: "최신순",
 });
+
+export const SearchEmotionState = atom({
+  key: "SearchEmotionState",
+  default: 0,
+});
+
+export const MyEmotionState = atom({
+  key: "MyEmotionState",
+  default: 0,
+});

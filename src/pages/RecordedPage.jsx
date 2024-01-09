@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //페이지
 import IntroTopbar from "../components/IntroTopbar";
@@ -11,6 +12,7 @@ const RecordedPage = () => {
   const { id } = useParams();
   let pageType;
   let firstCategory;
+  const navigate = useNavigate();
 
   switch (id) {
     case "1":
@@ -37,11 +39,17 @@ const RecordedPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(firstCategory);
   const handleCategory = (category) => {
     setSelectedCategory(category);
+
+    if (category === "saved") {
+      navigate("/recorded/1");
+    } else if (category === "bookmarked") {
+      navigate("/recorded/2");
+    }
   };
   return (
     <div>
       <Wrapper>
-        <IntroTopbar text="내활동" del={false} />
+        <IntroTopbar text="내활동" del={true} delPath="/my" />
         <Filter>
           <span
             onClick={() => handleCategory("saved")}
@@ -88,6 +96,7 @@ const Filter = styled.div`
     font-weight: 500;
     line-height: 130%; /* 20.8px */
     letter-spacing: -0.016rem;
+    cursor: pointer;
   }
 
   .selected {
