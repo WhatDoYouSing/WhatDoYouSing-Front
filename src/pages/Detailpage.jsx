@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
 
 //components
@@ -14,8 +15,10 @@ import ReportPostModal from "../components/DetailPage/ReportPostModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
+import { GetLyricsDetail } from "../apis/detail";
+
 const Detailpage = () => {
-  //이 노래 들으러 가기 비활성화
+  //이 노래 들으러 가기 비활성화 -- data로부터 값받아 설정해줄것!
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
 
   const shareModalRef = useRef();
@@ -25,6 +28,26 @@ const Detailpage = () => {
   const [deletePost, setDeletePost] = useClickOutside(deleteModalRef, false);
   const reportModalRef = useRef(); //게시물 신고 모달
   const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
+
+  //params로 id 받기
+  let { postid } = useParams();
+  //가사 상세 데이터
+  const [thisData, setThisData] = useState({});
+  //렌더링 설정
+  const [render, setRender] = useState(1);
+
+  // console.log(postid);
+
+  useEffect(() => {
+    // console.log(postid);
+    const GetLyricDetailData = async (pk) => {
+      const response = await GetLyricsDetail(pk);
+      console.log(pk);
+      setThisData(response.data);
+      console.log(response.data);
+    };
+    GetLyricDetailData(postid);
+  }, []);
 
   return (
     <>
@@ -36,11 +59,12 @@ const Detailpage = () => {
           setDeletePost={setDeletePost}
           reportPost={reportPost}
           setReportPost={setReportPost}
+          postId={postid}
         />
-        <LyricWithWriter />
-        <GotoSong disabled={isListenBtnDisabled} />
+        <LyricWithWriter lyricContent={thisData} />
+        <GotoSong lyricContent={thisData} disabled={isListenBtnDisabled} />
         <EmotionBox />
-        <Comments />
+        <Comments postId={postid} render={render} setRender={setRender} />
       </Wrapper>
       {deletePost && (
         <ModalWrapper>
@@ -48,6 +72,7 @@ const Detailpage = () => {
             ref={deleteModalRef}
             deletePost={deletePost}
             setDeletePost={setDeletePost}
+            postId={postid}
           />
         </ModalWrapper>
       )}

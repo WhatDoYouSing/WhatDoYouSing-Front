@@ -14,10 +14,11 @@ export const GetComment = async (pk) => {
 };
 
 // POST : 댓글 등록
-export const PostComment = async (pk) => {
+export const PostComment = async (pk, com_content) => {
   try {
     const response = await axiosInstance.post(`/comments/${pk}/`, {
       pk: pk,
+      com_content: com_content,
     });
     console.log(response.data);
     return Promise.resolve(response.data);
@@ -29,9 +30,12 @@ export const PostComment = async (pk) => {
 // DELETE : 댓글 삭제
 export const DelComment = async (comment_pk) => {
   try {
-    const response = await axiosInstance.delete(`/comments/${comment_pk}/`, {
-      comment_pk: comment_pk,
-    });
+    const response = await axiosInstance.delete(
+      `/comments/del/${comment_pk}/`,
+      {
+        comment_pk: comment_pk,
+      }
+    );
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
@@ -40,12 +44,13 @@ export const DelComment = async (comment_pk) => {
 };
 
 // POST : 댓글 공감
-export const PostCommentLike = async (comment_pk) => {
+export const PostCommentLike = async (comment_pk, liked) => {
   try {
     const response = await axiosInstance.post(
       `/comments/${comment_pk}/likes/`,
       {
         comment_pk: comment_pk,
+        liked: liked,
       }
     );
     console.log(response.data);
@@ -56,12 +61,13 @@ export const PostCommentLike = async (comment_pk) => {
 };
 
 // POST : 댓글 공감 취소
-export const CancelCommentLike = async (comment_pk) => {
+export const CancelCommentLike = async (comment_pk, liked) => {
   try {
     const response = await axiosInstance.post(
       `/comments/${comment_pk}/likes/`,
       {
         comment_pk: comment_pk,
+        liked: liked,
       }
     );
     console.log(response);
@@ -72,10 +78,11 @@ export const CancelCommentLike = async (comment_pk) => {
 };
 
 // POST : 답댓글 등록
-export const PostReply = async (pk) => {
+export const PostReply = async (pk, com_content) => {
   try {
     const response = await axiosInstance.post(`/comments/${pk}/recomments/`, {
       pk: pk,
+      com_content: com_content,
     });
     console.log(response.data);
     return Promise.resolve(response.data);

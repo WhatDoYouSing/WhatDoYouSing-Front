@@ -1,29 +1,66 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
+
 import CommentBox from "../CommentBox";
+
 import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 import noContent from "../../images/noContent.svg";
-// import noContent from "../../images/noContent.png";
+import { GetComment, PostComment, PostReply } from "../../apis/comment";
 
-const Comments = () => {
+const Comments = ({ postId, render, setRender }) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
-
-  const handleComment = () => {
-    if (comment.trim() !== "") {
-      setCommentList((prevList) => [...prevList, comment]);
-      setComment(""); // 댓글 입력 창 초기화
-    }
-  };
+  const [activeReply, setActiveReply] = useState(null);
 
   const isSticky = useRef(null);
-  const handleReplyFocus = () => {
+  const handleReplyFocus = (comment_id) => {
     isSticky.current.focus();
+    setActiveReply(comment_id);
   };
+
+  //댓글 조회
+  useEffect(() => {
+    const GetComData = async (postId) => {
+      const response = await GetComment(postId);
+      setCommentList(response.data);
+      console.log(response.data);
+    };
+    GetComData(postId);
+  }, [render]);
+
+  //댓글 작성 || 답댓글 작성
+  const handleSubmit = () => {
+    if (comment.trim() === "") return null;
+    if (localStorage.getItem("token")) {
+      if (activeReply === null) {
+        const PostComData = async (postId, comment) => {
+          const response = await PostComment(postId, comment);
+          //console.log(response);
+          setRender(render + 1);
+        };
+        PostComData(postId, comment);
+      } else {
+        const PostReData = async (comment_id, comment) => {
+          const response = await PostReply(comment_id, comment);
+          console.log(response);
+          setActiveReply(null);
+          setRender(render + 1);
+          console.log(comment_id);
+        };
+        PostReData(activeReply, comment);
+      }
+      setComment("");
+    } else alert("로그인이 필요합니다.");
+  };
+
+  const totalCommentsCount = commentList.reduce(
+    (acc, commentContent) => acc + commentContent.recomments_count + 1,
+    0
+  );
 
   return (
     <Wrapper>
-      <CommentCount>댓글 {commentList.length}개</CommentCount>
+      <CommentCount>댓글 {totalCommentsCount}개</CommentCount>
       <CommentInput>
         <input
           ref={isSticky}
@@ -32,12 +69,11 @@ const Comments = () => {
           placeholder="댓글을 남겨보세요."
           style={{ outline: "none" }}
         ></input>
-        <SubmitBtn onClick={handleComment} />
+        <SubmitBtn onClick={handleSubmit} />
       </CommentInput>
       {commentList.length === 0 ? (
         <NoneDiv>
           <img src={noContent} width={"105rem"} height={"105rem"} />
-          {/* <NoContent width={"10.5rem"} height={"10.5rem"} fill="#a0a0a0" /> */}
           <div className="noneMent">
             댓글이 없어요.
             <br /> 첫 댓글을 남겨보시는 건 어때요?
@@ -46,9 +82,14 @@ const Comments = () => {
       ) : null}
       {commentList.map((commentContent, index) => (
         <CommentBox
-          key={index}
+          key={commentContent.comment_id}
           content={commentContent}
-          onReply={handleReplyFocus}
+          onReply={() => handleReplyFocus(commentContent.comment_id)}
+          render={render}
+          setRender={setRender}
+          isActive={activeReply === commentContent.comment_id}
+          activeReplyIndex={activeReply}
+          // author={commentContent.author}
         />
       ))}
     </Wrapper>
