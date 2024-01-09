@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
 const ResultLyrics = ({
+  isReverse = false,
   showComment = false,
   id = 1,
   lyrics = "이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아",
@@ -18,7 +19,7 @@ const ResultLyrics = ({
   const navigate = useNavigate();
 
   return (
-    <Navigate onClick={() => navigate(`/detail/${id}`)}>
+    <Navigate isReverse={isReverse} onClick={() => navigate(`/detail/${id}`)}>
       <Wrapper showComment={showComment}>
         <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
 
@@ -27,6 +28,7 @@ const ResultLyrics = ({
           <SongSinger>{singer}</SongSinger>
         </SongDiv>
       </Wrapper>
+      <MarginBox />
     </Navigate>
   );
 };
@@ -35,12 +37,15 @@ export default ResultLyrics;
 
 const Navigate = styled.div`
   align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: ${(props) => (props.isReverse ? "row-reverse" : "row")};
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: ${(props) => (props.showComment ? "100%" : "100%")};
 `;
 
 const LikeDiv = styled.div`
@@ -61,10 +66,6 @@ const Like = styled.div`
   font-weight: 500;
 `;
 
-const ChipDiv = styled.div`
-  display: flex;
-  margin-bottom: 2rem;
-`;
 const TitleLyrics = styled.div`
   display: flex;
   margin-bottom: 1.6rem;
@@ -76,22 +77,6 @@ const TitleLyrics = styled.div`
   font-weight: ${(props) => (props.showComment ? "900" : "800")};
   line-height: 105%;
   letter-spacing: ${(props) => (props.showComment ? "-0.12rem" : "-0.09rem")};
-`;
-
-const LyricsComment = styled.div`
-  display: flex;
-  width: 74%;
-  margin-bottom: 4rem;
-
-  overflow: hidden;
-  color: var(--black);
-  text-overflow: ellipsis;
-
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: -0.98px;
 `;
 
 const SongDiv = styled.div`
@@ -114,4 +99,12 @@ const SongTitle = styled.div`
 
 const SongSinger = styled.div`
   display: flex;
+`;
+
+const MarginBox = styled.div`
+  width: 94px;
+
+  @media (min-width: 1100px) {
+    width: 204px;
+  }
 `;

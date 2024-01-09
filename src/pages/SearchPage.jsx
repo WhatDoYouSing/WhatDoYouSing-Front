@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +11,36 @@ import DropDownBox from "../components/common/DropDownBox";
 
 import Topbar from "../components/common/MainPage/Topbar";
 
+//recoil
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import {
+  SelectEmotionState,
+  SearchDropdownState,
+  KeywordState,
+} from "../assets/recoil/apiRecoil";
+
 const SearchPage = () => {
   const navigate = useNavigate();
+  const setSearchKeyword = useSetRecoilState(KeywordState);
+  const setSearchOption = useSetRecoilState(SearchDropdownState);
+  const setSearchEmotion = useSetRecoilState(SelectEmotionState);
+
+  const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setSearchKeyword(keyword);
+    }, 500);
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [keyword]);
+
+  useEffect(() => {
+    setSearchKeyword("");
+    setSearchEmotion("");
+    setSearchOption("최신순");
+  }, []);
 
   return (
     <Wrapper>
@@ -20,13 +48,17 @@ const SearchPage = () => {
       <SearchDiv>
         <Title>무엇을 노래하나요?</Title>
         <InputDiv>
-          <Input placeholder="가사를 검색해보세요!" />
+          <Input
+            placeholder="가사를 검색해보세요!"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
           <ImgDiv>
             <Search onClick={() => navigate("/result")} />
           </ImgDiv>
         </InputDiv>
       </SearchDiv>
-      <EmotionList />
+      <EmotionList isSearch={true} />
     </Wrapper>
   );
 };
