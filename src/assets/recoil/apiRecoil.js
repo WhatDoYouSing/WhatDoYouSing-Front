@@ -36,10 +36,15 @@ export const DropdownState = atom({
 //홈 관련 state
 export const LikeListState = atom({
   key: "LikeListState",
-  default: null,
+  default: [1, 2, 3, 4, 5],
 });
 
 export const LankingListState = atom({
   key: "LankingListState",
   default: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+});
+
+export const SearchDropdownState = atom({
+  key: "SearchDropdownState",
+  default: "최신순",
 });

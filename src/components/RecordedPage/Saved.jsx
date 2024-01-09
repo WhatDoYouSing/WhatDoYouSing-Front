@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled, css } from "styled-components";
 
 import { ReactComponent as Search } from "../../images/search.svg";
 import LyricsItem from "../common/LyricsItem";
 
+//api
+import { GetMySaved } from "../../apis/my";
+
 const Saved = () => {
   const savedItems = Array.from({ length: 10 }, (_, index) => index + 1);
+  const [savedList, setSavedList] = useState([]);
 
+  useEffect(() => {
+    const handleClick = async () => {
+      const savedList = await GetMySaved(1);
+      setSavedList(savedList);
+    };
+
+    handleClick();
+  }, []);
+
+  console.log("잘 되나요?", savedList);
   return (
     <div>
       <Wrapper>

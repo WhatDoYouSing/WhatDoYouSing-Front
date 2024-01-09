@@ -16,7 +16,7 @@ const ResultTopbar = () => {
             navigate(-1);
           }}
         />
-        <input placeholder="(검색한 가사)" />
+        <input placeholder="가사를 검색해보세요!" />
         <Search />
       </Wrapper>
     </>

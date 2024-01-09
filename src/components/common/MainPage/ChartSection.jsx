@@ -5,42 +5,14 @@ import { styled } from "styled-components";
 import LyricsItem from "../LyricsItem";
 import DropDownBox from "../DropDownBox";
 
-//api
-import { GetSortLatest, GetSortLike, GetSortCom } from "../../../apis/main";
-
 //recoil
 import { useRecoilValue } from "recoil";
-import { DropdownState } from "../../../assets/recoil/apiRecoil";
+import { LankingListState } from "../../../assets/recoil/apiRecoil";
 
 const ChartSection = () => {
-  const chartItems = Array.from({ length: 10 }, (_, index) => index + 1);
-  const column1 = chartItems.slice(0, 5);
-  const column2 = chartItems.slice(5);
-
-  const selectedOption = useRecoilValue(DropdownState);
-
-  const handleClick = async () => {
-    switch (selectedOption) {
-      case "최신순":
-        const sortedLatestList = await GetSortLatest();
-        break;
-      case "좋아요 순":
-        const sortedLikeList = await GetSortLike();
-        break;
-      case "댓글순":
-        const sortedComeList = await GetSortCom();
-        break;
-
-      default:
-    }
-  };
-
-  const MainPage = () => {
-    useEffect(() => {
-      const handleInfo = async () => {};
-      handleInfo();
-    }, []);
-  };
+  const lankingList = useRecoilValue(LankingListState);
+  const column1 = lankingList.slice(0, 5);
+  const column2 = lankingList.slice(5);
 
   return (
     <Wrapper>
@@ -50,18 +22,30 @@ const ChartSection = () => {
       </TopDiv>
       <ChartDiv>
         <Column>
-          {column1.map((id) => (
-            <ChartItem key={id}>
-              {id}
-              <LyricsItem showComment={false} />
+          {column1.map((item, index) => (
+            <ChartItem key={item.id}>
+              {index + 1}
+              <LyricsItem
+                showComment={false}
+                lyrics={item.lyrics}
+                content={item.content}
+                title={item.title}
+                singer={item.singer}
+              />
             </ChartItem>
           ))}
         </Column>
         <Column>
-          {column2.map((id) => (
-            <ChartItem key={id}>
-              {id}
-              <LyricsItem showComment={false} />
+          {column2.map((item, index) => (
+            <ChartItem key={item}>
+              {index + 6}
+              <LyricsItem
+                showComment={false}
+                lyrics={item.lyrics}
+                content={item.content}
+                title={item.title}
+                singer={item.singer}
+              />
             </ChartItem>
           ))}
         </Column>

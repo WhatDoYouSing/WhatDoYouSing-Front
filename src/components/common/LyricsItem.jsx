@@ -11,6 +11,7 @@ import { emotionListAtom } from "../../assets/recoil/recoil";
 const LyricsItem = ({
   showComment = true,
   showChip = false,
+  showHeart = false,
   text = "쾌감",
   emotion = 1,
   likes = 0,
@@ -24,7 +25,7 @@ const LyricsItem = ({
 
   return (
     <>
-      {showComment && (
+      {showHeart && (
         <>
           <LikeDiv>
             <EmotionChip
@@ -41,7 +42,11 @@ const LyricsItem = ({
       <Wrapper showComment={showComment} onClick={() => navigate("/detail")}>
         {showChip && (
           <ChipDiv>
-            <EmotionChip text={text} size="small" />
+            <EmotionChip
+              text={emotions[emotion].text}
+              src={emotions[emotion].src}
+              size="small"
+            />
           </ChipDiv>
         )}
         <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
