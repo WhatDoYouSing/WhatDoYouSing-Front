@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -11,21 +11,37 @@ import { ReactComponent as Close } from "../../images/dropdown-close.svg";
 import DropDown from "./DropDown";
 
 //recoil
-import { useSetRecoilState } from "recoil";
-import { DropdownState } from "../../assets/recoil/apiRecoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import {
+  DropdownState,
+  SearchDropdownState,
+} from "../../assets/recoil/apiRecoil";
 
-const DropDownBox = ({ setSelOption }) => {
+const DropDownBox = ({ isSearch = false }) => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
-  const [selectedOption, setSelectedOption] = useState("댓글 순");
+  const [selectedOption, setSelectedOption] = useState("댓글순");
   const setOption = useSetRecoilState(DropdownState);
+  const settingSearchOption = useRecoilValue(SearchDropdownState);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    // setOption(selectedOption);
-    setSelOption(selectedOption);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (isSearch) {
+      setSelectedOption(settingSearchOption); //버튼 눌러서 검색할 때 state 설정
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleFirstState = () => {
+      setOption(selectedOption);
+    };
+    handleFirstState();
+  }, [selectedOption]); //처음 로딩되었을 때 selectedOption recoil 반영
+
   return (
     <Wrapper>
       <Container onMouseDown={() => setIsOpen(!isOpen)} ref={dropdownRef}>

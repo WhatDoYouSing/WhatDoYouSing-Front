@@ -8,49 +8,20 @@ import { ReactComponent as SampleHeart } from "../../images/sample-heart.svg";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-const LyricsItem = ({
-  showComment = true,
-  showChip = false,
-  showHeart = false,
+const ResultLyrics = ({
+  showComment = false,
   id = 1,
-  emotion = 1,
-  likes = 0,
   lyrics = "이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아",
-  content = "이 순간을 기억하고, 우리가 함께했음을 기억하고, 또 우리는 가리려해도 절대 가려지지 않는 존재들임을 기억하자!",
   title = "1 + 1",
   singer = "나상현씨밴드",
 }) => {
   const navigate = useNavigate();
-  const emotions = useRecoilValue(emotionListAtom);
 
   return (
     <Navigate onClick={() => navigate(`/detail/${id}`)}>
-      {showHeart && (
-        <>
-          <LikeDiv>
-            <EmotionChip
-              size="small"
-              text={emotions[emotion].text}
-              src={emotions[emotion].src}
-            />
-            <Like>
-              <SampleHeart /> {likes}
-            </Like>
-          </LikeDiv>
-        </>
-      )}
       <Wrapper showComment={showComment}>
-        {showChip && (
-          <ChipDiv>
-            <EmotionChip
-              text={emotions[emotion].text}
-              src={emotions[emotion].src}
-              size="small"
-            />
-          </ChipDiv>
-        )}
         <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
-        {showComment && <LyricsComment>{content}</LyricsComment>}
+
         <SongDiv>
           <SongTitle>{title}</SongTitle>
           <SongSinger>{singer}</SongSinger>
@@ -60,14 +31,16 @@ const LyricsItem = ({
   );
 };
 
-export default LyricsItem;
+export default ResultLyrics;
 
-const Navigate = styled.div``;
+const Navigate = styled.div`
+  align-self: stretch;
+`;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.showComment ? "100%" : "100%")};
+  width: 100%;
 `;
 
 const LikeDiv = styled.div`

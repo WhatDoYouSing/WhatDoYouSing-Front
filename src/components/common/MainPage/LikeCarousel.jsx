@@ -17,7 +17,7 @@ const LikeCarousel = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     pauseOnHover: true,
     swipeToSlide: true,
   };
@@ -30,7 +30,9 @@ const LikeCarousel = () => {
         {likedList !== null &&
           likedList.map((item) => (
             <LyricsItem
+              showHeart={true}
               key={item.id}
+              id={item.id}
               emotion={item.sings_emotion}
               likes={item.likes_count}
               lyrics={item.lyrics}

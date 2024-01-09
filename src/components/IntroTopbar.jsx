@@ -32,12 +32,12 @@ const IntroTopbar = ({
       case "비밀번호 변경":
         PatchPassword(newPassword);
         console.log(newPassword);
-        // navigate(nextPath);
+        navigate(nextPath);
         break;
       case "닉네임 변경":
         console.log(newNickname);
         PatchNickname(newNickname);
-        // navigate(nextPath);
+        navigate(nextPath);
         break;
       case "게시글 작성":
         break;
