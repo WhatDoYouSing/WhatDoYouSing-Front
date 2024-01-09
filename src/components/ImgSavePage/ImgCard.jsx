@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { styled, css } from "styled-components";
 
+import emotionData from "../../assets/data/EmotionData";
 import { ReactComponent as Character } from "../../images/icons/henry3.svg";
 
 const ImgCard = ({ captureRef, data }) => {
+  const emotion = emotionData;
+  // console.log("감정id: ", data.sings_emotion);
+
   return (
     <>
       <Wrapper ref={captureRef}>
@@ -15,7 +19,11 @@ const ImgCard = ({ captureRef, data }) => {
               <Song>{data.title}</Song>
               <Singer>{data.singer}</Singer>
             </Info>
-            <Character width={79} height={79} />
+            <img
+              src={emotion[data.sings_emotion].src[0]}
+              width={79}
+              height={79}
+            />
           </More>
         </Container>
       </Wrapper>

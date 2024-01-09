@@ -67,6 +67,9 @@ const Detailpage = () => {
           reportPost={reportPost}
           setReportPost={setReportPost}
           postId={postid}
+          render={render}
+          setRender={setRender}
+          thisData={thisData}
         />
         <LyricWithWriter lyricContent={thisData} />
         <GotoSong
@@ -75,7 +78,7 @@ const Detailpage = () => {
           setRender={setRender}
           disabled={isListenBtnDisabled}
         />
-        <EmotionBox />
+        <EmotionBox postId={postid} />
         <Comments postId={postid} render={render} setRender={setRender} />
       </Wrapper>
       {deletePost && (

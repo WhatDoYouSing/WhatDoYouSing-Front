@@ -10,7 +10,10 @@ import useClickOutside from "../../hooks/useClickOutside";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-const EmotionBox = () => {
+//api
+import { PatchDetailEmo } from "../../apis/detail";
+
+const EmotionBox = ({ postId }) => {
   const emotions = useRecoilValue(emotionListAtom);
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
@@ -36,7 +39,7 @@ const EmotionBox = () => {
     index: null,
   });
 
-  const handleChipClick = (index) => {
+  const handleChipClick = async (index) => {
     if (index === 0) {
       setIsOpen(!isOpen);
     } else {
@@ -44,6 +47,14 @@ const EmotionBox = () => {
         index: prevSelectedChip.index === index ? null : index,
       }));
     }
+    patchEmotion(postId, index);
+  };
+
+  const patchEmotion = async (postId, index) => {
+    console.log(postId, index);
+    const patchEmotions = await PatchDetailEmo(postId, index);
+
+    console.log(patchEmotions);
   };
 
   const handleModal = () => {
