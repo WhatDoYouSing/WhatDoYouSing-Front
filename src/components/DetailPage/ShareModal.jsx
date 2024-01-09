@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
-const ShareModal = ({ share, setShare, link }) => {
+const ShareModal = ({ share, setShare, data }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,6 +18,11 @@ const ShareModal = ({ share, setShare, link }) => {
     }
   };
 
+  const sendImgData = () => {
+    const imgData = { data: data };
+    navigate("/save", { state: imgData });
+  };
+
   return (
     <Container>
       <Title>공유하기</Title>
@@ -25,7 +30,7 @@ const ShareModal = ({ share, setShare, link }) => {
         <Url>{`http://whatdoyousing.com${location.pathname}`}</Url>
         <Btn onClick={handleCopyClipBoard}>복사</Btn>
       </UrlDiv>
-      <ImgDiv onClick={() => navigate("/save")}>
+      <ImgDiv onClick={sendImgData}>
         <SaveImg>이미지로 저장하기</SaveImg>
         <SvgDiv>
           <Save width={16} height={16} />
