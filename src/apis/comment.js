@@ -78,10 +78,11 @@ export const CancelCommentLike = async (comment_pk, liked) => {
 };
 
 // POST : 답댓글 등록
-export const PostReply = async (pk, com_content) => {
+export const PostReply = async (pk, post, com_content) => {
   try {
     const response = await axiosInstance.post(`/comments/${pk}/recomments/`, {
       pk: pk,
+      post: post,
       com_content: com_content,
     });
     console.log(response.data);
