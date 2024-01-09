@@ -18,6 +18,7 @@ const PostContent = (props) => {
   const [detail, setDetail] = useState("");
   const [song, setSong] = useState("");
   const [singer, setSinger] = useState("");
+  const [link, setLink] = useState("");
 
   const handleEmotionSelect = (selectedEmotion) => {
     setEmotion(selectedEmotion);
@@ -53,6 +54,24 @@ const PostContent = (props) => {
         : inputText.replace(/\s/g, "").length
     );
   };
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setPostForm({
+        lyrics: lyric,
+        content: detail,
+        title: song,
+        singer: singer,
+        link: link,
+        sings_emotion: emotion,
+      });
+      console.log("update");
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [lyric, detail, song, singer, link, emotion]);
 
   return (
     <div>
@@ -152,7 +171,11 @@ const PostContent = (props) => {
           </span>
         </Title>
         <Source style={{ marginBottom: "8.3rem" }}>
-          <input placeholder="노래를 들을 수 있는 링크를 남겨주세요!" />
+          <input
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="노래를 들을 수 있는 링크를 남겨주세요!"
+          />
         </Source>
       </Wrapper>
     </div>
