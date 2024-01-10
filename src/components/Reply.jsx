@@ -102,12 +102,13 @@ const Reply = ({
 export default Reply;
 
 const Container = styled.div`
-  width: 100%;
+  width: calc(100% + 1.6rem);
   display: flex;
   flex-direction: row;
   /* padding: 2.5rem 0; */
   margin-left: -1rem;
-  margin-top: 2.5rem;
+  padding: 2.5rem 6.6rem;
+  background-color: var(--lightGray);
 `;
 
 const ProfileContainer = styled.div`

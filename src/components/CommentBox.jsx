@@ -141,7 +141,7 @@ const CommentBox = ({
                 </>
               )}
             </Plus>
-            {content.recomments_count > 0 && (
+            {/* {content.recomments_count > 0 && (
               <Replies>
                 {content.recomments.map((reply) => (
                   <Reply
@@ -156,9 +156,25 @@ const CommentBox = ({
                   />
                 ))}
               </Replies>
-            )}
+            )} */}
           </ContentContainer>
         </Container>
+        {content.recomments_count > 0 && (
+          <Replies>
+            {content.recomments.map((reply) => (
+              <Reply
+                key={reply.comment_id}
+                replyContent={reply}
+                render={render}
+                setRender={setRender}
+                commentId={content.comment_id}
+                deleteRe={deleteRe}
+                setDeleteRe={setDeleteRe}
+                setReNum={setReNum}
+              />
+            ))}
+          </Replies>
+        )}
       </Background>
     </>
   );
@@ -175,7 +191,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem 2.5rem 1.6rem;
+  padding: 2.5rem 1.6rem 0rem 1.6rem;
   gap: 1rem;
 `;
 
