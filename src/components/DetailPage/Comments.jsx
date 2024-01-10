@@ -7,7 +7,14 @@ import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 import noContent from "../../images/noContent.svg";
 import { GetComment, PostComment, PostReply } from "../../apis/comment";
 
-const Comments = ({ postId, render, setRender }) => {
+const Comments = ({
+  postId,
+  render,
+  setRender,
+  deleteCom,
+  setDeleteCom,
+  setComNum,
+}) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [activeReply, setActiveReply] = useState(null);
@@ -95,6 +102,9 @@ const Comments = ({ postId, render, setRender }) => {
           setRender={setRender}
           isActive={activeReply === commentContent.comment_id}
           activeReplyIndex={activeReply}
+          deleteCom={deleteCom}
+          setDeleteCom={setDeleteCom}
+          setComNum={setComNum}
           // author={commentContent.author}
         />
       ))}
