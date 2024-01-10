@@ -141,7 +141,7 @@ const CommentBox = ({
                 </>
               )}
             </Plus>
-            {content.recomments_count > 0 && (
+            {/* {content.recomments_count > 0 && (
               <Replies>
                 {content.recomments.map((reply) => (
                   <Reply
@@ -156,9 +156,25 @@ const CommentBox = ({
                   />
                 ))}
               </Replies>
-            )}
+            )} */}
           </ContentContainer>
         </Container>
+        {content.recomments_count > 0 && (
+          <Replies>
+            {content.recomments.map((reply) => (
+              <Reply
+                key={reply.comment_id}
+                replyContent={reply}
+                render={render}
+                setRender={setRender}
+                commentId={content.comment_id}
+                deleteRe={deleteRe}
+                setDeleteRe={setDeleteRe}
+                setReNum={setReNum}
+              />
+            ))}
+          </Replies>
+        )}
       </Background>
     </>
   );
