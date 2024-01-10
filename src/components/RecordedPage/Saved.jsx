@@ -8,14 +8,18 @@ import Pagination from "../Pagination";
 //api
 import { GetMySaved } from "../../apis/my";
 
+//recoil
+import { useSetRecoilState } from "recoil";
+import { MyEmotionState } from "../../assets/recoil/apiRecoil";
+
 const Saved = () => {
-  const savedItems = Array.from({ length: 10 }, (_, index) => index + 1);
   const [savedList, setSavedList] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(null); // 전체 부스 개수
   const [totalPage, setTotalPage] = useState(1); // 전체 페이지
   const [keyword, setKeyword] = useState("");
+  const setMyEmotionState = useSetRecoilState(MyEmotionState);
 
   useEffect(() => {
     const handleClick = async (currentPage) => {
@@ -27,8 +31,7 @@ const Saved = () => {
     };
 
     handleClick(keyword, currentPage);
-
-    console.log(savedList);
+    setMyEmotionState("");
   }, [keyword, currentPage]);
 
   return (
