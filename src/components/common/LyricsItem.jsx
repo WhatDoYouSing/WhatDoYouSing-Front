@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import EmotionChip from "./EmotionChip";
 
-import { ReactComponent as SampleHeart } from "../../images/sample-heart.svg";
+import { ReactComponent as SampleHeart } from "../../images/heart_default.svg";
 
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
