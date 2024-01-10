@@ -2,14 +2,14 @@ import React from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as Music } from "../../../images/music.svg";
+import music from "../../../images/fab.svg";
 
 const FloatingBtn = () => {
   const navigate = useNavigate();
   return (
     <Wrapper onClick={() => navigate("/post")}>
       <ImgDiv>
-        <Music />
+        <Img src={music} />
       </ImgDiv>
     </Wrapper>
   );
@@ -42,5 +42,10 @@ const ImgDiv = styled.div`
   border-radius: 50%;
 
   background-color: var(--pointPink);
-  filter: drop-shadow(0px 5px 25px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0px 5px 25px rgba(0, 0, 0, 0.2));
+`;
+
+const Img = styled.img`
+  /* width: 2.4rem;
+  height: 2.2rem; */
 `;
