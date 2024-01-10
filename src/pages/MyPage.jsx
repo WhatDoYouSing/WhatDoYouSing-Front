@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 //components
 import Topbar from "../components/common/MainPage/Topbar";
@@ -92,6 +93,9 @@ const MyPage = () => {
 
   return isLogin ? (
     <>
+      <Helmet>
+        <meta name="theme-color" content="#262121" />
+      </Helmet>
       <Topbar />
       <Wrapper>
         <UserInfo>
