@@ -117,7 +117,7 @@ const CommentCount = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-bottom: 1.8rem;
+  margin: 1.8rem 0rem;
 `;
 
 const CommentInput = styled.div`
@@ -125,7 +125,7 @@ const CommentInput = styled.div`
   align-items: flex-start;
   gap: 0.8rem;
   align-self: stretch;
-  margin-bottom: 0.8rem;
+  margin-bottom: 3.3rem;
   input {
     display: flex;
     height: 4rem;
