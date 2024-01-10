@@ -73,7 +73,7 @@ const UserModifyIntroPage = () => {
               placeholder="본인의 비밀번호를 입력해 주세요."
             />
           </InputBox>
-          <LoginBtn onClick={handleNavigate}>확인</LoginBtn>
+          <LoginBtn onMouseUp={handleNavigate}>확인</LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />
@@ -234,4 +234,10 @@ const LoginBtn = styled.button`
 
   font-size: 2rem;
   font-weight: 600;
+
+  &:active {
+    background-color: var(--pointPink);
+    color: var(--white);
+    border: none;
+  }
 `;

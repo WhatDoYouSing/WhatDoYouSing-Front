@@ -8,8 +8,9 @@ import Topbar from "../components/common/MainPage/Topbar";
 import Footer from "../components/common/Footer";
 
 //recoil
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { profileListAtom } from "../assets/recoil/recoil";
+import { MyEmotionState } from "../assets/recoil/apiRecoil";
 
 //api
 import { GetMyPage } from "../apis/my";
@@ -60,6 +61,7 @@ const MyPage = () => {
   // const isLogin = useRecoilValue(LoginState);
   const isLogin = localStorage.getItem("token") !== null;
   const profileList = useRecoilValue(profileListAtom);
+  const setMyEmotionState = useSetRecoilState(MyEmotionState);
 
   const Logout = () => {
     window.localStorage.removeItem("user_id");
@@ -85,10 +87,10 @@ const MyPage = () => {
 
       const handleInfo = async () => {
         const myInfo = await GetMyPage();
-        console.log(myInfo);
       };
       handleInfo();
     }
+    setMyEmotionState("");
   }, []);
 
   return isLogin ? (
