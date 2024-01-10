@@ -6,7 +6,8 @@ import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
 import { ReactComponent as Symbol } from "../../images/icons/doong-ee3.svg";
-import { ReactComponent as Check } from "../../images/checkbox-off.svg";
+import check_off from "../../images/checkbox-off.svg";
+import check_on from "../../images/checkbox-on.svg";
 
 //api
 import { DelAccount } from "../../apis/user";
@@ -48,13 +49,15 @@ const UserDeletePage = () => {
             />
           </InputBox>
           <InfoBox>
-            <Check />
+            <Check src={check_on} />
             <DelInfo>
-              회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없습니다.
-              정말로 탈퇴하시겠습니까?
+              회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없음에
+              동의합니다.
             </DelInfo>
           </InfoBox>
-          <LoginBtn onClick={() => handleDelBtn(password)}>회원 탈퇴</LoginBtn>
+          <LoginBtn onMouseUp={() => handleDelBtn(password)}>
+            회원 탈퇴
+          </LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />
@@ -181,7 +184,12 @@ const Input = styled.input`
 const InfoBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1rem;
+`;
+
+const Check = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const DelInfo = styled.span`
@@ -214,4 +222,10 @@ const LoginBtn = styled.button`
 
   font-size: 2rem;
   font-weight: 600;
+
+  &:active {
+    background-color: var(--pointPink);
+    color: var(--white);
+    border: none;
+  }
 `;

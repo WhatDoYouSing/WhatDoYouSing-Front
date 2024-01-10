@@ -26,13 +26,6 @@ const EmotionBox = ({ postId, render, setRender }) => {
 
   //칩 클릭 & 데이터 PATCH
   const handleChipClick = async (content) => {
-    console.log(
-      "현재 선택 칩 : ",
-      selectedChip,
-      "보낼 params : ",
-      postId,
-      content
-    );
     if (selectedChip.content === content) {
       delEmotion(postId);
     } else {
@@ -42,7 +35,6 @@ const EmotionBox = ({ postId, render, setRender }) => {
     setSelectedChip((prevSelectedChip) => ({
       content: prevSelectedChip.content === content ? null : content,
     }));
-    console.log("현재의 selectedChips : ", selectedChip);
   };
 
   const patchEmotion = async (postId, content) => {

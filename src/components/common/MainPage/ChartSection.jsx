@@ -26,6 +26,7 @@ const ChartSection = () => {
             <ChartItem key={item.id}>
               {index + 1}
               <LyricsItem
+                isRec={false}
                 showComment={false}
                 id={item.id}
                 lyrics={item.lyrics}

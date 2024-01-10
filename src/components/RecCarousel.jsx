@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Slider from "react-slick";
 
 //components
-import LyricsItem from "./common/LyricsItem";
+import RecLyrics from "./common/RecLyrics";
 
-const RecCarousel = () => {
+const RecCarousel = ({ savedList }) => {
   const settings = {
     arrows: false,
     dots: false,
@@ -19,15 +19,25 @@ const RecCarousel = () => {
     vertical: true,
     verticalSwiping: true,
     swipeToSlide: true,
+    centeredSlides: true,
   };
   return (
     <Wrapper>
       <Slider {...settings} dotsClass="slick-dots-custom">
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
-        <LyricsItem />
+        {savedList !== null &&
+          savedList.map((item) => (
+            <RecLyrics
+              isRec={true}
+              key={item.id}
+              id={item.id}
+              emotion={item.sings_emotion}
+              likes={item.likes_count}
+              lyrics={item.lyrics}
+              content={item.content}
+              title={item.title}
+              singer={item.singer}
+            />
+          ))}
       </Slider>
     </Wrapper>
   );
@@ -35,4 +45,9 @@ const RecCarousel = () => {
 
 export default RecCarousel;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 41.8rem; */
+`;

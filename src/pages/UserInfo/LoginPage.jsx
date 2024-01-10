@@ -64,7 +64,7 @@ const LoginPage = () => {
             placeholder="비밀번호"
           />
         </InputBox>
-        <LoginBtn onClick={handleLogin}>로그인</LoginBtn>
+        <LoginBtn onMouseUp={handleLogin}>로그인</LoginBtn>
       </SideBox>
     </Wrapper>
   );
@@ -205,4 +205,10 @@ const LoginBtn = styled.button`
 
   font-size: 2rem;
   font-weight: 600;
+
+  &:active {
+    background-color: var(--pointPink);
+    color: var(--white);
+    border: none;
+  }
 `;
