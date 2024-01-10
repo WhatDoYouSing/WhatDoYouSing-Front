@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 import Slider from "react-slick";
 
@@ -6,6 +8,32 @@ import Slider from "react-slick";
 import RecLyrics from "./common/RecLyrics";
 
 const RecCarousel = ({ savedList }) => {
+  const navigate = useNavigate();
+
+  const [dragging, setDragging] = useState(false);
+  const [mouseDownTime, setMouseDownTime] = useState(0);
+
+  const handleBeforeChange = useCallback(() => {
+    setDragging(true);
+  }, []);
+
+  const handleAfterChange = useCallback((i) => {
+    setDragging(false);
+  }, []);
+
+  const handleMouseDown = () => {
+    setMouseDownTime(Date.now());
+  };
+
+  const handleMouseUp = (id) => {
+    const mouseUpTime = Date.now();
+    const clickDuration = mouseUpTime - mouseDownTime;
+
+    if (!dragging && clickDuration < 500) {
+      navigate(`/detail/${id}`);
+    }
+  };
+
   const settings = {
     arrows: false,
     dots: false,
@@ -20,6 +48,9 @@ const RecCarousel = ({ savedList }) => {
     verticalSwiping: true,
     swipeToSlide: true,
     centeredSlides: true,
+    touchThreshold: 1000,
+    beforeChange: handleBeforeChange,
+    afterChange: handleAfterChange,
   };
   return (
     <Wrapper>
@@ -36,6 +67,8 @@ const RecCarousel = ({ savedList }) => {
               content={item.content}
               title={item.title}
               singer={item.singer}
+              onMouseDown={handleMouseDown}
+              onMouseUp={() => handleMouseUp(item.id)}
             />
           ))}
       </Slider>

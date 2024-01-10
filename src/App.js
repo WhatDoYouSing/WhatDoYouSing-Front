@@ -18,6 +18,9 @@ import LoginPage from "./pages/UserInfo/LoginPage";
 import SignupPage from "./pages/UserInfo/SignupPage";
 import ProfileSettingPage from "./pages/UserInfo/ProfileSettingPage";
 
+import KakaoLoginPage from "./pages/UserInfo/KakaoLoginPage";
+import KakaoNicknamePage from "./pages/UserInfo/KakaoNicknamePage";
+
 import UserModifyIntroPage from "./pages/UserInfo/UserModifyIntroPage";
 import UserDeletePage from "./pages/UserInfo/UserDeletePage";
 import PasModifyPage from "./pages/UserInfo/PasModifyPage";
@@ -36,7 +39,15 @@ function App() {
           <Route path={"/initial"} element={<InitialPage />}></Route>
           <Route path={"/login"} element={<LoginPage />}></Route>
           <Route path={"/signup"} element={<SignupPage />}></Route>
-          <Route path={"/profile"} element={<ProfileSettingPage />}></Route>
+          <Route path={"/profile/:id"} element={<ProfileSettingPage />}></Route>
+          <Route
+            path={"/accounts/kakao/callback"}
+            element={<KakaoLoginPage />}
+          ></Route>
+          <Route
+            path={"/kakao-nicname"}
+            element={<KakaoNicknamePage />}
+          ></Route>
           <Route path={"/detail/:postid"} element={<Detailpage />}></Route>
           <Route path={"/search"} element={<SearchPage />}></Route>
           <Route path={"/recommend"} element={<RecommendPage />}></Route>

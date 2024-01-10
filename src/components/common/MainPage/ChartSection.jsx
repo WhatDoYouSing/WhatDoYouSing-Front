@@ -70,7 +70,7 @@ const TopDiv = styled.div`
   margin-bottom: 2rem;
 
   color: var(--black);
-  font-family: Pretendard;
+  font-family: "Pretendard-Regular";
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.04rem;

@@ -6,6 +6,8 @@ export const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
+export const KAKAO_AUTH_URL = "http://whatdoyousing.com/accounts/kakao/";
+
 axiosInstance.defaults.withCredentials = true;
 
 const token = localStorage.getItem("token") ?? false;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { styled, css } from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import IntroTopbar from "../../components/IntroTopbar";
 
@@ -25,25 +25,11 @@ const profiles = [
   { id: "Doongee", none_filled: doong_ee, filled: filled_doong_ee },
 ];
 
-const ProfileSettingPage = () => {
+const KakaoProfilePage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const selectedProfileIndex = useSetRecoilState(ProfileState);
   const selectedProfiles = useRecoilValue(ProfileState);
   const [selectedProfile, setSelectedProfile] = useState(null);
-  const [isKakao, setIsKakao] = useState(false);
-
-  useEffect(() => {
-    const setText = () => {
-      if (id === "1") {
-        setIsKakao(false);
-      } else if (id === "2") {
-        setIsKakao(true);
-      }
-    };
-    setText();
-    console.log(isKakao);
-  }, []);
 
   const handleChipClick = (selectedIndex) => {
     setSelectedProfile(selectedIndex);
@@ -55,7 +41,7 @@ const ProfileSettingPage = () => {
     <>
       <Wrapper>
         <IntroTopbar
-          text={isKakao ? "프로필 지정" : "프로필 설정"}
+          text="프로필 지정"
           del={false}
           actBtn={true}
           btnText={"가입하기"}
@@ -83,7 +69,7 @@ const ProfileSettingPage = () => {
   );
 };
 
-export default ProfileSettingPage;
+export default KakaoProfilePage;
 
 const Wrapper = styled.div`
   display: flex;
