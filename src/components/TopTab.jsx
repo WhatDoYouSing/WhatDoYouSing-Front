@@ -74,6 +74,7 @@ const TopTab = ({
               setDeletePost={setDeletePost}
               reportPost={reportPost}
               setReportPost={setReportPost}
+              thisData={thisData}
             />
           )}
         </Others>
