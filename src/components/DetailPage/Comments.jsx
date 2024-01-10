@@ -7,7 +7,17 @@ import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
 import noContent from "../../images/noContent.svg";
 import { GetComment, PostComment, PostReply } from "../../apis/comment";
 
-const Comments = ({ postId, render, setRender }) => {
+const Comments = ({
+  postId,
+  render,
+  setRender,
+  deleteCom,
+  setDeleteCom,
+  setComNum,
+  deleteRe,
+  setDeleteRe,
+  setReNum,
+}) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [activeReply, setActiveReply] = useState(null);
@@ -95,6 +105,12 @@ const Comments = ({ postId, render, setRender }) => {
           setRender={setRender}
           isActive={activeReply === commentContent.comment_id}
           activeReplyIndex={activeReply}
+          deleteCom={deleteCom}
+          setDeleteCom={setDeleteCom}
+          setComNum={setComNum}
+          deleteRe={deleteRe}
+          setDeleteRe={setDeleteRe}
+          setReNum={setReNum}
           // author={commentContent.author}
         />
       ))}
@@ -117,17 +133,19 @@ const CommentCount = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-bottom: 1.8rem;
+  margin: 1.8rem 0rem;
 `;
 
 const CommentInput = styled.div`
   display: flex;
+
   align-items: flex-start;
   gap: 0.8rem;
   align-self: stretch;
   margin-bottom: 0.8rem;
   input {
     display: flex;
+    width: 100;
     height: 4rem;
     padding-left: 1.6rem;
     align-items: center;

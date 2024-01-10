@@ -1,34 +1,40 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import { ReactComponent as Link } from "../../images/link.svg";
+import { DelComment } from "../apis/comment";
 
-//게시글 신고 모달
-const ReportPostModal = ({ reportPost, setReportPost }) => {
-  const handleClickRep = () => {
-    setReportPost(!reportPost); //모달 닫기
-  };
+const DeleteComModal = ({
+  deleteCom,
+  setDeleteCom,
+  comNum,
+  render,
+  setRender,
+}) => {
+  const navigate = useNavigate();
 
-  const toKakaoChat = () => {
-    window.location.href = "https://open.kakao.com/o/sGYh6V2f";
+  const handleClickDel = () => {
+    const DelComData = async (comment_pk) => {
+      const response = await DelComment(comment_pk);
+      setRender(render + 1);
+      console.log(response);
+      setDeleteCom(!deleteCom); //모달 닫기
+      console.log("댓글삭제성공");
+    };
+    DelComData(comNum);
   };
 
   return (
     <Container>
-      <TitleAsk>신고하기</TitleAsk>
-      <AskComment>
-        출처가 정확하지 않거나 법적 혹은 윤리적으로 부적절한 글이 보이면 신고해
-        주세요.
-      </AskComment>
-      <ButtonDiv onMouseUp={toKakaoChat} className="buttonDiv">
-        <Button className="button">카카오톡 오픈채팅으로 신고</Button>
-        <Link />
-      </ButtonDiv>
+      <TitleAsk>댓글 삭제</TitleAsk>
+      <AskComment>정말 댓글을 삭제하시겠습니까?</AskComment>
+      <Button onMouseUp={handleClickDel} className="buttonDiv">
+        댓글 삭제
+      </Button>
     </Container>
   );
 };
 
-export default ReportPostModal;
+export default DeleteComModal;
 
 const Container = styled.div`
   display: flex;
@@ -45,12 +51,6 @@ const Container = styled.div`
   .buttonDiv:active {
     background-color: var(--black);
   }
-  .buttonDiv:focus {
-    outline: none;
-  }
-  .button:focus {
-    outline: none;
-  }
 `;
 
 const TitleAsk = styled.div`
@@ -64,17 +64,15 @@ const TitleAsk = styled.div`
 `;
 
 const AskComment = styled.div`
-  width: 20.6rem;
-  text-align: center;
   color: var(--black);
-  font-size: 1.6rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  letter-spacing: -0.032rem;
+  letter-spacing: -0.32px;
 `;
 
-const ButtonDiv = styled.button`
+const Button = styled.button`
   width: 26.8rem;
   height: 4.8rem;
   border-radius: 10px;
@@ -82,10 +80,7 @@ const ButtonDiv = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6.4rem;
-`;
 
-const Button = styled.div`
   font-size: 1.4rem;
   text-align: center;
   font-style: normal;
