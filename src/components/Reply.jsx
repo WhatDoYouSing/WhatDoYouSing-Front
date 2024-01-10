@@ -15,7 +15,7 @@ const Reply = ({ replyContent, render, setRender, commentId }) => {
       "true"
   );
   const [likeCount, setLikeCount] = useState(replyContent.relikes_count || 0);
-  //const profiles = useRecoilValue(profileListAtom);
+  const profiles = useRecoilValue(profileListAtom);
 
   // 로그인 여부 확인 및 현재 사용자 정보 가져오기
   const isLoggedIn = !!localStorage.getItem("token");
@@ -55,7 +55,10 @@ const Reply = ({ replyContent, render, setRender, commentId }) => {
     <>
       <Container>
         <ProfileContainer>
-          <img src={`${profile}`} alt="profileimg"></img>
+          <img
+            src={profiles[replyContent.author_profile - 1]?.none_filled}
+            alt="profileimg"
+          ></img>
         </ProfileContainer>
         <ContentContainer>
           <Id>{replyContent.author_nickname}</Id>
@@ -96,15 +99,17 @@ const Container = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  width: 44px;
-  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
+  background-color: var(--lightGray);
 
   img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 21px;
+    height: 21px;
   }
 `;
 

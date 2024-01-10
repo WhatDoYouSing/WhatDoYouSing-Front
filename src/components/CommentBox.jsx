@@ -163,7 +163,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem 2.5rem 1.6rem;
+  padding: 0rem 1.6rem 2.5rem 1.6rem;
 `;
 
 const ProfileContainer = styled.div`
