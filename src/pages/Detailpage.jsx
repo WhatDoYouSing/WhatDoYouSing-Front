@@ -43,15 +43,11 @@ const Detailpage = () => {
   //렌더링 설정
   const [render, setRender] = useState(1);
 
-  // console.log(postid);
-
   useEffect(() => {
-    // console.log(postid);
     const GetLyricDetailData = async (pk) => {
       const response = await GetLyricsDetail(pk);
-      console.log(pk);
+
       setThisData(response.data);
-      console.log(response.data);
     };
     GetLyricDetailData(postid);
   }, [render]);
@@ -78,7 +74,7 @@ const Detailpage = () => {
           setRender={setRender}
           disabled={isListenBtnDisabled}
         />
-        <EmotionBox postId={postid} />
+        <EmotionBox postId={postid} render={render} setRender={setRender} />
         <Comments postId={postid} render={render} setRender={setRender} />
       </Wrapper>
       {deletePost && (
