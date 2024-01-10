@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router";
 import { ReactComponent as Link } from "../../images/link.svg";
 
 //게시글 신고 모달
 const ReportPostModal = ({ reportPost, setReportPost }) => {
   const handleClickRep = () => {
     setReportPost(!reportPost); //모달 닫기
+  };
+
+  const toKakaoChat = () => {
+    window.location.href = "https://open.kakao.com/o/sGYh6V2f";
   };
 
   return (
@@ -16,7 +20,7 @@ const ReportPostModal = ({ reportPost, setReportPost }) => {
         출처가 정확하지 않거나 법적 혹은 윤리적으로 부적절한 글이 보이면 신고해
         주세요.
       </AskComment>
-      <ButtonDiv onMouseUp={handleClickRep} className="buttonDiv">
+      <ButtonDiv onMouseUp={toKakaoChat} className="buttonDiv">
         <Button className="button">카카오톡 오픈채팅으로 신고</Button>
         <Link />
       </ButtonDiv>
