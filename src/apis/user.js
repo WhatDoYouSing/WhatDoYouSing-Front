@@ -44,7 +44,7 @@ export const PostSignup = async (
     });
     console.log(response.data);
     alert("가입이 완료되었습니다.");
-    navigate("/login");
+    // navigate("/login");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {

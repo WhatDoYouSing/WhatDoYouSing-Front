@@ -12,9 +12,10 @@ import { KeywordState } from "../../assets/recoil/apiRecoil";
 const ResultTopbar = () => {
   const navigate = useNavigate();
   const setSearchKeyword = useSetRecoilState(KeywordState);
-  const searchKeyword = useSetRecoilState(KeywordState);
+  const searchKeyword = useRecoilValue(KeywordState);
 
   const [keyword, setKeyword] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
@@ -29,9 +30,9 @@ const ResultTopbar = () => {
     }
   }, [keyword]);
 
-  // useEffect(() => {
-  //   setKeyword(searchKeyword);
-  // }, []);
+  useEffect(() => {
+    setPlaceholder(searchKeyword);
+  }, []);
 
   return (
     <>
@@ -42,7 +43,7 @@ const ResultTopbar = () => {
           }}
         />
         <input
-          placeholder="가사를 검색해보세요!"
+          placeholder={placeholder ? placeholder : "가사를 검색해보세요!"}
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           onFocus={() => setIsInputFocused(true)}

@@ -9,14 +9,15 @@ import { ReactComponent as Reload } from "../images/reload.svg";
 
 //api
 import { GetRecommend } from "../apis/main";
+import { GetLyricsList } from "../apis/lyrics";
 
 const RecommendPage = () => {
-  const chartItems = Array.from({ length: 3 }, (_, index) => index + 1);
+  const [savedList, setSavedList] = useState([]);
 
   useEffect(() => {
     const handleClick = async () => {
       const savedList = await GetRecommend();
-      console.log(savedList);
+      setSavedList(savedList.data);
     };
 
     handleClick();
@@ -27,7 +28,7 @@ const RecommendPage = () => {
       <Topbar />
       <Wrapper>
         <ScrollContainer>
-          <RecCarousel />
+          <RecCarousel savedList={savedList} />
         </ScrollContainer>
         <Reload />
       </Wrapper>
@@ -48,7 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const ScrollContainer = styled.div`
-  padding-top: 11.6rem;
+  padding: 9rem 0;
 
   display: flex;
   align-items: center;
