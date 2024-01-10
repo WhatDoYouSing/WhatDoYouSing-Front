@@ -34,22 +34,34 @@ const TopTab = ({
     setShare(!share);
   };
 
-  const [isBookmarked, setIsBookmarked] = useState();
+  const [isBookmarked, setIsBookmarked] = useState(false);
   useEffect(() => {
-    setIsBookmarked(thisData.scrap);
-    console.log(thisData.scrap);
-  }, [render]);
+    setIsBookmarked(thisData.is_scraped);
+    console.log("thisData.is_scraped", thisData.is_scraped);
+  }, [render, thisData]);
 
   const handleBookmark = () => {
-    if (localStorage.getItem("token")) {
-      const Scrap = async (postId) => {
-        const response = await PostScrap(postId);
-        setIsBookmarked(!isBookmarked);
-        console.log(response);
-      };
-      Scrap(postId);
-    }
+    const Scrap = async (postId) => {
+      const response = await PostScrap(postId);
+      // setIsBookmarked(thisData.is_scraped);
+      setIsBookmarked(!isBookmarked);
+      console.log("handleBookmark: ", response);
+    };
+    Scrap(postId);
   };
+
+  // useEffect(() => {
+  //   // 페이지 로딩 시에 로컬 스토리지에 저장된 값이 있으면 그 값으로 초기화
+  //   const savedIsBookmarked = localStorage.getItem("isBookmarked");
+  //   if (savedIsBookmarked !== null) {
+  //     setIsBookmarked(savedIsBookmarked === "true");
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   // isBookmarked 값이 변경될 때마다 로컬 스토리지에 저장
+  //   localStorage.setItem("isBookmarked", isBookmarked);
+  // }, [isBookmarked]);
 
   //외부 클릭시 닫힘
   const meatballRef = useRef(null);
