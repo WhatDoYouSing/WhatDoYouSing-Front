@@ -8,6 +8,8 @@ import { ReactComponent as Back } from "../images/back.svg";
 //recoil
 import { useRecoilValue } from "recoil";
 import {
+  SignupState,
+  ProfileState,
   PasModifyState,
   NicModifyState,
   LyricState,
@@ -15,7 +17,12 @@ import {
 } from "../assets/recoil/apiRecoil";
 
 //api
-import { PatchPassword, PatchNickname } from "../apis/user";
+import {
+  PatchPassword,
+  PatchNickname,
+  PostSignup,
+  PostProfile,
+} from "../apis/user";
 import { PostLyrics } from "../apis/lyrics";
 
 const IntroTopbar = ({
@@ -34,10 +41,25 @@ const IntroTopbar = ({
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
   const newLyricPost = useRecoilValue(LyricState);
+  const signupForm = useRecoilValue(SignupState);
+  const profile = useRecoilValue(ProfileState);
+
   console.log(newLyricPost);
 
   const handleClick = async () => {
     switch (text) {
+      case "프로필 설정":
+        console.log(signupForm, profile);
+        PostSignup(
+          signupForm.username,
+          signupForm.password,
+          signupForm.nickname,
+          profile,
+          navigate
+        );
+        // PostProfile(profile);
+        navigate(nextPath);
+        break;
       case "비밀번호 변경":
         PatchPassword(existingPassword, newPassword);
         console.log(existingPassword, newPassword);

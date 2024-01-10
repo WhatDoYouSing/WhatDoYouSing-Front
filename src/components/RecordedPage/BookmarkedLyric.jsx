@@ -6,10 +6,15 @@ import Pagination from "../Pagination";
 //api
 import { GetMyLyrics } from "../../apis/my";
 
+//recoil
+import { useSetRecoilState } from "recoil";
+import { MyEmotionState } from "../../assets/recoil/apiRecoil";
+
 const BookmarkedLyric = () => {
   const [bookmarkedList, setBookmarkedList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalPage, setTotalPage] = useState(1); // 전체 페이지
+  const setMyEmotionState = useSetRecoilState(MyEmotionState);
 
   useEffect(() => {
     const handleClick = async (currentPage) => {
@@ -21,6 +26,7 @@ const BookmarkedLyric = () => {
     };
 
     handleClick(currentPage);
+    setMyEmotionState("");
   }, [currentPage]);
 
   return (
