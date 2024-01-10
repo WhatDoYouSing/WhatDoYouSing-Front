@@ -80,9 +80,12 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
+
+
   margin-top: 7.9rem;
 
   &::-webkit-scrollbar {
     display: none;
   }
+
 `;

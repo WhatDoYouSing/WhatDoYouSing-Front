@@ -59,7 +59,7 @@ const ProfileContainer = styled.div`
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background-color: var(--gray);
+  background-color: var(--lightGray);
 
   img {
     width: 21px;
