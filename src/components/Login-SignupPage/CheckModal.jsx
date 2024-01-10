@@ -12,20 +12,18 @@ import { PostSignup, PostProfile } from "../../apis/user";
 //회원정보 확인 모달
 const CheckModal = () => {
   const navigate = useNavigate();
-  const signupForm = useRecoilValue(SignupState);
-  const profile = useRecoilValue(ProfileState);
 
   const handleClick = async () => {
-    console.log(signupForm, profile);
-    PostSignup(
-      signupForm.username,
-      signupForm.password,
-      signupForm.nickname,
-      profile,
-      navigate
-    );
-    PostProfile(profile);
-    navigate("/");
+    // console.log(signupForm, profile);
+    // PostSignup(
+    //   signupForm.username,
+    //   signupForm.password,
+    //   signupForm.nickname,
+    //   profile,
+    //   navigate
+    // );
+    // PostProfile(profile);
+    navigate("/profile");
   };
 
   return (

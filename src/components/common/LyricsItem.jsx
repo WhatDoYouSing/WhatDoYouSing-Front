@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
 const LyricsItem = ({
+  isRec = false,
   showComment = true,
   showChip = false,
   showHeart = false,
@@ -24,7 +25,7 @@ const LyricsItem = ({
   const emotions = useRecoilValue(emotionListAtom);
 
   return (
-    <Navigate onClick={() => navigate(`/detail/${id}`)}>
+    <Navigate onClick={() => navigate(`/detail/${id}`)} isRec={isRec}>
       {showHeart && (
         <>
           <LikeDiv>
@@ -67,6 +68,8 @@ const Navigate = styled.div``;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: ${(props) => (props.isRec ? "center" : null)};
+  align-items: ${(props) => (props.isRec ? "center" : null)};
   width: ${(props) => (props.showComment ? "100%" : "100%")};
 `;
 

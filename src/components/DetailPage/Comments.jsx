@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import CommentBox from "../CommentBox";
 
-import { ReactComponent as SubmitBtn } from "../../images/submit.svg";
+import submitBtn from "../../images/submit.svg";
 import noContent from "../../images/noContent.svg";
 import { GetComment, PostComment, PostReply } from "../../apis/comment";
 
@@ -85,7 +85,9 @@ const Comments = ({
           placeholder="댓글을 남겨보세요."
           style={{ outline: "none" }}
         ></input>
-        <SubmitBtn onClick={handleSubmit} />
+        <SubmitBtn onMouseUp={handleSubmit}>
+          <Img src={submitBtn} />
+        </SubmitBtn>
       </CommentInput>
       {commentList.length === 0 ? (
         <NoneDiv>
@@ -180,3 +182,22 @@ const NoneDiv = styled.div`
     margin-top: 1.6rem;
   }
 `;
+
+const SubmitBtn = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  background-color: var(--pointPink);
+
+  &:active {
+    background-color: var(--black);
+  }
+`;
+
+const Img = styled.img``;
