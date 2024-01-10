@@ -14,6 +14,9 @@ const Comments = ({
   deleteCom,
   setDeleteCom,
   setComNum,
+  deleteRe,
+  setDeleteRe,
+  setReNum,
 }) => {
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
@@ -105,6 +108,9 @@ const Comments = ({
           deleteCom={deleteCom}
           setDeleteCom={setDeleteCom}
           setComNum={setComNum}
+          deleteRe={deleteRe}
+          setDeleteRe={setDeleteRe}
+          setReNum={setReNum}
           // author={commentContent.author}
         />
       ))}
@@ -132,12 +138,14 @@ const CommentCount = styled.div`
 
 const CommentInput = styled.div`
   display: flex;
+
   align-items: flex-start;
   gap: 0.8rem;
   align-self: stretch;
-  margin-bottom: 3.3rem;
+  margin-bottom: 0.8rem;
   input {
     display: flex;
+    width: 100;
     height: 4rem;
     padding-left: 1.6rem;
     align-items: center;
