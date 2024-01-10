@@ -39,7 +39,9 @@ const CheckModal = () => {
           </AskComment>
           <AskComment>정말 이 회원정보로 가입하시겠어요?</AskComment>
         </ComDiv>
-        <Button onClick={handleClick}>네. 회원정보 기억했어요!</Button>
+        <Button onMouseUp={handleClick} className="buttonDiv">
+          네. 회원정보 기억했어요!
+        </Button>
       </Wrapper>
     </>
   );
@@ -61,6 +63,10 @@ const Wrapper = styled.div`
   color: var(--black);
   text-align: center;
   z-index: 101;
+
+  .buttonDiv:active {
+    background-color: var(--black);
+  }
 `;
 
 const Title = styled.div`
