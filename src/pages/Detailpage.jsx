@@ -22,9 +22,9 @@ const Detailpage = () => {
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
   const setLinked = () => {
     if (
-      thisData.link === null
-        ? setIsListenBtnDisabled(false)
-        : setIsListenBtnDisabled(true)
+      thisData.link === ""
+        ? setIsListenBtnDisabled(true)
+        : setIsListenBtnDisabled(false)
     );
   };
 
@@ -46,8 +46,9 @@ const Detailpage = () => {
   useEffect(() => {
     const GetLyricDetailData = async (pk) => {
       const response = await GetLyricsDetail(pk);
-
+      console.log(response);
       setThisData(response.data);
+      setLinked();
     };
     GetLyricDetailData(postid);
   }, [render]);
