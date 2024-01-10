@@ -42,6 +42,8 @@ const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
     PostLike(lyricContent.id);
   };
 
+  console.log("disabled", disabled);
+
   return (
     <>
       <Wrapper>
@@ -65,7 +67,12 @@ const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
             {lyricContent.likes_count}
           </LikeBtn>
           <Link to={`${lyricContent.link}`}>
-            <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
+            <GoListen
+              disabled={disabled}
+              style={{ color: disabled ? "var(--gray)" : "var(--black)" }}
+            >
+              이 노래 들으러 가기
+            </GoListen>
           </Link>
         </Buttons>
       </Wrapper>

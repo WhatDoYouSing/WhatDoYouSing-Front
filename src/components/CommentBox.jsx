@@ -19,6 +19,12 @@ const CommentBox = ({
   setRender,
   isActive,
   showReply = true,
+  deleteCom,
+  setDeleteCom,
+  setComNum,
+  deleteRe,
+  setDeleteRe,
+  setReNum,
 }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(
@@ -57,12 +63,15 @@ const CommentBox = ({
 
   //댓글 삭제
   const handleDelete = () => {
-    const DelComData = async (comment_pk) => {
-      const response = await DelComment(comment_pk);
-      setRender(render + 1);
-      console.log(response);
-    };
-    DelComData(content.comment_id);
+    setDeleteCom(!deleteCom);
+    setComNum(content.comment_id);
+
+    // const DelComData = async (comment_pk) => {
+    //   const response = await DelComment(comment_pk);
+    //   setRender(render + 1);
+    //   console.log(response);
+    // };
+    // DelComData(content.comment_id);
   };
 
   const handleNavigate = () => {
@@ -141,6 +150,9 @@ const CommentBox = ({
                     render={render}
                     setRender={setRender}
                     commentId={content.comment_id}
+                    deleteRe={deleteRe}
+                    setDeleteRe={setDeleteRe}
+                    setReNum={setReNum}
                   />
                 ))}
               </Replies>
@@ -164,6 +176,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   padding: 2.5rem 1.6rem 2.5rem 1.6rem;
+  gap: 1rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -176,7 +189,7 @@ const ProfileContainer = styled.div`
   background-color: var(--lightGray);
 
   img {
-    width: 21px;
+    width: 4rem;
     height: 21px;
   }
 `;
@@ -185,13 +198,13 @@ const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
   font-style: normal;
+  padding-right: 1.6rem;
 `;
 
 const Id = styled.div`
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: normal;
 `;
@@ -201,7 +214,7 @@ const Content = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 125%;
 `;
@@ -217,6 +230,8 @@ const Plus = styled.div`
   font-weight: 500;
   line-height: normal;
 
+  margin-bottom: 2.5rem;
+
   img {
     width: 9px;
     height: 9.212px;
@@ -226,10 +241,12 @@ const Plus = styled.div`
   div {
     cursor: pointer;
     color: var(--darkGray);
+    font-size: 1.4rem;
   }
 
   span {
     color: var(--darkGray);
+    font-size: 1.4rem;
   }
 `;
 

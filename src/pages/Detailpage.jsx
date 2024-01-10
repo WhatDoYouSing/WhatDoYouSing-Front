@@ -12,19 +12,21 @@ import Comments from "../components/DetailPage/Comments";
 import ShareModal from "../components/DetailPage/ShareModal";
 import DeletePostModal from "../components/DeletePostModal";
 import ReportPostModal from "../components/DetailPage/ReportPostModal";
+import DeleteComModal from "../components/DeleteComModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
 import { GetLyricsDetail } from "../apis/detail";
+import DeleteReModal from "../components/DeleteReModal";
 
 const Detailpage = () => {
   //이 노래 들으러 가기 비활성화 -- data로부터 값받아 설정해줄것!
   const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
   const setLinked = () => {
     if (
-      thisData.link === null
-        ? setIsListenBtnDisabled(false)
-        : setIsListenBtnDisabled(true)
+      thisData.link === ""
+        ? setIsListenBtnDisabled(true)
+        : setIsListenBtnDisabled(false)
     );
   };
 
@@ -36,6 +38,14 @@ const Detailpage = () => {
   const reportModalRef = useRef(); //게시물 신고 모달
   const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
 
+  const deleteComModalRef = useRef(); //댓글 삭제 모달
+  const [deleteCom, setDeleteCom] = useClickOutside(deleteComModalRef, false);
+  const [comNum, setComNum] = useState("");
+
+  const deleteReModalRef = useRef(); //답글 삭제 모달
+  const [deleteRe, setDeleteRe] = useClickOutside(deleteReModalRef, false);
+  const [reNum, setReNum] = useState("");
+
   //params로 id 받기
   let { postid } = useParams();
   //가사 상세 데이터
@@ -46,8 +56,9 @@ const Detailpage = () => {
   useEffect(() => {
     const GetLyricDetailData = async (pk) => {
       const response = await GetLyricsDetail(pk);
-
+      console.log(response);
       setThisData(response.data);
+      setLinked();
     };
     GetLyricDetailData(postid);
   }, [render]);
@@ -75,7 +86,17 @@ const Detailpage = () => {
           disabled={isListenBtnDisabled}
         />
         <EmotionBox postId={postid} render={render} setRender={setRender} />
-        <Comments postId={postid} render={render} setRender={setRender} />
+        <Comments
+          postId={postid}
+          render={render}
+          setRender={setRender}
+          deleteCom={deleteCom}
+          setDeleteCom={setDeleteCom}
+          deleteRe={deleteRe}
+          setComNum={setComNum}
+          setDeleteRe={setDeleteRe}
+          setReNum={setReNum}
+        />
       </Wrapper>
       {deletePost && (
         <ModalWrapper>
@@ -103,6 +124,30 @@ const Detailpage = () => {
             share={share}
             setShare={setShare}
             data={thisData}
+          />
+        </ModalWrapper>
+      )}
+      {deleteCom && (
+        <ModalWrapper>
+          <DeleteComModal
+            ref={deleteComModalRef}
+            deleteCom={deleteCom}
+            setDeleteCom={setDeleteCom}
+            comNum={comNum}
+            render={render}
+            setRender={setRender}
+          />
+        </ModalWrapper>
+      )}
+      {deleteRe && (
+        <ModalWrapper>
+          <DeleteReModal
+            ref={deleteReModalRef}
+            deleteRe={deleteRe}
+            setDeleteRe={setDeleteRe}
+            reNum={reNum}
+            render={render}
+            setRender={setRender}
           />
         </ModalWrapper>
       )}
