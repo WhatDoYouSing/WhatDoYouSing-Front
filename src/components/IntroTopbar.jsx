@@ -8,6 +8,8 @@ import { ReactComponent as Back } from "../images/back.svg";
 //recoil
 import { useRecoilValue } from "recoil";
 import {
+  SignupState,
+  ProfileState,
   PasModifyState,
   NicModifyState,
   LyricState,
@@ -15,7 +17,12 @@ import {
 } from "../assets/recoil/apiRecoil";
 
 //api
-import { PatchPassword, PatchNickname } from "../apis/user";
+import {
+  PatchPassword,
+  PatchNickname,
+  PostSignup,
+  PostProfile,
+} from "../apis/user";
 import { PostLyrics } from "../apis/lyrics";
 
 const IntroTopbar = ({
@@ -35,18 +42,30 @@ const IntroTopbar = ({
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
   const newLyricPost = useRecoilValue(LyricState);
-  console.log(newLyricPost);
+  const signupForm = useRecoilValue(SignupState);
+  const profile = useRecoilValue(ProfileState);
 
-  useEffect(() => {
-    const handleClick = async () => {
+  const handleClick = async () => {
+    if (isFilled) {
       switch (text) {
+        case "프로필 설정":
+          console.log(signupForm, profile);
+          PostSignup(
+            signupForm.username,
+            signupForm.password,
+            signupForm.nickname,
+            profile,
+            navigate
+          );
+          // PostProfile(profile);
+          navigate(nextPath);
+          break;
         case "비밀번호 변경":
           PatchPassword(existingPassword, newPassword);
-          console.log(existingPassword, newPassword);
           navigate(nextPath);
           break;
         case "닉네임 변경":
-          console.log(newNickname);
+
           PatchNickname(newNickname);
           navigate(nextPath);
           break;
@@ -74,8 +93,11 @@ const IntroTopbar = ({
         default:
           navigate(nextPath);
       }
-    };
-  }, [response]);
+
+    } else {
+      // alert("필수항목을 모두 채워주세요!");
+    }
+  };
 
   return (
     <Wrapper>
@@ -97,7 +119,11 @@ const IntroTopbar = ({
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn isFilled={isFilled} onClick={handleClick}>
+          <NextBtn
+            className="buttonDiv"
+            isFilled={isFilled}
+            onMouseUp={handleClick}
+          >
             {btnText}
           </NextBtn>
         ) : (
@@ -173,4 +199,9 @@ const NextBtn = styled.button`
 
   font-size: 1.4rem;
   font-weight: 500;
+
+  &:active {
+    background-color: ${(props) =>
+      props.isFilled ? "var(--pointPink)" : "var(--lightGray)"};
+  }
 `;

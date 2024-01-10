@@ -4,6 +4,7 @@ import { axiosInstance } from "../apis/http";
 export const GetLyricsDetail = async (pk) => {
   try {
     const response = await axiosInstance.get(`/posts/${pk}/`);
+    console.log(response.data);
 
     return Promise.resolve(response.data);
   } catch (error) {

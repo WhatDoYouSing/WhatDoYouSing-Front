@@ -7,9 +7,14 @@ import Pagination from "../Pagination";
 //api
 import { GetMyComment } from "../../apis/my";
 
+//recoil
+import { useSetRecoilState } from "recoil";
+import { MyEmotionState } from "../../assets/recoil/apiRecoil";
+
 const BookmarkedComment = () => {
   const [bookmarkedList, setBookmarkedList] = useState([]);
   const [response, setResponse] = useState();
+  const setMyEmotionState = useSetRecoilState(MyEmotionState);
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalPage, setTotalPage] = useState(1); // 전체 페이지
@@ -20,10 +25,10 @@ const BookmarkedComment = () => {
       setBookmarkedList(savedList["내가 쓴 댓글/대댓글 최신순 정렬"]);
       setCurrentPage(savedList.current_page);
       setTotalPage(savedList.total_page);
-      console.log(bookmarkedList);
     };
 
     handleClick(currentPage);
+    setMyEmotionState("");
   }, [currentPage]);
 
   return (
