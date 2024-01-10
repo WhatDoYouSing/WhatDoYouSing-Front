@@ -22,7 +22,9 @@ const DeletePostModal = ({ deletePost, setDeletePost, postId }) => {
     <Container>
       <TitleAsk>게시글 삭제</TitleAsk>
       <AskComment>정말 게시글을 삭제하시겠습니까?</AskComment>
-      <Button onMouseDown={handleClickDel}>게시글 삭제</Button>
+      <Button onMouseUp={handleClickDel} className="buttonDiv">
+        게시글 삭제
+      </Button>
     </Container>
   );
 };
@@ -40,6 +42,10 @@ const Container = styled.div`
   gap: 16px;
   border-radius: 10px;
   background-color: var(--white);
+
+  .buttonDiv:active {
+    background-color: var(--black);
+  }
 `;
 
 const TitleAsk = styled.div`

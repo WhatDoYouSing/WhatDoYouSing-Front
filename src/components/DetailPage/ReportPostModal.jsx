@@ -16,8 +16,8 @@ const ReportPostModal = ({ reportPost, setReportPost }) => {
         출처가 정확하지 않거나 법적 혹은 윤리적으로 부적절한 글이 보이면 신고해
         주세요.
       </AskComment>
-      <ButtonDiv onMouseDown={handleClickRep}>
-        <Button>카카오톡 오픈채팅으로 신고</Button>
+      <ButtonDiv onMouseUp={handleClickRep} className="buttonDiv">
+        <Button className="button">카카오톡 오픈채팅으로 신고</Button>
         <Link />
       </ButtonDiv>
     </Container>
@@ -37,6 +37,16 @@ const Container = styled.div`
   gap: 16px;
   border-radius: 10px;
   background-color: var(--white);
+
+  .buttonDiv:active {
+    background-color: var(--black);
+  }
+  .buttonDiv:focus {
+    outline: none;
+  }
+  .button:focus {
+    outline: none;
+  }
 `;
 
 const TitleAsk = styled.div`
