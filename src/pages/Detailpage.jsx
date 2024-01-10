@@ -29,6 +29,7 @@ const Detailpage = () => {
         : setIsListenBtnDisabled(false)
     );
   };
+  console.log("isListenBtnDisabled:", isListenBtnDisabled);
 
   const shareModalRef = useRef();
   const [share, setShare] = useClickOutside(shareModalRef, false);
