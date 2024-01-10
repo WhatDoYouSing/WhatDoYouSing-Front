@@ -117,7 +117,7 @@ const Detailpage = () => {
 export default Detailpage;
 
 const Wrapper = styled.div`
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 `;
 
 const ModalWrapper = styled.div`

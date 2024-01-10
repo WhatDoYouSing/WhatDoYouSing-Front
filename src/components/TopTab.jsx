@@ -34,21 +34,20 @@ const TopTab = ({
     setShare(!share);
   };
 
-  const [isBookmarked, setIsBookmarked] = useState();
+  const [isBookmarked, setIsBookmarked] = useState(false);
   useEffect(() => {
-    setIsBookmarked(thisData.scrap);
-    console.log(thisData.scrap);
-  }, [render]);
+    setIsBookmarked(thisData.is_scraped);
+    console.log("thisData.is_scraped", thisData.is_scraped);
+  }, [render, thisData]);
 
   const handleBookmark = () => {
-    if (localStorage.getItem("token")) {
-      const Scrap = async (postId) => {
-        const response = await PostScrap(postId);
-        setIsBookmarked(!isBookmarked);
-        console.log(response);
-      };
-      Scrap(postId);
-    }
+    const Scrap = async (postId) => {
+      const response = await PostScrap(postId);
+      // setIsBookmarked(thisData.is_scraped);
+      setIsBookmarked(!isBookmarked);
+      console.log("handleBookmark: ", response);
+    };
+    Scrap(postId);
   };
 
   //외부 클릭시 닫힘
@@ -94,7 +93,7 @@ const Wrapper = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  height: 11.3rem;
+  height: 7.9rem;
   background-color: var(--white);
   color: var(--black);
   z-index: 99;

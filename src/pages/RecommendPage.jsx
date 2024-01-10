@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Helmet } from "react-helmet-async";
 
 //components
 import RecCarousel from "../components/RecCarousel";
@@ -24,6 +25,9 @@ const RecommendPage = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="theme-color" content="#262121" />
+      </Helmet>
       <Topbar />
       <Wrapper>
         <ScrollContainer>
@@ -38,7 +42,7 @@ const RecommendPage = () => {
 export default RecommendPage;
 
 const Wrapper = styled.div`
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;

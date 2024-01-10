@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Helmet } from "react-helmet-async";
 
 //components
 
@@ -58,6 +59,9 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="theme-color" content="#262121" />
+      </Helmet>
       <Wrapper>
         <Topbar />
         <LikeSection />
@@ -76,7 +80,7 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 
   &::-webkit-scrollbar {
     display: none;

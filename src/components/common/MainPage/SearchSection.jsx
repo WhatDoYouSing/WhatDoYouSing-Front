@@ -38,13 +38,13 @@ const SearchSection = () => {
           <SearchDiv>
             <SearchItem onClick={moveSearchLatest}>
               <ImgDiv>
-                <Img src={comments} />
+                <Img src={lastest} />
               </ImgDiv>
               최신순
             </SearchItem>
             <SearchItem onClick={moveSearchComm}>
               <ImgDiv>
-                <Img src={lastest} />
+                <Img src={comments} />
               </ImgDiv>
               댓글순
             </SearchItem>
@@ -111,8 +111,8 @@ const SearchItem = styled.button`
 `;
 
 const ImgDiv = styled.div`
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2rem;
+  height: 2rem;
 `;
 
 const Img = styled.img``;
