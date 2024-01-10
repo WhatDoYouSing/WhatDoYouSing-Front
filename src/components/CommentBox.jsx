@@ -22,6 +22,9 @@ const CommentBox = ({
   deleteCom,
   setDeleteCom,
   setComNum,
+  deleteRe,
+  setDeleteRe,
+  setReNum,
 }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(
@@ -147,6 +150,9 @@ const CommentBox = ({
                     render={render}
                     setRender={setRender}
                     commentId={content.comment_id}
+                    deleteRe={deleteRe}
+                    setDeleteRe={setDeleteRe}
+                    setReNum={setReNum}
                   />
                 ))}
               </Replies>
@@ -169,7 +175,8 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 0rem 1.6rem 2.5rem 1.6rem;
+  padding: 2.5rem 1.6rem 2.5rem 1.6rem;
+  gap: 1rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -191,13 +198,12 @@ const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
   font-style: normal;
 `;
 
 const Id = styled.div`
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: normal;
 `;
@@ -207,7 +213,7 @@ const Content = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 125%;
 `;
@@ -223,6 +229,8 @@ const Plus = styled.div`
   font-weight: 500;
   line-height: normal;
 
+  margin-bottom: 2.5rem;
+
   img {
     width: 9px;
     height: 9.212px;
@@ -232,10 +240,12 @@ const Plus = styled.div`
   div {
     cursor: pointer;
     color: var(--darkGray);
+    font-size: 1.4rem;
   }
 
   span {
     color: var(--darkGray);
+    font-size: 1.4rem;
   }
 `;
 

@@ -9,7 +9,15 @@ import { DelReply, PostReplyLike } from "../apis/comment";
 import { useRecoilValue } from "recoil";
 import { profileListAtom } from "../assets/recoil/recoil";
 
-const Reply = ({ replyContent, render, setRender, commentId }) => {
+const Reply = ({
+  replyContent,
+  render,
+  setRender,
+  commentId,
+  deleteRe,
+  setDeleteRe,
+  setReNum,
+}) => {
   const [isLiked, setIsLiked] = useState(
     localStorage.getItem(`reply_${replyContent.recomment_id}_isLiked`) ===
       "true"
@@ -43,12 +51,15 @@ const Reply = ({ replyContent, render, setRender, commentId }) => {
 
   //답댓글 삭제
   const handleDeleteRe = () => {
-    const DelReData = async (recomment_pk) => {
-      const response = await DelReply(recomment_pk);
-      setRender(render + 1);
-      console.log(response);
-    };
-    DelReData(replyContent.recomment_id);
+    setDeleteRe(!deleteRe);
+    setReNum(replyContent.recomment_id);
+
+    // const DelReData = async (recomment_pk) => {
+    //   const response = await DelReply(recomment_pk);
+    //   setRender(render + 1);
+    //   console.log(response);
+    // };
+    // DelReData(replyContent.recomment_id);
   };
 
   return (
@@ -94,8 +105,9 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 0;
+  /* padding: 2.5rem 0; */
   margin-left: -1rem;
+  margin-top: 2.5rem;
 `;
 
 const ProfileContainer = styled.div`
@@ -123,7 +135,7 @@ const ContentContainer = styled.div`
 
 const Id = styled.div`
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -133,7 +145,7 @@ const Content = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
   color: var(--veryDarkGray);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 125%;
 `;
@@ -157,11 +169,13 @@ const Plus = styled.div`
 
   div {
     cursor: pointer;
+    font-size: 1.4rem;
     color: var(--darkGray);
   }
 
   span {
     color: var(--darkGray);
+    font-size: 1.4rem;
   }
 `;
 

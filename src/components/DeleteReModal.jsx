@@ -1,40 +1,34 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import { DelComment } from "../apis/comment";
+import { DelReply } from "../apis/comment";
 
-const DeleteComModal = ({
-  deleteCom,
-  setDeleteCom,
-  comNum,
-  render,
-  setRender,
-}) => {
+const DeleteReModal = ({ deleteRe, setDeleteRe, reNum, render, setRender }) => {
   const navigate = useNavigate();
 
   const handleClickDel = () => {
-    const DelComData = async (comment_pk) => {
-      const response = await DelComment(comment_pk);
+    const DelReData = async (recomment_pk) => {
+      const response = await DelReply(recomment_pk);
       setRender(render + 1);
       console.log(response);
-      setDeleteCom(!deleteCom); //모달 닫기
-      console.log("댓글삭제성공");
+      setDeleteRe(!deleteRe); //모달 닫기
+      console.log("답글삭제성공");
     };
-    DelComData(comNum);
+    DelReData(reNum);
   };
 
   return (
     <Container>
-      <TitleAsk>댓글 삭제</TitleAsk>
-      <AskComment>정말 댓글을 삭제하시겠습니까?</AskComment>
+      <TitleAsk>답글 삭제</TitleAsk>
+      <AskComment>정말 답글을 삭제하시겠습니까?</AskComment>
       <Button onMouseUp={handleClickDel} className="buttonDiv">
-        댓글 삭제
+        답글 삭제
       </Button>
     </Container>
   );
 };
 
-export default DeleteComModal;
+export default DeleteReModal;
 
 const Container = styled.div`
   display: flex;
