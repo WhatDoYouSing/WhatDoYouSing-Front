@@ -119,6 +119,7 @@ const SignupPage = () => {
   useEffect(() => {
     const isRequiredFieldsValid =
       usernameValid &&
+      duplicate !== null &&
       !duplicate &&
       passwordValid &&
       passwordMatch &&
@@ -139,12 +140,6 @@ const SignupPage = () => {
   return (
     <>
       <Wrapper>
-        {/* <IntroTopbar
-          text="회원가입"
-          actBtn={true}
-          nextPath="/profile"
-          isFilled={requiredFieldsValid}
-        /> */}
         <TopBarWrapper>
           <TopBarContainer>
             <ImgDiv>
@@ -158,7 +153,7 @@ const SignupPage = () => {
 
             <NextBtn
               isFilled={requiredFieldsValid}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => (requiredFieldsValid ? setIsOpen(!isOpen) : null)}
             >
               가입하기
             </NextBtn>
@@ -178,7 +173,7 @@ const SignupPage = () => {
               onFocus={() => setUsernameFocused(true)}
             />
             <Check onClick={handleDuplicate} duplicate={duplicate}>
-              {duplicate == null ? "중복확인" : "확인완료"}
+              {duplicate !== null && !duplicate ? "확인완료" : "중복확인"}
             </Check>
           </Contents>
           {duplicate == null && (
@@ -186,7 +181,7 @@ const SignupPage = () => {
               {isUsernameFocused ? (
                 usernameValid ? (
                   <Condition style={{ color: "var(--black)" }}>
-                    아이디가 조건에 맞아요. 중복 확인을 진행해 주세요.
+                    아이디가 조건에 맞아요. 중복확인을 진행해 주세요.
                   </Condition>
                 ) : (
                   <Condition style={{ color: "var(--pointPink)" }}>
@@ -378,6 +373,11 @@ const NextBtn = styled.button`
 
   font-size: 1.4rem;
   font-weight: 500;
+
+  &:active {
+    background-color: ${(props) =>
+      props.isFilled ? "var(--pointPink)" : "var(--lightGray)"};
+  }
 `;
 
 const Box = styled.div`

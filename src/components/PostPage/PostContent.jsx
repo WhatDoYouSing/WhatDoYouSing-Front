@@ -5,7 +5,7 @@ import EmotionList from "../common/EmotionList";
 import { LyricState } from "../../assets/recoil/apiRecoil";
 import { useSetRecoilState } from "recoil";
 
-const PostContent = (props) => {
+const PostContent = ({ onBtn }) => {
   const setPostForm = useSetRecoilState(LyricState);
 
   //글자수
@@ -27,9 +27,9 @@ const PostContent = (props) => {
   //버튼 활성화
   useEffect(() => {
     // const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
-    const isRequiredFieldsValid = lyric && emotion && song && singer;
-    props.onBtn(isRequiredFieldsValid);
-  }, [lyric, emotion, song, singer]);
+    const isRequiredFieldsValid = lyric && emotion && detail && song && singer;
+    onBtn(isRequiredFieldsValid);
+  }, [lyric, emotion, detail, song, singer]);
 
   const handleLyricChange = (e) => {
     const inputText = e.target.value;
