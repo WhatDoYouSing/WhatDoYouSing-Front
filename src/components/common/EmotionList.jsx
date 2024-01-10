@@ -52,7 +52,7 @@ const EmotionList = ({
   const handleChipClick = (emotion) => {
     setSelectedEmotion(emotion);
     if (onEmotionSelect) {
-      onEmotionSelect(emotion.id);
+      onEmotionSelect(emotion.id - 1);
       if (!big) {
         closeModal();
       }

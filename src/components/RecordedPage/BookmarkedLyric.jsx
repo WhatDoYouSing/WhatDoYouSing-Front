@@ -67,7 +67,7 @@ const LyricsWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   align-self: stretch;
   gap: 4rem;
 `;
