@@ -36,5 +36,5 @@ const Postpage = (props) => {
 export default Postpage;
 
 const Wrapper = styled.div`
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 `;

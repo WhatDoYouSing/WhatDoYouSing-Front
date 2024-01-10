@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Search } from "../images/search.svg";
+import { Helmet } from "react-helmet-async";
 
 //components
 import LyricsItem from "../components/common/LyricsItem";
@@ -43,23 +44,28 @@ const SearchPage = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <Topbar />
-      <SearchDiv>
-        <Title>무엇을 노래하나요?</Title>
-        <InputDiv>
-          <Input
-            placeholder="가사를 검색해보세요!"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          />
-          <ImgDiv>
-            <Search onClick={() => navigate("/result")} />
-          </ImgDiv>
-        </InputDiv>
-      </SearchDiv>
-      <EmotionList isSearch={true} />
-    </Wrapper>
+    <>
+      <Helmet>
+        <meta name="theme-color" content="#262121" />
+      </Helmet>
+      <Wrapper>
+        <Topbar />
+        <SearchDiv>
+          <Title>무엇을 노래하나요?</Title>
+          <InputDiv>
+            <Input
+              placeholder="가사를 검색해보세요!"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <ImgDiv>
+              <Search onClick={() => navigate("/result")} />
+            </ImgDiv>
+          </InputDiv>
+        </SearchDiv>
+        <EmotionList isSearch={true} />
+      </Wrapper>
+    </>
   );
 };
 
@@ -69,7 +75,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 `;
 
 const Title = styled.div`
