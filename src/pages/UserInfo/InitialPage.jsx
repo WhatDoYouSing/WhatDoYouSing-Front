@@ -10,10 +10,15 @@ import wordmarkE from "../../images/icons/wordmark-eng.svg";
 import { ReactComponent as Kakao } from "../../images/kakao.svg";
 
 //api
-import { KaKaoLogin } from "../../apis/user";
+import { KAKAO_AUTH_URL } from "../../apis/http";
 
 const InitialPage = () => {
   const navigate = useNavigate();
+
+  const loginKakao = () => {
+    window.location.href = "http://whatdoyousing.com/accounts/kakao/";
+  };
+
   return (
     <Wrapper>
       <IntroTopbar delPath="/" />
@@ -45,7 +50,7 @@ const InitialPage = () => {
           >
             로그인
           </LoginBtn>
-          <KakaoBtn onClick={KaKaoLogin}>
+          <KakaoBtn onClick={loginKakao}>
             <Kakao />
             카카오 로그인
           </KakaoBtn>

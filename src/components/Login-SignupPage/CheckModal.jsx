@@ -23,7 +23,7 @@ const CheckModal = () => {
     //   navigate
     // );
     // PostProfile(profile);
-    navigate("/profile");
+    navigate("/profile/1");
   };
 
   return (
