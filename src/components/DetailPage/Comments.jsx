@@ -22,8 +22,12 @@ const Comments = ({ postId, render, setRender }) => {
   useEffect(() => {
     const GetComData = async (postId) => {
       const response = await GetComment(postId);
-      setCommentList(response.data);
-      console.log(response.data);
+
+      if (response.message === "댓글이 존재하지 않습니다.") {
+        setCommentList([]);
+      } else {
+        setCommentList(response.data);
+      }
     };
     GetComData(postId);
   }, [render]);
@@ -35,7 +39,6 @@ const Comments = ({ postId, render, setRender }) => {
       if (activeReply === null) {
         const PostComData = async (postId, comment) => {
           const response = await PostComment(postId, comment);
-          //console.log(response);
           setRender(render + 1);
         };
         PostComData(postId, comment);
@@ -54,10 +57,12 @@ const Comments = ({ postId, render, setRender }) => {
     } else alert("로그인이 필요합니다.");
   };
 
-  const totalCommentsCount = commentList.reduce(
-    (acc, commentContent) => acc + commentContent.recomments_count + 1,
-    0
-  );
+  const totalCommentsCount = commentList
+    ? commentList.reduce(
+        (acc, commentContent) => acc + commentContent.recomments_count + 1,
+        0
+      )
+    : [];
 
   return (
     <Wrapper>

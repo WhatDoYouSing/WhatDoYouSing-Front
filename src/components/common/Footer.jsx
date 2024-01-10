@@ -25,7 +25,11 @@ const Footer = () => {
           >
             <LikeLion />
           </ImgDiv>
-          <ImgDiv onClick={() => handleIconClick("https://www.instagram.com")}>
+          <ImgDiv
+            onClick={() =>
+              handleIconClick("https://www.instagram.com/what_doyousing/")
+            }
+          >
             <Insta />
           </ImgDiv>
           <ImgDiv

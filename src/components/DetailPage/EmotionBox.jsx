@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import EmotionChipWithNum from "./EmotionChipWithNum";
 import EmotionSelectModal from "./EmotionSelectModal";
@@ -11,50 +11,69 @@ import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
 //api
-import { PatchDetailEmo } from "../../apis/detail";
+import { PatchDetailEmo, GetDetailEmo, DelDetailEmo } from "../../apis/detail";
 
-const EmotionBox = ({ postId }) => {
+const EmotionBox = ({ postId, render, setRender }) => {
   const emotions = useRecoilValue(emotionListAtom);
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
 
-  const emotionCountData = [
-    { icons: "", count: "" },
-    { icons: emotions[0], count: 10 },
-    { icons: emotions[1], count: 0 },
-    { icons: emotions[2], count: 2 },
-    { icons: emotions[3], count: 4 },
-    { icons: emotions[4], count: 19 },
-    { icons: emotions[5], count: 2 },
-    { icons: emotions[6], count: 3 },
-    { icons: emotions[7], count: 0 },
-    { icons: emotions[8], count: 13 },
-    { icons: emotions[9], count: 4 },
-    { icons: emotions[10], count: 5 },
-    { icons: emotions[11], count: 12 },
-  ];
-  //count수는 임의 목데이터, 추후 연결
+  const [emotionCount, setEmotionCount] = useState([]);
 
   const [selectedChip, setSelectedChip] = useState({
-    index: null,
+    content: null,
   });
 
-  const handleChipClick = async (index) => {
-    if (index === 0) {
-      setIsOpen(!isOpen);
+  //칩 클릭 & 데이터 PATCH
+  const handleChipClick = async (content) => {
+    console.log(
+      "현재 선택 칩 : ",
+      selectedChip,
+      "보낼 params : ",
+      postId,
+      content
+    );
+    if (selectedChip.content === content) {
+      delEmotion(postId);
     } else {
-      setSelectedChip((prevSelectedChip) => ({
-        index: prevSelectedChip.index === index ? null : index,
-      }));
+      patchEmotion(postId, content);
     }
-    patchEmotion(postId, index);
+
+    setSelectedChip((prevSelectedChip) => ({
+      content: prevSelectedChip.content === content ? null : content,
+    }));
+    console.log("현재의 selectedChips : ", selectedChip);
   };
 
-  const patchEmotion = async (postId, index) => {
-    console.log(postId, index);
-    const patchEmotions = await PatchDetailEmo(postId, index);
+  const patchEmotion = async (postId, content) => {
+    const patchEmotions = await PatchDetailEmo(postId, content);
 
-    console.log(patchEmotions);
+    setRender(render + 1);
+  };
+
+  const delEmotion = async (postId) => {
+    const delEmotions = await DelDetailEmo(postId);
+    setRender(render + 1);
+  };
+
+  //데이터 조회
+  useEffect(() => {
+    getEmotion(postId, "");
+  }, [render]);
+
+  const getEmotion = async (postId, content) => {
+    const patchEmotions = await GetDetailEmo(postId, content);
+
+    if (patchEmotions.message === "투표감정 조회 실패") {
+      setEmotionCount([]);
+    } else {
+      setEmotionCount(patchEmotions.data.Emotion);
+      setSelectedChip({
+        content: patchEmotions.data.my_emotion
+          ? patchEmotions.data.my_emotion[0]
+          : null,
+      });
+    }
   };
 
   const handleModal = () => {
@@ -64,20 +83,24 @@ const EmotionBox = ({ postId }) => {
   return (
     <Wrapper>
       <Emotions>
-        {emotionCountData.map((emotion, index) =>
-          emotion.count !== 0 ? (
+        <EmotionChipWithNum
+          onClick={() => setIsOpen(!isOpen)}
+          hideTextAndCount={true}
+          disabled={true}
+        />
+        {emotionCount &&
+          emotionCount.map((emotion, index) => (
             <EmotionChipWithNum
-              key={index}
-              text={emotion.icons.text}
-              src={emotion.icons.src}
-              num={emotion.count}
-              hideTextAndCount={index === 0}
-              disabled={index === 0}
-              isSelected={selectedChip.index === index}
-              onClick={() => handleChipClick(index)}
+              key={emotion.content}
+              text={emotions[+emotion.content].text}
+              src={emotions[+emotion.content].src}
+              num={emotion.num}
+              hideTextAndCount={false}
+              disabled={false}
+              isSelected={selectedChip.content === emotion.content}
+              onClick={() => handleChipClick(emotion.content)}
             />
-          ) : null
-        )}
+          ))}
       </Emotions>
       {isOpen && (
         <EmotionSelectModal
