@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 //components
 import Topbar from "../components/common/MainPage/Topbar";
@@ -94,6 +95,9 @@ const MyPage = () => {
 
   return isLogin ? (
     <>
+      <Helmet>
+        <meta name="theme-color" content="#262121" />
+      </Helmet>
       <Topbar />
       <Wrapper>
         <UserInfo>
@@ -148,7 +152,7 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
-  padding-top: 11.6rem;
+  padding-top: 7.9rem;
 `;
 
 const UserInfo = styled.div`
