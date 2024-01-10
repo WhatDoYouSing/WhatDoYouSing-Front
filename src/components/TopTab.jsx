@@ -50,19 +50,6 @@ const TopTab = ({
     Scrap(postId);
   };
 
-  // useEffect(() => {
-  //   // 페이지 로딩 시에 로컬 스토리지에 저장된 값이 있으면 그 값으로 초기화
-  //   const savedIsBookmarked = localStorage.getItem("isBookmarked");
-  //   if (savedIsBookmarked !== null) {
-  //     setIsBookmarked(savedIsBookmarked === "true");
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   // isBookmarked 값이 변경될 때마다 로컬 스토리지에 저장
-  //   localStorage.setItem("isBookmarked", isBookmarked);
-  // }, [isBookmarked]);
-
   //외부 클릭시 닫힘
   const meatballRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(meatballRef, false);
