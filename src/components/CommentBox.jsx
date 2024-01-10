@@ -189,7 +189,7 @@ const ProfileContainer = styled.div`
   background-color: var(--lightGray);
 
   img {
-    width: 21px;
+    width: 4rem;
     height: 21px;
   }
 `;
@@ -199,6 +199,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   font-style: normal;
+  padding-right: 1.6rem;
 `;
 
 const Id = styled.div`
