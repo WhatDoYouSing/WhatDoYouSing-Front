@@ -107,7 +107,8 @@ const Container = styled.div`
   flex-direction: row;
   /* padding: 2.5rem 0; */
   margin-left: -1rem;
-  margin-top: 2.5rem;
+  padding: 2.5rem 0;
+  background-color: var(--lightGray);
 `;
 
 const ProfileContainer = styled.div`
