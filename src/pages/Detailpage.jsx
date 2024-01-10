@@ -12,6 +12,7 @@ import Comments from "../components/DetailPage/Comments";
 import ShareModal from "../components/DetailPage/ShareModal";
 import DeletePostModal from "../components/DeletePostModal";
 import ReportPostModal from "../components/DetailPage/ReportPostModal";
+import DeleteComModal from "../components/DeleteComModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
@@ -35,6 +36,13 @@ const Detailpage = () => {
   const [deletePost, setDeletePost] = useClickOutside(deleteModalRef, false);
   const reportModalRef = useRef(); //게시물 신고 모달
   const [reportPost, setReportPost] = useClickOutside(reportModalRef, false);
+
+  const deleteComModalRef = useRef(); //댓글 삭제 모달
+  const [deleteCom, setDeleteCom] = useClickOutside(deleteComModalRef, false);
+  const [comNum, setComNum] = useState("");
+
+  //const deleteReModalRef = useRef(); //답글 삭제 모달
+  //const [deleteRe, setDeleteRe] = useClickOutside(deleteReModalRef, false);
 
   //params로 id 받기
   let { postid } = useParams();
@@ -76,7 +84,14 @@ const Detailpage = () => {
           disabled={isListenBtnDisabled}
         />
         <EmotionBox postId={postid} render={render} setRender={setRender} />
-        <Comments postId={postid} render={render} setRender={setRender} />
+        <Comments
+          postId={postid}
+          render={render}
+          setRender={setRender}
+          deleteCom={deleteCom}
+          setDeleteCom={setDeleteCom}
+          setComNum={setComNum}
+        />
       </Wrapper>
       {deletePost && (
         <ModalWrapper>
@@ -104,6 +119,18 @@ const Detailpage = () => {
             share={share}
             setShare={setShare}
             data={thisData}
+          />
+        </ModalWrapper>
+      )}
+      {deleteCom && (
+        <ModalWrapper>
+          <DeleteComModal
+            ref={deleteComModalRef}
+            deleteCom={deleteCom}
+            setDeleteCom={setDeleteCom}
+            comNum={comNum}
+            render={render}
+            setRender={setRender}
           />
         </ModalWrapper>
       )}

@@ -19,6 +19,9 @@ const CommentBox = ({
   setRender,
   isActive,
   showReply = true,
+  deleteCom,
+  setDeleteCom,
+  setComNum,
 }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(
@@ -57,12 +60,15 @@ const CommentBox = ({
 
   //댓글 삭제
   const handleDelete = () => {
-    const DelComData = async (comment_pk) => {
-      const response = await DelComment(comment_pk);
-      setRender(render + 1);
-      console.log(response);
-    };
-    DelComData(content.comment_id);
+    setDeleteCom(!deleteCom);
+    setComNum(content.comment_id);
+
+    // const DelComData = async (comment_pk) => {
+    //   const response = await DelComment(comment_pk);
+    //   setRender(render + 1);
+    //   console.log(response);
+    // };
+    // DelComData(content.comment_id);
   };
 
   const handleNavigate = () => {
