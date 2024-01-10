@@ -106,7 +106,7 @@ const Wrapper = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  height: 11.3rem;
+  height: 7.9rem;
   background-color: var(--white);
   color: var(--black);
   z-index: 99;

@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 `;
 
 const Title = styled.div`
