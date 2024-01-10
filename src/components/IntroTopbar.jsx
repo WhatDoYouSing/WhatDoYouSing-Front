@@ -61,7 +61,9 @@ const IntroTopbar = ({
 
         console.log(newLyricPost);
         console.log(postId);
-        onPostIdReceived(postId);
+        // onPostIdReceived(postId);
+
+        // navigate(nextPath);
 
         navigate(`/detail/${postId}`);
         break;

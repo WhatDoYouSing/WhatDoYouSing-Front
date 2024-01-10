@@ -71,6 +71,9 @@ const Wrapper = styled.div`
 `;
 
 const ImgDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.6rem;
   height: 1.6rem;
 `;

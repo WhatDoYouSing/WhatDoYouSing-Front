@@ -77,8 +77,4 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding-bottom: 15.8rem;
   margin-top: 11.6rem;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
