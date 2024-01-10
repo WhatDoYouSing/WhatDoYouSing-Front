@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const options = ["게시글 삭제", "게시글 신고"];
+let options;
 
 const MeatballSelect = ({
   isOpen,
@@ -11,6 +11,7 @@ const MeatballSelect = ({
   setDeletePost,
   reportPost,
   setReportPost,
+  thisData,
 }) => {
   const handleOptionClick = (option) => {
     option === "게시글 삭제"
@@ -18,6 +19,15 @@ const MeatballSelect = ({
       : setReportPost(!reportPost);
     setIsOpen(!isOpen);
   };
+
+  const isLoggedIn = !!localStorage.getItem("token");
+  const currentUserID = +localStorage.getItem("user_id");
+  const showDelete = isLoggedIn && currentUserID === thisData.author;
+  if (showDelete) {
+    options = ["게시글 삭제", "게시글 신고"];
+  } else {
+    options = ["게시글 신고"];
+  }
 
   return (
     <>

@@ -1,34 +1,28 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import { DelReply } from "../apis/comment";
+import { DelLyrics } from "../apis/lyrics";
 
-const DeleteReModal = ({ deleteRe, setDeleteRe, reNum, render, setRender }) => {
+//게시글 삭제 모달
+const PostCheckModal = ({ setCheckModal }) => {
   const navigate = useNavigate();
 
-  const handleClickDel = () => {
-    const DelReData = async (recomment_pk) => {
-      const response = await DelReply(recomment_pk);
-      setRender(render + 1);
-      console.log(response);
-      setDeleteRe(!deleteRe); //모달 닫기
-      console.log("답글삭제성공");
-    };
-    DelReData(reNum);
+  const handleClick = () => {
+    setCheckModal(false);
   };
 
   return (
     <Container>
-      <TitleAsk>답글 삭제</TitleAsk>
-      <AskComment>정말 답글을 삭제하시겠습니까?</AskComment>
-      <Button onMouseUp={handleClickDel} className="buttonDiv">
-        답글 삭제
+      <TitleAsk>업로드 불가</TitleAsk>
+      <AskComment>필수 표시가 된 항목을 모두 작성해주세요!</AskComment>
+      <Button onMouseUp={handleClick} className="buttonDiv">
+        확인
       </Button>
     </Container>
   );
 };
 
-export default DeleteReModal;
+export default PostCheckModal;
 
 const Container = styled.div`
   display: flex;
@@ -40,11 +34,10 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
   border-radius: 10px;
-  background-color: var(--white);
-  z-index: 101;
+  background-color: var(--black);
 
   .buttonDiv:active {
-    background-color: var(--black);
+    background-color: var(--pointPink);
   }
 `;
 

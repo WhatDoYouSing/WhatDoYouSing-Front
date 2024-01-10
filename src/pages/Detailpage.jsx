@@ -29,6 +29,7 @@ const Detailpage = () => {
         : setIsListenBtnDisabled(false)
     );
   };
+  console.log("isListenBtnDisabled:", isListenBtnDisabled);
 
   const shareModalRef = useRef();
   const [share, setShare] = useClickOutside(shareModalRef, false);
@@ -100,6 +101,7 @@ const Detailpage = () => {
       </Wrapper>
       {deletePost && (
         <ModalWrapper>
+          <Background onClick={() => setDeletePost(!deletePost)} />
           <DeletePostModal
             ref={deleteModalRef}
             deletePost={deletePost}
@@ -110,6 +112,7 @@ const Detailpage = () => {
       )}
       {reportPost && (
         <ModalWrapper>
+          <Background onClick={() => setReportPost(!reportPost)} />
           <ReportPostModal
             ref={reportModalRef}
             reportPost={reportPost}
@@ -119,6 +122,7 @@ const Detailpage = () => {
       )}
       {share && (
         <ModalWrapper>
+          <Background onClick={() => setShare(!share)} />
           <ShareModal
             ref={shareModalRef}
             share={share}
@@ -129,6 +133,7 @@ const Detailpage = () => {
       )}
       {deleteCom && (
         <ModalWrapper>
+          <Background onClick={() => setDeleteCom(!deleteCom)} />
           <DeleteComModal
             ref={deleteComModalRef}
             deleteCom={deleteCom}
@@ -141,6 +146,7 @@ const Detailpage = () => {
       )}
       {deleteRe && (
         <ModalWrapper>
+          <Background onClick={() => setDeleteRe(!deleteRe)} />
           <DeleteReModal
             ref={deleteReModalRef}
             deleteRe={deleteRe}
@@ -170,6 +176,18 @@ const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 100;
+  z-index: 50;
 `;
