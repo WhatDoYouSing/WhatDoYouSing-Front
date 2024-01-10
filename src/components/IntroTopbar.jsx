@@ -28,6 +28,7 @@ const IntroTopbar = ({
   nextPath = "/",
   isFilled = false,
   onPostIdReceived,
+  setCheckPost,
 }) => {
   const navigate = useNavigate();
   const existingPassword = useRecoilValue(PasCheckState);
@@ -36,42 +37,45 @@ const IntroTopbar = ({
   const newLyricPost = useRecoilValue(LyricState);
   console.log(newLyricPost);
 
-  const handleClick = async () => {
-    switch (text) {
-      case "비밀번호 변경":
-        PatchPassword(existingPassword, newPassword);
-        console.log(existingPassword, newPassword);
-        navigate(nextPath);
-        break;
-      case "닉네임 변경":
-        console.log(newNickname);
-        PatchNickname(newNickname);
-        navigate(nextPath);
-        break;
-      case "게시글 작성":
-        const response = await PostLyrics(
-          newLyricPost.lyrics,
-          newLyricPost.content,
-          newLyricPost.title,
-          newLyricPost.singer,
-          newLyricPost.link,
-          newLyricPost.sings_emotion
-        );
-        const postId = response.data.id;
+  useEffect(() => {
+    const handleClick = async () => {
+      switch (text) {
+        case "비밀번호 변경":
+          PatchPassword(existingPassword, newPassword);
+          console.log(existingPassword, newPassword);
+          navigate(nextPath);
+          break;
+        case "닉네임 변경":
+          console.log(newNickname);
+          PatchNickname(newNickname);
+          navigate(nextPath);
+          break;
+        case "게시글 작성":
+          const response = await PostLyrics(
+            newLyricPost.lyrics,
+            newLyricPost.content,
+            newLyricPost.title,
+            newLyricPost.singer,
+            newLyricPost.link,
+            newLyricPost.sings_emotion
+          );
+          const postId = response.data.id;
 
-        console.log(newLyricPost);
-        console.log(postId);
-        // onPostIdReceived(postId);
+          if (response.data.message === "가사 작성 실패") {
+            setCheckPost(true);
+            console.log("setCheckPost: ", setCheckPost);
+          }
 
-        // navigate(nextPath);
+          console.log(newLyricPost);
+          console.log(postId);
+          navigate(`/detail/${postId}`);
+          break;
 
-        navigate(`/detail/${postId}`);
-        break;
-
-      default:
-        navigate(nextPath);
-    }
-  };
+        default:
+          navigate(nextPath);
+      }
+    };
+  }, [response]);
 
   return (
     <Wrapper>
