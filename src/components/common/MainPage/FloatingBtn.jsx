@@ -6,8 +6,9 @@ import music from "../../../images/fab.svg";
 
 const FloatingBtn = () => {
   const navigate = useNavigate();
+  const isLogin = localStorage.getItem("token") !== null;
   return (
-    <Wrapper onClick={() => navigate("/post")}>
+    <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}>
       <ImgDiv>
         <Img src={music} />
       </ImgDiv>

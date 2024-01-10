@@ -44,54 +44,54 @@ const IntroTopbar = ({
   const signupForm = useRecoilValue(SignupState);
   const profile = useRecoilValue(ProfileState);
 
-  console.log(newLyricPost);
-
   const handleClick = async () => {
-    switch (text) {
-      case "프로필 설정":
-        console.log(signupForm, profile);
-        PostSignup(
-          signupForm.username,
-          signupForm.password,
-          signupForm.nickname,
-          profile,
-          navigate
-        );
-        // PostProfile(profile);
-        navigate(nextPath);
-        break;
-      case "비밀번호 변경":
-        PatchPassword(existingPassword, newPassword);
-        console.log(existingPassword, newPassword);
-        navigate(nextPath);
-        break;
-      case "닉네임 변경":
-        console.log(newNickname);
-        PatchNickname(newNickname);
-        navigate(nextPath);
-        break;
-      case "게시글 작성":
-        const response = await PostLyrics(
-          newLyricPost.lyrics,
-          newLyricPost.content,
-          newLyricPost.title,
-          newLyricPost.singer,
-          newLyricPost.link,
-          newLyricPost.sings_emotion
-        );
-        const postId = response.data.id;
+    if (isFilled) {
+      switch (text) {
+        case "프로필 설정":
+          console.log(signupForm, profile);
+          PostSignup(
+            signupForm.username,
+            signupForm.password,
+            signupForm.nickname,
+            profile,
+            navigate
+          );
+          // PostProfile(profile);
+          navigate(nextPath);
+          break;
+        case "비밀번호 변경":
+          PatchPassword(existingPassword, newPassword);
+          navigate(nextPath);
+          break;
+        case "닉네임 변경":
+          PatchNickname(newNickname);
+          navigate(nextPath);
+          break;
+        case "게시글 작성":
+          const response = await PostLyrics(
+            newLyricPost.lyrics,
+            newLyricPost.content,
+            newLyricPost.title,
+            newLyricPost.singer,
+            newLyricPost.link,
+            newLyricPost.sings_emotion
+          );
+          const postId = response.data.id;
 
-        console.log(newLyricPost);
-        console.log(postId);
-        // onPostIdReceived(postId);
+          console.log(newLyricPost);
+          console.log(postId);
+          // onPostIdReceived(postId);
 
-        // navigate(nextPath);
+          // navigate(nextPath);
 
-        navigate(`/detail/${postId}`);
-        break;
+          navigate(`/detail/${postId}`);
+          break;
 
-      default:
-        navigate(nextPath);
+        default:
+          navigate(nextPath);
+      }
+    } else {
+      // alert("필수항목을 모두 채워주세요!");
     }
   };
 
@@ -115,7 +115,11 @@ const IntroTopbar = ({
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn isFilled={isFilled} onClick={handleClick}>
+          <NextBtn
+            className="buttonDiv"
+            isFilled={isFilled}
+            onMouseUp={handleClick}
+          >
             {btnText}
           </NextBtn>
         ) : (
@@ -191,4 +195,9 @@ const NextBtn = styled.button`
 
   font-size: 1.4rem;
   font-weight: 500;
+
+  &:active {
+    background-color: ${(props) =>
+      props.isFilled ? "var(--pointPink)" : "var(--lightGray)"};
+  }
 `;

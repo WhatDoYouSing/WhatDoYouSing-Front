@@ -32,14 +32,14 @@ const InitialPage = () => {
         <Login>로그인</Login>
         <BtnBox>
           <SignupBtn
-            onClick={() => {
+            onMouseUp={() => {
               navigate("/signup");
             }}
           >
             회원가입
           </SignupBtn>
           <LoginBtn
-            onClick={() => {
+            onMouseUp={() => {
               navigate("/login");
             }}
           >
@@ -171,11 +171,23 @@ const Btn = styled.div`
 const SignupBtn = styled(Btn)`
   background: var(--Black, #262121);
   color: var(--White, #fff);
+
+  &:active {
+    background-color: var(--pointPink);
+    color: var(--white);
+    border: none;
+  }
 `;
 
 const LoginBtn = styled(Btn)`
   border: 1.5px solid var(--Gray, #d9d9d9);
   background: var(--White, #fff);
+
+  &:active {
+    background-color: var(--pointPink);
+    color: var(--white);
+    border: none;
+  }
 `;
 
 const KakaoBtn = styled(Btn)`
