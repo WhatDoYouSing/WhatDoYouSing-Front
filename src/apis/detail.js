@@ -37,37 +37,24 @@ export const PatchDetailEmo = async (pk, content) => {
   }
 };
 
-// // POST : 가사 상세페이지 감정 등록
-// export const PostDetailEmo = async (post_pk) => {
-//   try {
-//     const response = await axiosInstance.post(`/posts/${post_pk}/emotions/`, {
-//       post_pk: post_pk,
-//     });
-//     console.log(response.data);
-//     return Promise.resolve(response.data);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
+// PATCH : 가사 상세페이지 감정 조회
+export const GetDetailEmo = async (pk) => {
+  try {
+    const response = await axiosInstance.get(`/posts/${pk}/emotions/`);
+    console.log(response.data);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
-// // GET : 가사 상세페이지 감정 조회
-// export const GetDetailEmo = async (post_pk) => {
-//   try {
-//     const response = await axiosInstance.get(`/posts/${post_pk}/emotions/`);
-
-//     return Promise.resolve(response.data);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
-// // DELETE : 가사 상세페이지 감정 삭제
-// export const DelLyrics = async (post_pk) => {
-//   try {
-//     const response = await axiosInstance.delete(`/posts/${post_pk}/`);
-
-//     return Promise.resolve(response.data);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
+// DELETE : 가사 상세페이지 감정 삭제
+export const DelDetailEmo = async (pk) => {
+  try {
+    const response = await axiosInstance.delete(`/posts/${pk}/emotions/del/`);
+    console.log(response.data);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
