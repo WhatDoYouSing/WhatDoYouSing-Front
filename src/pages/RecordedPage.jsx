@@ -80,7 +80,7 @@ const RecordedPage = () => {
 export default RecordedPage;
 
 const Wrapper = styled.div`
-  margin-top: 11.6rem;
+  margin-top: 7.9rem;
 `;
 
 const Filter = styled.div`

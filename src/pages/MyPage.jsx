@@ -146,7 +146,7 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
-  padding-top: 11.6rem;
+  padding-top: 7.9rem;
 `;
 
 const UserInfo = styled.div`
