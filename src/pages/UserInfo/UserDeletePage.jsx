@@ -16,15 +16,24 @@ const UserDeletePage = () => {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleDelBtn = async (password) => {
     if (password.trim() === "") {
       alert("비밀번호를 입력해주세요.");
+      return;
+    } else if (!isChecked) {
+      alert("회원탈퇴 약관에 동의해주세요.");
     } else {
       setPassword(password.trim());
       const result = await DelAccount(password, navigate);
       console.log(result);
     }
+  };
+
+  const toggleCheck = () => {
+    // 체크 상태를 토글하는 함수
+    setIsChecked((prev) => !prev);
   };
 
   return (
@@ -49,7 +58,10 @@ const UserDeletePage = () => {
             />
           </InputBox>
           <InfoBox>
-            <Check src={check_on} />
+            <Check
+              src={isChecked ? check_on : check_off}
+              onClick={toggleCheck}
+            />
             <DelInfo>
               회원탈퇴 버튼을 누르면 계정 정보가 삭제되며, 복구할 수 없음에
               동의합니다.

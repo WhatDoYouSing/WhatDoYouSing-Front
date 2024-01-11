@@ -37,17 +37,19 @@ const TopTab = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   useEffect(() => {
     setIsBookmarked(thisData.is_scraped);
-    console.log("thisData.is_scraped", thisData.is_scraped);
   }, [render, thisData]);
 
   const handleBookmark = () => {
     const Scrap = async (postId) => {
       const response = await PostScrap(postId);
       // setIsBookmarked(thisData.is_scraped);
-      setIsBookmarked(!isBookmarked);
-      console.log("handleBookmark: ", response);
+      setIsBookmarked(thisData.is_scraped);
     };
-    Scrap(postId);
+    if (localStorage.getItem("token")) {
+      Scrap(postId);
+    } else {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   //외부 클릭시 닫힘

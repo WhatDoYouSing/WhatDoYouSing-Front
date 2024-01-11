@@ -41,23 +41,32 @@ const CommentBox = ({
   const showDeleteButton = isLoggedIn && currentUserID === content.author;
 
   const handleLike = () => {
-    const PostComLike = async (comment_pk, liked) => {
-      const response = await PostCommentLike(comment_pk, liked);
-      setRender(render + 1);
-      console.log(response);
-    };
-    PostComLike(content.comment_id, isLiked);
-    setIsLiked(!isLiked);
+    if (localStorage.getItem("token")) {
+      const PostComLike = async (comment_pk, liked) => {
+        const response = await PostCommentLike(comment_pk, liked);
+        setRender(render + 1);
+        console.log(response);
+      };
+      PostComLike(content.comment_id, isLiked);
+      setIsLiked(!isLiked);
+    } else {
+      alert("로그인이 필요합니다.");
+    }
+
     // setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
   const handleReply = () => {
-    if (isActive) {
-      setAddReply(!addReply);
-      onReply(content.comment_id);
+    if (localStorage.getItem("token")) {
+      if (isActive) {
+        setAddReply(!addReply);
+        onReply(content.comment_id);
+      } else {
+        setAddReply(true);
+        onReply(content.comment_id);
+      }
     } else {
-      setAddReply(true);
-      onReply(content.comment_id);
+      alert("로그인이 필요합니다.");
     }
   };
 

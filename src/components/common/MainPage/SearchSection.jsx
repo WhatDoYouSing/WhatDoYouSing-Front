@@ -32,42 +32,24 @@ const SearchSection = () => {
         <TopDiv>감정별 검색</TopDiv>
         <EmotionList isSearch={true} />
       </SectionDiv>
-      <Grid>
-        <SectionDiv>
-          <TopDiv>다른 방식으로 검색</TopDiv>
-          <SearchDiv>
-            <SearchItem onClick={moveSearchLatest}>
-              <ImgDiv>
-                <Img src={lastest} />
-              </ImgDiv>
-              최신순
-            </SearchItem>
-            <SearchItem onClick={moveSearchComm}>
-              <ImgDiv>
-                <Img src={comments} />
-              </ImgDiv>
-              댓글순
-            </SearchItem>
-          </SearchDiv>
-        </SectionDiv>
-        <AD>
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1919598055512436"
-            crossorigin="anonymous"
-          ></script>
 
-          <ins
-            class="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-1919598055512436"
-            data-ad-slot="1197662171"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </AD>
-      </Grid>
+      <SectionDiv>
+        <TopDiv>다른 방식으로 검색</TopDiv>
+        <SearchDiv>
+          <SearchItem onClick={moveSearchLatest}>
+            <ImgDiv>
+              <Img src={lastest} />
+            </ImgDiv>
+            최신순
+          </SearchItem>
+          <SearchItem onClick={moveSearchComm}>
+            <ImgDiv>
+              <Img src={comments} />
+            </ImgDiv>
+            댓글순
+          </SearchItem>
+        </SearchDiv>
+      </SectionDiv>
     </Wrapper>
   );
 };
@@ -92,14 +74,6 @@ const TopDiv = styled.div`
   letter-spacing: -0.04rem;
 
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
-`;
-
-const Grid = styled.div`
-  @media (min-width: 900px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  gap: 2.4rem;
 `;
 
 const SearchDiv = styled.div`
