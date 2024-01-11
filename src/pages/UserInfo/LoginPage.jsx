@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import IntroTopbar from "../../components/IntroTopbar";
 
-import { ReactComponent as Symbol } from "../../images/symbol.svg";
-import wordmark from "../../images/icons/wordmark-kor.svg";
-import wordmarkE from "../../images/icons/wordmark-eng.svg";
+import symbol from "../../images/change/animals.png";
+import wordmark from "../../images/change/wordmark-kor.png";
+import wordmarkE from "../../images/change/wormark-eng.png";
 
 //api
 import { PostLogin } from "../../apis/user";
@@ -37,13 +37,13 @@ const LoginPage = () => {
       <IntroTopbar />
       <Box>
         <ImgBoxS>
-          <Symbol />
+          <Symbol src={symbol} />
         </ImgBoxS>
         <ImgBoxW>
           <Wordmark src={wordmark} />
         </ImgBoxW>
         <ImgBoxE>
-          <Wordmark src={wordmarkE} />
+          <WordmarkE src={wordmarkE} />
         </ImgBoxE>
       </Box>
       <SideBox>
@@ -102,6 +102,9 @@ const Box = styled(ColumnStyle)`
 `;
 
 const ImgBoxS = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 12rem;
   height: 12rem;
 
@@ -112,8 +115,11 @@ const ImgBoxS = styled.div`
 `;
 
 const ImgBoxW = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 12rem;
-  height: 2.6rem;
+  height: 2.7rem;
 
   @media (min-width: 1200px) {
     display: none;
@@ -121,6 +127,9 @@ const ImgBoxW = styled.div`
 `;
 
 const ImgBoxE = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 18rem;
 
   @media (max-width: 1200px) {
@@ -128,7 +137,25 @@ const ImgBoxE = styled.div`
   }
 `;
 
-const Wordmark = styled.img``;
+const WordmarkE = styled.img`
+  width: 18rem;
+  height: 166.01px;
+`;
+
+const Wordmark = styled.img`
+  width: 12rem;
+  height: 2.7rem;
+`;
+
+const Symbol = styled.img`
+  width: 12rem;
+  height: 12rem;
+
+  @media (min-width: 1200px) {
+    width: 18rem;
+    height: 17.83rem;
+  }
+`;
 
 const SideBox = styled(ColumnStyle)`
   width: 100%;
