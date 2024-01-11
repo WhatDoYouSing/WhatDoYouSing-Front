@@ -44,8 +44,6 @@
 ⎪  ⎪   └─ 📂 recoil     
 ├─ 📂 components
 ⎪  ⎪   └─ 📂 _common                    
-⎪  ⎪   └─ 📂 _common
-⎪  ⎪   └─ 📂 _common
 ├─ 📂 hooks
 ├─ 📂 images
 ├─ 📂 pages
