@@ -9,7 +9,8 @@ const ShareModal = ({ share, setShare, data }) => {
   const location = useLocation();
 
   const handleCopyClipBoard = async () => {
-    const textToCopy = `http://whatdoyousing.com${location.pathname}`;
+    console.log(location);
+    const textToCopy = `https://whatdoyousing.swygbro.com${location.pathname}`;
     try {
       await navigator.clipboard.writeText(textToCopy);
       alert("클립보드에 링크가 복사되었어요.");
@@ -27,7 +28,7 @@ const ShareModal = ({ share, setShare, data }) => {
     <Container>
       <Title>공유하기</Title>
       <UrlDiv>
-        <Url>{`http://whatdoyousing.com${location.pathname}`}</Url>
+        <Url>{`https://whatdoyousing.swygbro.com${location.pathname}`}</Url>
         <Btn onClick={handleCopyClipBoard}>복사</Btn>
       </UrlDiv>
       <ImgDiv onClick={sendImgData}>

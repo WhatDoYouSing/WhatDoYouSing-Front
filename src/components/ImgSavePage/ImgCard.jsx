@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { styled, css } from "styled-components";
 
 import emotionData from "../../assets/data/EmotionData";
-import { ReactComponent as Character } from "../../images/icons/henry3.svg";
 
 const ImgCard = ({ captureRef, data }) => {
   const emotion = emotionData;
@@ -19,11 +18,7 @@ const ImgCard = ({ captureRef, data }) => {
               <Song>{data.title}</Song>
               <Singer>{data.singer}</Singer>
             </Info>
-            <img
-              src={emotion[data.sings_emotion].src[0]}
-              width={79}
-              height={79}
-            />
+            <Img src={emotion[data.sings_emotion].src[0]} />
           </More>
         </Container>
       </Wrapper>
@@ -94,6 +89,11 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.687rem;
+`;
+
+const Img = styled.img`
+  width: 7.8rem;
+  height: 7.8rem;
 `;
 
 const Song = styled.div`

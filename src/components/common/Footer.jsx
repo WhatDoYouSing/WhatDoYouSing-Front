@@ -70,6 +70,8 @@ const Wrapper = styled.footer`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   gap: 1.9rem;
 `;
@@ -84,7 +86,15 @@ const InfoDiv = styled.div`
   line-height: 16.64px;
 `;
 
-const Title = styled.span``;
+const Title = styled.span`
+  color: var(--Dark-Gray, #a0a0a0);
+  text-align: center;
+  font-family: "Pretendard-regular";
+  font-size: 10.4px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16.64px; /* 160% */
+`;
 
 const IconDiv = styled.div`
   display: flex;
@@ -97,4 +107,12 @@ const ImgDiv = styled.div`
   cursor: pointer;
 `;
 
-const Copyright = styled.span``;
+const Copyright = styled.span`
+  color: var(--Dark-Gray, #a0a0a0);
+  text-align: center;
+  font-family: "Pretendard-regular";
+  font-size: 8.32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+`;

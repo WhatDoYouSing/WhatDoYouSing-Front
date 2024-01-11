@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import EmotionChip from "./EmotionChip";
 
-import { ReactComponent as SampleHeart } from "../../images/heart_default.svg";
+import heart from "../../images/change/heart-black.png";
 
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
@@ -35,7 +35,7 @@ const LyricsItem = ({
               src={emotions[emotion].src}
             />
             <Like>
-              <SampleHeart /> {likes}
+              <Img src={heart} /> {likes}
             </Like>
           </LikeDiv>
         </>
@@ -89,6 +89,11 @@ const Like = styled.div`
   color: #000;
   font-size: 1.4rem;
   font-weight: 500;
+`;
+
+const Img = styled.img`
+  width: 1.6rem;
+  height: 1.25rem;
 `;
 
 const ChipDiv = styled.div`
