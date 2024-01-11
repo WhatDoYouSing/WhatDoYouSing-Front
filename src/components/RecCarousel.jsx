@@ -29,7 +29,7 @@ const RecCarousel = ({ savedList }) => {
     const mouseUpTime = Date.now();
     const clickDuration = mouseUpTime - mouseDownTime;
 
-    if (!dragging && clickDuration < 500) {
+    if (!dragging && clickDuration < 100) {
       navigate(`/detail/${id}`);
     }
   };
@@ -48,7 +48,7 @@ const RecCarousel = ({ savedList }) => {
     verticalSwiping: true,
     swipeToSlide: true,
     centeredSlides: true,
-    touchThreshold: 1000,
+    touchThreshold: 100,
     beforeChange: handleBeforeChange,
     afterChange: handleAfterChange,
   };
