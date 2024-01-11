@@ -42,8 +42,8 @@ const TopTab = ({
   const handleBookmark = () => {
     const Scrap = async (postId) => {
       const response = await PostScrap(postId);
-      // setIsBookmarked(thisData.is_scraped);
       setIsBookmarked(thisData.is_scraped);
+      setRender(render - 1);
     };
     if (localStorage.getItem("token")) {
       Scrap(postId);
