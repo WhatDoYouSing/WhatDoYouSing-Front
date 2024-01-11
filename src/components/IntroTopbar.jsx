@@ -35,6 +35,7 @@ const IntroTopbar = ({
   nextPath = "/",
   isFilled = false,
   onPostIdReceived,
+  setCheckPost,
 }) => {
   const navigate = useNavigate();
   const existingPassword = useRecoilValue(PasCheckState);
@@ -68,6 +69,7 @@ const IntroTopbar = ({
           // navigate(nextPath);
           break;
         case "닉네임 변경":
+
           PatchNickname(newNickname);
           navigate(nextPath);
           break;
@@ -87,18 +89,20 @@ const IntroTopbar = ({
           );
           const postId = response.data.id;
 
+          if (response.data.message === "가사 작성 실패") {
+            setCheckPost(true);
+            console.log("setCheckPost: ", setCheckPost);
+          }
+
           console.log(newLyricPost);
           console.log(postId);
-          // onPostIdReceived(postId);
-
-          // navigate(nextPath);
-
           navigate(`/detail/${postId}`);
           break;
 
         default:
           navigate(nextPath);
       }
+
     } else {
       // alert("필수항목을 모두 채워주세요!");
     }

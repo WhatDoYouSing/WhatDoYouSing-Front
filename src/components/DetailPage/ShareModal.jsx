@@ -54,6 +54,7 @@ const Container = styled.div`
   gap: 16px;
   border-radius: 10px;
   background-color: var(--white);
+  z-index: 101;
 `;
 
 const Title = styled.div`
