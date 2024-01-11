@@ -38,7 +38,7 @@ const Footer = () => {
             <Github />
           </ImgDiv>
         </IconDiv>
-        <Copyright>Copyright © WDYS. All Rights Reserved.</Copyright>
+        <Copyright>Copyright . WDYS. All Rights Reserved.</Copyright>
       </Container>
     </Wrapper>
   );
