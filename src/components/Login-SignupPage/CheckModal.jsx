@@ -14,15 +14,6 @@ const CheckModal = () => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    // console.log(signupForm, profile);
-    // PostSignup(
-    //   signupForm.username,
-    //   signupForm.password,
-    //   signupForm.nickname,
-    //   profile,
-    //   navigate
-    // );
-    // PostProfile(profile);
     navigate("/profile/1");
   };
 

@@ -53,7 +53,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.label`
-  width: 120px;
+  width: 12rem;
   padding: 1.4rem 1.6rem;
 
   border-radius: 16px;
@@ -62,6 +62,7 @@ const Container = styled.label`
   justify-content: space-between;
   align-items: center;
 
+  font-family: "Pretendard-regular";
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;

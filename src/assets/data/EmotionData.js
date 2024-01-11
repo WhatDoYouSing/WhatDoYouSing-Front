@@ -1,5 +1,5 @@
 //img
-import cherry1 from "../../images/icons/cherry1.svg";
+import cherry1 from "../../images/icons/png/cherry1.png";
 import cherry2 from "../../images/icons/cherry2.svg";
 import cherry3 from "../../images/icons/cherry3.svg";
 import henry1 from "../../images/icons/henry1.svg";

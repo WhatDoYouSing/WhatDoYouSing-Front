@@ -58,7 +58,6 @@ const path_list = [
 
 const MyPage = () => {
   const navigate = useNavigate();
-  // const isLogin = useRecoilValue(LoginState);
   const isLogin = localStorage.getItem("token") !== null;
   const profileList = useRecoilValue(profileListAtom);
   const setMyEmotionState = useSetRecoilState(MyEmotionState);
@@ -76,6 +75,7 @@ const MyPage = () => {
   const [userID, setUserID] = useState(null);
   const [userName, setUserName] = useState(null);
   const [profile, setProfile] = useState(1);
+  const [isKakaoUser, setIsKakaoUser] = useState(false);
 
   useEffect(() => {
     if (!isLogin) {
@@ -85,13 +85,30 @@ const MyPage = () => {
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
 
-      const handleInfo = async () => {
-        const myInfo = await GetMyPage();
-      };
-      handleInfo();
+      // const handleInfo = async () => {
+      //   const myInfo = await GetMyPage();
+      // };
+      // handleInfo();
+
+      if (userName) {
+        setIsKakaoUser(userName.indexOf("kakao") !== -1);
+        setUserName(
+          userName.indexOf("kakao") !== -1
+            ? "카카오 로그인"
+            : localStorage.getItem("username")
+        );
+      }
     }
     setMyEmotionState("");
-  }, []);
+  }, [userName]);
+
+  const handleIsKakao = async () => {
+    if (isKakaoUser) {
+      navigate("/modifyintro/pas");
+    } else {
+      alert("");
+    }
+  };
 
   return isLogin ? (
     <>
@@ -129,9 +146,7 @@ const MyPage = () => {
                 <Nav>아이디 </Nav>
                 <span>{userID}</span>
               </IDDiv>
-              <Nav onClick={() => navigate("/modifyintro/pas")}>
-                비밀번호 변경
-              </Nav>
+              <Nav onClick={handleIsKakao}>비밀번호 변경</Nav>
               <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
             </Action>
             <ActionEx>

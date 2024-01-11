@@ -94,6 +94,7 @@ export const PostCheckPassword = async (password) => {
       password: password,
     });
     console.log(response.data);
+
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -122,17 +123,25 @@ export const PatchNickname = async (nickname) => {
 };
 
 // PATCH : 비밀번호 수정
-export const PatchPassword = async (current_password, new_password) => {
+export const PatchPassword = async (
+  current_password,
+  new_password,
+  navigate
+) => {
   try {
     const response = await axiosInstance.patch("/accounts/update/password/", {
       current_password: current_password,
       new_password: new_password,
     });
     console.log(response.data);
+    alert(response.data.message);
+    navigate("/");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      alert(error.response.data.error.non_field_errors);
+      console.log(error.response.data);
+      alert(error.response.data.message);
+      navigate("/modifyintro/pas");
     }
     console.error(error.response);
   }
@@ -177,8 +186,6 @@ export const KakaoLogin = async (code) => {
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
     localStorage.setItem("user_profile", response.data.data.profile);
-
-    // alert("로그인에 성공했습니다!");
 
     window.location.replace(
       (response.data.message = "카카오 로그인 성공" ? "/" : "/kakao-nicname")
