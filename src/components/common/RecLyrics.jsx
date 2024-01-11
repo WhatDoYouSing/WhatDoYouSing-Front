@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 const RecLyrics = ({
+  onMouseDown,
+  onMouseUp,
   isRec = false,
   showComment = true,
   showChip = false,
@@ -18,7 +20,12 @@ const RecLyrics = ({
   const navigate = useNavigate();
 
   return (
-    <Wrapper onClick={() => navigate(`/detail/${id}`)}>
+    <Wrapper
+      onMouseDown={onMouseDown}
+      onMouseUp={() => {
+        onMouseUp(id);
+      }}
+    >
       <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
       {showComment && <LyricsComment>{content}</LyricsComment>}
       <SongDiv>

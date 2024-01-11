@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import EmotionChipWithNum from "./EmotionChipWithNum";
 import EmotionSelectModal from "./EmotionSelectModal";
@@ -14,6 +15,8 @@ import { emotionListAtom } from "../../assets/recoil/recoil";
 import { PatchDetailEmo, GetDetailEmo, DelDetailEmo } from "../../apis/detail";
 
 const EmotionBox = ({ postId, render, setRender }) => {
+  const navigate = useNavigate();
+
   const emotions = useRecoilValue(emotionListAtom);
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
@@ -26,19 +29,34 @@ const EmotionBox = ({ postId, render, setRender }) => {
 
   //칩 클릭 & 데이터 PATCH
   const handleChipClick = async (content) => {
-    if (selectedChip.content === content) {
-      delEmotion(postId);
-    } else {
-      patchEmotion(postId, content);
-    }
+    if (localStorage.getItem("token")) {
+      if (selectedChip.content === content) {
+        delEmotion(postId);
+      } else {
+        patchEmotion(postId, content);
+      }
 
-    setSelectedChip((prevSelectedChip) => ({
-      content: prevSelectedChip.content === content ? null : content,
-    }));
+      setSelectedChip((prevSelectedChip) => ({
+        content: prevSelectedChip.content === content ? null : content,
+      }));
+    } else {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   const patchEmotion = async (postId, content) => {
     const patchEmotions = await PatchDetailEmo(postId, content);
+
+    if (patchEmotions.message === "투표감정 조회 실패") {
+      setEmotionCount([]);
+    } else {
+      setEmotionCount(patchEmotions.data.Emotion);
+      setSelectedChip({
+        content: patchEmotions.data.my_emotion
+          ? patchEmotions.data.my_emotion[0]
+          : null,
+      });
+    }
 
     setRender(render + 1);
   };

@@ -44,7 +44,7 @@ export const PostSignup = async (
     });
     console.log(response.data);
     alert("가입이 완료되었습니다.");
-    // navigate("/login");
+    navigate("/login");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -75,6 +75,9 @@ export const PostProfile = async (profile) => {
     });
 
     console.log(response.data);
+    localStorage.setItem("user_profile", response.data.data.profile);
+    window.location.replace("/");
+
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -143,12 +146,13 @@ export const DelAccount = async (password, navigate) => {
       password: password,
     });
     console.log(response.data);
+    alert("회원탈퇴가 완료되었습니다.");
     window.localStorage.removeItem("user_id");
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("nickname");
     window.localStorage.removeItem("user_profile");
     window.localStorage.removeItem("token");
-    navigate("/");
+    window.location.replace("/");
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -160,35 +164,28 @@ export const DelAccount = async (password, navigate) => {
 
 //GET
 // GET : 카카오 로그인
-export const KaKaoLogin = async () => {
+export const KakaoLogin = async (code) => {
   try {
-    const response = await axiosInstance.get("/accounts/kakao/");
-    const ACCESS_TOKEN = response.data.data.access_token;
-    const REFRESH_TOKEN = response.data.data.refresh_token;
+    const response = await axiosInstance.get(
+      `/accounts/kakao/callback/?code=${code}`
+    );
 
-    localStorage.setItem("token", ACCESS_TOKEN);
-    localStorage.setItem("refresh_token", REFRESH_TOKEN);
+    console.log(response.data);
 
-    return Promise.resolve(response);
+    localStorage.setItem("user_id", response.data.data.id);
+    localStorage.setItem("username", response.data.data.username);
+    localStorage.setItem("nickname", response.data.data.nickname);
+    localStorage.setItem("token", response.data.data.access_token);
+    localStorage.setItem("user_profile", response.data.data.profile);
+
+    // alert("로그인에 성공했습니다!");
+
+    window.location.replace(
+      (response.data.message = "카카오 로그인 성공" ? "/" : "/kakao-nicname")
+    );
+
+    return Promise.resolve(response.data);
   } catch (error) {
     return Promise.reject(error);
   }
 };
-
-// // GET : 카카오 로그인
-// export const KaKaoLogin = async (code) => {
-//   try {
-//     const response = await http.get(
-//       `/accounts/kakao/login/?code=${code}&redirect_uri=https://cheer-charm.vercel.app/oauth`
-//     );
-//     const ACCESS_TOKEN = response.data.data.access_token;
-//     const REFRESH_TOKEN = response.data.data.refresh_token;
-
-//     localStorage.setItem("token", ACCESS_TOKEN);
-//     localStorage.setItem("refresh_token", REFRESH_TOKEN);
-
-//     return Promise.resolve(response);
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
