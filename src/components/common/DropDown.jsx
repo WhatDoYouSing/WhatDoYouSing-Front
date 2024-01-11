@@ -43,7 +43,7 @@ const ListItem = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-family: "Pretendard-regular";
+  font-family: "AppleSDGothicNeo";
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;

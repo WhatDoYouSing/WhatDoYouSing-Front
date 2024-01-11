@@ -89,7 +89,6 @@ const InfoDiv = styled.div`
 const Title = styled.span`
   color: var(--Dark-Gray, #a0a0a0);
   text-align: center;
-  font-family: "Pretendard-regular";
   font-size: 10.4px;
   font-style: normal;
   font-weight: 500;
