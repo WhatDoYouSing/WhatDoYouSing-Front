@@ -78,7 +78,10 @@ const ImgDiv = styled.div`
   height: 1.6rem;
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
 
 const EmotionText = styled.div`
   font-size: 1.4rem;

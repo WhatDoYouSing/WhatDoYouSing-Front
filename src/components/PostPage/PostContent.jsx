@@ -14,7 +14,7 @@ const PostContent = ({ onBtn }) => {
 
   //유효성 검사
   const [lyric, setLyric] = useState("");
-  const [emotion, setEmotion] = useState("");
+  const [emotion, setEmotion] = useState(null);
   const [detail, setDetail] = useState("");
   const [song, setSong] = useState("");
   const [singer, setSinger] = useState("");
@@ -26,9 +26,9 @@ const PostContent = ({ onBtn }) => {
 
   //버튼 활성화
   useEffect(() => {
-    // const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
-    const isRequiredFieldsValid = lyric && emotion && detail && song && singer;
-    onBtn(isRequiredFieldsValid);
+    const isRequiredFieldsValid =
+      lyric && emotion !== null && detail && song && singer;
+    onBtn(!!isRequiredFieldsValid);
   }, [lyric, emotion, detail, song, singer]);
 
   const handleLyricChange = (e) => {
@@ -66,7 +66,6 @@ const PostContent = ({ onBtn }) => {
         link: link,
         sings_emotion: emotion,
       });
-      console.log("update");
     }, 500);
 
     // cleanup 함수
@@ -84,14 +83,6 @@ const PostContent = ({ onBtn }) => {
         </Title>
         <Lyric>
           <textarea
-            // value={lyric}
-            // onChange={(e) => {
-            //   setLyric(e.target.value);
-            //   setLyricCount(e.target.value.replace(/\s/g, "").length);
-            // }}
-            // maxLength={60}
-            // placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
-            // rows={3}
             value={lyric}
             onChange={handleLyricChange}
             maxLength={60}
