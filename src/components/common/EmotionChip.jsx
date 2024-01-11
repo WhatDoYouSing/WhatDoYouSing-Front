@@ -90,7 +90,9 @@ const EmotionText = styled.div`
   ${fontSizeStyles}
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+  ${imgSizeStyles};
+`;
 
 EmotionChip.defaultProps = {
   size: "medium",
@@ -108,7 +110,7 @@ export default function EmotionChip({
   return (
     <Wrapper size={size} onClick={onClick} isSelected={isSelected}>
       <ImgDiv imgSize={size}>
-        <Img src={isSelected ? srcList[1] : srcList[0]}></Img>
+        <Img src={isSelected ? srcList[1] : srcList[0]} imgSize={size}></Img>
       </ImgDiv>
       <EmotionText fontSize={size}>{text}</EmotionText>
     </Wrapper>

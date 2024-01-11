@@ -64,8 +64,8 @@ const IntroTopbar = ({
           // navigate(nextPath);
           break;
         case "비밀번호 변경":
-          PatchPassword(existingPassword, newPassword);
-          navigate(nextPath);
+          PatchPassword(existingPassword, newPassword, navigate);
+          // navigate(nextPath);
           break;
         case "닉네임 변경":
           PatchNickname(newNickname);
