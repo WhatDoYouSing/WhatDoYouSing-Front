@@ -58,7 +58,7 @@ const IntroTopbar = ({
             navigate
           );
           // PostProfile(profile);
-          navigate(nextPath);
+          // navigate(nextPath);
           break;
         case "프로필 지정":
           PostProfile(profile);
@@ -69,7 +69,6 @@ const IntroTopbar = ({
           // navigate(nextPath);
           break;
         case "닉네임 변경":
-
           PatchNickname(newNickname);
           navigate(nextPath);
           break;
@@ -102,7 +101,6 @@ const IntroTopbar = ({
         default:
           navigate(nextPath);
       }
-
     } else {
       // alert("필수항목을 모두 채워주세요!");
     }
