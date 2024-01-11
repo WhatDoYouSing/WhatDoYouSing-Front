@@ -105,7 +105,10 @@ const ImgDiv = styled.div`
   height: 2rem;
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+  width: 2rem;
+  height: 2rem;
+`;
 
 const AD = styled.div`
   display: flex;

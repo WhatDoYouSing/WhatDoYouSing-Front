@@ -214,8 +214,8 @@ const ProfileContainer = styled.div`
   background-color: var(--lightGray);
 
   img {
-    width: 4rem;
-    height: 21px;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 `;
 

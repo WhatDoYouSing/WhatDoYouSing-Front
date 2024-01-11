@@ -99,7 +99,7 @@ const Wrapper = styled.div`
   height: 7.9rem;
   background-color: var(--white);
   color: var(--black);
-  z-index: 99;
+  z-index: 90;
 `;
 
 const Others = styled.div`
