@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { ReactComponent as Heart } from "../../images/heart.svg";
-import { ReactComponent as FullHeart } from "../../images/full-heart.svg";
+import heart from "../../images/change/heart-white.png";
+import full_heart from "../../images/change/heart-filled.png";
 
 import LikeInteraction from "./LikeInteraction";
 import Aos from "aos";
@@ -63,7 +63,8 @@ const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
                 <LikeInteraction noteId={noteId} />
               </div>
             )}
-            {isLiked ? <FullHeart /> : <Heart />}
+            <Img src={isLiked ? full_heart : heart} />
+
             {lyricContent.likes_count}
           </LikeBtn>
           <Link to={`${lyricContent.link}`}>
@@ -90,6 +91,11 @@ const Wrapper = styled.div`
   align-items: flex-end;
   align-self: stretch;
   padding: 4rem 0;
+`;
+
+const Img = styled.img`
+  width: 1.6rem;
+  height: 1.2rem;
 `;
 
 const SongDiv = styled.div`

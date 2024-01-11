@@ -20,6 +20,7 @@ import ProfileSettingPage from "./pages/UserInfo/ProfileSettingPage";
 
 import KakaoLoginPage from "./pages/UserInfo/KakaoLoginPage";
 import KakaoNicknamePage from "./pages/UserInfo/KakaoNicknamePage";
+import KakaoDeletePage from "./pages/UserInfo/KakaoDeletePage";
 
 import UserModifyIntroPage from "./pages/UserInfo/UserModifyIntroPage";
 import UserDeletePage from "./pages/UserInfo/UserDeletePage";
@@ -63,6 +64,7 @@ function App() {
           <Route path={"/pas-modify"} element={<PasModifyPage />}></Route>
           <Route path={"/nic-modify"} element={<NicModifyPage />}></Route>
           <Route path={"/delete"} element={<UserDeletePage />}></Route>
+          <Route path={"/kakao-delete"} element={<KakaoDeletePage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

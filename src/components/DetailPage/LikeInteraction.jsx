@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import note16 from "../../images/note16.png";
-import note8 from "../../images/note8.png";
-import note4 from "../../images/note4.png";
-import note2 from "../../images/note2.png";
+import note16 from "../../images/change/음표1.png";
+import note8 from "../../images/change/음표2.png";
+import note4 from "../../images/change/음표3.png";
+import note2 from "../../images/change//음표4.png";
 
 const LikeInteraction = ({ noteId }) => {
   const noteImages = [note16, note8, note4, note2];
@@ -14,7 +14,7 @@ const LikeInteraction = ({ noteId }) => {
   return (
     <Wrapper>
       <div className="ch">
-        <img src={selectedNoteImage} width="30px" alt={`Note ${noteId}`} />
+        <Img src={selectedNoteImage} alt={`Note ${noteId}`} />
       </div>
     </Wrapper>
   );
@@ -39,6 +39,10 @@ const Wrapper = styled.div`
       transform: rotate(-30deg);
     }
   }
+`;
+
+const Img = styled.img`
+  width: 3rem;
 `;
 
 export default LikeInteraction;
