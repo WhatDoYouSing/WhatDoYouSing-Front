@@ -81,15 +81,17 @@ const MyPage = () => {
     if (!isLogin) {
       navigate("/initial");
     } else if (isLogin) {
-      setUserID(localStorage.getItem("username") || "");
+      const userNames = localStorage.getItem("username");
+      console.log(userNames);
+      setUserID(userNames || "");
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
 
-      if (userID) {
-        setIsKakaoUser(userID.indexOf("kakao") !== -1);
-        console.log(userID.indexOf("kakao") !== -1);
+      if (userNames) {
+        setIsKakaoUser(userNames.indexOf("kakao_") !== -1);
+        console.log(userNames.indexOf("kakao_") !== -1);
         setUserID(
-          userID.indexOf("kakao") !== -1
+          userNames.indexOf("kakao_") !== -1
             ? "카카오 로그인"
             : localStorage.getItem("username")
         );
@@ -115,9 +117,9 @@ const MyPage = () => {
 
   const handleDelIsKakao = async () => {
     if (isKakaoUser) {
-      navigate("/delete");
-    } else {
       navigate("/kakao-delete");
+    } else {
+      navigate("/delete");
     }
   };
 

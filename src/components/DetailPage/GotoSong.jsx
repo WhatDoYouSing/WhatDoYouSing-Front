@@ -37,12 +37,9 @@ const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
     const PostLike = async (postId) => {
       const response = await PostDetailLike(postId);
       setRender(render + 1);
-      console.log(response);
     };
     PostLike(lyricContent.id);
   };
-
-  console.log("disabled", disabled);
 
   return (
     <>

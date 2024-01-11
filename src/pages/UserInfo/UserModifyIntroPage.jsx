@@ -90,12 +90,14 @@ const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
+  margin-top: 7.9rem;
 
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     min-height: 100%;
+    margin: 0;
   }
 `;
 
