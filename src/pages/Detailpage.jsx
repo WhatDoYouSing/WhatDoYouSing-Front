@@ -20,17 +20,6 @@ import { GetLyricsDetail } from "../apis/detail";
 import DeleteReModal from "../components/DeleteReModal";
 
 const Detailpage = () => {
-  //이 노래 들으러 가기 비활성화 -- data로부터 값받아 설정해줄것!
-  const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
-  const setLinked = () => {
-    if (
-      thisData.link === ""
-        ? setIsListenBtnDisabled(true)
-        : setIsListenBtnDisabled(false)
-    );
-  };
-  console.log("isListenBtnDisabled:", isListenBtnDisabled);
-
   const shareModalRef = useRef();
   const [share, setShare] = useClickOutside(shareModalRef, false);
 
@@ -47,6 +36,8 @@ const Detailpage = () => {
   const [deleteRe, setDeleteRe] = useClickOutside(deleteReModalRef, false);
   const [reNum, setReNum] = useState("");
 
+  const [isListenBtnDisabled, setIsListenBtnDisabled] = useState(false);
+
   //params로 id 받기
   let { postid } = useParams();
   //가사 상세 데이터
@@ -59,7 +50,17 @@ const Detailpage = () => {
       const response = await GetLyricsDetail(pk);
       console.log(response);
       setThisData(response.data);
+      const setLinked = () => {
+        if (
+          response.data.link === ""
+            ? setIsListenBtnDisabled(true)
+            : setIsListenBtnDisabled(false)
+        );
+      };
       setLinked();
+
+      console.log(response.data.link);
+      console.log("isListenBtnDisabled:", isListenBtnDisabled);
     };
     GetLyricDetailData(postid);
   }, [render]);
@@ -176,7 +177,7 @@ const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 100;
 `;
 
 const Background = styled.div`
@@ -189,5 +190,5 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 50;
+  z-index: 100;
 `;
