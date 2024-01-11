@@ -171,6 +171,27 @@ export const DelAccount = async (password, navigate) => {
   }
 };
 
+// DELETE : 카카오 회원 탈퇴
+export const DelKakaoAccount = async (navigate) => {
+  try {
+    const response = await axiosInstance.post("/accounts/kakao/delete/");
+    console.log(response.data);
+    alert("회원탈퇴가 완료되었습니다.");
+    window.localStorage.removeItem("user_id");
+    window.localStorage.removeItem("username");
+    window.localStorage.removeItem("nickname");
+    window.localStorage.removeItem("user_profile");
+    window.localStorage.removeItem("token");
+    window.location.replace("/");
+    return Promise.resolve(response.data);
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      alert(error.response.data.error.non_field_errors);
+    }
+    console.error(error.response);
+  }
+};
+
 //GET
 // GET : 카카오 로그인
 export const KakaoLogin = async (code) => {
@@ -188,7 +209,7 @@ export const KakaoLogin = async (code) => {
     localStorage.setItem("user_profile", response.data.data.profile);
 
     window.location.replace(
-      (response.data.message = "카카오 로그인 성공" ? "/" : "/kakao-nicname")
+      response.data.message === "카카오 로그인 성공" ? "/" : "/kakao-nicname"
     );
 
     return Promise.resolve(response.data);

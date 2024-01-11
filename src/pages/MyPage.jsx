@@ -85,28 +85,39 @@ const MyPage = () => {
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
 
-      // const handleInfo = async () => {
-      //   const myInfo = await GetMyPage();
-      // };
-      // handleInfo();
-
-      if (userName) {
-        setIsKakaoUser(userName.indexOf("kakao") !== -1);
-        setUserName(
-          userName.indexOf("kakao") !== -1
+      if (userID) {
+        setIsKakaoUser(userID.indexOf("kakao") !== -1);
+        console.log(userID.indexOf("kakao") !== -1);
+        setUserID(
+          userID.indexOf("kakao") !== -1
             ? "카카오 로그인"
             : localStorage.getItem("username")
         );
       }
+
+      const handleInfo = async () => {
+        const myInfo = await GetMyPage();
+      };
+      handleInfo();
     }
     setMyEmotionState("");
-  }, [userName]);
+  }, []);
 
-  const handleIsKakao = async () => {
+  const handlePasIsKakao = async () => {
     if (isKakaoUser) {
-      navigate("/modifyintro/pas");
+      alert(
+        "카카오 아이디로 로그인하신 경우, 비밀번호는 카카오 서비스에서 변경하실 수 있습니다."
+      );
     } else {
-      alert("");
+      navigate("/modifyintro/pas");
+    }
+  };
+
+  const handleDelIsKakao = async () => {
+    if (isKakaoUser) {
+      navigate("/delete");
+    } else {
+      navigate("/kakao-delete");
     }
   };
 
@@ -146,12 +157,12 @@ const MyPage = () => {
                 <Nav>아이디 </Nav>
                 <span>{userID}</span>
               </IDDiv>
-              <Nav onClick={handleIsKakao}>비밀번호 변경</Nav>
+              <Nav onClick={handlePasIsKakao}>비밀번호 변경</Nav>
               <Nav onClick={() => navigate("/nic-modify")}>닉네임 변경</Nav>
             </Action>
             <ActionEx>
               <div className="title">기타</div>
-              <Nav onClick={() => navigate("/delete")}>회원 탈퇴</Nav>
+              <Nav onClick={handleDelIsKakao}>회원 탈퇴</Nav>
             </ActionEx>
           </div>
         </Grid>

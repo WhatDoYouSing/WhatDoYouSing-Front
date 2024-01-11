@@ -10,23 +10,18 @@ import check_off from "../../images/checkbox-off.svg";
 import check_on from "../../images/checkbox-on.svg";
 
 //api
-import { DelAccount } from "../../apis/user";
+import { DelKakaoAccount } from "../../apis/user";
 
 const KakaoDeletePage = () => {
   const navigate = useNavigate();
 
-  const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleDelBtn = async (password) => {
-    if (password.trim() === "") {
-      alert("비밀번호를 입력해주세요.");
-      return;
-    } else if (!isChecked) {
+  const handleDelBtn = async () => {
+    if (!isChecked) {
       alert("회원탈퇴 약관에 동의해주세요.");
     } else {
-      setPassword(password.trim());
-      const result = await DelAccount(password, navigate);
+      const result = await DelKakaoAccount(navigate);
       console.log(result);
     }
   };
@@ -47,16 +42,6 @@ const KakaoDeletePage = () => {
           <span>정말... 떠나시겠어요?</span>
         </Box>
         <SideBox>
-          <Login>회원정보 수정</Login>
-          <Info>비밀번호를 입력하세요.</Info>
-          <InputBox>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="본인의 비밀번호를 입력해 주세요."
-            />
-          </InputBox>
           <InfoBox>
             <Check
               src={isChecked ? check_on : check_off}
@@ -67,9 +52,7 @@ const KakaoDeletePage = () => {
               동의합니다.
             </DelInfo>
           </InfoBox>
-          <LoginBtn onMouseUp={() => handleDelBtn(password)}>
-            회원 탈퇴
-          </LoginBtn>
+          <LoginBtn onMouseUp={() => handleDelBtn()}>회원 탈퇴</LoginBtn>
         </SideBox>
       </Wrapper>
       <Footer />
