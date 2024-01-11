@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import music from "../../../images/fab.svg";
+import music from "../../../images/change/fab.png";
 
 const FloatingBtn = () => {
   const navigate = useNavigate();
@@ -47,6 +47,6 @@ const ImgDiv = styled.div`
 `;
 
 const Img = styled.img`
-  /* width: 2.4rem;
-  height: 2.2rem; */
+  width: 2.4rem;
+  height: 2.2rem;
 `;

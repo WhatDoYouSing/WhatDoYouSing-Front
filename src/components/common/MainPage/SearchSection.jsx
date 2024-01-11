@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import comments from "../../../images/comments.svg";
-import lastest from "../../../images/latest.svg";
+import comments from "../../../images/change/cmt.png";
+import lastest from "../../../images/change/new.png";
 
 //components
 import EmotionList from "../EmotionList";
