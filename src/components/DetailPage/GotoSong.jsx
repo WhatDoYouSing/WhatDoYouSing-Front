@@ -68,12 +68,7 @@ const GotoSong = ({ lyricContent, render, setRender, disabled }) => {
             {lyricContent.likes_count}
           </LikeBtn>
           <Link to={`${lyricContent.link}`}>
-            <GoListen
-              disabled={disabled}
-              style={{ color: disabled ? "var(--gray)" : "var(--black)" }}
-            >
-              이 노래 들으러 가기
-            </GoListen>
+            <GoListen disabled={disabled}>이 노래 들으러 가기</GoListen>
           </Link>
         </Buttons>
       </Wrapper>
@@ -155,7 +150,10 @@ const GoListen = styled.div`
   gap: 0.5rem;
   border-radius: 8rem;
   border: 0.15rem solid var(--gray);
-  background: var(--white);
+  color: ${(props) => (props.disabled ? "var(--gray)" : "var(--black)")};
+  background-color: ${(props) =>
+    props.disabled ? " var(--lightGray)" : "var(--white)"};
+  /* background: var(--white); */
 
   font-size: 1.4rem;
   font-style: normal;

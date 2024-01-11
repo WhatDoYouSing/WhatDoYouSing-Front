@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
-import { ReactComponent as Symbol } from "../../images/icons/doong-ee3.svg";
+import symbol from "../../images/icons/png/doong-ee3.png";
 import check_off from "../../images/checkbox-off.svg";
 import check_on from "../../images/checkbox-on.svg";
 
@@ -42,7 +42,7 @@ const KakaoDeletePage = () => {
         <IntroTopbar text="회원탈퇴" delPath="/my" />
         <Box>
           <ImgBoxS>
-            <Symbol />
+            <Img src={symbol} />
           </ImgBoxS>
           <span>정말... 떠나시겠어요?</span>
         </Box>
@@ -117,9 +117,11 @@ const Box = styled(ColumnStyle)`
   }
 `;
 
-const ImgBoxS = styled.div`
-  width: 10.2rem;
-  height: 10.1rem;
+const ImgBoxS = styled.div``;
+
+const Img = styled.img`
+  width: 105px;
+  height: 105px;
 
   @media (min-width: 1200px) {
     width: 18rem;
