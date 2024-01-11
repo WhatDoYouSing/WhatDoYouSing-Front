@@ -29,7 +29,7 @@ const LyricWithWriter = ({ lyricContent }) => {
       <TitleLyrics>{lyricContent.lyrics}</TitleLyrics>
 
       <LyricsComment>{lyricContent.content}</LyricsComment>
-      <Writer>{lyricContent.author_nickname}</Writer>
+      <Writer>by. {lyricContent.author_nickname}</Writer>
     </Wrapper>
   );
 };
