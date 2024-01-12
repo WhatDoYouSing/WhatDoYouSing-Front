@@ -65,7 +65,7 @@ export default EmotionSearch;
 const Emotions = styled.div`
   display: flex;
   padding: 1rem 0;
-  padding: ${(props) => (props.isPadding ? "1rem 0" : "0")};
+  padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0 0.4rem")};
   align-items: flex-start;
   align-self: stretch;
   overflow-x: scroll;
@@ -87,6 +87,6 @@ const Emotions = styled.div`
   }
 
   @media (min-width: 1100px) {
-    padding: ${(props) => (props.isPadding ? "1rem 16.8rem" : "0 0")};
+    padding: ${(props) => (props.isPadding ? "1rem 16.8rem" : "0 0 0.4rem")};
   }
 `;
