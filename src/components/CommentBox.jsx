@@ -51,6 +51,7 @@ const CommentBox = ({
       setIsLiked(!isLiked);
     } else {
       alert("로그인이 필요합니다.");
+      navigate("/initial");
     }
 
     // setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
@@ -67,6 +68,7 @@ const CommentBox = ({
       }
     } else {
       alert("로그인이 필요합니다.");
+      navigate("/initial");
     }
   };
 
@@ -132,22 +134,20 @@ const CommentBox = ({
               </Count>
               {showReply && (
                 <>
-                  <span>·</span>
                   <AddReply
                     onClick={() => {
                       handleReply();
                     }}
                   >
-                    답글달기
+                    · 답글달기
                   </AddReply>
                 </>
               )}
 
               {showDeleteButton && (
-                <>
-                  <span>·</span>
-                  <div onClick={handleDelete}>삭제하기</div>
-                </>
+                <DelBtn>
+                  <div onClick={handleDelete}>· 삭제하기</div>
+                </DelBtn>
               )}
             </Plus>
             {/* {content.recomments_count > 0 && (
@@ -276,8 +276,20 @@ const Plus = styled.div`
 `;
 
 const LikeBtn = styled.div``;
-const Count = styled.div``;
-const AddReply = styled.div``;
+const Count = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0.25rem;
+`;
+const AddReply = styled.div`
+  padding: 0 0 0.4rem 0.3rem;
+`;
+
+const DelBtn = styled.div`
+  padding: 0 0 0.4rem 0.3rem;
+`;
+
 const Replies = styled.div``;
 
 const InputBoxPosition = styled.div`

@@ -6,6 +6,7 @@ import { ReactComponent as Share } from "../images/share.svg";
 import { ReactComponent as BookmarkOff } from "../images/bookmark-off.svg";
 import { ReactComponent as BookmarkOn } from "../images/bookmark-on.svg";
 import { ReactComponent as Meatball } from "../images/meatball.svg";
+import home from "../images/icons/home.png";
 
 import MeatballSelect from "./DetailPage/MeatballSelect";
 
@@ -52,6 +53,7 @@ const TopTab = ({
       Scrap(postId);
     } else {
       alert("로그인이 필요합니다.");
+      navigate("/initial");
     }
   };
 
@@ -64,6 +66,7 @@ const TopTab = ({
       <Wrapper>
         <Back onClick={goBack} />
         <Others>
+          <Home src={home} onClick={() => navigate("/")} />
           <Share onClick={handleShare} />
           {isBookmarked ? (
             <BookmarkOn onClick={handleBookmark} />
@@ -103,9 +106,20 @@ const Wrapper = styled.div`
   background-color: var(--white);
   color: var(--black);
   z-index: 90;
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem;
+  }
 `;
 
 const Others = styled.div`
+  width: auto;
+  height: auto;
+  flex-direction: row;
+  cursor: pointer;
+`;
+
+const Home = styled.img`
   width: auto;
   height: auto;
   flex-direction: row;

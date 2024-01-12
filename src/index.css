@@ -169,7 +169,7 @@
   font-style: normal;
   src: url("./statics/fonts/AppleSDGothicNeoT.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -178,7 +178,7 @@
   font-style: normal;
   src: url("./statics/fonts/AppleSDGothicNeoUL.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -186,7 +186,7 @@
   font-weight: 300;
   src: url("./statics/fonts/AppleSDGothicNeoL.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -194,7 +194,7 @@
   font-weight: 400;
   src: url("./statics/fonts/AppleSDGothicNeoR.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -202,7 +202,7 @@
   font-weight: 500;
   src: url("./statics/fonts/AppleSDGothicNeoM.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -210,7 +210,7 @@
   font-weight: 600;
   src: url("./statics/fonts/AppleSDGothicNeoSB.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -218,7 +218,7 @@
   font-weight: 700;
   src: url("./statics/fonts/AppleSDGothicNeoB.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -226,7 +226,7 @@
   font-weight: 800;
   src: url("./statics/fonts/AppleSDGothicNeoEB.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 @font-face {
@@ -234,7 +234,7 @@
   font-weight: 900;
   src: url("./statics/fonts/AppleSDGothicNeoH.ttf") format("truetype");
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+0030-0039, U+1100-115F;
+  unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B;
 }
 
 /* Dots */
