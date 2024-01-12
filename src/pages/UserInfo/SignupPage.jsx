@@ -264,7 +264,7 @@ const SignupPage = () => {
             )}
           </Box>
         </PasswordDiv>
-        <Box>
+        <Box style={{ marginBottom: "9.1rem" }}>
           <Guide>
             닉네임 <span>*</span>
           </Guide>

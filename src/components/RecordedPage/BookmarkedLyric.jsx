@@ -48,6 +48,7 @@ const BookmarkedLyric = () => {
             />
           ))}
         </LyricsWrapper>
+
         <Pagination
           total={totalPage}
           page={currentPage}

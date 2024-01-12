@@ -29,12 +29,7 @@ const SearchPage = () => {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setSearchKeyword(keyword);
-    }, 500);
-    // cleanup 함수
-    return () => clearTimeout(delayTimer);
+    setSearchKeyword(keyword);
   }, [keyword]);
 
   useEffect(() => {
