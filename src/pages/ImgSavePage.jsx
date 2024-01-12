@@ -110,7 +110,6 @@ const TopBar = styled.div`
   width: 100%;
   height: 9rem;
   background-color: var(--white);
-  padding: 0 1.6rem;
 `;
 const Container = styled.div`
   width: 100%;
