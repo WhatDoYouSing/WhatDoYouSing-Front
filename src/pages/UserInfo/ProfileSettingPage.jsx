@@ -90,7 +90,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-top: 11.3rem;
+  margin: 11.3rem 0 5rem;
 
   @media (min-width: 1200px) {
     padding: 0 20.6rem;

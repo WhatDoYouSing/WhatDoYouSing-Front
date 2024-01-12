@@ -27,6 +27,9 @@ const TopTab = ({
 }) => {
   const navigate = useNavigate();
   const goBack = () => {
+    // const string = document.referrer;
+    // console.log("이전 경로 : ", document.referrer);
+
     navigate(-1);
   };
 

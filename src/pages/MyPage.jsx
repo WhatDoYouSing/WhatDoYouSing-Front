@@ -101,6 +101,7 @@ const MyPage = () => {
         const myInfo = await GetMyPage();
       };
       handleInfo();
+      window.scrollTo(0, 0);
     }
     setMyEmotionState("");
   }, []);

@@ -67,6 +67,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
+  margin-bottom: 17rem;
+
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

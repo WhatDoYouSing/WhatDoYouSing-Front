@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import IntroTopbar from "../components/IntroTopbar";
@@ -14,6 +14,10 @@ const Postpage = (props) => {
   const handlePostIdReceived = (receivedPostId) => {
     setPostId(receivedPostId);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

@@ -100,11 +100,11 @@ const Wrapper = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  height: 7.9rem;
+  height: 7.8rem;
   background: var(--black);
 
   color: var(--white);
-  z-index: 99;
+  z-index: 5;
 `;
 
 const Container = styled.div`
@@ -164,5 +164,6 @@ const RoundDiv = styled.div`
   height: 1.6rem;
   background-color: var(--white);
   border-radius: 1.6rem 1.6rem 0 0;
-  z-index: 1;
+  z-index: 6;
+  bottom: 0;
 `;

@@ -297,6 +297,10 @@ const Source = styled.div`
     width: 26.4rem;
     flex-shrink: 0;
     border: none;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
     outline: none;
