@@ -55,6 +55,7 @@ const MainPage = () => {
     };
 
     handleClick();
+    window.scrollTo(0, 0);
   }, [selectedOption]);
 
   return (
@@ -81,11 +82,9 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding-bottom: 15.8rem;
 
-
   margin-top: 7.9rem;
 
   &::-webkit-scrollbar {
     display: none;
   }
-
 `;

@@ -59,12 +59,12 @@ const Saved = () => {
             />
           ))}
         </ItemDiv>
-        <Pagination
-          total={totalPage}
-          page={currentPage}
-          setPage={setCurrentPage}
-        />
       </Wrapper>
+      <Pagination
+        total={totalPage}
+        page={currentPage}
+        setPage={setCurrentPage}
+      />
     </div>
   );
 };
@@ -76,6 +76,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100%;
+  padding-bottom: 8rem;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -97,9 +99,13 @@ const SearchBar = styled.div`
     width: 100%;
     flex-shrink: 0;
     border: none;
+    border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
     outline: none;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
   }
 
   input::placeholder {

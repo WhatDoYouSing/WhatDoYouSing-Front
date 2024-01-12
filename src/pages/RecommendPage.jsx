@@ -43,7 +43,7 @@ const RecommendPage = () => {
 export default RecommendPage;
 
 const Wrapper = styled.div`
-  margin-top: 7.9rem;
+  margin: 7.9rem 0 8.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;

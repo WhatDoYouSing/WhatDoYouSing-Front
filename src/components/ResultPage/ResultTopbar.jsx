@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import EmotionSearch from "./EmotionSearch";
+
 import { ReactComponent as Back } from "../../images/back.svg";
 import { ReactComponent as Search } from "../../images/search.svg";
 
@@ -35,7 +37,7 @@ const ResultTopbar = () => {
   }, []);
 
   return (
-    <>
+    <Box>
       <Wrapper>
         <Back
           onClick={() => {
@@ -50,17 +52,25 @@ const ResultTopbar = () => {
         />
         <Search />
       </Wrapper>
-    </>
+      <EmotionSearch />
+    </Box>
   );
 };
 export default ResultTopbar;
 
-const Wrapper = styled.div`
+const Box = styled.div`
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
+
+  z-index: 90;
+`;
+
+const Wrapper = styled.div`
   display: flex;
   align-items: flex-end;
+  padding-bottom: 0.8rem;
 
   width: 100%;
   height: 7.9rem;
@@ -73,7 +83,12 @@ const Wrapper = styled.div`
     height: 4.8rem;
     border: none;
     outline: none;
+    border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
   }
 `;
