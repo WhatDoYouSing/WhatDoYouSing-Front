@@ -61,7 +61,7 @@ const Filter = styled.div`
   width: 100%;
   align-items: flex-start;
   gap: 1.4rem;
-  padding: 1.6rem 0;
+  padding: 1.6rem 0 0;
   span {
     display: flex;
     padding: 1.9rem 2rem;

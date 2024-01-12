@@ -65,13 +65,17 @@ const Box = styled.div`
   left: 0;
   padding: 0 1.6rem;
 
+  @media (min-width: 1100px) {
+    padding: 0;
+  }
+
   z-index: 90;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-end;
-  padding-bottom: 0.8rem;
+  padding-bottom: 1rem;
 
   width: 100%;
   height: 7.9rem;
@@ -80,7 +84,7 @@ const Wrapper = styled.div`
   z-index: 9999;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem;
+    padding: 0 16.8rem 1rem;
   }
 
   input {

@@ -32,7 +32,7 @@ const BookmarkedEmotion = () => {
 
   return (
     <>
-      <EmotionSearch />
+      <EmotionSearch isPadding={false} />
       <Wrapper>
         <ItemDiv>
           {bookmarkedList.map((item) => (
@@ -74,8 +74,8 @@ const ItemDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between;
   align-items: flex-end;
-  align-self: stretch;
+  align-self: stretch; */
   gap: 4rem;
 `;

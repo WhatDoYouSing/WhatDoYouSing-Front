@@ -76,6 +76,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 5rem;
   margin-bottom: 17rem;
 
   @media (min-width: 1200px) {
@@ -93,7 +94,7 @@ const ColumnStyle = styled.div`
 `;
 
 const Box = styled(ColumnStyle)`
-  margin: 17.8rem 0 4.2rem;
+  margin: 12.8rem 0 4.2rem;
   gap: 2.5rem;
 
   @media (min-width: 1200px) {

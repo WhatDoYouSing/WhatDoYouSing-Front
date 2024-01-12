@@ -102,7 +102,7 @@ const ColumnStyle = styled.div`
 `;
 
 const Box = styled(ColumnStyle)`
-  margin: 23.7rem 0 6.4rem;
+  margin: 17.8rem 0 6.4rem;
   gap: 2.5rem;
 
   span {
