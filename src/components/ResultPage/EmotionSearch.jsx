@@ -62,12 +62,13 @@ export default EmotionSearch;
 
 const Emotions = styled.div`
   display: flex;
-  padding: 1rem 0rem;
+  padding: 1rem 1.6rem;
   align-items: flex-start;
   align-self: stretch;
-  overflow-x: auto;
+  overflow-x: scroll;
+  background-color: var(--white);
 
-  width: "100%";
+  width: 100%;
 
   /* 스크롤바 감추기 */
   scrollbar-width: thin;

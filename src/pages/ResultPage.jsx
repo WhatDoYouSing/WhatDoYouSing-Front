@@ -12,7 +12,7 @@ const ResultPage = () => {
     <>
       <Wrapper>
         <ResultTopbar />
-        <EmotionSearch />
+
         <FilterResult />
       </Wrapper>
       <Footer />
@@ -24,6 +24,6 @@ const ResultPage = () => {
 export default ResultPage;
 
 const Wrapper = styled.div`
-  padding: 11.4rem 0 15.8rem;
+  padding: 13rem 0 15.8rem;
   min-height: 100%;
 `;

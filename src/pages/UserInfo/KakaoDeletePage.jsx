@@ -68,7 +68,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: auto;
   min-height: 100%;
-  padding-bottom: 15.8rem;
+  padding-bottom: 25.8rem;
 
   @media (min-width: 1200px) {
     display: grid;
@@ -127,54 +127,6 @@ const SideBox = styled(ColumnStyle)`
     background: var(--white);
 
     box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const Info = styled.span`
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 800;
-  text-align: start;
-`;
-
-const Login = styled.div`
-  color: var(--black);
-  text-align: center;
-
-  font-size: 3.2rem;
-  font-weight: 800;
-
-  margin-bottom: 6.4rem;
-
-  @media (max-width: 1200px) {
-    display: none;
-  }
-`;
-
-const InputBox = styled(ColumnStyle)`
-  width: 100%;
-
-  margin-bottom: 6.4rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 4.8rem;
-  background: var(--white);
-  padding: 0 1rem;
-
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 500;
-
-  border: none;
-  outline: none;
-  border-bottom: 0.2rem solid var(--black);
-  transition: border-bottom-color 0.3s ease;
-
-  &::placeholder {
-    color: var(--gray);
   }
 `;
 

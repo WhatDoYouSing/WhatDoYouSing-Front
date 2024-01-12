@@ -44,8 +44,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateY(-100%);
   gap: 4px;
-  margin: 16px;
 `;
 
 const Button = styled.button`

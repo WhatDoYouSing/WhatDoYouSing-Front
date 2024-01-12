@@ -11,6 +11,7 @@ const ImgCard = ({ captureRef, data }) => {
     <>
       <Wrapper ref={captureRef}>
         <Container>
+          <Insta>@what_doyousing</Insta>
           <Lyric>{data.lyrics}</Lyric>
           <Detail>{data.content}</Detail>
           <More>
@@ -44,6 +45,16 @@ const Wrapper = styled.div`
   background: var(--white);
 `;
 
+const Insta = styled.div`
+  color: var(--Gray, #d9d9d9);
+  font-size: 13.732px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 17.851px */
+  letter-spacing: -0.137px;
+
+  margin-bottom: 2rem;
+`;
 const Container = styled.div`
   display: flex;
   width: 30.7249rem;

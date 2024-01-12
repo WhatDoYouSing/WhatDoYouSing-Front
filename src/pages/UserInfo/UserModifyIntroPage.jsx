@@ -235,6 +235,7 @@ const Input = styled.input`
 
   border: none;
   outline: none;
+  border-radius: 0;
   border-bottom: 0.2rem solid var(--black);
   transition: border-bottom-color 0.3s ease;
 
