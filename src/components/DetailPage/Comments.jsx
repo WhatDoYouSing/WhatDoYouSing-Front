@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import CommentBox from "../CommentBox";
 
@@ -18,6 +19,7 @@ const Comments = ({
   setDeleteRe,
   setReNum,
 }) => {
+  const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [activeReply, setActiveReply] = useState(null);
@@ -64,7 +66,10 @@ const Comments = ({
       }
 
       setComment("");
-    } else alert("로그인이 필요합니다.");
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate("/initial");
+    }
   };
 
   const totalCommentsCount = commentList
@@ -75,7 +80,7 @@ const Comments = ({
     : [];
 
   return (
-    <Wrapper>
+    <Wrapper style={{ paddingBottom: "5rem" }}>
       <CommentCount>댓글 {totalCommentsCount}개</CommentCount>
       <CommentInput>
         <input

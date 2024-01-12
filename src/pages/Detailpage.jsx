@@ -162,7 +162,8 @@ const Detailpage = () => {
 export default Detailpage;
 
 const Wrapper = styled.div`
-  margin-top: 7.9rem;
+  margin: 7.9rem 0 0;
+  background-color: #fff;
 `;
 
 const ModalWrapper = styled.div`

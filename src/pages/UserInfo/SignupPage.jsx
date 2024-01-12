@@ -309,6 +309,8 @@ const Wrapper = styled.div`
 
   margin: 12.9rem 0 9.1rem;
 
+  background-color: #fff;
+
   @media (min-width: 1200px) {
     padding: 0 20.6rem;
   }
@@ -322,7 +324,7 @@ const TopBarWrapper = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  height: 11.3rem;
+  height: 7.9rem;
   background: var(--white);
 
   color: var(--black);
@@ -347,6 +349,10 @@ const ImgDiv = styled.div`
   position: absolute;
   left: 1.6rem;
 
+  @media (min-width: 1200px) {
+    left: 16.8rem;
+  }
+
   cursor: pointer;
 `;
 
@@ -367,6 +373,10 @@ const NextBtn = styled.button`
   justify-content: center;
   align-items: center;
   right: 1.6rem;
+
+  @media (min-width: 1200px) {
+    right: 16.8rem;
+  }
 
   flex-shrink: 0;
   border-radius: 1.6rem;

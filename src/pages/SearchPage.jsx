@@ -70,11 +70,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 7.9rem 0 16.8rem;
+  margin: 5.8rem 0 16.8rem;
 `;
 
 const Title = styled.div`
-  margin-top: 14.3rem;
+  margin-top: 12.3rem;
 
   color: var(--black);
 
