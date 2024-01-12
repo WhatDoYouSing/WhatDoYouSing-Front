@@ -63,6 +63,7 @@ const Box = styled.div`
   width: 100%;
   top: 0;
   left: 0;
+  padding: 0 1.6rem;
 
   z-index: 90;
 `;
@@ -77,6 +78,10 @@ const Wrapper = styled.div`
   background: var(--white);
   color: var(--black);
   z-index: 9999;
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem;
+  }
 
   input {
     width: 100%;
