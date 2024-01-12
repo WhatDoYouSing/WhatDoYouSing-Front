@@ -46,7 +46,7 @@ const ImgSavePage = () => {
   };
 
   return (
-    <>
+    <Background>
       <Wrapper>
         <TopBar>
           <Container>
@@ -73,18 +73,23 @@ const ImgSavePage = () => {
           </Setting2>
         </Box>
       </Wrapper>
-    </>
+    </Background>
   );
 };
 
 export default ImgSavePage;
+
+const Background = styled.div`
+  height: 100%;
+  background-color: var(--black);
+`;
 
 const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2rem;
   top: 0;
   left: 0;
@@ -101,7 +106,7 @@ const TopBar = styled.div`
   display: flex;
   align-items: flex-end;
   width: 100%;
-  height: 11.3rem;
+  height: 7rem;
   background-color: var(--black);
 `;
 const Container = styled.div`
@@ -154,6 +159,7 @@ const Setting2 = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  width: 100%;
-  background-color: var(--black);
+  width: calc(100% + 1.6rem * 2);
+  padding-bottom: 13rem;
+  /* background-color: var(--black); */
 `;
