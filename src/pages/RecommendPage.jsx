@@ -34,7 +34,7 @@ const RecommendPage = () => {
         <ScrollContainer>
           <RecCarousel savedList={savedList} />
         </ScrollContainer>
-        <Reload style={{ marginBottom: "8.6rem" }} />
+        <Reload style={{ marginBottom: "7.6rem" }} />
       </Wrapper>
     </>
   );
@@ -47,13 +47,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   gap: 4rem;
 `;
 
 const ScrollContainer = styled.div`
-  padding: 9rem 0;
+  padding: 9rem 0 3rem;
 
   display: flex;
   align-items: center;

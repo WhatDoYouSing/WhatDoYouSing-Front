@@ -120,8 +120,8 @@ const Others = styled.div`
 `;
 
 const Home = styled.img`
-  width: auto;
-  height: auto;
+  width: 48px;
+  height: 48px;
   flex-direction: row;
   cursor: pointer;
 `;

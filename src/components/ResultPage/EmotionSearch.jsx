@@ -82,4 +82,8 @@ const Emotions = styled.div`
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }
+
+  @media (min-width: 1100px) {
+    padding: 1rem 16.8rem;
+  }
 `;
