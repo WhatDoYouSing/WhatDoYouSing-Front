@@ -24,6 +24,6 @@ const ResultPage = () => {
 export default ResultPage;
 
 const Wrapper = styled.div`
-  padding: 13rem 0 15.8rem;
+  padding: 13.5rem 0 15.8rem;
   min-height: 100%;
 `;

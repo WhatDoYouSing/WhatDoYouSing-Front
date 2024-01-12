@@ -109,7 +109,6 @@ const ImgDiv = styled.div`
 const Copyright = styled.span`
   color: var(--Dark-Gray, #a0a0a0);
   text-align: center;
-  font-family: "Pretendard-regular";
   font-size: 8.32px;
   font-style: normal;
   font-weight: 300;

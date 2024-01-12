@@ -26,7 +26,7 @@ const CheckModal = () => {
             현재로서는 <br /> 아이디와 비밀번호를
             <br /> 분실 시 찾을 수 없어요 ㅠ.ㅠ
           </AskComment>
-          <AskComment>정말 이 회원정보로 가입하시겠어요?</AskComment>
+          <Comment>정말 이 회원정보로 가입하시겠어요?</Comment>
         </ComDiv>
         <Button onMouseUp={handleClick} className="buttonDiv">
           네. 회원정보 기억했어요!
@@ -78,7 +78,17 @@ const ComDiv = styled.div`
   margin: 1.6rem 0 1rem;
 `;
 
-const AskComment = styled.div``;
+const AskComment = styled.div`
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+`;
+
+const Comment = styled.div`
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+`;
 
 const Button = styled.button`
   width: 26.8rem;

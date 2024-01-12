@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import { ReactComponent as Close } from "../images/close.svg";
 import { ReactComponent as Save } from "../images/save.svg";
+
+import { GetLyricsDetail } from "../apis/detail";
 
 import ImgCard from "../components/ImgSavePage/ImgCard";
 import html2canvas from "html2canvas";
@@ -15,6 +17,21 @@ const ImgSavePage = () => {
 
   const data = location.state?.data;
   // console.log("감정id: ", data.sings_emotion);
+
+  let { postid } = useParams();
+  console.log("감정id: ", postid);
+
+  //가사 상세 데이터
+  const [thisData, setThisData] = useState({});
+
+  useEffect(() => {
+    const GetLyricDetailData = async (pk) => {
+      const response = await GetLyricsDetail(pk);
+      setThisData(response.data);
+    };
+    GetLyricDetailData(postid);
+    console.log("잘되나?");
+  }, []);
 
   const handleCapture = () => {
     html2canvas(captureRef.current, { scale: 4 });
@@ -42,7 +59,7 @@ const ImgSavePage = () => {
             <Save width={18} height={18} onClick={handleCapture} />
           </Container>
         </TopBar>
-        <ImgCard captureRef={captureRef} data={data} />
+        <ImgCard captureRef={captureRef} data={thisData} />
       </Wrapper>
     </>
   );

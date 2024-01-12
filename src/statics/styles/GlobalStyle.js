@@ -50,24 +50,11 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         flex-direction: column;
 
-        /* &::-webkit-scrollbar {
+        &::-webkit-scrollbar {
     display: none;
-  } */
+  }
 
-  &::-webkit-scrollbar {
-    position: absolute;
-    right: 0;
-    width: 8px;  /* 세로축 스크롤바 폭 너비 */
-    
-}
-&::-webkit-scrollbar-thumb {
-    background: rgba(109, 109, 109, 0.2); /* 스크롤바 막대 색상 */
-    border:none; /* 스크롤바 막대 테두리 설정  */
-    border-radius: 20px;
-}
-&::-webkit-scrollbar-track {
-    background: transparent;  /*스크롤바 뒷 배경 색상*/
-}
+  
 
         @media (min-width: 1200px) {
             padding: 0 16.8rem;
