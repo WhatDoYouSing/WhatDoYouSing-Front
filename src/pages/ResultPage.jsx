@@ -8,6 +8,9 @@ import Footer from "../components/common/Footer";
 import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 
 const ResultPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Wrapper>
