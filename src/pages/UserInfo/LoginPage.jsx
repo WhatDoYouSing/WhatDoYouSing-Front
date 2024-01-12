@@ -93,7 +93,7 @@ const ColumnStyle = styled.div`
 `;
 
 const Box = styled(ColumnStyle)`
-  margin: 23.7rem 0 4.2rem;
+  margin: 17.8rem 0 4.2rem;
   gap: 2.5rem;
 
   @media (min-width: 1200px) {

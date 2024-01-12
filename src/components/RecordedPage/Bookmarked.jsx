@@ -49,9 +49,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between;
   align-items: flex-end;
-  align-self: stretch;
+  align-self: stretch; */
   @media (min-width: 1200px) {
     padding: 0 22.6rem;
   }

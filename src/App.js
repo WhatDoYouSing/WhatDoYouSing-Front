@@ -56,7 +56,7 @@ function App() {
           <Route path={"/post"} element={<PostPage />}></Route>
           <Route path={"/recorded/:id"} element={<RecordedPage />}></Route>
           <Route path={"/result"} element={<ResultPage />}></Route>
-          <Route path={"/save"} element={<ImgSavePage />}></Route>
+          <Route path={"/save/:postid"} element={<ImgSavePage />}></Route>
           <Route
             path={"/modifyintro/:id"}
             element={<UserModifyIntroPage />}
