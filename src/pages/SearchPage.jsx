@@ -75,7 +75,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7.9rem;
+  margin: 7.9rem 0 16.8rem;
 `;
 
 const Title = styled.div`
@@ -113,10 +113,16 @@ const Input = styled.input`
 
   border: none;
   outline: none;
+  border-radius: 0;
   border-bottom: 0.15rem solid var(--black);
   transition: border-bottom-color 0.3s ease;
 
-  &:focus {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+
+  &:focus,
+  &:not(:placeholder-shown) {
     border-bottom-color: var(--pointPink);
   }
 `;

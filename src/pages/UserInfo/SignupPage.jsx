@@ -137,6 +137,10 @@ const SignupPage = () => {
   }, [usernameValid, duplicate, passwordValid, passwordMatch, nicknameValid]);
   //나중에 중복확인을 아이디 규격 참일 때 가능하게 설정하고, 중복 확인 참일 때 활성화되도록 수정
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -303,7 +307,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
 
-  margin-top: 12.9rem;
+  margin: 12.9rem 0 9.1rem;
 
   @media (min-width: 1200px) {
     padding: 0 20.6rem;
@@ -410,6 +414,7 @@ const Input = styled.input`
 
   border: none;
   outline: none;
+  border-radius: 0;
   border-bottom: 0.2rem solid var(--black);
   transition: border-bottom-color 0.3s ease;
 

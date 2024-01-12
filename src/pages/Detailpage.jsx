@@ -48,7 +48,6 @@ const Detailpage = () => {
   useEffect(() => {
     const GetLyricDetailData = async (pk) => {
       const response = await GetLyricsDetail(pk);
-      console.log(response);
       setThisData(response.data);
       const setLinked = () => {
         if (
@@ -58,10 +57,8 @@ const Detailpage = () => {
         );
       };
       setLinked();
-
-      console.log(response.data.link);
-      console.log("isListenBtnDisabled:", isListenBtnDisabled);
     };
+    window.scrollTo(0, 0);
     GetLyricDetailData(postid);
   }, [render]);
 

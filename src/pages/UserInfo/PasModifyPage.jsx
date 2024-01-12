@@ -143,7 +143,7 @@ const Wrapper = styled.div`
   position: relative;
   height: auto;
   min-height: 100%;
-  padding: 13.7rem 0 15.8rem;
+  padding: 13.7rem 0 35.8rem;
 
   @media (min-width: 1200px) {
     padding: 0 20.6rem;
@@ -180,6 +180,7 @@ const Input = styled.input`
 
   border: none;
   outline: none;
+  border-radius: 0;
   border-bottom: 0.2rem solid var(--black);
   transition: border-bottom-color 0.3s ease;
 
