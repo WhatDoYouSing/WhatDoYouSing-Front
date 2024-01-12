@@ -167,7 +167,7 @@ const Container = styled.div`
   width: 100%;
   padding: 0 1.6rem 2.7rem;
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1100px) {
     padding: 0 16.8rem 2.7rem;
   }
 `;
@@ -177,6 +177,10 @@ const ImgDiv = styled.div`
   left: 1.6rem;
 
   cursor: pointer;
+
+  @media (min-width: 1100px) {
+    left: 16.8rem;
+  }
 `;
 
 const Title = styled.div`
@@ -196,6 +200,10 @@ const NextBtn = styled.button`
   justify-content: center;
   align-items: center;
   right: 1.6rem;
+
+  @media (min-width: 1100px) {
+    right: 16.8rem;
+  }
 
   flex-shrink: 0;
   border-radius: 1.6rem;

@@ -65,7 +65,7 @@ const ProfileSettingPage = () => {
         <Guide>
           거의 다 왔어요! <br /> 사용할 프로필을 선택해 주세요.
         </Guide>
-        <ProfileDiv>
+        <ProfileDiv style={{ marginBottom: "10rem" }}>
           {profiles.map(({ none_filled, filled }, profileIndex) => (
             <ProfileBox
               key={profileIndex}
@@ -90,7 +90,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin: 11.3rem 0 5rem;
+  margin: 16.8rem 0 5rem;
 
   @media (min-width: 1200px) {
     padding: 0 20.6rem;
@@ -104,7 +104,7 @@ const Guide = styled.div`
   font-weight: 700;
   line-height: 124%;
 
-  margin-top: 5.8rem;
+  /* margin-top: 5.8rem; */
 `;
 
 const ProfileDiv = styled.div`

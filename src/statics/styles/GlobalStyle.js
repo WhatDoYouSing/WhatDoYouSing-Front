@@ -56,7 +56,7 @@ const GlobalStyles = createGlobalStyle`
 
   
 
-        @media (min-width: 1200px) {
+        @media (min-width: 1100px) {
             padding: 0 16.8rem;
   }
     }

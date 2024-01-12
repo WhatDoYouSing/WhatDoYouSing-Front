@@ -55,8 +55,11 @@ const MainPage = () => {
     };
 
     handleClick();
-    window.scrollTo(0, 0);
   }, [selectedOption]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
