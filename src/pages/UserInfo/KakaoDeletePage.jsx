@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +30,10 @@ const KakaoDeletePage = () => {
     // 체크 상태를 토글하는 함수
     setIsChecked((prev) => !prev);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
