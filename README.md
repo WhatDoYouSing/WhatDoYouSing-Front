@@ -32,31 +32,30 @@
 <br/>
 <br/>
 
-## 🗂️ 폴더 구조 (추후 업데이트 예정)
+## 🗂️ 폴더 구조
 ```
 📂 public
 ⎪   └─  favicon.ico
 ⎪   └─  index.html
 📂 src
+├─ 📂 apis
+├─ 📂 assets
+⎪  ⎪   └─ 📂 data
+⎪  ⎪   └─ 📂 recoil     
 ├─ 📂 components
 ⎪  ⎪   └─ 📂 _common                    
-⎪  ⎪   ⎪   └─ LyricsItem.jsx
-⎪  ⎪   ⎪   └─ Dropdown.jsx
-⎪  ⎪   ⎪   └─ Emotion.jsx
-⎪  ⎪   ⎪   └─ EmotionGroup.jsx
-⎪  ⎪   └─  AskModal.jsx
-⎪  ⎪   └─  ShareModal.jsx
-⎪  ⎪   └─  CommentBox.jsx
-⎪  ⎪   └─  Reply.jsx
-⎪  ⎪   └─  EmotionCategory.jsx
-⎪  ⎪   └─  MySelectCategory.jsx
-⎪  ⎪   └─  SearchResult.jsx
+├─ 📂 hooks
+├─ 📂 images
 ├─ 📂 pages
-⎪  ⎪   └─  Loginpage.jsx
-⎪  ⎪   └─  SignUppage.jsx
+⎪  ⎪   └─ 📂 UserInfo
+⎪  ⎪   └─  Detailpage.jsx
+⎪  ⎪   └─  ImgSavepage.jsx
 ⎪  ⎪   └─  Mainpage.jsx
-⎪  ⎪   └─  Detailpage.jsx       
-⎪  ⎪   └─  Surfpage.jsx
+⎪  ⎪   └─  Postpage.jsx
+⎪  ⎪   └─  Detailpage.jsx
+⎪  ⎪   └─  RecommendPage.jsx
+⎪  ⎪   └─  Resultpage.jsx
+⎪  ⎪   └─  RecordedPage.jsx 
 ⎪  ⎪   └─  Searchpage.jsx
 ⎪  ⎪   └─  Mypage.jsx       
 ⎪  📂 statics 
