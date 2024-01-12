@@ -53,7 +53,7 @@ const Wrapper = styled.div`
 `;
 
 const ScrollContainer = styled.div`
-  padding: 9rem 0 2rem;
+  padding: 9rem 0 1rem;
 
   display: flex;
   align-items: center;

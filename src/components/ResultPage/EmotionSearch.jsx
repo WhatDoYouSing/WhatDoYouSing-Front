@@ -12,7 +12,7 @@ import {
   SelectEmotionState,
 } from "../../assets/recoil/apiRecoil";
 
-const EmotionSearch = () => {
+const EmotionSearch = ({ isPadding = true }) => {
   const emotions = useRecoilValue(emotionListAtom);
 
   const selectedMyEmotion = useRecoilValue(MyEmotionState); //my 검색 결과로 떴을 때
@@ -25,14 +25,16 @@ const EmotionSearch = () => {
   const isResultPage = location.pathname === "/result";
 
   const [selectedChip, setSelectedChip] = useState(
-    isResultPage ? selectedSearchEmotion : 0
+    isResultPage ? selectedSearchEmotion : null
   );
 
   const handleChipClick = (index) => {
     setSelectedChip((prevSelectedChip) =>
       prevSelectedChip === index ? null : index
     );
-    setSelectedMyEmotion(index);
+    setSelectedMyEmotion((prevSelectedChip) =>
+      prevSelectedChip === index ? "" : index
+    );
 
     if (isResultPage) {
       setSelectedSearchEmotion((prevSelectedChip) =>
@@ -43,7 +45,7 @@ const EmotionSearch = () => {
   console.log(selectedMyEmotion, selectedSearchEmotion);
   return (
     <>
-      <Emotions>
+      <Emotions isPadding={isPadding}>
         {emotions.map((emotion, index) => (
           <EmotionChipWithNum
             key={index}
@@ -85,5 +87,6 @@ const Emotions = styled.div`
 
   @media (min-width: 1100px) {
     padding: 1rem 16.8rem;
+    padding: ${(props) => (props.isPadding ? "1rem 16.8rem" : "1rem 0")};
   }
 `;

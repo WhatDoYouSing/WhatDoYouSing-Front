@@ -60,6 +60,10 @@ const Wrapper = styled.div`
   background: var(--white);
 
   box-shadow: 0 0.5rem 2.5rem 0 rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 1100px) {
+    right: 18.3rem;
+  }
 `;
 
 const ListItem = styled.div`

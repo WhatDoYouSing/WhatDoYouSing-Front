@@ -87,6 +87,14 @@ const Filter = styled.div`
   display: flex;
   flex-direction: row;
 
+  /* @media (min-width: 1100px) {
+    padding: 0 16.8rem;
+  } */
+
+  @media (min-width: 1200px) {
+    padding: 0 22.6rem;
+  }
+
   span {
     width: 7.8rem;
     color: var(--black);
