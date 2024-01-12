@@ -58,9 +58,12 @@ const Detailpage = () => {
       };
       setLinked();
     };
-    window.scrollTo(0, 0);
     GetLyricDetailData(postid);
   }, [render]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
