@@ -1,15 +1,16 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
 const ShareModal = ({ share, setShare, data }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const type = useParams();
 
   const handleCopyClipBoard = async () => {
-    console.log(location);
+    console.log(location, type);
     const textToCopy = `https://whatdoyousing.swygbro.com${location.pathname}`;
     try {
       await navigator.clipboard.writeText(textToCopy);
@@ -21,7 +22,7 @@ const ShareModal = ({ share, setShare, data }) => {
 
   const sendImgData = () => {
     const imgData = { data: data };
-    navigate("/save", { state: imgData });
+    navigate(`/save/${type.postid}`, { state: imgData });
   };
 
   return (

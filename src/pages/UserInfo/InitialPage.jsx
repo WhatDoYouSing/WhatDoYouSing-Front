@@ -50,7 +50,7 @@ const InitialPage = () => {
           >
             로그인
           </LoginBtn>
-          <KakaoBtn onClick={loginKakao}>
+          <KakaoBtn onClick={loginKakao} style={{ marginBottom: "17remrem" }}>
             <Kakao />
             카카오 로그인
           </KakaoBtn>
@@ -67,8 +67,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 17rem;
-
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -84,7 +82,7 @@ const ColumnStyle = styled.div`
 `;
 
 const Box = styled(ColumnStyle)`
-  margin: 23.7rem 0 4.2rem;
+  margin: 17.8rem 0 4.2rem;
   gap: 2.5rem;
 
   @media (min-width: 1200px) {
