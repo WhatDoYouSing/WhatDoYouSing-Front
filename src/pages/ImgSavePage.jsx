@@ -30,6 +30,7 @@ const ImgSavePage = () => {
       setThisData(response.data);
     };
     GetLyricDetailData(postid);
+    window.scrollTo(0, 0);
   }, []);
 
   const handleCapture = () => {
@@ -58,17 +59,19 @@ const ImgSavePage = () => {
             <Save width={18} height={18} onClick={handleCapture} />
           </Container>
         </TopBar>
-        <Setting>
-          다운로드 버튼을 누른 후,
-          <br />
-          이미지를 꾹 눌러서 저장해 주세요!
-        </Setting>
-        <ImgCard captureRef={captureRef} data={thisData} />
-        <Setting2>
-          ※ 사파리 이용자의 경우
-          <br />
-          설정 Safari 팝업 차단 '해제'를 해주세요.
-        </Setting2>
+        <Box>
+          <Setting>
+            다운로드 버튼을 누른 후,
+            <br />
+            이미지를 꾹 눌러서 저장해 주세요!
+          </Setting>
+          <ImgCard captureRef={captureRef} data={thisData} />
+          <Setting2>
+            ※ 사파리 이용자의 경우
+            <br />
+            설정 Safari 팝업 차단 '해제'를 해주세요.
+          </Setting2>
+        </Box>
       </Wrapper>
     </>
   );
@@ -117,6 +120,15 @@ const Container = styled.div`
   }
 `;
 
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 11.3rem;
+`;
+
 const Title = styled.div`
   color: var(--white);
   text-align: center;
@@ -132,8 +144,6 @@ const Setting = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-
-  margin-top: 3rem;
 `;
 
 const Setting2 = styled.div`

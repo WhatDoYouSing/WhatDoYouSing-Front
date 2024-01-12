@@ -64,7 +64,7 @@ const fontSizeStyles = ({ fontSize }) => css`
 
 const Wrapper = styled.div`
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 
@@ -82,9 +82,7 @@ const Wrapper = styled.div`
     `};
 `;
 
-const ImgDiv = styled.div`
-  ${imgSizeStyles};
-`;
+const ImgDiv = styled.div``;
 
 const EmotionText = styled.div`
   ${fontSizeStyles}
@@ -109,7 +107,7 @@ export default function EmotionChip({
     Array.isArray(src) && src.length >= 2 ? src : [undefined, undefined];
   return (
     <Wrapper size={size} onClick={onClick} isSelected={isSelected}>
-      <ImgDiv imgSize={size}>
+      <ImgDiv>
         <Img src={isSelected ? srcList[1] : srcList[0]} imgSize={size}></Img>
       </ImgDiv>
       <EmotionText fontSize={size}>{text}</EmotionText>
