@@ -86,7 +86,7 @@ const ImgDiv = styled.div``;
 
 const EmotionText = styled.div`
   ${fontSizeStyles}
-  padding-bottom: 0.1rem;
+  padding-bottom: 0.2rem;
 `;
 
 const Img = styled.img`
