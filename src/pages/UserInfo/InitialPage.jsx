@@ -50,7 +50,7 @@ const InitialPage = () => {
           >
             로그인
           </LoginBtn>
-          <KakaoBtn onClick={loginKakao} style={{ marginBottom: "17remrem" }}>
+          <KakaoBtn onClick={loginKakao}>
             <Kakao />
             카카오 로그인
           </KakaoBtn>
@@ -226,4 +226,9 @@ const KakaoBtn = styled(Btn)`
   background: #fee500;
   color: #3b1d1d;
   gap: 1.6rem;
+  margin-bottom: 17rem;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 0;
+  }
 `;

@@ -62,7 +62,7 @@ export default EmotionSearch;
 
 const Emotions = styled.div`
   display: flex;
-  padding: 1rem 1.6rem;
+  padding: 1rem 0;
   align-items: flex-start;
   align-self: stretch;
   overflow-x: scroll;

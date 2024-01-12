@@ -30,7 +30,6 @@ const ImgSavePage = () => {
       setThisData(response.data);
     };
     GetLyricDetailData(postid);
-    console.log("잘되나?");
   }, []);
 
   const handleCapture = () => {
@@ -52,14 +51,24 @@ const ImgSavePage = () => {
           <Container>
             <Close
               onClick={() => {
-                navigate(`/detail/${data.id}`);
+                navigate(`/detail/${postid}`);
               }}
             />
             <Title>이미지 저장</Title>
             <Save width={18} height={18} onClick={handleCapture} />
           </Container>
         </TopBar>
+        <Setting>
+          다운로드 버튼을 누른 후,
+          <br />
+          이미지를 꾹 눌러서 저장해 주세요!
+        </Setting>
         <ImgCard captureRef={captureRef} data={thisData} />
+        <Setting2>
+          ※ 사파리 이용자의 경우
+          <br />
+          설정 Safari 팝업 차단 '해제'를 해주세요.
+        </Setting2>
       </Wrapper>
     </>
   );
@@ -70,6 +79,10 @@ export default ImgSavePage;
 const Wrapper = styled.div`
   position: absolute;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
   top: 0;
   left: 0;
 
@@ -110,4 +123,24 @@ const Title = styled.div`
   font-size: 2rem;
   font-style: normal;
   font-weight: 800;
+`;
+
+const Setting = styled.div`
+  color: var(--Dark-Gray, #a0a0a0);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin-top: 3rem;
+`;
+
+const Setting2 = styled.div`
+  color: var(--Dark-Gray, #a0a0a0);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;

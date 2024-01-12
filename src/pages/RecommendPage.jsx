@@ -34,7 +34,7 @@ const RecommendPage = () => {
         <ScrollContainer>
           <RecCarousel savedList={savedList} />
         </ScrollContainer>
-        <Reload />
+        <Reload style={{ marginBottom: "8.6rem" }} />
       </Wrapper>
     </>
   );
@@ -43,7 +43,7 @@ const RecommendPage = () => {
 export default RecommendPage;
 
 const Wrapper = styled.div`
-  margin: 7.9rem 0 8.6rem;
+  margin: 5rem 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;

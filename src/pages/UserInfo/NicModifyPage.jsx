@@ -100,8 +100,8 @@ const Wrapper = styled.div`
   min-height: 100%;
   padding: 13.7rem 0 35.8rem;
 
-  @media (min-width: 1200px) {
-    padding: 0 20.6rem;
+  @media (min-width: 1100px) {
+    padding: 13.7rem 0 20.6rem;
   }
 `;
 

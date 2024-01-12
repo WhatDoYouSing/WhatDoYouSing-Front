@@ -23,7 +23,6 @@ const BookmarkedEmotion = () => {
     const handleClick = async (currentPage) => {
       const bookmarkedList = await GetMyEmo(emotionState, currentPage);
       setBookmarkedList(bookmarkedList["내가 남긴 감정"]);
-      console.log(bookmarkedList);
       setCurrentPage(bookmarkedList.current_page);
       setTotalPage(bookmarkedList.total_page);
     };
@@ -31,7 +30,6 @@ const BookmarkedEmotion = () => {
     handleClick(currentPage);
   }, [emotionState, currentPage]);
 
-  console.log("내가 남긴 감정", emotionState, currentPage, bookmarkedList);
   return (
     <>
       <EmotionSearch />

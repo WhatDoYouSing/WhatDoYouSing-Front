@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { styled, css } from "styled-components";
 
 import emotionData from "../../assets/data/EmotionData";
+import EmotionChip from "../common/EmotionChip";
 
 const ImgCard = ({ captureRef, data }) => {
   const emotion = emotionData;
@@ -11,7 +12,11 @@ const ImgCard = ({ captureRef, data }) => {
     <>
       <Wrapper ref={captureRef}>
         <Container>
-          <Insta>@what_doyousing</Insta>
+          <EmotionChip
+            text={emotion[data.sings_emotion]?.text}
+            src={emotion[data.sings_emotion]?.src}
+            size="small"
+          />
           <Lyric>{data.lyrics}</Lyric>
           <Detail>{data.content}</Detail>
           <More>
@@ -19,7 +24,8 @@ const ImgCard = ({ captureRef, data }) => {
               <Song>{data.title}</Song>
               <Singer>{data.singer}</Singer>
             </Info>
-            <Img src={emotion[data.sings_emotion].src[0]} />
+
+            <Insta>@what_doyousing</Insta>
           </More>
         </Container>
       </Wrapper>
@@ -30,10 +36,10 @@ const ImgCard = ({ captureRef, data }) => {
 export default ImgCard;
 
 const Wrapper = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 
   display: flex;
   flex-direction: column;
@@ -46,14 +52,14 @@ const Wrapper = styled.div`
 `;
 
 const Insta = styled.div`
+  display: flex;
+  align-items: flex-end;
   color: var(--Gray, #d9d9d9);
   font-size: 13.732px;
   font-style: normal;
   font-weight: 500;
   line-height: 130%; /* 17.851px */
   letter-spacing: -0.137px;
-
-  margin-bottom: 2rem;
 `;
 const Container = styled.div`
   display: flex;
@@ -71,6 +77,8 @@ const Lyric = styled.div`
   font-weight: 900;
   line-height: 105%;
   letter-spacing: -0.103rem;
+
+  margin-top: 1.7rem;
 `;
 
 const Detail = styled.div`
@@ -92,8 +100,10 @@ const More = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  justify-content: space-between;
   width: 100%;
-  gap: 9rem;
+
+  margin-top: 3.5rem;
 `;
 
 const Info = styled.div`

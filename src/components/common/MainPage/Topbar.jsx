@@ -97,7 +97,7 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
   width: 100%;
   height: 7.8rem;
@@ -113,10 +113,10 @@ const Container = styled.div`
   align-items: center;
 
   width: 100%;
-  padding: 0 1.6rem 2.7rem;
+  padding: 0 1.6rem 1rem;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem 2.7rem;
+    padding: 0 16.8rem 1rem;
   }
 `;
 

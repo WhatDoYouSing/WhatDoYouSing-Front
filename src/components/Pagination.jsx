@@ -46,7 +46,6 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 4px;
   width: 100%;
-  margin: 16px;
 `;
 
 const Button = styled.button`
@@ -65,6 +64,10 @@ const PageButton = styled.button`
   color: var(--black);
   font-size: 11px;
   cursor: pointer;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
 
   &[current] {
     color: var(--pointPink);
