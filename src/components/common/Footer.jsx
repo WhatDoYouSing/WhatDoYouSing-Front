@@ -39,6 +39,7 @@ const Footer = () => {
           </ImgDiv>
         </IconDiv>
         <Copyright>Copyright 2024. WDYS all rights reserved.</Copyright>
+
       </Container>
     </Wrapper>
   );
