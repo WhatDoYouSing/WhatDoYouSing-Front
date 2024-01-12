@@ -68,7 +68,7 @@ const EmotionList = ({
   };
   return (
     <>
-      <ShortWrapper>
+      <ShortWrapper big={big}>
         {emotionData.map((row, rowIndex) => (
           <GridDiv key={rowIndex}>
             {row.map((emotion, chipIndex) => (
@@ -84,7 +84,7 @@ const EmotionList = ({
           </GridDiv>
         ))}
       </ShortWrapper>
-      <Wrapper>
+      <Wrapper big={big}>
         {emotionLongData.map((row, rowIndex) => (
           <GridDiv key={rowIndex}>
             {row.map((emotion, chipIndex) => (

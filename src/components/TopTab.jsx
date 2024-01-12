@@ -6,7 +6,7 @@ import { ReactComponent as Share } from "../images/share.svg";
 import { ReactComponent as BookmarkOff } from "../images/bookmark-off.svg";
 import { ReactComponent as BookmarkOn } from "../images/bookmark-on.svg";
 import { ReactComponent as Meatball } from "../images/meatball.svg";
-import home from "../images/icons/home.png";
+import home from "../images/icons/home-s.svg";
 
 import MeatballSelect from "./DetailPage/MeatballSelect";
 

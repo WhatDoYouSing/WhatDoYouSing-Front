@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { styled, css } from "styled-components";
 
+import emotionChipData from "../../assets/data/EmotionChipData";
 import emotionData from "../../assets/data/EmotionData";
 import EmotionChip from "../common/EmotionChip";
 

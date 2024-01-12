@@ -126,7 +126,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  padding-top: 11.3rem;
+  padding-top: 12.3rem;
 `;
 
 const Title = styled.div`
@@ -153,4 +153,7 @@ const Setting2 = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  width: 100%;
+  background-color: var(--black);
 `;
