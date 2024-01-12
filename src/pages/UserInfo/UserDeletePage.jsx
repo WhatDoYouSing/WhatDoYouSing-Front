@@ -47,7 +47,7 @@ const KakaoDeletePage = () => {
           <span>정말... 떠나시겠어요?</span>
         </Box>
         <SideBox>
-          <Login>회원정보 수정</Login>
+          <Login>회원 탈퇴</Login>
           <Info>비밀번호를 입력하세요.</Info>
           <InputBox>
             <Input
