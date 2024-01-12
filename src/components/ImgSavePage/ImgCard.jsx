@@ -82,7 +82,7 @@ const Lyric = styled.div`
 `;
 
 const Detail = styled.div`
-  width: 22.743rem;
+  width: 23.543rem;
   /* height: 5.4rem; */
   overflow: hidden;
   color: var(--Black, #262121);
@@ -118,7 +118,7 @@ const Img = styled.img`
 `;
 
 const Song = styled.div`
-  width: 146.759px;
+  width: 152px;
   color: var(--Gray, #d9d9d9);
   font-family: Apple SD Gothic Neo;
   font-size: 13.732px;
@@ -129,7 +129,7 @@ const Song = styled.div`
 `;
 
 const Singer = styled.div`
-  width: 146.759px;
+  width: 152px;
   color: var(--Gray, #d9d9d9);
   font-family: Apple SD Gothic Neo;
   font-size: 13.732px;
