@@ -66,10 +66,12 @@ const Reply = ({
     <>
       <Container>
         <ProfileContainer>
-          <img
-            src={profiles[replyContent.author_profile - 1]?.none_filled}
-            alt="profileimg"
-          ></img>
+          <Profile>
+            <img
+              src={profiles[replyContent.author_profile - 1]?.none_filled}
+              alt="profileimg"
+            ></img>
+          </Profile>
         </ProfileContainer>
         <ContentContainer>
           <Id>{replyContent.author_nickname}</Id>
@@ -111,14 +113,16 @@ const Container = styled.div`
   background-color: var(--lightGray);
 `;
 
-const ProfileContainer = styled.div`
+const ProfileContainer = styled.div``;
+
+const Profile = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background-color: var(--lightGray);
+  background-color: #fff;
 
   img {
     width: 2.2rem;
@@ -181,4 +185,9 @@ const Plus = styled.div`
 `;
 
 const LikeBtn = styled.div``;
-const Count = styled.div``;
+const Count = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0.3rem 0.4rem;
+`;

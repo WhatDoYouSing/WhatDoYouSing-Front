@@ -133,7 +133,7 @@ const Box = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  padding-top: 12.3rem;
+  padding-top: 10.3rem;
 `;
 
 const Title = styled.div`
