@@ -71,7 +71,7 @@ const ImgSavePage = () => {
           <Setting2>
             ※ 사파리 이용자의 경우
             <br />
-            설정 Safari 팝업 차단 '해제'를 해주세요.
+            설정 > Safari > 팝업 차단 '해제'를 해주세요.
           </Setting2>
         </Box>
       </Wrapper>
