@@ -15,7 +15,6 @@ const ResultPage = () => {
     <>
       <Wrapper>
         <ResultTopbar />
-
         <FilterResult />
       </Wrapper>
       <Footer />
