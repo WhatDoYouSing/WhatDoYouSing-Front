@@ -64,13 +64,14 @@ export default EmotionSearch;
 
 const Emotions = styled.div`
   display: flex;
-  padding: 1rem 0;
   padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0 1.6rem")};
   margin: ${(props) => (props.isPadding ? "" : "0 0 1.6rem")};
   border-bottom: ${(props) =>
-    props.isPadding ? "none" : "1px solid var(--gray)"};  align-items: flex-start;
+    props.isPadding ? "none" : "1px solid var(--gray)"};
+  align-items: flex-start;
   align-self: stretch;
   overflow-x: scroll;
+
   background-color: var(--white);
 
   width: 100%;

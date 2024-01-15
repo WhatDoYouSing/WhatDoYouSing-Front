@@ -25,7 +25,7 @@ const ResultTopbar = () => {
       const delayTimer = setTimeout(() => {
         // 입력이 0.5초 동안 멈추면 작업 수행
         setSearchKeyword(keyword);
-      }, 500);
+      }, 300);
 
       // cleanup 함수
       return () => clearTimeout(delayTimer);
