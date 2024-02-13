@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ReactComponent as Close } from "../images/delete.svg";
 import { ReactComponent as Save } from "../images/download.svg";
@@ -12,11 +12,7 @@ import html2canvas from "html2canvas";
 
 const ImgSavePage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const captureRef = useRef(null);
-
-  const data = location.state?.data;
-  // console.log("감정id: ", data.sings_emotion);
 
   let { postid } = useParams();
 
@@ -30,17 +26,17 @@ const ImgSavePage = () => {
     };
     GetLyricDetailData(postid);
     window.scrollTo(0, 0);
-  }, []);
+  }, [postid]);
 
   const handleCapture = () => {
-    html2canvas(captureRef.current, { scale: 4 });
-    html2canvas(captureRef.current).then((canvas) => {
-      const imgData = canvas.toDataURL("imgae/png");
-
-      const newWindow = window.open("", "_blank");
-      newWindow.document.write(
-        `<html><head><title>Captured Image</title></head><body style="background-color: black; display: flex; align-items: center; justify-content: center;  width: 100vw; margin: 0;"><img src="${imgData}" alt="Captured Image" style="top:80%; left: 80%; width: 80%; border-radius: 64px"/></body></html>`
-      );
+    html2canvas(captureRef.current, {
+      backgroundColor: null,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "whatdoyousing.png";
+      link.click();
     });
   };
 
@@ -71,7 +67,7 @@ const ImgSavePage = () => {
           <Setting2>
             ※ 사파리 이용자의 경우
             <br />
-            설정 > Safari > 팝업 차단 '해제'를 해주세요.
+            설정 &gt; Safari &gt; 팝업 차단 '해제'를 해주세요.
           </Setting2>
         </Box>
       </Wrapper>
