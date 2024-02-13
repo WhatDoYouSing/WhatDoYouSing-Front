@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
-import emotionChipData from "../../assets/data/EmotionChipData";
 import emotionData from "../../assets/data/EmotionData";
 import EmotionChip from "../common/EmotionChip";
 
 const ImgCard = ({ captureRef, data }) => {
   const emotion = emotionData;
-  // console.log("감정id: ", data.sings_emotion);
 
   return (
     <>
@@ -37,11 +34,6 @@ const ImgCard = ({ captureRef, data }) => {
 export default ImgCard;
 
 const Wrapper = styled.div`
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-
   display: flex;
   flex-direction: column;
   width: 35.2556rem;
@@ -62,6 +54,7 @@ const Insta = styled.div`
   line-height: 130%; /* 17.851px */
   letter-spacing: -0.137px;
 `;
+
 const Container = styled.div`
   display: flex;
   width: 30.7249rem;
@@ -111,11 +104,6 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.687rem;
-`;
-
-const Img = styled.img`
-  width: 7.8rem;
-  height: 7.8rem;
 `;
 
 const Song = styled.div`
