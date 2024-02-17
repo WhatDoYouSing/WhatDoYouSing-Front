@@ -13,6 +13,7 @@ import {
 //api
 import {
   GetChartTracks,
+  GetAlbum,
   GetMusicSearch,
   GetDetailLyrics,
 } from "../apis/openLyrics";
@@ -25,11 +26,14 @@ const TestPage = () => {
 
   useEffect(() => {
     const handleClick = async () => {
-      const savedList = await GetChartTracks("xw", 1, 10, "hot", 0);
-      const searchResult = await GetMusicSearch("IVE");
+      // const savedList = await GetChartTracks("kr", 1, 10, "hot", 0);
+      const artiSearchResult = await GetAlbum(34234172);
+      const searchResult = await GetMusicSearch("SWift");
       const detailLyrics = await GetDetailLyrics(240376536, 147266331);
 
       setKeyword(detailLyrics.message.body.lyrics.lyrics_body);
+
+      // console.log(searchResult.message.body.track_list);
     };
 
     handleClick();
