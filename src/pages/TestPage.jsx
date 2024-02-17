@@ -11,7 +11,11 @@ import {
 } from "../assets/recoil/apiRecoil";
 
 //api
-import { GetChartTracks, GetDetailLyrics } from "../apis/openLyrics";
+import {
+  GetChartTracks,
+  GetMusicSearch,
+  GetDetailLyrics,
+} from "../apis/openLyrics";
 
 const TestPage = () => {
   const navigate = useNavigate();
@@ -21,9 +25,11 @@ const TestPage = () => {
 
   useEffect(() => {
     const handleClick = async () => {
-      // const savedList = await GetChartTracks("kr", 1, 5, "top", 1);
+      const savedList = await GetChartTracks("xw", 1, 10, "hot", 0);
+      const searchResult = await GetMusicSearch("IVE");
       const detailLyrics = await GetDetailLyrics(240376536, 147266331);
-      // setKeyword(savedList.data);
+
+      setKeyword(detailLyrics.message.body.lyrics.lyrics_body);
     };
 
     handleClick();
@@ -46,10 +52,18 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 5.8rem 0 16.8rem;
+
+  span {
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 400;
+    white-space: pre-line;
+  }
 `;
 
 const Title = styled.div`
   margin-top: 12.3rem;
+  margin-bottom: 5rem;
 
   color: var(--black);
 
