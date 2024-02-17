@@ -40,8 +40,6 @@ const FilterResult = () => {
     setTotalPage(searchList.total_page);
   };
 
-  console.log(selectedOption, selectedEmotion, selectedKeyword);
-
   useEffect(() => {
     const handleClick = async (currentPage) => {
       if (selectedOption === "최신순") {

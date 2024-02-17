@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
 import beforeOne from "../images/beforeOnepage.svg";
@@ -6,16 +6,20 @@ import beforeAll from "../images/beforeAllpage.svg";
 import nextOne from "../images/nextOnepage.svg";
 import nextAll from "../images/nextAllpage.svg";
 
-const Pagination = ({ total, limit, page, setPage }) => {
+const Pagination = ({ total, page, setPage }) => {
+  const range = window.innerWidth <= 400 ? 5 : 10;
   const numPages = total;
+  const totalPhase = Math.ceil(total / range);
+
+  const [phase, setPhase] = useState(1);
 
   return (
     <Wrapper>
       <Button onClick={() => setPage(1)}>
-        <img src={beforeAll} />
+        <img src={beforeAll} alt="" />
       </Button>
-      <Button onClick={() => setPage(page - 1)}>
-        <img src={beforeOne} />
+      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <img src={beforeOne} alt="" />
       </Button>
       {Array(numPages)
         .fill()
@@ -28,11 +32,11 @@ const Pagination = ({ total, limit, page, setPage }) => {
             {i + 1}
           </PageButton>
         ))}
-      <Button onClick={() => setPage(page + 1)}>
-        <img src={nextOne} />
+      <Button onClick={() => setPage(page + 1)} disabled={page === total}>
+        <img src={nextOne} alt="" />
       </Button>
       <Button onClick={() => setPage(total)}>
-        <img src={nextAll} />
+        <img src={nextAll} alt="" />
       </Button>
     </Wrapper>
   );
