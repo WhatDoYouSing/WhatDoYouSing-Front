@@ -42,7 +42,7 @@ const EmotionSearch = ({ isPadding = true }) => {
       );
     }
   };
-  console.log(selectedMyEmotion, selectedSearchEmotion);
+  // console.log(selectedMyEmotion, selectedSearchEmotion);
   return (
     <>
       <Emotions isPadding={isPadding}>

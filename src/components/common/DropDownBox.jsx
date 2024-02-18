@@ -17,7 +17,7 @@ import { DropdownState } from "../../assets/recoil/apiRecoil";
 const DropDownBox = () => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
-  const [selectedOption, setSelectedOption] = useState("댓글순");
+  const [selectedOption, setSelectedOption] = useState("최신순");
   const setOption = useSetRecoilState(DropdownState);
 
   const handleSelect = (option) => {

@@ -4,8 +4,11 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://localhost:3000",
+      target: "https://api.musixmatch.com/ws/1.1/",
       changeOrigin: true,
+      pathRewrite: {
+        "^/api": "",
+      },
     })
   );
 };
