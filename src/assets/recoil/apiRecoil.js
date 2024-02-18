@@ -35,7 +35,7 @@ export const NicModifyState = atom({
 
 export const DropdownState = atom({
   key: "DropdownState",
-  default: "댓글순",
+  default: "최신순",
 });
 
 //홈 관련 state
@@ -63,7 +63,6 @@ export const MyEmotionState = atom({
   key: "MyEmotionState",
   default: 0,
 });
-
 
 export const LyricState = atom({
   key: "LyricState",
