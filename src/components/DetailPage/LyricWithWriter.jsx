@@ -1,7 +1,4 @@
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { ReactComponent as ProfileImg } from "../../images/profile.svg";
 import EmotionChip from "../common/EmotionChip";
 
 import { useRecoilValue } from "recoil";
@@ -15,16 +12,20 @@ const LyricWithWriter = ({ lyricContent }) => {
     <Wrapper>
       <ProfileWrapper>
         <ProfileContainer>
-          <img
-            src={profiles[lyricContent.author_profile - 1]?.none_filled}
-            alt="profileimg"
-          ></img>
+          {profiles[lyricContent.author_profile - 1]?.none_filled && (
+            <img
+              src={profiles[lyricContent.author_profile - 1].none_filled}
+              alt="profileimg"
+            />
+          )}
         </ProfileContainer>
-        <EmotionChip
-          size="small"
-          text={emotions[lyricContent.sings_emotion]?.text}
-          src={emotions[lyricContent.sings_emotion]?.src}
-        />
+        {lyricContent.sings_emotion && (
+          <EmotionChip
+            size="small"
+            text={emotions[lyricContent.sings_emotion].text}
+            src={emotions[lyricContent.sings_emotion].src}
+          />
+        )}
       </ProfileWrapper>
       <TitleLyrics>{lyricContent.lyrics}</TitleLyrics>
 
@@ -102,25 +103,4 @@ const Writer = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 130%;
-`;
-const SongDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-
-  color: var(--Gray, #d9d9d9);
-
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%;
-  letter-spacing: -0.16px;
-`;
-
-const SongTitle = styled.div`
-  display: flex;
-`;
-
-const SongSinger = styled.div`
-  display: flex;
 `;
