@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
@@ -31,28 +31,42 @@ const PostContent = ({ onBtn }) => {
     onBtn(!!isRequiredFieldsValid);
   }, [lyric, emotion, detail, song, singer]);
 
+  //가사 입력 값 관리
+  const lyricRef = useRef(null);
   const handleLyricChange = (e) => {
-    const inputText = e.target.value;
     const maxLength = 60;
+    const inputText = e.target.value;
+    const textWithoutSpaces = inputText.replace(/\s+/g, "");
+    const textLength = textWithoutSpaces.length;
 
-    setLyric(inputText.slice(0, maxLength));
-    setLyricCount(
-      inputText.replace(/\s/g, "").length > maxLength
-        ? maxLength
-        : inputText.replace(/\s/g, "").length
-    );
+    if (textLength <= maxLength) {
+      setLyric(inputText);
+      setLyricCount(textLength);
+    } else {
+      setLyricCount(maxLength);
+    }
+
+    lyricRef.current.style.height = "auto";
+    lyricRef.current.style.height = lyricRef.current.scrollHeight + "px";
   };
 
+  //해석 입력 값 관리
+  const detailRef = useRef(null);
   const handleDetailChange = (e) => {
-    const inputText = e.target.value;
     const maxLength = 150;
+    const inputText = e.target.value;
+    const textWithoutSpaces = inputText.replace(/\s+/g, "");
+    const textLength = textWithoutSpaces.length;
 
-    setDetail(inputText.slice(0, maxLength));
-    setDetailCount(
-      inputText.replace(/\s/g, "").length > maxLength
-        ? maxLength
-        : inputText.replace(/\s/g, "").length
-    );
+    if (textLength <= maxLength) {
+      setDetail(inputText);
+      setDetailCount(textLength);
+    } else {
+      setDetailCount(maxLength);
+    }
+
+    detailRef.current.style.height = "auto";
+    detailRef.current.style.height = detailRef.current.scrollHeight + "px";
   };
 
   useEffect(() => {
@@ -83,12 +97,12 @@ const PostContent = ({ onBtn }) => {
         </Title>
         <Lyric>
           <textarea
+            ref={lyricRef}
             value={lyric}
             onChange={handleLyricChange}
-            maxLength={60}
             placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
             rows={3}
-          ></textarea>
+          />
         </Lyric>
         <Limit>
           <span>{lyricCount}</span>
@@ -114,18 +128,11 @@ const PostContent = ({ onBtn }) => {
         </Title>
         <Detail>
           <textarea
-            // value={detail}
-            // onChange={(e) => {
-            //   setDetail(e.target.value);
-            //   setDetailCount(e.target.value.replace(/\s/g, "").length);
-            // }}
-            // maxLength={150}
-            // placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
+            ref={detailRef}
             value={detail}
             onChange={handleDetailChange}
-            maxLength={150}
             placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
-          ></textarea>
+          />
         </Detail>
         <Limit>
           <span>{detailCount}</span>
@@ -202,9 +209,9 @@ const Title = styled.div`
 const Lyric = styled.div`
   width: 100%;
   margin-bottom: 2.4rem;
+
   textarea {
     width: 100%;
-    height: auto;
     align-self: stretch;
     color: var(--black);
     font-size: 4rem;
@@ -212,8 +219,6 @@ const Lyric = styled.div`
     font-weight: 900;
     line-height: 105%;
     letter-spacing: -0.12rem;
-    border: none;
-    outline: none;
   }
 
   textarea::placeholder {
@@ -256,10 +261,11 @@ const EmotionDiv = styled.div`
 `;
 
 const Detail = styled.div`
+  width: 100%;
   margin-bottom: 2.4rem;
+
   textarea {
-    width: 100vw;
-    height: auto;
+    width: 100%;
     align-self: stretch;
     color: var(--black);
     font-size: 1.4rem;
@@ -267,9 +273,8 @@ const Detail = styled.div`
     font-weight: 600;
     line-height: 150%; /* 21px */
     letter-spacing: -0.098rem;
-    border: none;
-    outline: none;
   }
+
   textarea::placeholder {
     color: var(--gray);
   }
@@ -293,7 +298,6 @@ const Source = styled.div`
   input {
     height: 4.8rem;
     flex: 1 0 0;
-
     width: 26.4rem;
     flex-shrink: 0;
     border: none;
