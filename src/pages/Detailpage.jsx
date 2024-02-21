@@ -13,11 +13,11 @@ import ShareModal from "../components/DetailPage/ShareModal";
 import DeletePostModal from "../components/DeletePostModal";
 import ReportPostModal from "../components/DetailPage/ReportPostModal";
 import DeleteComModal from "../components/DeleteComModal";
+import DeleteReModal from "../components/DeleteReModal";
 
 import useClickOutside from "../hooks/useClickOutside";
 
 import { GetLyricsDetail } from "../apis/detail";
-import DeleteReModal from "../components/DeleteReModal";
 
 const Detailpage = () => {
   const shareModalRef = useRef();
@@ -124,12 +124,7 @@ const Detailpage = () => {
       {share && (
         <ModalWrapper>
           <Background onClick={() => setShare(!share)} />
-          <ShareModal
-            ref={shareModalRef}
-            share={share}
-            setShare={setShare}
-            data={thisData}
-          />
+          <ShareModal ref={shareModalRef} data={thisData} />
         </ModalWrapper>
       )}
       {deleteCom && (
