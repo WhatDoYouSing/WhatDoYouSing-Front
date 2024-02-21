@@ -34,15 +34,9 @@ const GlobalStyles = createGlobalStyle`
         background-color: #ffffff;
     }
     * {
-    font-family: "AppleSDGothicNeo", "Pretendard-regular", sans-serif;
-    font-weight: 400;
-    box-sizing: border-box;
-    }
-
-    button {
-        border: 0;
-        background: transparent;
-        cursor: pointer;
+        font-family: "AppleSDGothicNeo", "Pretendard-regular", sans-serif;
+        font-weight: 400;
+        box-sizing: border-box;
     }
 
     body {
@@ -51,16 +45,25 @@ const GlobalStyles = createGlobalStyle`
         flex-direction: column;
 
         &::-webkit-scrollbar {
-    display: none;
-  }
-
-  
+            display: none;
+        }
 
         @media (min-width: 1100px) {
             padding: 0 16.8rem;
-  }
+        } 
     }
 
+    button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    textarea {
+        outline: none;
+        border: none;
+        resize: none;
+    }
 `;
 
 export default GlobalStyles;
