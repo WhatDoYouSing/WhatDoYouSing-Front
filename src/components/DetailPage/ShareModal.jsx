@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation, useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
+import html2canvas from "html2canvas";
+
+import ImgCard from "../ImgSavePage/ImgCard";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
-const ShareModal = ({ share, setShare, data }) => {
-  const navigate = useNavigate();
+const ShareModal = ({ data }) => {
   const location = useLocation();
   const type = useParams();
 
@@ -20,31 +22,43 @@ const ShareModal = ({ share, setShare, data }) => {
     }
   };
 
-  const sendImgData = () => {
-    const imgData = { data: data };
-    navigate(`/save/${type.postid}`, { state: imgData });
+  const captureRef = useRef(null);
+  const handleCapture = () => {
+    html2canvas(captureRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "whatdoyousing.png";
+      link.click();
+    });
   };
 
   return (
-    <Container>
-      <Title>공유하기</Title>
-      <UrlDiv>
-        <Url>{`https://whatdoyousing.swygbro.com${location.pathname}`}</Url>
-        <Btn onClick={handleCopyClipBoard}>복사</Btn>
-      </UrlDiv>
-      <ImgDiv onClick={sendImgData}>
-        <SaveImg>이미지로 저장하기</SaveImg>
-        <SvgDiv>
-          <Save width={16} height={16} />
-        </SvgDiv>
-      </ImgDiv>
-    </Container>
+    <>
+      <Container>
+        <Title>공유하기</Title>
+        <UrlDiv>
+          <Url>{`https://whatdoyousing.swygbro.com${location.pathname}`}</Url>
+          <Btn onClick={handleCopyClipBoard}>복사</Btn>
+        </UrlDiv>
+        <ImgDiv onClick={handleCapture}>
+          <SaveImg>이미지로 저장하기</SaveImg>
+          <SvgDiv>
+            <Save width={16} height={16} />
+          </SvgDiv>
+        </ImgDiv>
+      </Container>
+      <div style={{ opacity: 0 }}>
+        <ImgCard captureRef={captureRef} data={data} />
+      </div>
+    </>
   );
 };
 
 export default ShareModal;
 
 const Container = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 30rem;

@@ -11,7 +11,6 @@ import MyPage from "./pages/MyPage";
 import PostPage from "./pages/Postpage";
 import RecordedPage from "./pages/RecordedPage";
 import ResultPage from "./pages/ResultPage";
-import ImgSavePage from "./pages/ImgSavePage";
 
 import InitialPage from "./pages/UserInfo/InitialPage";
 import LoginPage from "./pages/UserInfo/LoginPage";
@@ -60,7 +59,6 @@ function App() {
           <Route path={"/post"} element={<PostPage />}></Route>
           <Route path={"/recorded/:id"} element={<RecordedPage />}></Route>
           <Route path={"/result"} element={<ResultPage />}></Route>
-          <Route path={"/save/:postid"} element={<ImgSavePage />}></Route>
           <Route
             path={"/modifyintro/:id"}
             element={<UserModifyIntroPage />}
