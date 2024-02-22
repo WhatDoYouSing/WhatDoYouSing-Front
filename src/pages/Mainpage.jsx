@@ -15,12 +15,17 @@ import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
 
 //recoil
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import {
   LikeListState,
   LankingListState,
   DropdownState,
 } from "../assets/recoil/apiRecoil";
+
+//modal
+import { useToggleModal } from "../hooks/useToggleModal";
+import { modalContent, modalState } from "../assets/recoil/modal";
+import PostModal from "../components/PostPage/PostModal";
 
 const MainPage = () => {
   const setLikeList = useSetRecoilState(LikeListState);
@@ -64,6 +69,18 @@ const MainPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // const isModalOpen = useRecoilValue(modalState);
+  // const { openModal } = useToggleModal();
+
+  // const [modalItem, setModalItem] = useRecoilState(modalContent);
+
+  // const handlePost = () => {
+  //   setModalItem(<PostModal />);
+  //   openModal();
+  // };
+
+  const [newPost, setNewPost] = useState(false);
+
   return (
     <>
       <Helmet>
@@ -74,8 +91,13 @@ const MainPage = () => {
         <LikeSection />
         <ChartSection />
         <SearchSection />
-        <FloatingBtn />
+        <FloatingBtn setNewPost={setNewPost} />
       </Wrapper>
+      {newPost && (
+        <PostModalWrapper>
+          <PostModal />
+        </PostModalWrapper>
+      )}
       <Footer />
     </>
   );
@@ -93,4 +115,10 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const PostModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 150;
 `;
