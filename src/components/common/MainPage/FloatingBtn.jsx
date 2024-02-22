@@ -4,11 +4,29 @@ import { useNavigate } from "react-router-dom";
 
 import music from "../../../images/change/fab.png";
 
-const FloatingBtn = () => {
+//modal
+import { useRecoilValue, useRecoilState } from "recoil";
+import { useToggleModal } from "../../../hooks/useToggleModal";
+import { modalContent, modalState } from "../../../assets/recoil/modal";
+import PostModal from "../../PostPage/PostModal";
+
+const FloatingBtn = ({ setNewPost }) => {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("token") !== null;
+
+  const isOpen = useRecoilValue(modalState);
+  const { openModal } = useToggleModal();
+
+  const [modalItem, setModalItem] = useRecoilState(modalContent);
+  const handlePost = () => {
+    setModalItem(<PostModal />);
+    openModal();
+    setNewPost(isOpen);
+  };
+
   return (
-    <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}>
+    <Wrapper onClick={handlePost}>
+      {/* <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}> */}
       <ImgDiv>
         <Img src={music} />
       </ImgDiv>

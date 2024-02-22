@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { modalState } from "../recoil/modal";
+import { modalState } from "../assets/recoil/modal";
 
 export function useToggleModal() {
   //modal 관리
