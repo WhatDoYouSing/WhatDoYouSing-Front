@@ -31,42 +31,56 @@ const PostContent = ({ onBtn }) => {
     onBtn(!!isRequiredFieldsValid);
   }, [lyric, emotion, detail, song, singer]);
 
-  //가사 입력 값 관리
-  const lyricRef = useRef(null);
-  const handleLyricChange = (e) => {
-    const maxLength = 60;
-    const inputText = e.target.value;
+  //입력 값 관리 함수
+  const handleInputChange = (inputText, maxLength, setState, setCount) => {
     const textWithoutSpaces = inputText.replace(/\s+/g, "");
     const textLength = textWithoutSpaces.length;
 
     if (textLength <= maxLength) {
-      setLyric(inputText);
-      setLyricCount(textLength);
+      setState(inputText);
+      setCount(textLength);
     } else {
-      setLyricCount(maxLength);
-    }
+      const words = inputText.split(/\s+/);
+      let sliceText = "";
+      let wordsLength = 0;
 
-    lyricRef.current.style.height = "auto";
-    lyricRef.current.style.height = lyricRef.current.scrollHeight + "px";
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        if (wordsLength + word.length <= maxLength) {
+          sliceText += word + " ";
+          wordsLength += word.length;
+        } else break;
+      }
+
+      setState(sliceText);
+      setCount(wordsLength);
+    }
+  };
+
+  const handleHeight = (ref) => {
+    ref.current.style.height = "auto";
+    ref.current.style.height = ref.current.scrollHeight + "px";
+  };
+
+  //가사 입력 값 관리
+  const lyricRef = useRef(null);
+  const handleLyricChange = (e) => {
+    const maxLength = 60;
+    handleInputChange(e.target.value, maxLength, setLyric, setLyricCount);
+  };
+  const handleLyricHeight = (e) => {
+    setLyric(e.target.value.replace(/\n/g, " ").trim());
+    handleHeight(lyricRef);
   };
 
   //해석 입력 값 관리
   const detailRef = useRef(null);
   const handleDetailChange = (e) => {
     const maxLength = 150;
-    const inputText = e.target.value;
-    const textWithoutSpaces = inputText.replace(/\s+/g, "");
-    const textLength = textWithoutSpaces.length;
-
-    if (textLength <= maxLength) {
-      setDetail(inputText);
-      setDetailCount(textLength);
-    } else {
-      setDetailCount(maxLength);
-    }
-
-    detailRef.current.style.height = "auto";
-    detailRef.current.style.height = detailRef.current.scrollHeight + "px";
+    handleInputChange(e.target.value, maxLength, setDetail, setDetailCount);
+  };
+  const handleDetailHeight = () => {
+    handleHeight(detailRef);
   };
 
   useEffect(() => {
@@ -101,7 +115,7 @@ const PostContent = ({ onBtn }) => {
             value={lyric}
             onChange={handleLyricChange}
             placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
-            rows={3}
+            onBlur={(e) => handleLyricHeight(e)}
           />
         </Lyric>
         <Limit>
@@ -132,6 +146,7 @@ const PostContent = ({ onBtn }) => {
             value={detail}
             onChange={handleDetailChange}
             placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
+            onBlur={handleDetailHeight}
           />
         </Detail>
         <Limit>
