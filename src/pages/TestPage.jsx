@@ -1,39 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-
-//recoil
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  SelectEmotionState,
-  SearchDropdownState,
-  KeywordState,
-} from "../assets/recoil/apiRecoil";
 
 //api
-import {
-  GetChartTracks,
-  GetAlbum,
-  GetMusicSearch,
-  GetDetailLyrics,
-} from "../apis/openLyrics";
+import { GetChartTracks } from "../apis/openLyrics";
 
 const TestPage = () => {
-  const navigate = useNavigate();
-  const setSearchKeyword = useSetRecoilState(KeywordState);
-
-  const [keyword, setKeyword] = useState("");
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     const handleClick = async () => {
-      // const savedList = await GetChartTracks("kr", 1, 10, "hot", 0);
-      const artiSearchResult = await GetAlbum(34234172);
-      const searchResult = await GetMusicSearch("SWift");
-      const detailLyrics = await GetDetailLyrics(240376536, 147266331);
-
-      setKeyword(detailLyrics.message.body.lyrics.lyrics_body);
-
-      // console.log(searchResult.message.body.track_list);
+      const trackData = await GetChartTracks("밤양갱");
+      setTracks(trackData);
     };
 
     handleClick();
@@ -43,7 +20,17 @@ const TestPage = () => {
     <>
       <Wrapper>
         <Title>무엇을 노래하나요?</Title>
-        <span>{keyword}</span>
+        {tracks.map((track) => (
+          <Result key={track.id}>
+            <div>
+              <img src={track.album.images[1].url} alt="album cover img" />
+            </div>
+            <div>
+              <p>{track.name}</p>
+              <p>{track.artists[0].name}</p>
+            </div>
+          </Result>
+        ))}
       </Wrapper>
     </>
   );
@@ -56,18 +43,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 5.8rem 0 16.8rem;
-
-  span {
-    font-size: 2.2rem;
-    font-style: normal;
-    font-weight: 400;
-    white-space: pre-line;
-  }
+  gap: 10px;
 `;
 
 const Title = styled.div`
   margin-top: 12.3rem;
-  margin-bottom: 5rem;
 
   color: var(--black);
 
@@ -78,9 +58,12 @@ const Title = styled.div`
   letter-spacing: -0.096rem;
 `;
 
-const SearchDiv = styled.div`
-  width: 100%;
-  @media (min-width: 650px) {
-    width: 58.8rem;
+const Result = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  div > img {
+    width: 50px;
+    height: 50px;
   }
 `;

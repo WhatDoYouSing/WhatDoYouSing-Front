@@ -15,16 +15,15 @@ axiosInstance.defaults.headers.common["Authorization"] = token
   : null;
 
 //카카오 로그인
-
 export const KAKAO_AUTH_URL = "http://whatdoyousing.com/accounts/kakao/";
 
 //오픈 API 관련
-const OPEN_BASE_URL = "https://api.musixmatch.com/ws/1.1/";
+const musicToken =
+  "BQAF8pSuZhqTkGrznSKTm310EUKmxd-RZzTHYS0Bsq21Cn9G46r6KGMgmNbVDd5LnJDuDOEcdnbD30vBYoQeHleqT9dnYORwV0mwETDzpBTvH6btwZoXCjhqbubHglHEVHbVG9KPEVC9KU5XJnW4Br99A-wBO1rGH8J51XyCe4QZy5RqSRXa9k1XAHhf13JA8NathA";
 
 export const api = axios.create({
-  // baseURL: OPEN_BASE_URL,
   headers: {
-    Authorization: `Bearer ${process.env.REACT_APP_LYRICS_API_KEY}`,
+    Authorization: `Bearer ${musicToken}`,
   },
 });
 
