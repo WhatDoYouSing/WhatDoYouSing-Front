@@ -83,33 +83,42 @@ const MainPage = () => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta name="theme-color" content="#262121" />
-      </Helmet>
-      <Wrapper>
-        <Topbar />
-        <LikeSection />
-        <ChartSection />
-        <SearchSection />
-        <FloatingBtn setNewPost={setNewPost} />
-      </Wrapper>
+      </Helmet> */}
+      <FlowWrapper newPost={newPost}>
+        <Wrapper>
+          <Topbar />
+          <LikeSection />
+          <ChartSection />
+          <SearchSection />
+          <FloatingBtn setNewPost={setNewPost} />
+        </Wrapper>
+        <Footer />
+      </FlowWrapper>
       {newPost && (
         <PostModalWrapper>
           <PostModal />
         </PostModalWrapper>
       )}
-      <Footer />
     </>
   );
 };
 
 export default MainPage;
 
+const FlowWrapper = styled.div`
+  height: auto;
+  min-height: 100%;
+  /* position: ${(newPost) => (newPost ? "fixed" : "absolute")};
+  top: 0; */
+  overflow-y: ${(newPost) => (newPost ? "hidden" : "auto")};
+`;
+
 const Wrapper = styled.div`
   height: auto;
   min-height: 100%;
   padding-bottom: 15.8rem;
-
   margin-top: 7.9rem;
 
   &::-webkit-scrollbar {
@@ -118,7 +127,8 @@ const Wrapper = styled.div`
 `;
 
 const PostModalWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
-  z-index: 150;
+  z-index: 110;
+  background-color: white;
 `;

@@ -9,15 +9,11 @@ const PostInput = ({ onBtn }) => {
   const setPostForm = useSetRecoilState(LyricState);
 
   //글자수
-  const [lyricCount, setLyricCount] = useState(0);
   const [detailCount, setDetailCount] = useState(0);
 
   //유효성 검사
-  const [lyric, setLyric] = useState("");
   const [emotion, setEmotion] = useState(null);
   const [detail, setDetail] = useState("");
-  const [song, setSong] = useState("");
-  const [singer, setSinger] = useState("");
   const [link, setLink] = useState("");
 
   const handleEmotionSelect = (selectedEmotion) => {
@@ -26,10 +22,9 @@ const PostInput = ({ onBtn }) => {
 
   //버튼 활성화
   useEffect(() => {
-    const isRequiredFieldsValid =
-      lyric && emotion !== null && detail && song && singer;
+    const isRequiredFieldsValid = emotion !== null && detail;
     onBtn(!!isRequiredFieldsValid);
-  }, [lyric, emotion, detail, song, singer]);
+  }, [emotion, detail]);
 
   //입력 값 관리 함수
   const handleInputChange = (inputText, maxLength, setState, setCount) => {
@@ -62,17 +57,6 @@ const PostInput = ({ onBtn }) => {
     ref.current.style.height = ref.current.scrollHeight + "px";
   };
 
-  //가사 입력 값 관리
-  const lyricRef = useRef(null);
-  const handleLyricChange = (e) => {
-    const maxLength = 60;
-    handleInputChange(e.target.value, maxLength, setLyric, setLyricCount);
-  };
-  const handleLyricHeight = (e) => {
-    setLyric(e.target.value.replace(/\n/g, " ").trim());
-    handleHeight(lyricRef);
-  };
-
   //해석 입력 값 관리
   const detailRef = useRef(null);
   const handleDetailChange = (e) => {
@@ -87,10 +71,7 @@ const PostInput = ({ onBtn }) => {
     const delayTimer = setTimeout(() => {
       // 입력이 0.5초 동안 멈추면 작업 수행
       setPostForm({
-        lyrics: lyric,
         content: detail,
-        title: song,
-        singer: singer,
         link: link,
         sings_emotion: emotion,
       });
@@ -98,31 +79,17 @@ const PostInput = ({ onBtn }) => {
 
     // cleanup 함수
     return () => clearTimeout(delayTimer);
-  }, [lyric, detail, song, singer, link, emotion]);
+  }, [detail, link, emotion]);
 
   return (
     <div>
       <Wrapper>
         <Title>
           <span className="title" style={{ marginBottom: "3.2rem" }}>
-            인용할 가사
+            가사 선택
           </span>
           <span className="star">*</span>
         </Title>
-        <Lyric>
-          <textarea
-            ref={lyricRef}
-            value={lyric}
-            onChange={handleLyricChange}
-            placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
-            onBlur={(e) => handleLyricHeight(e)}
-          />
-        </Lyric>
-        <Limit>
-          <span>{lyricCount}</span>
-          <span> / 60 자</span>
-          <span className="ex"> (공백 제외)</span>
-        </Limit>
         <Line />
         <EmotionDiv>
           <Title>
@@ -154,29 +121,6 @@ const PostInput = ({ onBtn }) => {
           <span> / 150 자</span>
           <span className="ex"> (공백 제외)</span>
         </Limit>
-        <Line style={{ marginTop: "5rem" }} />
-        <Title>
-          <span className="title" style={{ marginBottom: "1.6rem" }}>
-            가사 출처
-          </span>
-          <span className="star">*</span>
-        </Title>
-        <Source>
-          <div className="smallTitle">노래 제목</div>
-          <input
-            value={song}
-            onChange={(e) => setSong(e.target.value)}
-            placeholder="노래 제목을 남겨주세요!"
-          />
-        </Source>
-        <Source>
-          <div className="smallTitle">가수 이름</div>
-          <input
-            value={singer}
-            onChange={(e) => setSinger(e.target.value)}
-            placeholder="가수 이름을 남겨주세요!"
-          />
-        </Source>
         <Line style={{ marginTop: "5rem" }} />
         <Title>
           <span className="title" style={{ marginBottom: "1.6rem" }}>
@@ -218,33 +162,6 @@ const Title = styled.div`
   }
   .star {
     color: var(--pointPink);
-  }
-`;
-
-const Lyric = styled.div`
-  width: 100%;
-  margin-bottom: 2.4rem;
-
-  textarea {
-    width: 100%;
-    align-self: stretch;
-    color: var(--black);
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 900;
-    line-height: 105%;
-    letter-spacing: -0.12rem;
-  }
-
-  textarea::placeholder {
-    width: 100%;
-    align-self: stretch;
-    color: var(--gray);
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 900;
-    line-height: 105%;
-    letter-spacing: -0.12rem;
   }
 `;
 

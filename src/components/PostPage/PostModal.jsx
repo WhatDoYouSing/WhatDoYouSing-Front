@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import IntroTopbar from "../IntroTopbar";
+// import IntroTopbar from "../IntroTopbar";
+import ModalTopbar from "./ModalTopbar";
+
 import { useRecoilValue } from "recoil";
 import PostInput from "./PostInput";
 
 const PostModal = (props) => {
+  const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
+  const onBtn = (requiredFieldsValid) => {
+    setRequiredFieldsValid(requiredFieldsValid);
+  };
+
+  const [postId, setPostId] = useState("");
+  const handlePostIdReceived = (receivedPostId) => {
+    setPostId(receivedPostId);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -13,18 +25,15 @@ const PostModal = (props) => {
   return (
     <div>
       <Wrapper>
-        <IntroTopbar
+        <ModalTopbar
           text="게시글 작성"
           delPath="/"
           actBtn={true}
           btnText="게시하기"
-          isFilled={true}
-          onPostIdReceived={true}
+          isFilled={requiredFieldsValid}
+          onPostIdReceived={handlePostIdReceived}
         />
-        <h1>
-          <br />
-          안녕
-        </h1>
+        <PostInput onBtn={onBtn} />
       </Wrapper>
     </div>
   );
@@ -34,6 +43,8 @@ export default PostModal;
 
 const Wrapper = styled.div`
   margin-top: 9.5rem;
+  width: 100vw;
+  overflow-x: hidden;
   background-color: white;
-  height: 100vh;
+  z-index: 120;
 `;
