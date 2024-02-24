@@ -85,10 +85,15 @@ const PostInput = ({ onBtn }) => {
     <div>
       <Wrapper>
         <Title>
-          <span className="title" style={{ marginBottom: "3.2rem" }}>
-            가사 선택
-          </span>
-          <span className="star">*</span>
+          <div className="select-lyric">
+            <span className="auto-lyric">
+              <span className="title" style={{ marginBottom: "3.2rem" }}>
+                가사 선택
+              </span>
+              <span className="star">*</span>
+            </span>
+            <span className="self-lyric">직접 가사 입력하기</span>
+          </div>
         </Title>
         <Line />
         <EmotionDiv>
@@ -156,12 +161,25 @@ const Title = styled.div`
   font-weight: 800;
   line-height: normal;
   letter-spacing: -0.04rem;
+  width: 100%;
+
+  align-items: center;
 
   .title {
     color: var(--black);
   }
   .star {
     color: var(--pointPink);
+  }
+  .select-lyric {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .self-lyric {
+    font-size: 1.4rem;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
   }
 `;
 

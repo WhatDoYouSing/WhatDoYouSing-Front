@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { useToggleModal } from "../../../hooks/useToggleModal";
 import { modalContent, modalState } from "../../../assets/recoil/modal";
 import PostModal from "../../PostPage/PostModal";
 
-const FloatingBtn = ({ setNewPost }) => {
+const FloatingBtn = ({ newPost, setNewPost }) => {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("token") !== null;
 
@@ -18,11 +18,18 @@ const FloatingBtn = ({ setNewPost }) => {
   const { openModal } = useToggleModal();
 
   const [modalItem, setModalItem] = useRecoilState(modalContent);
+
   const handlePost = () => {
     setModalItem(<PostModal />);
     openModal();
-    setNewPost(isOpen);
+    setNewPost(true);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setNewPost(false);
+    }
+  }, [isOpen, setNewPost]);
 
   return (
     <Wrapper onClick={handlePost}>
