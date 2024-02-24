@@ -109,8 +109,16 @@ const ModalTopbar = ({
     } else {
       // alert("필수항목을 모두 채워주세요!");
     }
+  };
 
-    // 모달 닫기
+  // modal close
+  const isOpen = useRecoilValue(modalState);
+  const { openModal } = useToggleModal();
+
+  const [modalItem, setModalItem] = useRecoilState(modalContent);
+  const handlePost = () => {
+    setModalItem(<PostModal />);
+    openModal();
   };
 
   return (
@@ -120,7 +128,7 @@ const ModalTopbar = ({
           {del ? (
             <Delete
               onClick={() => {
-                navigate(delPath);
+                handlePost();
               }}
             />
           ) : (

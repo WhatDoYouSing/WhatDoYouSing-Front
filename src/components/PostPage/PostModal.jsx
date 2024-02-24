@@ -23,7 +23,7 @@ const PostModal = (props) => {
   }, []);
 
   return (
-    <div>
+    <>
       <Wrapper>
         <ModalTopbar
           text="게시글 작성"
@@ -35,7 +35,7 @@ const PostModal = (props) => {
         />
         <PostInput onBtn={onBtn} />
       </Wrapper>
-    </div>
+    </>
   );
 };
 
@@ -43,6 +43,7 @@ export default PostModal;
 
 const Wrapper = styled.div`
   margin-top: 9.5rem;
+  margin-right: 1.6rem;
   width: 100vw;
   overflow-x: hidden;
   background-color: white;

@@ -92,7 +92,7 @@ const MainPage = () => {
           <LikeSection />
           <ChartSection />
           <SearchSection />
-          <FloatingBtn setNewPost={setNewPost} />
+          <FloatingBtn newPost={newPost} setNewPost={setNewPost} />
         </Wrapper>
         <Footer />
       </FlowWrapper>
@@ -112,7 +112,7 @@ const FlowWrapper = styled.div`
   min-height: 100%;
   /* position: ${(newPost) => (newPost ? "fixed" : "absolute")};
   top: 0; */
-  overflow-y: ${(newPost) => (newPost ? "hidden" : "auto")};
+  /* overflow-y: ${(newPost) => (newPost ? "hidden" : "auto")}; */
 `;
 
 const Wrapper = styled.div`
