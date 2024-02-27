@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 댓글순 정렬
 export const GetSortCom = async () => {
@@ -7,6 +8,7 @@ export const GetSortCom = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -18,6 +20,7 @@ export const GetSortLatest = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -29,6 +32,7 @@ export const GetSortLike = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -40,6 +44,7 @@ export const GetRecommend = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
