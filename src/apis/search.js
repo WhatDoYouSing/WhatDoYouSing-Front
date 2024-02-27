@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 가사 검색 최신순 정렬
 export const GetSearchLatest = async (searchKeyword, searchEmo, searchPage) => {
@@ -11,6 +12,7 @@ export const GetSearchLatest = async (searchKeyword, searchEmo, searchPage) => {
 
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -25,6 +27,7 @@ export const GetSearchLike = async (searchKeyword, searchEmo, searchPage) => {
 
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -42,6 +45,7 @@ export const GetSearchCom = async (searchKeyword, searchEmo, searchPage) => {
     if (error.response && error.response.status === 400) {
       alert(error.response);
     }
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -55,6 +59,7 @@ export const GetSearchEmoLatest = async (searchEmo, searchPage) => {
 
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -68,6 +73,7 @@ export const GetSearchEmoLike = async (searchEmo, searchPage) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -81,6 +87,7 @@ export const GetSearchEmoCom = async (searchEmo, searchPage) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };

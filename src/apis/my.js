@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 마이 페이지
 export const GetMyPage = async () => {
@@ -7,6 +8,7 @@ export const GetMyPage = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -22,6 +24,7 @@ export const GetMySaved = async (keyword, page) => {
     );
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -35,6 +38,7 @@ export const GetMyLyrics = async (page) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -48,6 +52,7 @@ export const GetMyComment = async (page) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -62,6 +67,7 @@ export const GetMyEmo = async (emotion, page) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
