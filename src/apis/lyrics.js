@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 가사 목록 조회
 export const GetLyricsList = async () => {
@@ -7,6 +8,7 @@ export const GetLyricsList = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -32,6 +34,7 @@ export const PostLyrics = async (
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     console.error("가사등록 실패", error.response);
   }
 };
@@ -45,6 +48,7 @@ export const DelLyrics = async (pk) => {
 
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
