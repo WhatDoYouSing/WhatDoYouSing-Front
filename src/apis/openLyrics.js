@@ -31,17 +31,17 @@ export const GetChartTracks = async (
 //     return Promise.reject(error);
 //   }
 // };
-export const GetArtistAlbums = async (artist_id, page_size, page) => {
-  try {
-    const response = await api.get(
-      `/api/artist.albums.get?artist_id=${artist_id}&s_release_date=desc&g_album_name=1&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
+// export const GetArtistAlbums = async (artist_id, page_size, page) => {
+//   try {
+//     const response = await api.get(
+//       `/api/artist.albums.get?artist_id=${artist_id}&s_release_date=desc&g_album_name=1&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
+//     );
+//     console.log(response.data);
+//     return response.data;
+//   } catch (error) {
+//     return Promise.reject(error);
+//   }
+// };
 
 export const GetAlbum = async (album_id, page_size, page) => {
   try {
