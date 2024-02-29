@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
@@ -62,15 +61,18 @@ const Reply = ({
     // DelReData(replyContent.recomment_id);
   };
 
+  // 답글 프로필 이미지 설정
+  const profileIndex = replyContent?.author_profile
+    ? replyContent.author_profile - 1
+    : 0;
+  const profileImageSrc = profiles[profileIndex].none_filled;
+
   return (
     <>
       <Container>
         <ProfileContainer>
           <Profile>
-            <img
-              src={profiles[replyContent.author_profile - 1]?.none_filled}
-              alt="profileimg"
-            ></img>
+            <img src={profileImageSrc} alt="profileimg" />
           </Profile>
         </ProfileContainer>
         <ContentContainer>
