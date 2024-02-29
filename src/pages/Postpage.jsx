@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import IntroTopbar from "../components/IntroTopbar";
 import PostContent from "../components/PostPage/PostContent";
+import SearchTrackModal from "../components/PostPage/SearchTrackModal";
+import SelectLyricModal from "../components/PostPage/SelectLyricModal";
 
 const Postpage = (props) => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
@@ -15,12 +17,16 @@ const Postpage = (props) => {
     setPostId(receivedPostId);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // 모달 관리
+  const [isSearchOpen, setSearchOpen] = useState(true);
+  const [isSelectOpen, setSelectOpen] = useState(false);
+
+  // 사용자가 선택한 음악 정보 관리
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  console.log(selectedTrack);
 
   return (
-    <div>
+    <>
       <Wrapper>
         <IntroTopbar
           text="게시글 작성"
@@ -31,9 +37,21 @@ const Postpage = (props) => {
           isFilled={requiredFieldsValid}
           onPostIdReceived={handlePostIdReceived}
         />
-        <PostContent onBtn={onBtn} />
+        <PostContent onBtn={onBtn} selectedTrack={selectedTrack} />
       </Wrapper>
-    </div>
+
+      {isSearchOpen && (
+        <SearchTrackModal
+          {...{ setSearchOpen, setSelectOpen, isSelectOpen, setSelectedTrack }}
+        />
+      )}
+
+      {isSelectOpen && (
+        <SelectLyricModal
+          {...{ setSearchOpen, setSelectOpen, selectedTrack, setSelectedTrack }}
+        />
+      )}
+    </>
   );
 };
 
