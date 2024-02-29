@@ -1,13 +1,18 @@
 import { useRecoilState } from "recoil";
-import { modalState } from "../recoil/modal";
+import { modalState1, modalState2 } from "../assets/recoil/modal";
 
 export function useToggleModal() {
   //modal 관리
-  const [isModalOpen, setIsModalOpen] = useRecoilState(modalState);
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalState1);
+  const [isModalOpen2, setIsModalOpen2] = useRecoilState(modalState2);
 
   const openModal = () => {
     setIsModalOpen((cur) => !cur);
   };
 
-  return { isModalOpen, openModal };
+  const openModal2 = () => {
+    setIsModalOpen2((cur) => !cur);
+  };
+
+  return { isModalOpen, openModal, openModal2 };
 }
