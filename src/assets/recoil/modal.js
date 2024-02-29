@@ -2,12 +2,22 @@ import { ReactNode } from "react";
 import { atom, selector } from "recoil";
 
 //Recoil Atom 선언
-export const modalState = atom({
-  key: "modalState",
+export const modalState1 = atom({
+  key: "modalState1",
   default: false,
 });
 
-export const modalContent = atom({
-  key: "modalContent",
+export const modalState2 = atom({
+  key: "modalState2",
+  default: false,
+});
+
+export const modalContent1 = atom({
+  key: "modalContent1",
+  default: null,
+});
+
+export const modalContent2 = atom({
+  key: "modalContent2",
   default: null,
 });

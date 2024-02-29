@@ -7,117 +7,41 @@ import { ReactComponent as Back } from "../../images/back.svg";
 
 //recoil
 import { useRecoilValue, useRecoilState } from "recoil";
-import {
-  SignupState,
-  ProfileState,
-  PasModifyState,
-  NicModifyState,
-  LyricState,
-  PasCheckState,
-} from "../../assets/recoil/apiRecoil";
-
-//api
-import {
-  PatchPassword,
-  PatchNickname,
-  PostSignup,
-  PostProfile,
-} from "../../apis/user";
-import { PostLyrics } from "../../apis/lyrics";
 
 //modal
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { modalContent, modalState } from "../../assets/recoil/modal";
+import {
+  modalContent1,
+  modalContent2,
+  modalState1,
+  modalState2,
+} from "../../assets/recoil/modal";
 import PostModal from "./PostModal";
+import LyricInput from "./LyricInput";
 
 const ModalTopbar = ({
   text = "로그인",
-  backPath = -1,
   del = true,
-  delPath = "/initial",
   actBtn = false,
   btnText = "다음으로",
-  nextPath = "/",
   isFilled = false,
-  onPostIdReceived,
-  setCheckPost,
+  newPost,
+  setNewPost,
+  isOpen1,
 }) => {
-  const navigate = useNavigate();
-  const existingPassword = useRecoilValue(PasCheckState);
-  const newPassword = useRecoilValue(PasModifyState);
-  const newNickname = useRecoilValue(NicModifyState);
-  const newLyricPost = useRecoilValue(LyricState);
-  const signupForm = useRecoilValue(SignupState);
-  const profile = useRecoilValue(ProfileState);
-
-  const handleClick = async () => {
-    if (isFilled) {
-      switch (text) {
-        case "프로필 설정":
-          console.log(signupForm, profile);
-          PostSignup(
-            signupForm.username,
-            signupForm.password,
-            signupForm.nickname,
-            profile,
-            navigate
-          );
-          // PostProfile(profile);
-          // navigate(nextPath);
-          break;
-        case "프로필 지정":
-          PostProfile(profile);
-          // navigate(nextPath);
-          break;
-        case "비밀번호 변경":
-          PatchPassword(existingPassword, newPassword, navigate);
-          // navigate(nextPath);
-          break;
-        case "닉네임 변경":
-          PatchNickname(newNickname);
-          navigate(nextPath);
-          break;
-        case "회원가입":
-          console.log(newNickname);
-          PatchNickname(newNickname);
-          navigate(nextPath);
-          break;
-        case "게시글 작성":
-          const response = await PostLyrics(
-            newLyricPost.lyrics,
-            newLyricPost.content,
-            newLyricPost.title,
-            newLyricPost.singer,
-            newLyricPost.link,
-            newLyricPost.sings_emotion
-          );
-          const postId = response.data.id;
-
-          if (response.data.message === "가사 작성 실패") {
-            setCheckPost(true);
-            console.log("setCheckPost: ", setCheckPost);
-          }
-
-          console.log(newLyricPost);
-          console.log(postId);
-          navigate(`/detail/${postId}`);
-          break;
-
-        default:
-          navigate(nextPath);
-      }
-    } else {
-      // alert("필수항목을 모두 채워주세요!");
-    }
-  };
-
   // modal close
-  const isOpen = useRecoilValue(modalState);
   const { openModal } = useToggleModal();
 
-  const [modalItem, setModalItem] = useRecoilState(modalContent);
-  const handlePost = () => {
-    setModalItem(<PostModal />);
+  const [postModalItem, setPostModalItem] = useRecoilState(modalContent1);
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+
+  const handlePostModal = () => {
+    setPostModalItem(<PostModal />);
+    openModal();
+  };
+
+  const handleLyricModal = () => {
+    setLyricModalItem(<LyricInput />);
     openModal();
   };
 
@@ -128,24 +52,20 @@ const ModalTopbar = ({
           {del ? (
             <Delete
               onClick={() => {
-                handlePost();
+                handlePostModal();
               }}
             />
           ) : (
             <Back
               onClick={() => {
-                navigate(backPath);
+                handleLyricModal();
               }}
             />
           )}
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn
-            className="buttonDiv"
-            isFilled={isFilled}
-            onMouseUp={handleClick}
-          >
+          <NextBtn className="buttonDiv" isFilled={isFilled}>
             {btnText}
           </NextBtn>
         ) : (
