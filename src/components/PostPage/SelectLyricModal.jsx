@@ -53,7 +53,11 @@ const SelectLyricModal = ({
 
   // 선택한 가사 저장
   const saveSelectedLyric = () => {
-    const totalSelectedLine = selectLines
+    const sortedSelectLines = selectLines
+      .slice()
+      .sort((a, b) => a.index - b.index);
+
+    const totalSelectedLine = sortedSelectLines
       .map((selectedLine) => selectedLine.words)
       .join(" ")
       .replace(/\s/g, " ");

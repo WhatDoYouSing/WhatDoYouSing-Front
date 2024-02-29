@@ -56,7 +56,7 @@ const SearchTrackModal = ({
         initial="closed"
         animate={animateState}
         variants={{
-          opened: { top: `10%` },
+          opened: { top: `10vh` },
           closed: { top: "100vh" },
         }}
         transition={{ type: "spring", bounce: 0, duration: 0.5 }}
@@ -98,7 +98,7 @@ const SearchTrackModal = ({
 export default SearchTrackModal;
 
 const Overlay = styled(motion.div)`
-  z-index: 100;
+  z-index: 130;
   position: absolute;
   top: 0;
   left: 0;
@@ -108,12 +108,12 @@ const Overlay = styled(motion.div)`
 `;
 
 const Container = styled(motion.div)`
-  z-index: 120;
+  z-index: 150;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 90%;
+  height: 90vh;
   background-color: var(--white);
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
