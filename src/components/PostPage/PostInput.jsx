@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
 import { LyricState } from "../../assets/recoil/apiRecoil";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { useToggleModal } from "../../hooks/useToggleModal";
-import { modalContent2 } from "../../assets/recoil/modal";
+import { modalContent2, modalState2 } from "../../assets/recoil/modal";
 import LyricInput from "./LyricInput";
 
 const PostInput = ({
@@ -15,6 +15,7 @@ const PostInput = ({
   setLyricInputModal,
   isLyricSearchOpen,
   setIsLyricSearchOpen,
+  newPost,
 }) => {
   const setPostForm = useSetRecoilState(LyricState);
 
@@ -95,14 +96,24 @@ const PostInput = ({
   const handleLyricSearchClick = () => {
     setIsLyricSearchOpen(!isLyricSearchOpen);
   };
+
   //직접 가사 입력하기
-  const { openModal } = useToggleModal();
+  const isOpen2 = useRecoilValue(modalState2);
+  const { openModal2 } = useToggleModal();
   const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+
   const handleLyricWriteClick = () => {
     setLyricModalItem(<LyricInput />);
-    openModal();
+    openModal2();
     setLyricInputModal(true);
+    // console.log("handleLyricWriteClick", lyricInputModal, newPost);
   };
+
+  useEffect(() => {
+    if (!isOpen2) {
+      setLyricInputModal(false);
+    }
+  }, [isOpen2, setLyricInputModal]);
 
   return (
     <div>

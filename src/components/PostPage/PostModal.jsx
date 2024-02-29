@@ -67,6 +67,7 @@ const PostModal = ({
           setLyricInputModal={setLyricInputModal}
           isLyricSearchOpen={isLyricSearchOpen}
           setIsLyricSearchOpen={setIsLyricSearchOpen}
+          newPost={newPost}
         />
       </Wrapper>
 
@@ -101,7 +102,10 @@ const Wrapper = styled.div`
   background-color: white;
   z-index: 120;
 
-  /* padding: 0 1.6rem; */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   padding: 0 calc(100% * 1.6 / 39);
 
   @media (min-width: 1100px) {
@@ -118,7 +122,7 @@ const ModalWrapper1 = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  z-index: 100;
+  z-index: 125;
 `;
 
 const Background = styled.div`

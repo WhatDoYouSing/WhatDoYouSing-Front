@@ -10,5 +10,9 @@ export function useToggleModal() {
     setIsModalOpen((cur) => !cur);
   };
 
-  return { isModalOpen, openModal };
+  const openModal2 = () => {
+    setIsModalOpen2((cur) => !cur);
+  };
+
+  return { isModalOpen, openModal, openModal2 };
 }

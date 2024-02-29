@@ -31,6 +31,7 @@ const ModalTopbar = ({
 }) => {
   // modal close
   const { openModal } = useToggleModal();
+  const { openModal2 } = useToggleModal();
 
   const [postModalItem, setPostModalItem] = useRecoilState(modalContent1);
   const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
@@ -38,11 +39,13 @@ const ModalTopbar = ({
   const handlePostModal = () => {
     setPostModalItem(<PostModal />);
     openModal();
+    // console.log("handlePostModal");
   };
 
   const handleLyricModal = () => {
     setLyricModalItem(<LyricInput />);
-    openModal();
+    openModal2();
+    // console.log("handleLyricModal");
   };
 
   return (

@@ -142,12 +142,23 @@ export default LyricInput;
 
 const Wrapper = styled.div`
   margin-top: 7.5rem;
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
   width: 100%;
-  overflow-x: hidden;
+  height: 100%;
+  position: fixed;
+
+  overflow: scroll;
   background-color: white;
   z-index: 120;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  padding: 0 calc(100% * 1.6 / 39);
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem;
+  }
 `;
 
 const Message = styled.div`
