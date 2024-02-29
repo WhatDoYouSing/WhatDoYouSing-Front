@@ -108,14 +108,14 @@ const MainPage = () => {
             />
           </PostModalWrapper>
         )}
+
+        {lyricInputModal && (
+          <PostModalWrapper>
+            <LyricInput />
+          </PostModalWrapper>
+        )}
       </Wrapper>
       <Footer />
-
-      {lyricInputModal && (
-        <PostModalWrapper>
-          <LyricInput />
-        </PostModalWrapper>
-      )}
     </>
   );
 };

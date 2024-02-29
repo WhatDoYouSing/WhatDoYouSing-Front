@@ -10,18 +10,19 @@ import { useToggleModal } from "../../../hooks/useToggleModal";
 import { modalContent1, modalState1 } from "../../../assets/recoil/modal";
 import PostModal from "../../PostPage/PostModal";
 
-const FloatingBtn = ({ setNewPost }) => {
+const FloatingBtn = ({ newPost, setNewPost }) => {
   const isLogin = localStorage.getItem("token") !== null;
+  const navigate = useNavigate();
 
   const isOpen1 = useRecoilValue(modalState1);
   const { openModal } = useToggleModal();
-
   const [modalItem, setModalItem] = useRecoilState(modalContent1);
 
   const handlePost = () => {
     setModalItem(<PostModal />);
     openModal();
     setNewPost(true);
+    // console.log("handlePost", newPost, isOpen1);
   };
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const FloatingBtn = ({ setNewPost }) => {
   }, [isOpen1, setNewPost]);
 
   return (
-    <Wrapper onClick={handlePost}>
+    <Wrapper onClick={() => (isLogin ? handlePost() : navigate("/initial"))}>
       {/* <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}> */}
       <ImgDiv>
         <Img src={music} />
