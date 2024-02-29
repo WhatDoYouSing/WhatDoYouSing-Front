@@ -1,42 +1,79 @@
 import React, { useState, useEffect } from "react";
-import { styled } from "styled-components";
+import { styled, css } from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 
+import { ReactComponent as Delete } from "../../images/delete.svg";
 import { ReactComponent as Back } from "../../images/back.svg";
 
+//recoil
+import { useRecoilValue, useRecoilState } from "recoil";
+
+//modal
+import { useToggleModal } from "../../hooks/useToggleModal";
+import {
+  modalContent1,
+  modalContent2,
+  modalState1,
+  modalState2,
+} from "../../assets/recoil/modal";
+import PostModal from "./PostModal";
+import LyricInput from "./LyricInput";
+
 const ModalTopbar = ({
-  selectLines,
-  setSearchOpen,
-  setSelectOpen,
-  saveSelectedLyric,
+  text = "로그인",
+  del = true,
+  actBtn = false,
+  btnText = "다음으로",
+  isFilled = false,
+  newPost,
+  setNewPost,
+  isOpen1,
 }) => {
-  const [isFilled, setIsFilled] = useState(false);
+  // modal close
+  const { openModal } = useToggleModal();
+  const { openModal2 } = useToggleModal();
 
-  useEffect(() => {
-    setIsFilled(selectLines.length > 0);
-  }, [selectLines]);
+  const [postModalItem, setPostModalItem] = useRecoilState(modalContent1);
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
 
-  const handleCloseModal = () => {
-    if (isFilled) {
-      saveSelectedLyric();
-      setSearchOpen(false);
-      setSelectOpen(false);
-    }
+  const handlePostModal = () => {
+    setPostModalItem(<PostModal />);
+    openModal();
+    // console.log("handlePostModal");
+  };
+
+  const handleLyricModal = () => {
+    setLyricModalItem(<LyricInput />);
+    openModal2();
+    // console.log("handleLyricModal");
   };
 
   return (
     <Wrapper>
       <Container>
         <ImgDiv>
-          <Back onClick={() => setSelectOpen(false)} />
+          {del ? (
+            <Delete
+              onClick={() => {
+                handlePostModal();
+              }}
+            />
+          ) : (
+            <Back
+              onClick={() => {
+                handleLyricModal();
+              }}
+            />
+          )}
         </ImgDiv>
-        <Title>가사 선택하기</Title>
-        <NextBtn
-          className="buttonDiv"
-          isFilled={isFilled}
-          onClick={handleCloseModal}
-        >
-          선택완료
-        </NextBtn>
+        <Title>{text}</Title>
+        {actBtn ? (
+          <NextBtn className="buttonDiv" isFilled={isFilled}>
+            {btnText}
+          </NextBtn>
+        ) : (
+          <></>
+        )}
       </Container>
     </Wrapper>
   );
@@ -45,16 +82,18 @@ const ModalTopbar = ({
 export default ModalTopbar;
 
 const Wrapper = styled.div`
-  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   align-items: flex-end;
+
   width: 100%;
   height: 7.9rem;
   background: var(--white);
+
   color: var(--black);
+  z-index: 99;
 `;
 
 const Container = styled.div`
@@ -62,17 +101,19 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 100%;
-  height: 4.8rem;
+  padding: 0 1.6rem 2.7rem;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem;
+    padding: 0 16.8rem 2.7rem;
   }
 `;
 
 const ImgDiv = styled.div`
   position: absolute;
-  left: 0;
+  left: 1.6rem;
+
   cursor: pointer;
 
   @media (min-width: 1100px) {
@@ -81,10 +122,11 @@ const ImgDiv = styled.div`
 `;
 
 const Title = styled.div`
+  color: var(--Black, #262121);
   text-align: center;
   font-size: 2rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 `;
 
 const NextBtn = styled.button`
@@ -104,9 +146,15 @@ const NextBtn = styled.button`
   flex-shrink: 0;
   border-radius: 1.6rem;
   background-color: ${(props) =>
-    props.isFilled ? "var(--pointPink)" : "var(--lightGray)"};
+    props.isFilled ? "var(--black)" : "var(--lightGray)"};
   color: ${(props) => (props.isFilled ? "var(--white)" : "var(--darkGray)")};
   text-align: center;
+
   font-size: 1.4rem;
   font-weight: 500;
+
+  &:active {
+    background-color: ${(props) =>
+      props.isFilled ? "var(--pointPink)" : "var(--lightGray)"};
+  }
 `;

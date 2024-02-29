@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 가사 상세 조회
 export const GetLyricsDetail = async (pk) => {
@@ -8,6 +9,7 @@ export const GetLyricsDetail = async (pk) => {
 
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -21,6 +23,7 @@ export const PostDetailLike = async (pk) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -34,6 +37,7 @@ export const PatchDetailEmo = async (pk, content) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -45,6 +49,7 @@ export const GetDetailEmo = async (pk) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -56,6 +61,7 @@ export const DelDetailEmo = async (pk) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
