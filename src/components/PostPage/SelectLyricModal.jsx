@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import ModalTopbar from "./ModalTopbar";
+import SelectTopbar from "./SelectTopbar";
 
 import { GetTrackLyric } from "../../apis/openLyrics";
 
@@ -67,7 +67,7 @@ const SelectLyricModal = ({
   return (
     <>
       <Wrapper>
-        <ModalTopbar
+        <SelectTopbar
           {...{ selectLines, setSearchOpen, setSelectOpen, saveSelectedLyric }}
         />
         <Container>
