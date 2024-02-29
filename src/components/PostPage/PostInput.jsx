@@ -3,9 +3,19 @@ import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
 import { LyricState } from "../../assets/recoil/apiRecoil";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-const PostInput = ({ onBtn }) => {
+import { useToggleModal } from "../../hooks/useToggleModal";
+import { modalContent2 } from "../../assets/recoil/modal";
+import LyricInput from "./LyricInput";
+
+const PostInput = ({
+  onBtn,
+  lyricInputModal,
+  setLyricInputModal,
+  isLyricSearchOpen,
+  setIsLyricSearchOpen,
+}) => {
   const setPostForm = useSetRecoilState(LyricState);
 
   //글자수
@@ -81,20 +91,36 @@ const PostInput = ({ onBtn }) => {
     return () => clearTimeout(delayTimer);
   }, [detail, link, emotion]);
 
+  //가사 선택하기
+  const handleLyricSearchClick = () => {
+    setIsLyricSearchOpen(!isLyricSearchOpen);
+  };
+  //직접 가사 입력하기
+  const { openModal } = useToggleModal();
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+  const handleLyricWriteClick = () => {
+    setLyricModalItem(<LyricInput />);
+    openModal();
+    setLyricInputModal(true);
+  };
+
   return (
     <div>
       <Wrapper>
         <Title>
           <div className="select-lyric">
-            <span className="auto-lyric">
+            <span>
               <span className="title" style={{ marginBottom: "3.2rem" }}>
                 가사 선택
               </span>
               <span className="star">*</span>
             </span>
-            <span className="self-lyric">직접 가사 입력하기</span>
+            <span className="self-lyric" onClick={handleLyricWriteClick}>
+              직접 가사 입력하기
+            </span>
           </div>
         </Title>
+        <Lyric onClick={handleLyricSearchClick}>🎵 가사 검색하기 &gt;</Lyric>
         <Line />
         <EmotionDiv>
           <Title>
@@ -163,8 +189,6 @@ const Title = styled.div`
   letter-spacing: -0.04rem;
   width: 100%;
 
-  align-items: center;
-
   .title {
     color: var(--black);
   }
@@ -172,15 +196,36 @@ const Title = styled.div`
     color: var(--pointPink);
   }
   .select-lyric {
+    padding-top: 2.8rem;
+    display: flex;
     width: 100%;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
   }
   .self-lyric {
     font-size: 1.4rem;
     text-decoration: underline;
     font-weight: 600;
     cursor: pointer;
+    /* margin-left: 50%; */
   }
+`;
+
+const Lyric = styled.div`
+  display: flex;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.04rem;
+  width: 100%;
+  height: 7rem;
+  background-color: #d9d9d9;
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1rem;
+  margin: 3rem 0;
+  cursor: pointer;
 `;
 
 const Limit = styled.div`
@@ -258,6 +303,8 @@ const Source = styled.div`
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
     outline: none;
+
+    margin-bottom: 8rem;
   }
 
   input::placeholder {

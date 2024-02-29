@@ -26,6 +26,7 @@ import {
 import { useToggleModal } from "../hooks/useToggleModal";
 import { modalContent, modalState } from "../assets/recoil/modal";
 import PostModal from "../components/PostPage/PostModal";
+import LyricInput from "../components/PostPage/LyricInput";
 
 const MainPage = () => {
   const setLikeList = useSetRecoilState(LikeListState);
@@ -69,36 +70,50 @@ const MainPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // const isModalOpen = useRecoilValue(modalState);
-  // const { openModal } = useToggleModal();
-
-  // const [modalItem, setModalItem] = useRecoilState(modalContent);
-
-  // const handlePost = () => {
-  //   setModalItem(<PostModal />);
-  //   openModal();
-  // };
-
   const [newPost, setNewPost] = useState(false);
+  const [lyricInputModal, setLyricInputModal] = useState(false);
+
+  useEffect(() => {
+    // newPost 상태가 변경될 때마다 body에 스크롤 방지 스타일을 추가 또는 제거합니다.
+    if (newPost) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    // cleanup 함수를 사용하여 컴포넌트가 언마운트될 때 스타일을 초기화합니다.
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [newPost]);
 
   return (
     <>
       {/* <Helmet>
         <meta name="theme-color" content="#262121" />
       </Helmet> */}
-      <FlowWrapper newPost={newPost}>
-        <Wrapper>
-          <Topbar />
-          <LikeSection />
-          <ChartSection />
-          <SearchSection />
-          <FloatingBtn newPost={newPost} setNewPost={setNewPost} />
-        </Wrapper>
-        <Footer />
-      </FlowWrapper>
-      {newPost && (
+      <Wrapper>
+        <Topbar />
+        <LikeSection />
+        <ChartSection />
+        <SearchSection />
+        <FloatingBtn newPost={newPost} setNewPost={setNewPost} />
+
+        {newPost && (
+          <PostModalWrapper>
+            <PostModal
+              newPost={newPost}
+              setNewPost={setNewPost}
+              lyricInputModal={lyricInputModal}
+              setLyricInputModal={setLyricInputModal}
+            />
+          </PostModalWrapper>
+        )}
+      </Wrapper>
+      <Footer />
+
+      {lyricInputModal && (
         <PostModalWrapper>
-          <PostModal />
+          <LyricInput />
         </PostModalWrapper>
       )}
     </>
@@ -106,14 +121,6 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-const FlowWrapper = styled.div`
-  height: auto;
-  min-height: 100%;
-  /* position: ${(newPost) => (newPost ? "fixed" : "absolute")};
-  top: 0; */
-  /* overflow-y: ${(newPost) => (newPost ? "hidden" : "auto")}; */
-`;
 
 const Wrapper = styled.div`
   height: auto;
@@ -128,7 +135,10 @@ const Wrapper = styled.div`
 
 const PostModalWrapper = styled.div`
   position: absolute;
+  width: 100%;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 110;
   background-color: white;
 `;
