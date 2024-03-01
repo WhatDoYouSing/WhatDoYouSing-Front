@@ -8,16 +8,17 @@ const LyricWithWriter = ({ lyricContent }) => {
   const emotions = useRecoilValue(emotionListAtom);
   const profiles = useRecoilValue(profileListAtom);
 
+  // 프로필 이미지 설정
+  const profileIndex = lyricContent?.author_profile
+    ? lyricContent.author_profile - 1
+    : 0;
+  const profileImageSrc = profiles[profileIndex].none_filled;
+
   return (
     <Wrapper>
       <ProfileWrapper>
         <ProfileContainer>
-          {profiles[lyricContent.author_profile - 1]?.none_filled && (
-            <img
-              src={profiles[lyricContent.author_profile - 1].none_filled}
-              alt="profileimg"
-            />
-          )}
+          <img src={profileImageSrc} alt="profileimg" />
         </ProfileContainer>
         {lyricContent.sings_emotion && (
           <EmotionChip
