@@ -81,20 +81,6 @@ const PostInput = ({
     handleHeight(detailRef);
   };
 
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setPostForm({
-        content: detail,
-        link: link,
-        sings_emotion: emotion,
-      });
-    }, 500);
-
-    // cleanup 함수
-    return () => clearTimeout(delayTimer);
-  }, [detail, link, emotion]);
-
   //가사 선택하기
   const handleLyricSearchClick = () => {
     setIsLyricSearchOpen(!isLyricSearchOpen);
@@ -111,6 +97,23 @@ const PostInput = ({
     setLyricInputModal(true);
     // console.log("handleLyricWriteClick", lyricInputModal, newPost);
   };
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setPostForm({
+        lyrics: selectedTrack.lyric,
+        title: selectedTrack.name,
+        singer: selectedTrack.artist,
+        content: detail,
+        link: link,
+        sings_emotion: emotion,
+      });
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [detail, link, emotion]);
 
   useEffect(() => {
     if (!isOpen2) {

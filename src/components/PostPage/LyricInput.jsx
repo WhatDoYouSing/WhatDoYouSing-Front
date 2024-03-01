@@ -81,10 +81,6 @@ const LyricInput = ({ selectedTrack, setSelectedTrack }) => {
   // 입력한 가사 저장
   const saveInputLyric = () => {
     setSelectedTrack({
-      id: 0,
-      image: "",
-      name: "",
-
       lyric: lyric,
       name: song,
       artist: singer,
@@ -94,7 +90,7 @@ const LyricInput = ({ selectedTrack, setSelectedTrack }) => {
   useEffect(() => {
     const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
     completeBtn(!!isRequiredFields);
-  }, [lyric, singer, song]);
+  }, [lyric, song, singer]);
 
   return (
     <>
