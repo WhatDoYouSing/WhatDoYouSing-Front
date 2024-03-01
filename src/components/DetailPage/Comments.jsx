@@ -118,6 +118,7 @@ const Comments = ({
           deleteRe={deleteRe}
           setDeleteRe={setDeleteRe}
           setReNum={setReNum}
+          showDel={true}
           // author={commentContent.author}
         />
       ))}

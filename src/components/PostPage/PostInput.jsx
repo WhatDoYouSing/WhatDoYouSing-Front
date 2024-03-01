@@ -8,6 +8,7 @@ import { useToggleModal } from "../../hooks/useToggleModal";
 import { modalContent2, modalState2 } from "../../assets/recoil/modal";
 import LyricInput from "./LyricInput";
 import { ReactComponent as Delete } from "../../images/lyric-input-delete.svg";
+import { ReactComponent as NextBtn } from "../../images/nextBtn.svg";
 
 const PostInput = ({
   onBtn,
@@ -80,20 +81,6 @@ const PostInput = ({
     handleHeight(detailRef);
   };
 
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setPostForm({
-        content: detail,
-        link: link,
-        sings_emotion: emotion,
-      });
-    }, 500);
-
-    // cleanup 함수
-    return () => clearTimeout(delayTimer);
-  }, [detail, link, emotion]);
-
   //가사 선택하기
   const handleLyricSearchClick = () => {
     setIsLyricSearchOpen(!isLyricSearchOpen);
@@ -110,6 +97,23 @@ const PostInput = ({
     setLyricInputModal(true);
     // console.log("handleLyricWriteClick", lyricInputModal, newPost);
   };
+
+  useEffect(() => {
+    const delayTimer = setTimeout(() => {
+      // 입력이 0.5초 동안 멈추면 작업 수행
+      setPostForm({
+        lyrics: selectedTrack.lyric,
+        title: selectedTrack.name,
+        singer: selectedTrack.artist,
+        content: detail,
+        link: link,
+        sings_emotion: emotion,
+      });
+    }, 500);
+
+    // cleanup 함수
+    return () => clearTimeout(delayTimer);
+  }, [detail, link, emotion]);
 
   useEffect(() => {
     if (!isOpen2) {
@@ -141,7 +145,10 @@ const PostInput = ({
             </span>
           </div>
         </Title>
-        <Lyric onClick={handleLyricSearchClick}>🎵 가사 검색하기 &gt;</Lyric>
+        <Lyric onClick={handleLyricSearchClick}>
+          <span>가사 검색하기</span>
+          <NextBtn />
+        </Lyric>
         {selectedTrack?.lyric && (
           <>
             <LyricBox>
@@ -257,19 +264,24 @@ const Title = styled.div`
 
 const Lyric = styled.div`
   display: flex;
+  flex-direction: row;
   font-size: 2rem;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 400;
   line-height: normal;
   letter-spacing: -0.04rem;
   width: 100%;
   height: 7rem;
-  background-color: #d9d9d9;
-  border-radius: 1rem;
+  background-color: var(--black);
+  border-radius: 1.5rem;
   align-items: center;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: 0 2.4rem;
   margin: 3.2rem 0;
   cursor: pointer;
+  span {
+    color: white;
+  }
 `;
 
 const LyricBox = styled.div`

@@ -7,6 +7,17 @@ import { ReactComponent as Back } from "../../images/back.svg";
 
 //recoil
 import { useRecoilValue, useRecoilState } from "recoil";
+import { PostLyrics } from "../../apis/lyrics";
+import {
+  SignupState,
+  ProfileState,
+  PasModifyState,
+  NicModifyState,
+  LyricState,
+  PasCheckState,
+  postCheckModal,
+  setPostCheckModal,
+} from "../../assets/recoil/apiRecoil";
 
 //modal
 import { useToggleModal } from "../../hooks/useToggleModal";
@@ -28,7 +39,14 @@ const ModalTopbar = ({
   newPost,
   setNewPost,
   isOpen1,
+  saveInputLyric,
+  setCheckPost,
+  uploCheckModal,
+  setUploCheckModal,
 }) => {
+  const navigate = useNavigate();
+  const newLyricPost = useRecoilValue(LyricState);
+
   // modal close
   const { openModal } = useToggleModal();
   const { openModal2 } = useToggleModal();
@@ -46,6 +64,39 @@ const ModalTopbar = ({
     setLyricModalItem(<LyricInput />);
     openModal2();
     // console.log("handleLyricModal");
+  };
+
+  const handleClick = async () => {
+    if (isFilled) {
+      switch (text) {
+        case "직접 가사 입력하기":
+          saveInputLyric();
+          handleLyricModal();
+          break;
+        case "게시글 작성":
+          const response = await PostLyrics(
+            newLyricPost.lyrics,
+            newLyricPost.content,
+            newLyricPost.title,
+            newLyricPost.singer,
+            newLyricPost.link,
+            newLyricPost.sings_emotion
+          );
+          const postId = response.data.id;
+
+          if (response.data.message === "가사 작성 실패") {
+            setCheckPost(true);
+            console.log("setCheckPost: ", setCheckPost);
+          }
+          console.log(newLyricPost);
+          console.log(postId);
+          navigate(`/detail/${postId}`);
+          break;
+      }
+    } else {
+      setUploCheckModal(!uploCheckModal);
+      console.log(uploCheckModal);
+    }
   };
 
   return (
@@ -68,7 +119,11 @@ const ModalTopbar = ({
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn className="buttonDiv" isFilled={isFilled}>
+          <NextBtn
+            className="buttonDiv"
+            isFilled={isFilled}
+            onClick={handleClick}
+          >
             {btnText}
           </NextBtn>
         ) : (

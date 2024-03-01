@@ -6,8 +6,18 @@ import ModalTopbar from "./ModalTopbar";
 import { LyricState } from "../../assets/recoil/apiRecoil";
 import { useSetRecoilState } from "recoil";
 
-const LyricInput = ({ setLyricInputModal }) => {
+const LyricInput = ({
+  selectedTrack,
+  setSelectedTrack,
+  uploCheckModal,
+  setUploCheckModal,
+}) => {
   const setPostForm = useSetRecoilState(LyricState);
+
+  const [fieldsValid, setFieldsValid] = useState(false);
+  const completeBtn = (fieldsValid) => {
+    setFieldsValid(fieldsValid);
+  };
 
   //글자수
   const [lyricCount, setLyricCount] = useState(0);
@@ -73,6 +83,20 @@ const LyricInput = ({ setLyricInputModal }) => {
     return () => clearTimeout(delayTimer);
   }, [lyric, song, singer]);
 
+  // 입력한 가사 저장
+  const saveInputLyric = () => {
+    setSelectedTrack({
+      lyric: lyric,
+      name: song,
+      artist: singer,
+    });
+  };
+
+  useEffect(() => {
+    const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
+    completeBtn(!!isRequiredFields);
+  }, [lyric, song, singer]);
+
   return (
     <>
       <Wrapper>
@@ -80,14 +104,16 @@ const LyricInput = ({ setLyricInputModal }) => {
           text="직접 가사 입력하기"
           del={false}
           actBtn={true}
-          isFilled={false}
+          isFilled={fieldsValid}
           btnText="입력완료"
+          saveInputLyric={saveInputLyric}
+          uploCheckModal={uploCheckModal}
+          setUploCheckModal={setUploCheckModal}
         />
         <Message>
-          출처가 정확하지 않거나
+          출처가 정확하지 않거나 법적 혹은 윤리적으로
           <br />
-          법적 혹은 윤리적으로 부적절한 가사 업로드 시<br />
-          제재될 수 있어요.
+          부적절한 가사 업로드 시 제재될 수 있어요.
         </Message>
         <Title>
           <span className="title" style={{ marginBottom: "3.2rem" }}>
@@ -165,16 +191,17 @@ const Message = styled.div`
   display: flex;
   font-size: 1.5rem;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 400;
   line-height: 2rem;
   letter-spacing: -0.04rem;
   width: 100%;
   height: auto;
-  background-color: #d9d9d9;
+  background-color: var(--lightGray);
+  color: var(--gray);
   border-radius: 1rem;
   align-items: center;
   padding: 1.5rem;
-  margin: 3rem 0;
+  margin: 2rem 0;
 `;
 
 const Title = styled.div`
