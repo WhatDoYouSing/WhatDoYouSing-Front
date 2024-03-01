@@ -23,6 +23,7 @@ const CommentBox = ({
   deleteRe,
   setDeleteRe,
   setReNum,
+  showDel,
 }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState(
@@ -143,7 +144,7 @@ const CommentBox = ({
                 </>
               )}
 
-              {showDeleteButton && (
+              {showDel && showDeleteButton && (
                 <DelBtn>
                   <div onClick={handleDelete}>· 삭제하기</div>
                 </DelBtn>

@@ -12,6 +12,10 @@ const PostModal = ({
   setNewPost,
   lyricInputModal,
   setLyricInputModal,
+  selectedTrack,
+  setSelectedTrack,
+  uploCheckModal,
+  setUploCheckModal,
 }) => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
   const onBtn = (requiredFieldsValid) => {
@@ -27,10 +31,6 @@ const PostModal = ({
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isSelectOpen, setSelectOpen] = useState(false);
 
-  // 사용자가 선택한 음악 정보 관리
-  const [selectedTrack, setSelectedTrack] = useState(null);
-  console.log(selectedTrack);
-
   return (
     <>
       <Wrapper>
@@ -43,6 +43,8 @@ const PostModal = ({
           onPostIdReceived={handlePostIdReceived}
           newPost={newPost}
           setNewPost={setNewPost}
+          uploCheckModal={uploCheckModal}
+          setUploCheckModal={setUploCheckModal}
         />
         <PostInput
           onBtn={onBtn}
