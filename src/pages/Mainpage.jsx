@@ -88,6 +88,12 @@ const MainPage = () => {
 
   // 사용자가 선택한 음악 정보 관리
   const [selectedTrack, setSelectedTrack] = useState(null);
+  useEffect(() => {
+    setSelectedTrack({
+      lyric: "",
+    });
+  }, []);
+
   console.log(selectedTrack);
 
   return (
