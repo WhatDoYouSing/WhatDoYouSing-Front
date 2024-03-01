@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled, { css } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-// import Reply from "../BottomSheet/Reply";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 import Reply from "./Reply";
 
-import { DelComment, PostCommentLike } from "../apis/comment";
+import { PostCommentLike } from "../apis/comment";
 import { useRecoilValue } from "recoil";
 import { profileListAtom } from "../assets/recoil/recoil";
 
@@ -113,11 +112,9 @@ const CommentBox = ({
         style={{ backgroundColor: isActive ? "#FFF5F5" : "var(--white)" }}
       >
         <Container>
-          <ProfileContainer>
-            <Profile>
-              <img src={profileImageSrc} alt="profileimg" />
-            </Profile>
-          </ProfileContainer>
+          <Profile>
+            <img src={profileImageSrc} alt="profileimg" />
+          </Profile>
           <ContentContainer>
             <Id>{content.author_nickname}</Id>
             <Content>{content.com_content}</Content>
@@ -152,22 +149,6 @@ const CommentBox = ({
                 </DelBtn>
               )}
             </Plus>
-            {/* {content.recomments_count > 0 && (
-              <Replies>
-                {content.recomments.map((reply) => (
-                  <Reply
-                    key={reply.comment_id}
-                    replyContent={reply}
-                    render={render}
-                    setRender={setRender}
-                    commentId={content.comment_id}
-                    deleteRe={deleteRe}
-                    setDeleteRe={setDeleteRe}
-                    setReNum={setReNum}
-                  />
-                ))}
-              </Replies>
-            )} */}
           </ContentContainer>
         </Container>
         {content.recomments_count > 0 && (
@@ -202,11 +183,10 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 2.5rem 1.6rem 0rem 1.6rem;
+  padding: 2.5rem 1.6rem 0rem;
+  box-sizing: border-box;
   gap: 1rem;
 `;
-
-const ProfileContainer = styled.div``;
 
 const Profile = styled.div`
   display: flex;
