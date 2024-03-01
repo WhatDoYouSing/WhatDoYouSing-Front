@@ -77,13 +77,11 @@ const MainPage = () => {
   const [lyricInputModal, setLyricInputModal] = useState(false);
 
   useEffect(() => {
-    // newPost 상태가 변경될 때마다 body에 스크롤 방지 스타일을 추가 또는 제거합니다.
     if (newPost) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-    // cleanup 함수를 사용하여 컴포넌트가 언마운트될 때 스타일을 초기화합니다.
     return () => {
       document.body.style.overflow = "auto";
     };
