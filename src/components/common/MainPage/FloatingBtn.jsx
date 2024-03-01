@@ -22,7 +22,6 @@ const FloatingBtn = ({ newPost, setNewPost }) => {
     setModalItem(<PostModal />);
     openModal();
     setNewPost(true);
-    // console.log("handlePost", newPost, isOpen1);
   };
 
   useEffect(() => {
@@ -33,7 +32,6 @@ const FloatingBtn = ({ newPost, setNewPost }) => {
 
   return (
     <Wrapper onClick={() => (isLogin ? handlePost() : navigate("/initial"))}>
-      {/* <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}> */}
       <ImgDiv>
         <Img src={music} />
       </ImgDiv>
@@ -47,9 +45,7 @@ const Wrapper = styled.section`
   position: fixed;
   top: 61rem;
   right: 1.6rem;
-
-  z-index: 250;
-
+  z-index: 110;
   cursor: pointer;
 
   @media (min-width: 1200px) {

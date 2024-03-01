@@ -167,11 +167,9 @@ const LyricInput = ({
 export default LyricInput;
 
 const Wrapper = styled.div`
-  margin-top: 7.5rem;
   width: 100%;
   height: 100%;
   position: fixed;
-
   overflow: scroll;
   background-color: white;
   z-index: 120;
@@ -180,7 +178,7 @@ const Wrapper = styled.div`
     display: none;
   }
 
-  padding: 0 calc(100% * 1.6 / 39);
+  padding: 7.9rem calc(100% * 1.6 / 39) 0;
 
   @media (min-width: 1100px) {
     padding: 0 16.8rem;

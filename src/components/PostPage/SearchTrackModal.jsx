@@ -67,8 +67,8 @@ const SearchTrackModal = ({
         dragElastic={0.2}
         onDragEnd={handleDragEnd}
       >
-        <HandlerContainer>
-          <Handler onPointerDown={(e) => dragControls.start(e)} />
+        <HandlerContainer onPointerDown={(e) => dragControls.start(e)}>
+          <Handler />
         </HandlerContainer>
         <Header>
           <span>가사 검색하기</span>
@@ -128,7 +128,7 @@ const Container = styled(motion.div)`
 `;
 
 const HandlerContainer = styled.div`
-  padding-top: 20px;
+  padding: 20px 0;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -144,7 +144,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  padding-bottom: 20px;
 
   font-size: 15px;
   line-height: 100%; /* 15px */

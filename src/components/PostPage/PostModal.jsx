@@ -76,12 +76,9 @@ const PostModal = ({
 export default PostModal;
 
 const Wrapper = styled.div`
-  /* width: calc(100% + 3.6rem); */
   width: 100%;
   height: 100%;
   position: fixed;
-  margin-top: 7.9rem;
-
   overflow: scroll;
   background-color: white;
   z-index: 120;
