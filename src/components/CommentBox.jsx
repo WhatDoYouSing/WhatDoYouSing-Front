@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 // import Reply from "../BottomSheet/Reply";
-import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 import Reply from "./Reply";
@@ -104,6 +103,10 @@ const CommentBox = ({
     );
   }, [content.comment_id, isLiked]);
 
+  // 댓글 프로필 이미지 설정
+  const profileIndex = content?.author_profile ? content.author_profile - 1 : 0;
+  const profileImageSrc = profiles[profileIndex].none_filled;
+
   return (
     <>
       <Background
@@ -113,10 +116,7 @@ const CommentBox = ({
         <Container>
           <ProfileContainer>
             <Profile>
-              <img
-                src={profiles[content.author_profile - 1]?.none_filled}
-                alt="profileimg"
-              ></img>
+              <img src={profileImageSrc} alt="profileimg" />
             </Profile>
           </ProfileContainer>
           <ContentContainer>

@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useLocation, useParams } from "react-router";
 import html2canvas from "html2canvas";
 
 import ImgCard from "../ImgSavePage/ImgCard";
+import ImgSaveModal from "../ImgSavePage/ImgSaveModal";
 
 import { ReactComponent as Save } from "../../images/save.svg";
 
@@ -22,14 +23,16 @@ const ShareModal = ({ data }) => {
     }
   };
 
+  // 이미지 저장 모달
+  const [showModal, setShowModal] = useState(false);
+  const [imgData, setImgData] = useState(null);
+
   const captureRef = useRef(null);
   const handleCapture = () => {
     html2canvas(captureRef.current).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.href = imgData;
-      link.download = "whatdoyousing.png";
-      link.click();
+      setImgData(imgData);
+      setShowModal(true);
     });
   };
 
@@ -48,6 +51,7 @@ const ShareModal = ({ data }) => {
           </SvgDiv>
         </ImgDiv>
       </Container>
+      {showModal && imgData && <ImgSaveModal {...{ imgData, setShowModal }} />}
       <div style={{ opacity: 0 }}>
         <ImgCard captureRef={captureRef} data={data} />
       </div>

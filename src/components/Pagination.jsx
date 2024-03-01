@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 import beforeOne from "../images/beforeOnepage.svg";
@@ -7,11 +7,22 @@ import nextOne from "../images/nextOnepage.svg";
 import nextAll from "../images/nextAllpage.svg";
 
 const Pagination = ({ total, page, setPage }) => {
-  const range = window.innerWidth <= 400 ? 5 : 10;
-  const numPages = total;
-  const totalPhase = Math.ceil(total / range);
-
   const [phase, setPhase] = useState(1);
+
+  const limit = window.innerWidth <= 1100 ? 5 : 10;
+  const totalPhase = Math.ceil(total / limit);
+
+  const displayList =
+    phase === totalPhase
+      ? phase >= 2
+        ? page - (phase - 1) * limit
+        : total
+      : limit;
+
+  useEffect(() => {
+    console.log(page, Math.ceil(page / limit));
+    setPhase(Math.ceil(page / limit));
+  }, [page]);
 
   return (
     <Wrapper>
@@ -21,17 +32,20 @@ const Pagination = ({ total, page, setPage }) => {
       <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
         <img src={beforeOne} alt="" />
       </Button>
-      {Array(numPages)
+      {Array(displayList)
         .fill()
-        .map((_, i) => (
-          <PageButton
-            key={i + 1}
-            onClick={() => setPage(i + 1)}
-            current={page === i + 1 ? "page" : undefined}
-          >
-            {i + 1}
-          </PageButton>
-        ))}
+        .map((_, i) => {
+          const displayPage = (phase - 1) * limit + (i + 1);
+          return (
+            <PageButton
+              key={displayPage}
+              onClick={() => setPage(displayPage)}
+              current={page === displayPage ? "page" : undefined}
+            >
+              {displayPage}
+            </PageButton>
+          );
+        })}
       <Button onClick={() => setPage(page + 1)} disabled={page === total}>
         <img src={nextOne} alt="" />
       </Button>
