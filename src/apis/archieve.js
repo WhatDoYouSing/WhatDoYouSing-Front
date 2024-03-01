@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // POST : 게시글 저장
 export const PostScrap = async (pk, scrapped) => {
@@ -10,6 +11,7 @@ export const PostScrap = async (pk, scrapped) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("게시글 저장 실패", error.response);
   }
 };
@@ -24,6 +26,7 @@ export const PostCancelScrap = async (pk, scrapped) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("게시글 저장 취소 실패", error.response);
   }
 };

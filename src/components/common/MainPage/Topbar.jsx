@@ -75,9 +75,11 @@ const Topbar = () => {
               <Img
                 src={
                   pathname === "/my"
-                    ? profileList[profile - 1]?.filled
-                    : profileList[profile - 1]?.none_filled
+                    ? profileList[profile !== null ? profile - 1 : 0]?.filled
+                    : profileList[profile !== null ? profile - 1 : 0]
+                        ?.none_filled
                 }
+                alt="profile img"
               />
             </UserProfile>
           </>

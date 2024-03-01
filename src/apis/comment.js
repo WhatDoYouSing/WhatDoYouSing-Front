@@ -1,4 +1,5 @@
 import { axiosInstance } from "../apis/http";
+import { isTokenExpired } from "../apis/user";
 
 // GET : 댓글 조회
 export const GetComment = async (pk) => {
@@ -9,6 +10,7 @@ export const GetComment = async (pk) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     return Promise.reject(error);
   }
 };
@@ -23,6 +25,7 @@ export const PostComment = async (pk, com_content) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     console.error("댓글 등록 실패", error.response);
   }
 };
@@ -39,6 +42,7 @@ export const DelComment = async (comment_pk) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error(error.response);
   }
 };
@@ -56,6 +60,7 @@ export const PostCommentLike = async (comment_pk, liked) => {
     console.log(response.data);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("댓글 공감 등록 실패", error.response);
   }
 };
@@ -73,6 +78,7 @@ export const CancelCommentLike = async (comment_pk, liked) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("댓글 공감 취소 실패", error.response);
   }
 };
@@ -88,6 +94,7 @@ export const PostReply = async (pk, post, com_content) => {
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
+    isTokenExpired(error);
     console.error("답댓글 등록 실패", error.response);
   }
 };
@@ -104,6 +111,7 @@ export const DelReply = async (recomment_pk) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error(error.response);
   }
 };
@@ -121,6 +129,7 @@ export const PostReplyLike = async (comment_pk, recomment_pk) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("답댓글 공감 등록 실패", error.response);
   }
 };
@@ -138,6 +147,7 @@ export const CancelReplyLike = async (comment_pk, recomment_pk) => {
     console.log(response);
     return Promise.resolve(response);
   } catch (error) {
+    isTokenExpired(error);
     console.error("답댓글 공감 취소 실패", error.response);
   }
 };

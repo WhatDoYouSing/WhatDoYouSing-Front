@@ -49,7 +49,6 @@ const IntroTopbar = ({
     if (isFilled) {
       switch (text) {
         case "프로필 설정":
-          console.log(signupForm, profile);
           PostSignup(
             signupForm.username,
             signupForm.password,
@@ -66,7 +65,6 @@ const IntroTopbar = ({
           break;
         case "비밀번호 변경":
           PatchPassword(existingPassword, newPassword, navigate);
-          // navigate(nextPath);
           break;
         case "닉네임 변경":
           PatchNickname(newNickname);

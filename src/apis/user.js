@@ -217,3 +217,22 @@ export const KakaoLogin = async (code) => {
     return Promise.reject(error);
   }
 };
+
+//Logout
+export const Logout = () => {
+  window.localStorage.removeItem("user_id");
+  window.localStorage.removeItem("username");
+  window.localStorage.removeItem("nickname");
+  window.localStorage.removeItem("user_profile");
+  window.localStorage.removeItem("token");
+
+  const navigate = useNavigate();
+  navigate("/");
+};
+
+export const isTokenExpired = async (error) => {
+  if (error.response.data.code === "token_not_valid") {
+    alert("세션 만료. 다시 로그인해주세요.");
+    Logout();
+  }
+};
