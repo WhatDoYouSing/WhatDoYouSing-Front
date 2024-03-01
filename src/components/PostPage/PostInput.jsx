@@ -4,10 +4,10 @@ import styled from "styled-components";
 import EmotionList from "../common/EmotionList";
 import { LyricState } from "../../assets/recoil/apiRecoil";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { modalContent2, modalState2 } from "../../assets/recoil/modal";
 import LyricInput from "./LyricInput";
+import { ReactComponent as Delete } from "../../images/lyric-input-delete.svg";
 
 const PostInput = ({
   onBtn,
@@ -16,6 +16,8 @@ const PostInput = ({
   isLyricSearchOpen,
   setIsLyricSearchOpen,
   newPost,
+  selectedTrack,
+  setSelectedTrack,
 }) => {
   const setPostForm = useSetRecoilState(LyricState);
 
@@ -115,6 +117,14 @@ const PostInput = ({
     }
   }, [isOpen2, setLyricInputModal]);
 
+  // 선택한 가사 초기화
+  const handleLyricDelete = () => {
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
+      lyric: "",
+    }));
+  };
+
   return (
     <div>
       <Wrapper>
@@ -132,6 +142,29 @@ const PostInput = ({
           </div>
         </Title>
         <Lyric onClick={handleLyricSearchClick}>🎵 가사 검색하기 &gt;</Lyric>
+        {selectedTrack?.lyric && (
+          <>
+            <LyricBox>
+              <div>{selectedTrack.lyric}</div>
+              <Delete onClick={handleLyricDelete} />
+            </LyricBox>
+            <Line />
+            <Title>
+              <span className="title" style={{ marginBottom: "1.6rem" }}>
+                가사 출처
+              </span>
+              <span className="star">*</span>
+            </Title>
+            <TrackInfo>
+              <div>
+                노래 제목 <span>{selectedTrack.name}</span>
+              </div>
+              <div>
+                가수 이름 <span>{selectedTrack.artist}</span>
+              </div>
+            </TrackInfo>
+          </>
+        )}
         <Line />
         <EmotionDiv>
           <Title>
@@ -235,8 +268,31 @@ const Lyric = styled.div`
   border-radius: 1rem;
   align-items: center;
   padding: 1rem;
-  margin: 3rem 0;
+  margin: 3.2rem 0;
   cursor: pointer;
+`;
+
+const LyricBox = styled.div`
+  width: 100%;
+  margin: -0.8rem 0 3.2rem;
+  padding: 2.4rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  background-color: var(--lightGray);
+  border-radius: 16px;
+
+  div {
+    width: 100%;
+    align-self: stretch;
+    color: var(--black);
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 105%;
+    letter-spacing: -0.12rem;
+  }
 `;
 
 const Limit = styled.div`
@@ -258,8 +314,7 @@ const Line = styled.div`
   border-bottom: 0.05rem solid var(--black);
   opacity: 0.2;
   line-height: 0.1rem;
-  margin: 0.8rem 0;
-  margin-bottom: 5rem;
+  margin-bottom: 5.8rem;
 `;
 
 const EmotionDiv = styled.div`
@@ -289,7 +344,6 @@ const Detail = styled.div`
 const Source = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.6rem;
   align-self: stretch;
 
   .smallTitle {
@@ -325,5 +379,34 @@ const Source = styled.div`
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.032rem;
+  }
+`;
+
+const TrackInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 3.2rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 4.8rem;
+    color: var(--black);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.032rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 3.2rem;
+      height: 4.8rem;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 400;
+    }
   }
 `;
