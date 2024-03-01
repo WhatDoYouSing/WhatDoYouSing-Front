@@ -14,6 +14,8 @@ const PostModal = ({
   setLyricInputModal,
   selectedTrack,
   setSelectedTrack,
+  uploCheckModal,
+  setUploCheckModal,
 }) => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
   const onBtn = (requiredFieldsValid) => {
@@ -41,6 +43,8 @@ const PostModal = ({
           onPostIdReceived={handlePostIdReceived}
           newPost={newPost}
           setNewPost={setNewPost}
+          uploCheckModal={uploCheckModal}
+          setUploCheckModal={setUploCheckModal}
         />
         <PostInput
           onBtn={onBtn}

@@ -6,7 +6,12 @@ import ModalTopbar from "./ModalTopbar";
 import { LyricState } from "../../assets/recoil/apiRecoil";
 import { useSetRecoilState } from "recoil";
 
-const LyricInput = ({ selectedTrack, setSelectedTrack }) => {
+const LyricInput = ({
+  selectedTrack,
+  setSelectedTrack,
+  uploCheckModal,
+  setUploCheckModal,
+}) => {
   const setPostForm = useSetRecoilState(LyricState);
 
   const [fieldsValid, setFieldsValid] = useState(false);
@@ -102,6 +107,8 @@ const LyricInput = ({ selectedTrack, setSelectedTrack }) => {
           isFilled={fieldsValid}
           btnText="입력완료"
           saveInputLyric={saveInputLyric}
+          uploCheckModal={uploCheckModal}
+          setUploCheckModal={setUploCheckModal}
         />
         <Message>
           출처가 정확하지 않거나 법적 혹은 윤리적으로

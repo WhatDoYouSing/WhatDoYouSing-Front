@@ -4,11 +4,12 @@ import { useNavigate } from "react-router";
 import { DelLyrics } from "../apis/lyrics";
 
 //게시글 삭제 모달
-const PostCheckModal = ({ setCheckModal }) => {
+const PostCheckModal = ({ uploCheckModal, setUploCheckModal }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    setCheckModal(false);
+    setUploCheckModal(false);
+    console.log(uploCheckModal);
   };
 
   return (
@@ -34,11 +35,12 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
   border-radius: 10px;
-  background-color: var(--black);
+  background-color: var(--white);
 
   .buttonDiv:active {
     background-color: var(--pointPink);
   }
+  z-index: 210;
 `;
 
 const TitleAsk = styled.div`
@@ -64,7 +66,7 @@ const Button = styled.button`
   width: 26.8rem;
   height: 4.8rem;
   border-radius: 10px;
-  background: var(--pointPink);
+  background: var(--black);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -15,6 +15,8 @@ import {
   NicModifyState,
   LyricState,
   PasCheckState,
+  postCheckModal,
+  setPostCheckModal,
 } from "../../assets/recoil/apiRecoil";
 
 //modal
@@ -39,6 +41,8 @@ const ModalTopbar = ({
   isOpen1,
   saveInputLyric,
   setCheckPost,
+  uploCheckModal,
+  setUploCheckModal,
 }) => {
   const navigate = useNavigate();
   const newLyricPost = useRecoilValue(LyricState);
@@ -90,7 +94,8 @@ const ModalTopbar = ({
           break;
       }
     } else {
-      alert("필수항목을 모두 채워주세요!");
+      setUploCheckModal(!uploCheckModal);
+      console.log(uploCheckModal);
     }
   };
 
