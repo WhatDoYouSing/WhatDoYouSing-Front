@@ -28,6 +28,7 @@ const ModalTopbar = ({
   newPost,
   setNewPost,
   isOpen1,
+  saveInputLyric,
 }) => {
   // modal close
   const { openModal } = useToggleModal();
@@ -68,7 +69,14 @@ const ModalTopbar = ({
         </ImgDiv>
         <Title>{text}</Title>
         {actBtn ? (
-          <NextBtn className="buttonDiv" isFilled={isFilled}>
+          <NextBtn
+            className="buttonDiv"
+            isFilled={isFilled}
+            onClick={() => {
+              saveInputLyric();
+              handleLyricModal();
+            }}
+          >
             {btnText}
           </NextBtn>
         ) : (
