@@ -1,7 +1,6 @@
 import GlobalStyle from "./statics/styles/GlobalStyle";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import { Helmet } from "react-helmet-async";
 
 import MainPage from "./pages/Mainpage";
 import Detailpage from "./pages/Detailpage";
@@ -33,9 +32,6 @@ function App() {
     <RecoilRoot>
       <GlobalStyle />
       <BrowserRouter>
-        <Helmet>
-          <meta name="theme-color" content="#ffffff" />
-        </Helmet>
         <Routes>
           <Route path={"/test"} element={<TestPage />}></Route>
 
