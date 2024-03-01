@@ -86,6 +86,10 @@ const MainPage = () => {
     };
   }, [newPost]);
 
+  // 사용자가 선택한 음악 정보 관리
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  console.log(selectedTrack);
+
   return (
     <>
       {/* <Helmet>
@@ -105,13 +109,18 @@ const MainPage = () => {
               setNewPost={setNewPost}
               lyricInputModal={lyricInputModal}
               setLyricInputModal={setLyricInputModal}
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
             />
           </PostModalWrapper>
         )}
 
         {lyricInputModal && (
           <PostModalWrapper>
-            <LyricInput />
+            <LyricInput
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
+            />
           </PostModalWrapper>
         )}
       </Wrapper>

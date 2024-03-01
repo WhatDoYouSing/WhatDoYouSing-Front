@@ -12,6 +12,8 @@ const PostModal = ({
   setNewPost,
   lyricInputModal,
   setLyricInputModal,
+  selectedTrack,
+  setSelectedTrack,
 }) => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
   const onBtn = (requiredFieldsValid) => {
@@ -26,10 +28,6 @@ const PostModal = ({
   // 가사 검색/선택 모달 관리
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isSelectOpen, setSelectOpen] = useState(false);
-
-  // 사용자가 선택한 음악 정보 관리
-  const [selectedTrack, setSelectedTrack] = useState(null);
-  console.log(selectedTrack);
 
   return (
     <>
