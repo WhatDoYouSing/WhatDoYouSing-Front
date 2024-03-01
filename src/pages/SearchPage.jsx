@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Search } from "../images/search.svg";
-import { Helmet } from "react-helmet-async";
 
 //components
 import LyricsItem from "../components/common/LyricsItem";
@@ -40,9 +39,6 @@ const SearchPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta name="theme-color" content="#262121" />
-      </Helmet>
       <Wrapper>
         <Topbar />
         <SearchDiv>
