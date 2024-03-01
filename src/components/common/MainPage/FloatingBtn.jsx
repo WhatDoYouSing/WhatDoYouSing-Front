@@ -48,7 +48,7 @@ const Wrapper = styled.section`
   top: 61rem;
   right: 1.6rem;
 
-  z-index: 100;
+  z-index: 250;
 
   cursor: pointer;
 
