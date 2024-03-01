@@ -228,6 +228,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  padding-top: 7.9rem;
 `;
 
 const Title = styled.div`
