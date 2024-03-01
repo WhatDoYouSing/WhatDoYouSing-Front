@@ -148,7 +148,7 @@ const Wrapper = styled.div`
   background: var(--white);
 
   color: var(--black);
-  z-index: 99;
+  z-index: 260;
 `;
 
 const Container = styled.div`
