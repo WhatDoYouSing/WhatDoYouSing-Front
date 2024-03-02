@@ -45,6 +45,7 @@ const PostModal = ({
           setNewPost={setNewPost}
           uploCheckModal={uploCheckModal}
           setUploCheckModal={setUploCheckModal}
+          setSelectedTrack={setSelectedTrack}
         />
         <PostInput
           onBtn={onBtn}
