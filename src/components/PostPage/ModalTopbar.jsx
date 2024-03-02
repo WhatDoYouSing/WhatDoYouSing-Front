@@ -43,6 +43,7 @@ const ModalTopbar = ({
   setCheckPost,
   uploCheckModal,
   setUploCheckModal,
+  setSelectedTrack,
 }) => {
   const navigate = useNavigate();
   const newLyricPost = useRecoilValue(LyricState);
@@ -58,6 +59,12 @@ const ModalTopbar = ({
     setPostModalItem(<PostModal />);
     openModal();
     // console.log("handlePostModal");
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
+      lyric: "",
+      name: "",
+      artist: "",
+    }));
   };
 
   const handleLyricModal = () => {
