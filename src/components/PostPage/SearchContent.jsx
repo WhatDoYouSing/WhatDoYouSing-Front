@@ -62,7 +62,6 @@ const SearchContent = ({
     openModal2();
     setLyricInputModal(true);
     setSearchOpen(false);
-    // console.log("handleLyricWriteClick", lyricInputModal, newPost);
   };
 
   useEffect(() => {
@@ -135,7 +134,6 @@ const InputContainer = styled.div`
   align-items: center;
   width: 100%;
   gap: 0.8rem;
-  margin: 2.4rem 0;
 
   input {
     width: 100%;
@@ -149,19 +147,23 @@ const InputContainer = styled.div`
     font-style: normal;
     font-weight: 500;
 
-    &:focus,
-    &:not(:placeholder-shown) {
-      border-bottom-color: var(--pointPink);
-    }
-
     &::placeholder {
       color: var(--gray);
     }
   }
+
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const ResultNum = styled.div`
+  margin-top: 1.6rem;
   color: var(--veryDarkGray);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.32px;
 `;
 
 const ResultContainer = styled.div`
@@ -171,7 +173,7 @@ const ResultContainer = styled.div`
 `;
 
 const ResultBox = styled.div`
-  margin: 6px 0;
+  margin: 8px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -186,7 +188,14 @@ const ResultBox = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+
+    color: var(--black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%; /* 20.8px */
+    letter-spacing: -0.16px;
   }
 `;
 
@@ -225,5 +234,8 @@ const WriteLyricBtn = styled.div`
 
   color: var(--veryDarkGray);
   font-size: 2rem;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.4px;
 `;

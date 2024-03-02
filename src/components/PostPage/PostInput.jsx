@@ -306,6 +306,10 @@ const LyricBox = styled.div`
     line-height: 105%;
     letter-spacing: -0.12rem;
   }
+
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const Limit = styled.div`
