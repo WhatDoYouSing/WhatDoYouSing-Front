@@ -58,7 +58,6 @@ const RecCarousel = ({ savedList }) => {
         {savedList !== null &&
           savedList.map((item) => (
             <RecLyrics
-              isRec={true}
               key={item.id}
               id={item.id}
               emotion={item.sings_emotion}
