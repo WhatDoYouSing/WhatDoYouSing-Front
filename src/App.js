@@ -26,8 +26,6 @@ import UserDeletePage from "./pages/UserInfo/UserDeletePage";
 import PasModifyPage from "./pages/UserInfo/PasModifyPage";
 import NicModifyPage from "./pages/UserInfo/NicModifyPage";
 
-import TestPage from "./pages/TestPage";
-
 function App() {
   return (
     <RecoilRoot>
@@ -37,8 +35,6 @@ function App() {
           <meta name="theme-color" content="#ffffff" />
         </Helmet>
         <Routes>
-          <Route path={"/test"} element={<TestPage />}></Route>
-
           <Route path={"/"} element={<MainPage />}></Route>
           <Route path={"/initial"} element={<InitialPage />}></Route>
           <Route path={"/login"} element={<LoginPage />}></Route>
