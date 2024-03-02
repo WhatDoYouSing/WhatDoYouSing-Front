@@ -60,7 +60,13 @@ const PostModal = ({
 
       {isSearchOpen && (
         <SearchTrackModal
-          {...{ setSearchOpen, setSelectOpen, isSelectOpen, setSelectedTrack }}
+          {...{
+            setSearchOpen,
+            setSelectOpen,
+            isSelectOpen,
+            setSelectedTrack,
+            setLyricInputModal,
+          }}
         />
       )}
 

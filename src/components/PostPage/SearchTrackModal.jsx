@@ -11,6 +11,7 @@ const SearchTrackModal = ({
   setSelectOpen,
   isSelectOpen,
   setSelectedTrack,
+  setLyricInputModal,
 }) => {
   // 바텀 시트 관리
   const [isOpen, setIsOpen] = useState(true);
@@ -74,7 +75,14 @@ const SearchTrackModal = ({
           <span>가사 검색하기</span>
           <CloseBtn onClick={handleCloseModal}>취소</CloseBtn>
         </Header>
-        <SearchContent {...{ setSelectOpen, setSelectedTrack }} />
+        <SearchContent
+          {...{
+            setSelectOpen,
+            setSelectedTrack,
+            setLyricInputModal,
+            setSearchOpen,
+          }}
+        />
       </Container>
       <Overlay
         initial={false}
