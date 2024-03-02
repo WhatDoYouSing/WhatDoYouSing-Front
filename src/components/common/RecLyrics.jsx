@@ -5,10 +5,7 @@ import React, { useState } from "react";
 const RecLyrics = ({
   onMouseDown,
   onMouseUp,
-  isRec = false,
   showComment = true,
-  showChip = false,
-  showHeart = false,
   id = 1,
   emotion = 1,
   likes = 0,

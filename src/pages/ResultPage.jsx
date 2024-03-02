@@ -13,9 +13,6 @@ import PostCheckModal from "../components/PostCheckModal";
 import useClickOutside from "../hooks/useClickOutside";
 
 const ResultPage = () => {
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
   const [newPost, setNewPost] = useState(false);
   const [lyricInputModal, setLyricInputModal] = useState(false);
 

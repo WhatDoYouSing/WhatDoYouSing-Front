@@ -8,9 +8,10 @@ import heart from "../../images/change/heart-black.png";
 import { useRecoilValue } from "recoil";
 import { emotionListAtom } from "../../assets/recoil/recoil";
 
-const LyricsItem = ({
+const LikeLyrics = ({
+  onMouseDown,
+  onMouseUp,
   showComment = true,
-  showChip = false,
   showHeart = false,
   id = 1,
   emotion = 1,
@@ -24,7 +25,12 @@ const LyricsItem = ({
   const emotions = useRecoilValue(emotionListAtom);
 
   return (
-    <Navigate onClick={() => navigate(`/detail/${id}`)}>
+    <Navigate
+      onMouseDown={onMouseDown}
+      onMouseUp={() => {
+        onMouseUp(id);
+      }}
+    >
       {showHeart && (
         <>
           <LikeDiv>
@@ -40,15 +46,6 @@ const LyricsItem = ({
         </>
       )}
       <Wrapper showComment={showComment}>
-        {showChip && (
-          <ChipDiv>
-            <EmotionChip
-              text={emotions[emotion].text}
-              src={emotions[emotion].src}
-              size="small"
-            />
-          </ChipDiv>
-        )}
         <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
         {showComment && <LyricsComment>{content}</LyricsComment>}
         <SongDiv>
@@ -60,7 +57,7 @@ const LyricsItem = ({
   );
 };
 
-export default LyricsItem;
+export default LikeLyrics;
 
 const Navigate = styled.div``;
 

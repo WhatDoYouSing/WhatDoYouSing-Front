@@ -59,7 +59,9 @@ const SignupPage = () => {
 
   // 아이디 규격 확인
   useEffect(() => {
-    const isUsernameValid = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(username);
+    const isUsernameValid = /^(?=.*[A-Za-z])(?=.*[A-Za-z0-9]{6,}).{6,}$/.test(
+      username
+    );
     setUsernameValid(isUsernameValid);
     setDuplicate(null);
   }, [username]);
@@ -108,7 +110,6 @@ const SignupPage = () => {
         password: password,
         nickname: nickname,
       });
-      console.log("update +", nickname);
     }, 500);
 
     // cleanup 함수
