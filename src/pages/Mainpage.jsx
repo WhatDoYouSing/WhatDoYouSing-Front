@@ -56,9 +56,6 @@ const MainPage = () => {
           break;
 
         default:
-          // const defComeList = await GetSortCom();
-          // setLikeList(defComeList.data.Likes);
-          // setLankingList(defComeList.data.LankingList);
           const defComeList = await GetSortLatest();
           setLikeList(sortedLatestList.data.Likes);
           setLankingList(sortedLatestList.data.LankingList);
