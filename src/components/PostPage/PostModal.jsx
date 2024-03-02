@@ -45,6 +45,7 @@ const PostModal = ({
           setNewPost={setNewPost}
           uploCheckModal={uploCheckModal}
           setUploCheckModal={setUploCheckModal}
+          setSelectedTrack={setSelectedTrack}
         />
         <PostInput
           onBtn={onBtn}
@@ -60,7 +61,13 @@ const PostModal = ({
 
       {isSearchOpen && (
         <SearchTrackModal
-          {...{ setSearchOpen, setSelectOpen, isSelectOpen, setSelectedTrack }}
+          {...{
+            setSearchOpen,
+            setSelectOpen,
+            isSelectOpen,
+            setSelectedTrack,
+            setLyricInputModal,
+          }}
         />
       )}
 
