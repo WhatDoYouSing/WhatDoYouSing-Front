@@ -195,7 +195,7 @@ const Message = styled.div`
   width: 100%;
   height: auto;
   background-color: var(--lightGray);
-  color: var(--gray);
+  color: var(--darkGray);
   border-radius: 1rem;
   align-items: center;
   padding: 1.5rem;

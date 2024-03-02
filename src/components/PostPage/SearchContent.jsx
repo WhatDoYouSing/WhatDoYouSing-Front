@@ -7,7 +7,17 @@ import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
 
 import { GetChartTracks } from "../../apis/openLyrics";
 
-const SearchContent = ({ setSelectOpen, setSelectedTrack }) => {
+import { modalContent2, modalState2 } from "../../assets/recoil/modal";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useToggleModal } from "../../hooks/useToggleModal";
+import LyricInput from "./LyricInput";
+
+const SearchContent = ({
+  setSelectOpen,
+  setSelectedTrack,
+  setLyricInputModal,
+  setSearchOpen,
+}) => {
   const [keyword, setKeyword] = useState("");
   const [tracks, setTracks] = useState(null);
 
@@ -41,6 +51,25 @@ const SearchContent = ({ setSelectOpen, setSelectedTrack }) => {
     });
     setSelectOpen(true);
   };
+
+  // 직접가사입력 모달열기
+  const isOpen2 = useRecoilValue(modalState2);
+  const { openModal2 } = useToggleModal();
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+
+  const handleLyricWriteClick = () => {
+    setLyricModalItem(<LyricInput />);
+    openModal2();
+    setLyricInputModal(true);
+    setSearchOpen(false);
+    // console.log("handleLyricWriteClick", lyricInputModal, newPost);
+  };
+
+  useEffect(() => {
+    if (!isOpen2) {
+      setLyricInputModal(false);
+    }
+  }, [isOpen2, setLyricInputModal]);
 
   return (
     <>
@@ -80,7 +109,9 @@ const SearchContent = ({ setSelectOpen, setSelectedTrack }) => {
               <br />
               사용자님이 직접 가사를 입력해 보시는 건 어때요?
             </div>
-            <WriteLyricBtn>직접 가사 입력하기</WriteLyricBtn>
+            <WriteLyricBtn onClick={handleLyricWriteClick}>
+              직접 가사 입력하기
+            </WriteLyricBtn>
           </DefaltContainer>
         )
       ) : (
