@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import music from "../../../images/change/fab.png";
 
-const FloatingBtn = () => {
-  const navigate = useNavigate();
+//modal
+import { useRecoilValue, useRecoilState } from "recoil";
+import { useToggleModal } from "../../../hooks/useToggleModal";
+import { modalContent1, modalState1 } from "../../../assets/recoil/modal";
+import PostModal from "../../PostPage/PostModal";
+
+const FloatingBtn = ({ newPost, setNewPost }) => {
   const isLogin = localStorage.getItem("token") !== null;
+  const navigate = useNavigate();
+
+  const isOpen1 = useRecoilValue(modalState1);
+  const { openModal } = useToggleModal();
+  const [modalItem, setModalItem] = useRecoilState(modalContent1);
+
+  const handlePost = () => {
+    setModalItem(<PostModal />);
+    openModal();
+    setNewPost(true);
+  };
+
+  useEffect(() => {
+    if (!isOpen1) {
+      setNewPost(false);
+    }
+  }, [isOpen1, setNewPost]);
+
   return (
-    <Wrapper onClick={() => navigate(isLogin ? "/post" : "/initial")}>
+    <Wrapper onClick={() => (isLogin ? handlePost() : navigate("/initial"))}>
       <ImgDiv>
         <Img src={music} />
       </ImgDiv>
@@ -22,9 +45,7 @@ const Wrapper = styled.section`
   position: fixed;
   top: 61rem;
   right: 1.6rem;
-
-  z-index: 100;
-
+  z-index: 110;
   cursor: pointer;
 
   @media (min-width: 1200px) {

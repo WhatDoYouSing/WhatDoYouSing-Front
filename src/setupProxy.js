@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://api.musixmatch.com/ws/1.1/",
+      target: "https://api.spotify.com/v1/",
       changeOrigin: true,
       pathRewrite: {
         "^/api": "",

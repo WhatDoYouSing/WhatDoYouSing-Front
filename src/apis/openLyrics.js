@@ -1,80 +1,28 @@
-import { api } from "../apis/http";
+import { spotifyApi, lyricApi } from "../apis/http";
 
 // GET : chart tracks
-export const GetChartTracks = async (
-  country,
-  page,
-  page_size,
-  chart_name,
-  f_has_lyrics
-) => {
+export const GetChartTracks = async (title) => {
   try {
-    const response = await api.get(
-      `/api/chart.tracks.get?chart_name=${chart_name}&page=${page}&page_size=${page_size}&country=${country}&f_has_lyrics=${f_has_lyrics}`
+    const response = await spotifyApi.get(
+      `search?q=${title}&type=track&limit=5`
     );
-    console.log(response.data);
+    console.log(response.data.tracks.items);
 
-    return Promise.resolve(response.data);
+    return Promise.resolve(response.data.tracks.items);
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-// export const GetMusic = async () => {
-//   try {
-//     const response = await api.get(
-//       `/api/chart.tracks.get?chart_name=hot&page=1&page_size=10&country=xw&f_has_lyrics=0&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
-//     );
-//     https: console.log(response.data);
-//     return response.data;
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-// export const GetArtistAlbums = async (artist_id, page_size, page) => {
-//   try {
-//     const response = await api.get(
-//       `/api/artist.albums.get?artist_id=${artist_id}&s_release_date=desc&g_album_name=1&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
-//     );
-//     console.log(response.data);
-//     return response.data;
-//   } catch (error) {
-//     return Promise.reject(error);
-//   }
-// };
-
-export const GetAlbum = async (album_id, page_size, page) => {
+// GET : chart tracks
+export const GetTrackLyric = async (id) => {
   try {
-    const response = await api.get(
-      `/api/album.tracks.get?album_id=${album_id}&page=1&page_size=10&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const GetMusicSearch = async (q_artist, page_size, page) => {
-  try {
-    const response = await api.get(
-      `/api/track.search?q_artist=${q_artist}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const GetDetailLyrics = async (track_id, commontrack_id) => {
-  try {
-    const response = await api.get(
-      `/api/track.lyrics.get?track_id=${track_id}&commontrack_id=${commontrack_id}&apikey=${process.env.REACT_APP_LYRICS_API_KEY}`
+    const response = await lyricApi.get(
+      `https://zylalabs.com/api/1103/spotify+tracks+api/962/fetch+spotify+track+lyrics?id=${id}`
     );
     console.log(response.data);
 
-    return Promise.resolve(response.data);
+    return Promise.resolve(response.data.lyrics.lines);
   } catch (error) {
     return Promise.reject(error);
   }
