@@ -1,15 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Slider from "react-slick";
 
 //components
-import LyricsItem from "../LyricsItem";
+import LikeLyrics from "../LikeLyrics";
 
 //recoil
 import { useRecoilValue } from "recoil";
 import { LikeListState } from "../../../assets/recoil/apiRecoil";
 
 const LikeCarousel = () => {
+  const navigate = useNavigate();
+
+  const [dragging, setDragging] = useState(false);
+  const [mouseDownTime, setMouseDownTime] = useState(0);
+
+  const handleBeforeChange = useCallback(() => {
+    setDragging(true);
+  }, []);
+
+  const handleAfterChange = useCallback((i) => {
+    setDragging(false);
+  }, []);
+
+  const handleMouseDown = () => {
+    setMouseDownTime(Date.now());
+  };
+
+  const handleMouseUp = (id) => {
+    const mouseUpTime = Date.now();
+    const clickDuration = mouseUpTime - mouseDownTime;
+
+    if (!dragging && clickDuration < 100) {
+      navigate(`/detail/${id}`);
+    }
+  };
+
   const settings = {
     arrows: false,
     dots: true,
@@ -20,6 +47,9 @@ const LikeCarousel = () => {
     autoplaySpeed: 4000,
     pauseOnHover: true,
     swipeToSlide: true,
+    touchThreshold: 100,
+    beforeChange: handleBeforeChange,
+    afterChange: handleAfterChange,
   };
 
   const likedList = useRecoilValue(LikeListState);
@@ -29,7 +59,7 @@ const LikeCarousel = () => {
       <Slider {...settings} dotsClass="slick-dots-custom">
         {likedList !== null &&
           likedList.map((item) => (
-            <LyricsItem
+            <LikeLyrics
               showHeart={true}
               key={item.id}
               id={item.id}
@@ -39,6 +69,8 @@ const LikeCarousel = () => {
               content={item.content}
               title={item.title}
               singer={item.singer}
+              onMouseDown={handleMouseDown}
+              onMouseUp={() => handleMouseUp(item.id)}
             />
           ))}
       </Slider>
