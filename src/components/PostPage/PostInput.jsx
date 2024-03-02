@@ -3,21 +3,31 @@ import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
 import { LyricState } from "../../assets/recoil/apiRecoil";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useToggleModal } from "../../hooks/useToggleModal";
+import { modalContent2, modalState2 } from "../../assets/recoil/modal";
+import LyricInput from "./LyricInput";
+import { ReactComponent as Delete } from "../../images/lyric-input-delete.svg";
+import { ReactComponent as NextBtn } from "../../images/nextBtn.svg";
 
-const PostContent = ({ onBtn, selectedTrack }) => {
+const PostInput = ({
+  onBtn,
+  lyricInputModal,
+  setLyricInputModal,
+  isLyricSearchOpen,
+  setIsLyricSearchOpen,
+  newPost,
+  selectedTrack,
+  setSelectedTrack,
+}) => {
   const setPostForm = useSetRecoilState(LyricState);
 
   //글자수
-  const [lyricCount, setLyricCount] = useState(0);
   const [detailCount, setDetailCount] = useState(0);
 
   //유효성 검사
-  const [lyric, setLyric] = useState("");
   const [emotion, setEmotion] = useState(null);
   const [detail, setDetail] = useState("");
-  const [song, setSong] = useState("");
-  const [singer, setSinger] = useState("");
   const [link, setLink] = useState("");
 
   const handleEmotionSelect = (selectedEmotion) => {
@@ -26,10 +36,9 @@ const PostContent = ({ onBtn, selectedTrack }) => {
 
   //버튼 활성화
   useEffect(() => {
-    const isRequiredFieldsValid =
-      lyric && emotion !== null && detail && song && singer;
+    const isRequiredFieldsValid = emotion !== null && detail;
     onBtn(!!isRequiredFieldsValid);
-  }, [lyric, emotion, detail, song, singer]);
+  }, [emotion, detail]);
 
   //입력 값 관리 함수
   const handleInputChange = (inputText, maxLength, setState, setCount) => {
@@ -62,17 +71,6 @@ const PostContent = ({ onBtn, selectedTrack }) => {
     ref.current.style.height = ref.current.scrollHeight + "px";
   };
 
-  //가사 입력 값 관리
-  const lyricRef = useRef(null);
-  const handleLyricChange = (e) => {
-    const maxLength = 60;
-    handleInputChange(e.target.value, maxLength, setLyric, setLyricCount);
-  };
-  const handleLyricHeight = (e) => {
-    setLyric(e.target.value.replace(/\n/g, " ").trim());
-    handleHeight(lyricRef);
-  };
-
   //해석 입력 값 관리
   const detailRef = useRef(null);
   const handleDetailChange = (e) => {
@@ -83,14 +81,31 @@ const PostContent = ({ onBtn, selectedTrack }) => {
     handleHeight(detailRef);
   };
 
+  //가사 선택하기
+  const handleLyricSearchClick = () => {
+    setIsLyricSearchOpen(!isLyricSearchOpen);
+  };
+
+  //직접 가사 입력하기
+  const isOpen2 = useRecoilValue(modalState2);
+  const { openModal2 } = useToggleModal();
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+
+  const handleLyricWriteClick = () => {
+    setLyricModalItem(<LyricInput />);
+    openModal2();
+    setLyricInputModal(true);
+    // console.log("handleLyricWriteClick", lyricInputModal, newPost);
+  };
+
   useEffect(() => {
     const delayTimer = setTimeout(() => {
       // 입력이 0.5초 동안 멈추면 작업 수행
       setPostForm({
-        lyrics: lyric,
+        lyrics: selectedTrack.lyric,
+        title: selectedTrack.name,
+        singer: selectedTrack.artist,
         content: detail,
-        title: song,
-        singer: singer,
         link: link,
         sings_emotion: emotion,
       });
@@ -98,40 +113,65 @@ const PostContent = ({ onBtn, selectedTrack }) => {
 
     // cleanup 함수
     return () => clearTimeout(delayTimer);
-  }, [lyric, detail, song, singer, link, emotion]);
+  }, [detail, link, emotion]);
 
   useEffect(() => {
-    setLyric(selectedTrack?.lyric);
-    const textWithoutSpaces = selectedTrack?.lyric.replace(/\s+/g, "");
-    const textLength = textWithoutSpaces?.length;
-    setLyricCount(textLength);
-    handleHeight(lyricRef);
-    console.log("selectedTrack 렌더링");
-  }, [selectedTrack?.lyric]);
+    if (!isOpen2) {
+      setLyricInputModal(false);
+    }
+  }, [isOpen2, setLyricInputModal]);
+
+  // 선택한 가사 초기화
+  const handleLyricDelete = () => {
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
+      lyric: "",
+    }));
+  };
 
   return (
     <div>
       <Wrapper>
         <Title>
-          <span className="title" style={{ marginBottom: "3.2rem" }}>
-            인용할 가사
-          </span>
-          <span className="star">*</span>
+          <div className="select-lyric">
+            <span>
+              <span className="title" style={{ marginBottom: "3.2rem" }}>
+                가사 선택
+              </span>
+              <span className="star">*</span>
+            </span>
+            <span className="self-lyric" onClick={handleLyricWriteClick}>
+              직접 가사 입력하기
+            </span>
+          </div>
         </Title>
-        <Lyric>
-          <textarea
-            ref={lyricRef}
-            value={lyric}
-            onChange={handleLyricChange}
-            placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
-            onBlur={(e) => handleLyricHeight(e)}
-          />
+        <Lyric onClick={handleLyricSearchClick}>
+          <span>가사 검색하기</span>
+          <NextBtn />
         </Lyric>
-        <Limit>
-          <span>{lyricCount}</span>
-          <span> / 60 자</span>
-          <span className="ex"> (공백 제외)</span>
-        </Limit>
+        {selectedTrack?.lyric && (
+          <>
+            <LyricBox>
+              <div>{selectedTrack.lyric}</div>
+              <Delete onClick={handleLyricDelete} />
+            </LyricBox>
+            <Line />
+            <Title>
+              <span className="title" style={{ marginBottom: "1.6rem" }}>
+                가사 출처
+              </span>
+              <span className="star">*</span>
+            </Title>
+            <TrackInfo>
+              <div>
+                노래 제목 <span>{selectedTrack.name}</span>
+              </div>
+              <div>
+                가수 이름 <span>{selectedTrack.artist}</span>
+              </div>
+            </TrackInfo>
+          </>
+        )}
         <Line />
         <EmotionDiv>
           <Title>
@@ -166,29 +206,6 @@ const PostContent = ({ onBtn, selectedTrack }) => {
         <Line style={{ marginTop: "5rem" }} />
         <Title>
           <span className="title" style={{ marginBottom: "1.6rem" }}>
-            가사 출처
-          </span>
-          <span className="star">*</span>
-        </Title>
-        <Source>
-          <div className="smallTitle">노래 제목</div>
-          <input
-            value={song}
-            onChange={(e) => setSong(e.target.value)}
-            placeholder="노래 제목을 남겨주세요!"
-          />
-        </Source>
-        <Source>
-          <div className="smallTitle">가수 이름</div>
-          <input
-            value={singer}
-            onChange={(e) => setSinger(e.target.value)}
-            placeholder="가수 이름을 남겨주세요!"
-          />
-        </Source>
-        <Line style={{ marginTop: "5rem" }} />
-        <Title>
-          <span className="title" style={{ marginBottom: "1.6rem" }}>
             노래를 들을 수 있는 링크
           </span>
         </Title>
@@ -204,13 +221,14 @@ const PostContent = ({ onBtn, selectedTrack }) => {
   );
 };
 
-export default PostContent;
+export default PostInput;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  padding-top: 7.9rem;
 `;
 
 const Title = styled.div`
@@ -221,6 +239,7 @@ const Title = styled.div`
   font-weight: 800;
   line-height: normal;
   letter-spacing: -0.04rem;
+  width: 100%;
 
   .title {
     color: var(--black);
@@ -228,27 +247,59 @@ const Title = styled.div`
   .star {
     color: var(--pointPink);
   }
+  .select-lyric {
+    padding-top: 2.8rem;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .self-lyric {
+    font-size: 1.4rem;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+    /* margin-left: 50%; */
+  }
 `;
 
 const Lyric = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.04rem;
   width: 100%;
-  margin-bottom: 2.4rem;
+  height: 7rem;
+  background-color: var(--black);
+  border-radius: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.4rem;
+  margin: 3.2rem 0;
+  cursor: pointer;
+  span {
+    color: white;
+  }
+`;
 
-  textarea {
+const LyricBox = styled.div`
+  width: 100%;
+  margin: -0.8rem 0 3.2rem;
+  padding: 2.4rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  background-color: var(--lightGray);
+  border-radius: 16px;
+
+  div {
     width: 100%;
     align-self: stretch;
     color: var(--black);
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 900;
-    line-height: 105%;
-    letter-spacing: -0.12rem;
-  }
-
-  textarea::placeholder {
-    width: 100%;
-    align-self: stretch;
-    color: var(--gray);
     font-size: 4rem;
     font-style: normal;
     font-weight: 900;
@@ -276,8 +327,7 @@ const Line = styled.div`
   border-bottom: 0.05rem solid var(--black);
   opacity: 0.2;
   line-height: 0.1rem;
-  margin: 0.8rem 0;
-  margin-bottom: 5rem;
+  margin-bottom: 5.8rem;
 `;
 
 const EmotionDiv = styled.div`
@@ -307,7 +357,6 @@ const Detail = styled.div`
 const Source = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.6rem;
   align-self: stretch;
 
   .smallTitle {
@@ -332,6 +381,8 @@ const Source = styled.div`
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
     outline: none;
+
+    margin-bottom: 8rem;
   }
 
   input::placeholder {
@@ -341,5 +392,34 @@ const Source = styled.div`
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.032rem;
+  }
+`;
+
+const TrackInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 3.2rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 4.8rem;
+    color: var(--black);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.032rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      margin-left: 3.2rem;
+      height: 4.8rem;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 400;
+    }
   }
 `;

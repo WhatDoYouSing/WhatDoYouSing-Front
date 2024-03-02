@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import profile from "../images/profile.svg";
 import { ReactComponent as Like } from "../images/like.svg";
 import { ReactComponent as LikeClick } from "../images/likeclick.svg";
 
-import { DelReply, PostReplyLike } from "../apis/comment";
+import { PostReplyLike } from "../apis/comment";
 import { useRecoilValue } from "recoil";
 import { profileListAtom } from "../assets/recoil/recoil";
 
@@ -22,7 +21,6 @@ const Reply = ({
     localStorage.getItem(`reply_${replyContent.recomment_id}_isLiked`) ===
       "true"
   );
-  const [likeCount, setLikeCount] = useState(replyContent.relikes_count || 0);
   const profiles = useRecoilValue(profileListAtom);
 
   // 로그인 여부 확인 및 현재 사용자 정보 가져오기
@@ -39,7 +37,6 @@ const Reply = ({
     };
     PostReLike(commentId, replyContent.recomment_id);
     setIsLiked(!isLiked);
-    //setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
   };
 
   useEffect(() => {
@@ -53,26 +50,20 @@ const Reply = ({
   const handleDeleteRe = () => {
     setDeleteRe(!deleteRe);
     setReNum(replyContent.recomment_id);
-
-    // const DelReData = async (recomment_pk) => {
-    //   const response = await DelReply(recomment_pk);
-    //   setRender(render + 1);
-    //   console.log(response);
-    // };
-    // DelReData(replyContent.recomment_id);
   };
+
+  // 답글 프로필 이미지 설정
+  const profileIndex = replyContent?.author_profile
+    ? replyContent.author_profile - 1
+    : 0;
+  const profileImageSrc = profiles[profileIndex].none_filled;
 
   return (
     <>
       <Container>
-        <ProfileContainer>
-          <Profile>
-            <img
-              src={profiles[replyContent.author_profile - 1]?.none_filled}
-              alt="profileimg"
-            ></img>
-          </Profile>
-        </ProfileContainer>
+        <Profile>
+          <img src={profileImageSrc} alt="profileimg" />
+        </Profile>
         <ContentContainer>
           <Id>{replyContent.author_nickname}</Id>
           <Content>{replyContent.com_content}</Content>
@@ -104,16 +95,13 @@ const Reply = ({
 export default Reply;
 
 const Container = styled.div`
-  width: calc(100% + 1.6rem);
+  width: 100%;
   display: flex;
   flex-direction: row;
-  /* padding: 2.5rem 0; */
-  margin-left: -1rem;
-  padding: 2.5rem 6.6rem;
+  padding: 2.5rem 1.6rem 2.5rem 6.6rem;
+  box-sizing: border-box;
   background-color: var(--lightGray);
 `;
-
-const ProfileContainer = styled.div``;
 
 const Profile = styled.div`
   display: flex;

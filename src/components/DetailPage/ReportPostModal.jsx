@@ -17,8 +17,13 @@ const ReportPostModal = ({ reportPost, setReportPost }) => {
     <Container>
       <TitleAsk>신고하기</TitleAsk>
       <AskComment>
-        출처가 정확하지 않거나 법적 혹은 윤리적으로 부적절한 글이 보이면 신고해
-        주세요.
+        출처가 정확하지 않거나
+        <br />
+        법적 혹은 윤리적으로
+        <br />
+        부적절한 글이 보이면
+        <br />
+        신고해 주세요.
       </AskComment>
       <ButtonDiv onMouseUp={toKakaoChat} className="buttonDiv">
         <Button className="button">카카오톡 오픈채팅으로 신고</Button>

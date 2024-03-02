@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { styled, css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { ReactComponent as Delete } from "../images/delete.svg";
-import { ReactComponent as Back } from "../images/back.svg";
+import { ReactComponent as Delete } from "../../images/delete.svg";
+import { ReactComponent as Back } from "../../images/back.svg";
 
 //recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { PostLyrics } from "../../apis/lyrics";
 import {
   SignupState,
   ProfileState,
@@ -14,66 +15,63 @@ import {
   NicModifyState,
   LyricState,
   PasCheckState,
-} from "../assets/recoil/apiRecoil";
+  postCheckModal,
+  setPostCheckModal,
+} from "../../assets/recoil/apiRecoil";
 
-//api
+//modal
+import { useToggleModal } from "../../hooks/useToggleModal";
 import {
-  PatchPassword,
-  PatchNickname,
-  PostSignup,
-  PostProfile,
-} from "../apis/user";
-import { PostLyrics } from "../apis/lyrics";
+  modalContent1,
+  modalContent2,
+  modalState1,
+  modalState2,
+} from "../../assets/recoil/modal";
+import PostModal from "./PostModal";
+import LyricInput from "./LyricInput";
 
-const IntroTopbar = ({
+const ModalTopbar = ({
   text = "로그인",
-  backPath = -1,
   del = true,
-  delPath = "/initial",
   actBtn = false,
   btnText = "다음으로",
-  nextPath = "/",
   isFilled = false,
-  onPostIdReceived,
+  newPost,
+  setNewPost,
+  isOpen1,
+  saveInputLyric,
   setCheckPost,
+  uploCheckModal,
+  setUploCheckModal,
 }) => {
   const navigate = useNavigate();
-  const existingPassword = useRecoilValue(PasCheckState);
-  const newPassword = useRecoilValue(PasModifyState);
-  const newNickname = useRecoilValue(NicModifyState);
   const newLyricPost = useRecoilValue(LyricState);
-  const signupForm = useRecoilValue(SignupState);
-  const profile = useRecoilValue(ProfileState);
+
+  // modal close
+  const { openModal } = useToggleModal();
+  const { openModal2 } = useToggleModal();
+
+  const [postModalItem, setPostModalItem] = useRecoilState(modalContent1);
+  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
+
+  const handlePostModal = () => {
+    setPostModalItem(<PostModal />);
+    openModal();
+    // console.log("handlePostModal");
+  };
+
+  const handleLyricModal = () => {
+    setLyricModalItem(<LyricInput />);
+    openModal2();
+    // console.log("handleLyricModal");
+  };
 
   const handleClick = async () => {
     if (isFilled) {
       switch (text) {
-        case "프로필 설정":
-          PostSignup(
-            signupForm.username,
-            signupForm.password,
-            signupForm.nickname,
-            profile,
-            navigate
-          );
-          // PostProfile(profile);
-          // navigate(nextPath);
-          break;
-        case "프로필 지정":
-          PostProfile(profile);
-          // navigate(nextPath);
-          break;
-        case "비밀번호 변경":
-          PatchPassword(existingPassword, newPassword, navigate);
-          break;
-        case "닉네임 변경":
-          PatchNickname(newNickname);
-          navigate(nextPath);
-          break;
-        case "회원가입":
-          console.log(newNickname);
-          PatchNickname(newNickname);
-          navigate(nextPath);
+        case "직접 가사 입력하기":
+          saveInputLyric();
+          handleLyricModal();
           break;
         case "게시글 작성":
           const response = await PostLyrics(
@@ -90,17 +88,14 @@ const IntroTopbar = ({
             setCheckPost(true);
             console.log("setCheckPost: ", setCheckPost);
           }
-
           console.log(newLyricPost);
           console.log(postId);
           navigate(`/detail/${postId}`);
           break;
-
-        default:
-          navigate(nextPath);
       }
     } else {
-      // alert("필수항목을 모두 채워주세요!");
+      setUploCheckModal(!uploCheckModal);
+      console.log(uploCheckModal);
     }
   };
 
@@ -111,13 +106,13 @@ const IntroTopbar = ({
           {del ? (
             <Delete
               onClick={() => {
-                navigate(delPath);
+                handlePostModal();
               }}
             />
           ) : (
             <Back
               onClick={() => {
-                navigate(backPath);
+                handleLyricModal();
               }}
             />
           )}
@@ -127,7 +122,7 @@ const IntroTopbar = ({
           <NextBtn
             className="buttonDiv"
             isFilled={isFilled}
-            onMouseUp={handleClick}
+            onClick={handleClick}
           >
             {btnText}
           </NextBtn>
@@ -139,7 +134,7 @@ const IntroTopbar = ({
   );
 };
 
-export default IntroTopbar;
+export default ModalTopbar;
 
 const Wrapper = styled.div`
   position: fixed;
