@@ -255,9 +255,13 @@ const Title = styled.div`
     justify-content: space-between;
   }
   .self-lyric {
-    font-size: 1.4rem;
+    color: var(--black);
+    font-size: 1.6rem;
     text-decoration: underline;
-    font-weight: 600;
+    font-weight: 500;
+    line-height: 130%; /* 20.8px */
+    letter-spacing: -0.16px;
+    font-style: normal;
     cursor: pointer;
     /* margin-left: 50%; */
   }
@@ -266,19 +270,22 @@ const Title = styled.div`
 const Lyric = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.04rem;
   width: 100%;
-  height: 7rem;
+  height: 6.4119rem;
   background-color: var(--black);
-  border-radius: 1.5rem;
+  border-radius: 1.3358rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.4rem;
+
+  gap: 13.358px;
+  font-size: 1.9rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+
   margin: 3.2rem 0;
+  padding: 0 2.1rem;
   cursor: pointer;
   span {
     color: white;
