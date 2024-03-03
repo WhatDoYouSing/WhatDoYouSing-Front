@@ -198,8 +198,8 @@ const Message = styled.div`
   color: var(--darkGray);
   border-radius: 1rem;
   align-items: center;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  padding: 1.4rem;
+  margin: 1.6rem 0 3.2rem 0;
 `;
 
 const Title = styled.div`
