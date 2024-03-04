@@ -161,8 +161,13 @@ const TrackInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    color: var(--black);
     font-size: 20px;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 26px */
+    letter-spacing: -0.2px;
   }
 `;
 
@@ -170,9 +175,13 @@ const TrackLyric = styled.div`
   padding-bottom: 100px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
+  color: var(--black);
   font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 200%;
+  letter-spacing: -0.36px;
 
   div {
     cursor: pointer;

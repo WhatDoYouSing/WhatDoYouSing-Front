@@ -154,20 +154,24 @@ const Header = styled.div`
   align-items: center;
   padding-bottom: 20px;
 
-  font-size: 15px;
-  line-height: 100%; /* 15px */
-  letter-spacing: -0.3px;
-
   span {
+    color: var(--black);
     font-size: 2rem;
+    font-style: normal;
     font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.4px;
   }
 `;
 
 const CloseBtn = styled.div`
   position: absolute;
-  right: 2rem;
-  font-size: 1.8rem;
+  right: 2.1rem;
+  color: var(--black);
+  font-size: 2rem;
+  font-style: normal;
   font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -0.2px;
   cursor: pointer;
 `;

@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
-import { LyricState } from "../../assets/recoil/apiRecoil";
+import { LyricState, SpotifyToken } from "../../assets/recoil/apiRecoil";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import { modalContent2, modalState2 } from "../../assets/recoil/modal";
 import LyricInput from "./LyricInput";
 import { ReactComponent as Delete } from "../../images/lyric-input-delete.svg";
 import { ReactComponent as NextBtn } from "../../images/nextBtn.svg";
+import { GetSpotifyToken } from "../../apis/openLyrics";
 
 const PostInput = ({
   onBtn,
@@ -81,8 +82,11 @@ const PostInput = ({
     handleHeight(detailRef);
   };
 
-  //가사 선택하기
-  const handleLyricSearchClick = () => {
+  //가사 검색하기
+  const setToken = useSetRecoilState(SpotifyToken);
+  const handleLyricSearchClick = async () => {
+    const token = await GetSpotifyToken();
+    setToken(token);
     setIsLyricSearchOpen(!isLyricSearchOpen);
   };
 
@@ -312,6 +316,10 @@ const LyricBox = styled.div`
     font-weight: 900;
     line-height: 105%;
     letter-spacing: -0.12rem;
+  }
+
+  svg {
+    flex-shrink: 0;
   }
 `;
 
