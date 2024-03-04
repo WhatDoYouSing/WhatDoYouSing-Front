@@ -6,9 +6,9 @@ import { ReactComponent as DefaultEmoji } from "../../images/search-lyric-emoji.
 import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
 
 import { GetChartTracks } from "../../apis/openLyrics";
-
+import { useRecoilState, useRecoilValue } from "recoil";
 import { modalContent2, modalState2 } from "../../assets/recoil/modal";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { SpotifyToken } from "../../assets/recoil/apiRecoil";
 import { useToggleModal } from "../../hooks/useToggleModal";
 import LyricInput from "./LyricInput";
 
@@ -21,13 +21,15 @@ const SearchContent = ({
   const [keyword, setKeyword] = useState("");
   const [tracks, setTracks] = useState(null);
 
+  const token = useRecoilValue(SpotifyToken);
+
   const handleChange = (e) => {
     setKeyword(e.target.value);
   };
 
   const handleSearch = () => {
     if (keyword.trim() !== "") {
-      GetChartTracks(keyword).then((trackData) => {
+      GetChartTracks(keyword, token).then((trackData) => {
         setTracks(trackData);
       });
     } else {

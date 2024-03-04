@@ -85,3 +85,8 @@ export const KeywordState = atom({
   key: "KeywordState",
   default: "",
 }); //검색 키워드
+
+export const SpotifyToken = atom({
+  key: "SpotifyToken",
+  default: "",
+});
