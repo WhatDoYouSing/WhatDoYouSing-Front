@@ -18,14 +18,6 @@ axiosInstance.defaults.headers.common["Authorization"] = token
 export const KAKAO_AUTH_URL = "http://whatdoyousing.com/accounts/kakao/";
 
 //오픈 API 관련
-export const spotifyApi = axios.create({
-  headers: {
-    Authorization: `Bearer ${process.env.REACT_APP_SPOTIFY_API_TOKEN}`,
-  },
-});
-
-spotifyApi.defaults.withCredentials = true;
-
 export const lyricApi = axios.create({
   headers: {
     Authorization: `Bearer ${process.env.REACT_APP_LYRICS_API_KEY}`,

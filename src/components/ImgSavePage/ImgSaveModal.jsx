@@ -75,6 +75,7 @@ const Title = styled.div`
   font-size: 2rem;
   font-style: normal;
   font-weight: 800;
+  letter-spacing: -0.4px;
 `;
 
 const Box = styled.div`
