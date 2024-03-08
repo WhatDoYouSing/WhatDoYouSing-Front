@@ -5,7 +5,6 @@ import { axiosInstance, lyricApi } from "../apis/http";
 export const GetSpotifyToken = async () => {
   try {
     const response = await axiosInstance.get(`posts/spotify/`);
-    console.log(response.data);
     return Promise.resolve(response.data.data.access_token);
   } catch (error) {
     return Promise.reject(error);
@@ -23,10 +22,8 @@ export const GetChartTracks = async (title, token) => {
         },
       }
     );
-    console.log(response);
     return Promise.resolve(response.data.tracks.items);
   } catch (error) {
-    console.log(error);
     return Promise.reject(error);
   }
 };
