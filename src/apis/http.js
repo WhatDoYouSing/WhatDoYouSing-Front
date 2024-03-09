@@ -23,5 +23,3 @@ export const lyricApi = axios.create({
     Authorization: `Bearer ${process.env.REACT_APP_LYRICS_API_KEY}`,
   },
 });
-
-lyricApi.defaults.withCredentials = true;
