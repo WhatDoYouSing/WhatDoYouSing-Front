@@ -34,6 +34,7 @@ export const GetTrackLyric = async (id) => {
     const response = await lyricApi.get(
       `https://zylalabs.com/api/1103/spotify+tracks+api/962/fetch+spotify+track+lyrics?id=${id}`
     );
+    console.log(response.data);
     return Promise.resolve(response.data.lyrics.lines);
   } catch (error) {
     return Promise.reject(error);
