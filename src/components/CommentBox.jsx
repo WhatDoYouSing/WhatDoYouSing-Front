@@ -26,9 +26,7 @@ const CommentBox = ({
   showDel,
 }) => {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState(
-    localStorage.getItem(`comment_${content.comment_id}_isLiked`) === "true"
-  );
+  const [isLiked, setIsLiked] = useState(`${content.liked_by_user}` === "true");
   // const [likeCount, setLikeCount] = useState(6); //6은 임시값 (초기 좋아요 수)
   const [addReply, setAddReply] = useState(false);
   const profiles = useRecoilValue(profileListAtom);
@@ -75,13 +73,6 @@ const CommentBox = ({
   const handleDelete = () => {
     setDeleteCom(!deleteCom);
     setComNum(content.comment_id);
-
-    // const DelComData = async (comment_pk) => {
-    //   const response = await DelComment(comment_pk);
-    //   setRender(render + 1);
-    //   console.log(response);
-    // };
-    // DelComData(content.comment_id);
   };
 
   const handleNavigate = () => {
@@ -94,13 +85,12 @@ const CommentBox = ({
     }
   };
 
-  useEffect(() => {
-    // isLiked가 변경될 때마다 localStorage를 업데이트합니다.
-    localStorage.setItem(
-      `comment_${content.comment_id}_isLiked`,
-      isLiked.toString()
-    );
-  }, [content.comment_id, isLiked]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     `comment_${content.comment_id}_isLiked`,
+  //     isLiked.toString()
+  //   );
+  // }, [content.comment_id, isLiked]);
 
   // 댓글 프로필 이미지 설정
   const profileIndex = content?.author_profile ? content.author_profile - 1 : 0;
@@ -144,7 +134,7 @@ const CommentBox = ({
                 </>
               )}
 
-              {showDel && showDeleteButton && (
+              {showReply && showDeleteButton && (
                 <DelBtn>
                   <div onClick={handleDelete}>· 삭제하기</div>
                 </DelBtn>
