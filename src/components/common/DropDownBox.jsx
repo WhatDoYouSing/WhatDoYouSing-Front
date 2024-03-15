@@ -18,7 +18,7 @@ const DropDownBox = () => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useClickOutside(dropdownRef, false);
   const setOption = useSetRecoilState(DropdownState);
-  const Option = useRecoilValue(DropdownState);
+  const Option = useRecoilValue(DropdownState); //useState 초기값 주려고 설정
   const [selectedOption, setSelectedOption] = useState(Option);
 
   const handleSelect = (option) => {
