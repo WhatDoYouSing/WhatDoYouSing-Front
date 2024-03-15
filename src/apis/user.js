@@ -228,6 +228,7 @@ export const Logout = () => {
 
   const navigate = useNavigate();
   navigate("/");
+  window.location.reload();
 };
 
 export const isTokenExpired = async (error) => {
