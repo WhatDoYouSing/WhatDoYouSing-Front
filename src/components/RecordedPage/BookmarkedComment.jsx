@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 import CommentBox from "../CommentBox";
@@ -6,12 +7,14 @@ import Pagination from "../Pagination";
 
 //api
 import { GetMyComment } from "../../apis/my";
+import { GetComment } from "../../apis/comment";
 
 //recoil
 import { useSetRecoilState } from "recoil";
 import { MyEmotionState } from "../../assets/recoil/apiRecoil";
 
 const BookmarkedComment = () => {
+  const navigate = useNavigate();
   const [bookmarkedList, setBookmarkedList] = useState([]);
   const [response, setResponse] = useState();
   const setMyEmotionState = useSetRecoilState(MyEmotionState);
@@ -35,7 +38,12 @@ const BookmarkedComment = () => {
     <Wrapper>
       <CommentWrapper>
         {bookmarkedList.map((item) => (
-          <CommentBox showReply={false} key={item.comment_id} content={item} />
+          <CommentBox
+            // onClick={navigate(`/detail/${item.post}`)}
+            showReply={false}
+            key={item.comment_id}
+            content={item}
+          />
         ))}
       </CommentWrapper>
       <Pagination
