@@ -13,6 +13,7 @@ export const PostLogin = async (user_id, password) => {
     localStorage.setItem("username", response.data.data.username);
     localStorage.setItem("nickname", response.data.data.nickname);
     localStorage.setItem("token", response.data.data.access_token);
+    localStorage.setItem("refresh_token", response.data.data.refresh_token);
     localStorage.setItem("user_profile", response.data.data.profile);
 
     console.log(response.data);
@@ -24,6 +25,50 @@ export const PostLogin = async (user_id, password) => {
       alert(error.response.data.error.non_field_errors);
     }
     console.error("로그인 실패", error.response);
+  }
+};
+
+//GET
+// GET : 카카오 로그인
+export const KakaoLogin = async (code) => {
+  try {
+    const response = await axiosInstance.get(
+      `/accounts/kakao/callback/?code=${code}`
+    );
+
+    console.log(response.data);
+
+    localStorage.setItem("user_id", response.data.data.id);
+    localStorage.setItem("username", response.data.data.username);
+    localStorage.setItem("nickname", response.data.data.nickname);
+    localStorage.setItem("token", response.data.data.access_token);
+    localStorage.setItem("refresh_token", response.data.data.refresh_token);
+    localStorage.setItem("user_profile", response.data.data.profile);
+
+    window.location.replace(
+      response.data.message === "카카오 로그인 성공" ? "/" : "/kakao-nicname"
+    );
+
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+// POST : 리프레시 토큰 재발급
+export const PostRefresh = async (refresh) => {
+  try {
+    const response = await axiosInstance.post("/accounts/token/refresh/", {
+      refresh: refresh,
+    });
+    console.log(response.data);
+    localStorage.setItem("token", response.data.data.access);
+    localStorage.setItem("refresh_token", response.data.data.refresh);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    console.error("토큰 갱신 실패", error.response);
+    alert("세션 만료. 다시 로그인해주세요.");
+    Logout();
   }
 };
 
@@ -161,6 +206,8 @@ export const DelAccount = async (password, navigate) => {
     window.localStorage.removeItem("nickname");
     window.localStorage.removeItem("user_profile");
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("refresh_token");
+
     window.location.replace("/");
     return Promise.resolve(response.data);
   } catch (error) {
@@ -182,6 +229,7 @@ export const DelKakaoAccount = async (navigate) => {
     window.localStorage.removeItem("nickname");
     window.localStorage.removeItem("user_profile");
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("refresh_token");
     window.location.replace("/");
     return Promise.resolve(response.data);
   } catch (error) {
@@ -192,32 +240,6 @@ export const DelKakaoAccount = async (navigate) => {
   }
 };
 
-//GET
-// GET : 카카오 로그인
-export const KakaoLogin = async (code) => {
-  try {
-    const response = await axiosInstance.get(
-      `/accounts/kakao/callback/?code=${code}`
-    );
-
-    console.log(response.data);
-
-    localStorage.setItem("user_id", response.data.data.id);
-    localStorage.setItem("username", response.data.data.username);
-    localStorage.setItem("nickname", response.data.data.nickname);
-    localStorage.setItem("token", response.data.data.access_token);
-    localStorage.setItem("user_profile", response.data.data.profile);
-
-    window.location.replace(
-      response.data.message === "카카오 로그인 성공" ? "/" : "/kakao-nicname"
-    );
-
-    return Promise.resolve(response.data);
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
 //Logout
 export const Logout = () => {
   window.localStorage.removeItem("user_id");
@@ -225,14 +247,16 @@ export const Logout = () => {
   window.localStorage.removeItem("nickname");
   window.localStorage.removeItem("user_profile");
   window.localStorage.removeItem("token");
+  window.localStorage.removeItem("refresh_token");
 
-  const navigate = useNavigate();
-  navigate("/");
+  window.location.replace("/");
 };
 
 export const isTokenExpired = async (error) => {
   if (error.response.data.code === "token_not_valid") {
-    alert("세션 만료. 다시 로그인해주세요.");
-    Logout();
+    const refreshToken = window.localStorage.getItem("refresh_token");
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("refresh_token");
+    PostRefresh(refreshToken);
   }
 };
