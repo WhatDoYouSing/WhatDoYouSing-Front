@@ -19,8 +19,8 @@ const ImgCard = ({ captureRef, data }) => {
           <Detail>{data.content}</Detail>
           <More>
             <Info>
-              <Song>{data.title}</Song>
-              <Singer>{data.singer}</Singer>
+              <div>{data.title}</div>
+              <div>{data.singer}</div>
             </Info>
 
             <Insta>@what_doyousing</Insta>
@@ -103,27 +103,16 @@ const More = styled.div`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.687rem;
-`;
+  gap: 0.164rem;
 
-const Song = styled.div`
-  width: 152px;
-  color: var(--Gray, #d9d9d9);
-  font-family: Apple SD Gothic Neo;
-  font-size: 13.732px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%; /* 17.851px */
-  letter-spacing: -0.137px;
-`;
-
-const Singer = styled.div`
-  width: 152px;
-  color: var(--Gray, #d9d9d9);
-  font-family: Apple SD Gothic Neo;
-  font-size: 13.732px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%; /* 17.851px */
-  letter-spacing: -0.137px;
+  div {
+    width: 152px;
+    color: var(--gray);
+    font-family: Apple SD Gothic Neo;
+    font-size: 14.231px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: -0.142px;
+  }
 `;

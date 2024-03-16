@@ -145,7 +145,8 @@ const Description = styled.div`
 `;
 
 const TrackInfo = styled.div`
-  margin: 20px 0 18px 0;
+  margin: 36px 0 24px 0;
+  padding: 8px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -160,14 +161,22 @@ const TrackInfo = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
 
-    color: var(--black);
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 26px */
-    letter-spacing: -0.2px;
+    line-height: 130%;
+    letter-spacing: -0.18px;
+
+    span:nth-child(1) {
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    span:nth-child(2) {
+      color: var(--veryDarkGray);
+      font-weight: 500;
+    }
   }
 `;
 
