@@ -17,7 +17,7 @@ export const PostLogin = async (user_id, password) => {
     localStorage.setItem("user_profile", response.data.data.profile);
 
     console.log(response.data);
-    // window.location.replace("/");
+    window.location.replace("/");
 
     return Promise.resolve(response);
   } catch (error) {
