@@ -170,8 +170,10 @@ const ResultNum = styled.div`
 
 const ResultContainer = styled.div`
   margin-top: 24px;
+  height: calc(90vh - 204.5px);
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 `;
 
 const ResultBox = styled.div`

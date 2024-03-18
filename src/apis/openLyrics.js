@@ -15,7 +15,7 @@ export const GetSpotifyToken = async () => {
 export const GetChartTracks = async (title, token) => {
   try {
     const response = await axios.get(
-      `https://api.spotify.com/v1/search?q=${title}&type=track&limit=5`,
+      `https://api.spotify.com/v1/search?q=${title}&type=track`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
