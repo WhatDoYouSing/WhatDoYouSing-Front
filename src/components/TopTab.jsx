@@ -66,7 +66,7 @@ const TopTab = ({
       <Wrapper>
         <Back onClick={goBack} />
         <Others>
-          <Home src={home} onClick={() => navigate("/")} />
+          {/* <Home src={home} onClick={() => navigate("/")} /> */}
           <Share onClick={handleShare} />
           {isBookmarked ? (
             <BookmarkOn onClick={handleBookmark} />
