@@ -123,8 +123,8 @@ const Container = styled(motion.div)`
   width: 100vw;
   height: 90vh;
   background-color: var(--white);
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   padding: 0 16px;
   box-sizing: border-box;
 
