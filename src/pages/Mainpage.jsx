@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 //components
@@ -31,6 +32,7 @@ import useClickOutside from "../hooks/useClickOutside";
 import PostCheckModal from "../components/PostCheckModal";
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const setLikeList = useSetRecoilState(LikeListState);
   const setLankingList = useSetRecoilState(LankingListState);
 
@@ -67,6 +69,18 @@ const MainPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const token = window.localStorage.getItem("token");
+    const nickname = window.localStorage.getItem("nickname");
+    const userProfile = window.localStorage.getItem("user_profile");
+    if (token !== null) {
+      if (nickname === null) {
+        navigate("/nic-modify");
+        alert("닉네임이 지정되지 않아 해당 단계로 이동합니다.");
+      } else if (userProfile === null) {
+        navigate("/profile/2");
+        alert("프로필이 지정되지 않아 해당 단계로 이동합니다.");
+      }
+    }
   }, []);
 
   const [newPost, setNewPost] = useState(false);
