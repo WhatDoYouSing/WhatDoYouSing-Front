@@ -107,7 +107,7 @@ export default SearchTrackModal;
 
 const Overlay = styled(motion.div)`
   z-index: 130;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -117,7 +117,7 @@ const Overlay = styled(motion.div)`
 
 const Container = styled(motion.div)`
   z-index: 150;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;

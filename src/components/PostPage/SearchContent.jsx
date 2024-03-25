@@ -31,6 +31,7 @@ const SearchContent = ({
     if (keyword.trim() !== "") {
       GetChartTracks(keyword, token).then((trackData) => {
         setTracks(trackData);
+        console.log(trackData);
       });
     } else {
       setTracks(null);
