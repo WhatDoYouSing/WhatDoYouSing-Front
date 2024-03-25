@@ -65,7 +65,7 @@ const SearchTrackModal = ({
         dragControls={dragControls}
         dragListener={false}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={0.2}
+        dragElastic={0.4}
         onDragEnd={handleDragEnd}
       >
         <HandlerContainer onPointerDown={(e) => dragControls.start(e)}>
@@ -106,8 +106,8 @@ const SearchTrackModal = ({
 export default SearchTrackModal;
 
 const Overlay = styled(motion.div)`
-  z-index: 130;
   position: fixed;
+  z-index: 130;
   top: 0;
   left: 0;
   width: 100vw;
@@ -116,8 +116,8 @@ const Overlay = styled(motion.div)`
 `;
 
 const Container = styled(motion.div)`
-  z-index: 150;
   position: fixed;
+  z-index: 150;
   bottom: 0;
   left: 0;
   width: 100vw;

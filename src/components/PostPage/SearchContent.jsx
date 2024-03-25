@@ -97,7 +97,12 @@ const SearchContent = ({
                   <img src={track.album.images[1].url} alt="album cover img" />
                   <div>
                     <span>{track.name}</span>
-                    <span>{track.artists[0].name}</span>
+                    {track.artists.map((artist, index) => (
+                      <span key={index}>
+                        {artist.name}
+                        {index !== track.artists.length - 1 && ", "}
+                      </span>
+                    ))}
                   </div>
                 </ResultBox>
               ))}
