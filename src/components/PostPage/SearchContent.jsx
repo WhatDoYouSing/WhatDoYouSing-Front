@@ -96,13 +96,15 @@ const SearchContent = ({
                 >
                   <img src={track.album.images[1].url} alt="album cover img" />
                   <div>
-                    <span>{track.name}</span>
-                    {track.artists.map((artist, index) => (
-                      <span key={index}>
-                        {artist.name}
-                        {index !== track.artists.length - 1 && ", "}
-                      </span>
-                    ))}
+                    <span style={{ fontWeight: "700" }}>{track.name}</span>
+                    <span>
+                      {track.artists.map((artist, index) => (
+                        <span key={index}>
+                          {artist.name}
+                          {index !== track.artists.length - 1 && ", "}
+                        </span>
+                      ))}
+                    </span>
                   </div>
                 </ResultBox>
               ))}
@@ -123,7 +125,7 @@ const SearchContent = ({
         )
       ) : (
         <DefaltContainer>
-          <DefaultEmoji />
+          <DefaultEmoji style={{ flexShrink: "0" }} />
           <div>
             등록하고 싶은 가사를 <br />
             간편하게 검색해보세요!
@@ -148,9 +150,10 @@ const InputContainer = styled.div`
     height: 4.8rem;
     border: none;
     outline: none;
+    border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
-    transition: border-bottom-color 0.3s ease;
 
+    font-family: "AppleSDGothicNeo";
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -201,6 +204,7 @@ const ResultBox = styled.div`
     gap: 8px;
 
     color: var(--black);
+    font-family: "AppleSDGothicNeo";
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -210,9 +214,9 @@ const ResultBox = styled.div`
 `;
 
 const DefaltContainer = styled.div`
+  padding-top: 13.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1.6rem;
   height: calc(100% - 182px);
@@ -229,6 +233,7 @@ const DefaltContainer = styled.div`
 const NoResultEmoji = styled(NoResultSvg)`
   width: 10.5rem;
   height: 10.5rem;
+  flex-shrink: 0;
 `;
 
 const WriteLyricBtn = styled.div`
