@@ -31,6 +31,13 @@ const PostModal = ({
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isSelectOpen, setSelectOpen] = useState(false);
 
+  // 외부 화면 스크롤 방지
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, [isSearchOpen]);
+
   return (
     <>
       <Wrapper>
