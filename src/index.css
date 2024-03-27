@@ -237,8 +237,21 @@
   unicode-range: U+AC00-D7A3, U+0030-0039, U+3131-3163, U+203B, U+3040-9FFF;
 }
 
-/* Dots */
+@font-face {
+  font-family: "FullAppleSDGothicNeo";
+  font-weight: 500;
+  src: url("./statics/fonts/AppleSDGothicNeoM.ttf") format("truetype");
+  font-display: swap;
+}
 
+@font-face {
+  font-family: "FullAppleSDGothicNeo";
+  font-weight: 700;
+  src: url("./statics/fonts/AppleSDGothicNeoB.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Dots */
 .slick-dots-custom {
   position: absolute;
   bottom: -25px;

@@ -170,7 +170,7 @@ const CloseBtn = styled.div`
   color: var(--black);
   font-size: 2rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 130%;
   letter-spacing: -0.2px;
   cursor: pointer;
