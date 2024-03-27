@@ -153,7 +153,7 @@ const InputContainer = styled.div`
     border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
 
-    font-family: "AppleSDGothicNeo";
+    font-family: "FullAppleSDGothicNeo";
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -204,7 +204,7 @@ const ResultBox = styled.div`
     gap: 8px;
 
     color: var(--black);
-    font-family: "AppleSDGothicNeo";
+    font-family: "FullAppleSDGothicNeo";
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
