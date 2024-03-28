@@ -44,6 +44,7 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         flex-direction: column;
 
+        -ms-overflow-style:none;
         &::-webkit-scrollbar {
             display: none;
         }

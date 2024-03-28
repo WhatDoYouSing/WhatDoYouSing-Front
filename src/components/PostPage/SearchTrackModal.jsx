@@ -48,8 +48,12 @@ const SearchTrackModal = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
-  }, [isSelectOpen]);
+    document.body.style.position = "fixed";
+    return () => {
+      document.body.style = `overflow: auto`;
+      document.body.style.removeProperty("position");
+    };
+  }, []);
 
   return (
     <>

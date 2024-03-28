@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-// import IntroTopbar from "../IntroTopbar";
 import ModalTopbar from "./ModalTopbar";
 import PostInput from "./PostInput";
 import SearchTrackModal from "./SearchTrackModal";
@@ -35,8 +34,12 @@ const PostModal = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
-  }, [isSearchOpen]);
+    document.body.style.position = "fixed";
+    return () => {
+      document.body.style = `overflow: auto`;
+      document.body.style.removeProperty("position");
+    };
+  }, []);
 
   return (
     <>
