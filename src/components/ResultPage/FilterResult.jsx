@@ -85,7 +85,7 @@ const FilterResult = () => {
         </TopDiv>
         {totalItems === 0 ? (
           <NoneDiv>
-            <img src={noContent} width={"105rem"} height={"105rem"} />
+            <img src={noContent} alt="noContent" width={"105"} height={"105"} />
             <div className="noneMent">
               검색결과가 없어요.
               <br /> 사용자님이 등록해 보시는 건 어때요?
@@ -171,10 +171,14 @@ const ItemDiv = styled.div`
 
   width: 100%;
   gap: 2rem;
+
+  @media (min-width: 1000px) {
+    gap: 3.2rem;
+  }
+
   > div:nth-child(odd) {
     align-self: flex-start;
   }
-
   > div:nth-child(even) {
     align-self: flex-end;
   }

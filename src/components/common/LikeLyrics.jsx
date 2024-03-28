@@ -128,10 +128,10 @@ const LyricsComment = styled.div`
 const SongDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.2rem;
 
   color: var(--gray);
-
+  font-family: "FullAppleSDGothicNeo";
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
