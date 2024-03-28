@@ -48,24 +48,6 @@ const Wrapper = styled.div`
   width: ${(props) => (props.showComment ? "100%" : "100%")};
 `;
 
-const LikeDiv = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.9rem;
-
-  margin: 2rem 0;
-`;
-
-const Like = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-
-  color: #000;
-  font-size: 1.4rem;
-  font-weight: 500;
-`;
-
 const TitleLyrics = styled.div`
   display: flex;
   margin-bottom: 1.6rem;
@@ -82,10 +64,10 @@ const TitleLyrics = styled.div`
 const SongDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.2rem;
 
   color: var(--gray);
-
+  font-family: "FullAppleSDGothicNeo";
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
