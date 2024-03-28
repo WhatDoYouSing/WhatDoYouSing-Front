@@ -141,6 +141,10 @@ const Wrapper = styled.div`
   height: 100vh;
   background-color: var(--white);
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -181,6 +185,7 @@ const TrackInfo = styled.div`
     flex-direction: column;
     gap: 2px;
 
+    font-family: "FullAppleSDGothicNeo";
     font-size: 18px;
     font-style: normal;
     line-height: 130%;
@@ -211,6 +216,7 @@ const TrackLyric = styled.div`
   letter-spacing: -0.36px;
 
   div {
+    width: fit-content;
     cursor: pointer;
   }
 `;

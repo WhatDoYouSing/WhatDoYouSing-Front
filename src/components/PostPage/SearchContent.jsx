@@ -169,7 +169,7 @@ const InputContainer = styled.div`
 `;
 
 const ResultNum = styled.div`
-  margin-top: 1.6rem;
+  margin: 1.6rem 0;
   color: var(--veryDarkGray);
   font-size: 16px;
   font-weight: 500;
@@ -178,11 +178,15 @@ const ResultNum = styled.div`
 `;
 
 const ResultContainer = styled.div`
-  margin-top: 24px;
+  padding-top: 8px;
   height: calc(90vh - 204.5px);
   display: flex;
   flex-direction: column;
   overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ResultBox = styled.div`
