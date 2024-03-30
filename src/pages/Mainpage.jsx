@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -22,13 +22,7 @@ import {
 } from "../assets/recoil/apiRecoil";
 
 //modal
-import { useToggleModal } from "../hooks/useToggleModal";
-import { modalContent, modalState } from "../assets/recoil/modal";
 import PostModal from "../components/PostPage/PostModal";
-import LyricInput from "../components/PostPage/LyricInput";
-
-import useClickOutside from "../hooks/useClickOutside";
-import PostCheckModal from "../components/PostCheckModal";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -83,22 +77,6 @@ const MainPage = () => {
   }, []);
 
   const [newPost, setNewPost] = useState(false);
-  const [lyricInputModal, setLyricInputModal] = useState(false);
-
-  // 사용자가 선택한 음악 정보 관리
-  const [selectedTrack, setSelectedTrack] = useState(null);
-  useEffect(() => {
-    setSelectedTrack({
-      lyric: "",
-    });
-  }, []);
-
-  // 업로드 불가 모달
-  const postCheckModalRef = useRef();
-  const [uploCheckModal, setUploCheckModal] = useClickOutside(
-    postCheckModalRef,
-    false
-  );
 
   return (
     <>
@@ -111,41 +89,11 @@ const MainPage = () => {
 
         {newPost && (
           <PostModalWrapper>
-            <PostModal
-              newPost={newPost}
-              setNewPost={setNewPost}
-              lyricInputModal={lyricInputModal}
-              setLyricInputModal={setLyricInputModal}
-              selectedTrack={selectedTrack}
-              setSelectedTrack={setSelectedTrack}
-              uploCheckModal={uploCheckModal}
-              setUploCheckModal={setUploCheckModal}
-            />
-          </PostModalWrapper>
-        )}
-
-        {lyricInputModal && (
-          <PostModalWrapper>
-            <LyricInput
-              selectedTrack={selectedTrack}
-              setSelectedTrack={setSelectedTrack}
-              uploCheckModal={uploCheckModal}
-              setUploCheckModal={setUploCheckModal}
-            />
+            <PostModal setNewPost={setNewPost} />
           </PostModalWrapper>
         )}
       </Wrapper>
       <Footer />
-      {uploCheckModal && (
-        <ModalWrapper>
-          <Background onClick={() => setUploCheckModal(!uploCheckModal)} />
-          <PostCheckModal
-            ref={postCheckModalRef}
-            uploCheckModal={uploCheckModal}
-            setUploCheckModal={setUploCheckModal}
-          />
-        </ModalWrapper>
-      )}
     </>
   );
 };
@@ -171,29 +119,4 @@ const PostModalWrapper = styled.div`
   left: 0;
   z-index: 110;
   background-color: white;
-`;
-
-const ModalWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 200;
-`;
-
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 200;
 `;

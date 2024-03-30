@@ -4,32 +4,40 @@ import styled from "styled-components";
 import SelectTopbar from "./SelectTopbar";
 import Toast from "./Toast";
 import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
+import Spinner from "../../images/spinner.gif";
 
 import { GetTrackLyric } from "../../apis/openLyrics";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { LyricState, TrackState } from "../../assets/recoil/apiRecoil";
 
 const SelectLyricModal = ({
   setSearchOpen,
   setSelectOpen,
-  selectedTrack,
   setSelectedTrack,
 }) => {
   // 가사 받아오기
   const [lineData, setLineData] = useState([]);
+  const savedLines = useRecoilValue(LyricState);
+  const savedTrackInfo = useRecoilValue(TrackState);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleClick = async () => {
       try {
-        const lyricData = await GetTrackLyric(selectedTrack.id);
+        const lyricData = await GetTrackLyric(savedTrackInfo.id);
         setLineData(lyricData);
+        setLoading(false);
       } catch (error) {
         setLineData(null);
+        setLoading(false);
+      }
+
+      if (savedLines !== "") {
+        setSelectedLines(savedLines);
       }
     };
 
     handleClick();
-
-    document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
   }, []);
 
   // 가사 문장별 선택
@@ -60,6 +68,7 @@ const SelectLyricModal = ({
   };
 
   // 선택한 가사 저장
+  const setSavedLines = useSetRecoilState(LyricState);
   const saveSelectedLyric = () => {
     const sortedSelectLines = selectLines
       .slice()
@@ -70,10 +79,22 @@ const SelectLyricModal = ({
       .join(" ")
       .replace(/\s/g, " ");
 
-    setSelectedTrack({
-      ...selectedTrack,
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
+      name: savedTrackInfo.name,
+      artist: savedTrackInfo.artist,
       lyric: totalSelectedLine,
-    });
+      type: "search",
+    }));
+
+    setSavedLines(selectLines);
+    setSearchOpen(false);
+    setSelectOpen(false);
+  };
+
+  // 가사 선택 모달 닫기
+  const closeModal = () => {
+    setSelectOpen(false);
   };
 
   // Toast 메시지 띄우기
@@ -82,21 +103,26 @@ const SelectLyricModal = ({
   return (
     <>
       <Wrapper>
-        <SelectTopbar
-          {...{ selectLines, setSearchOpen, setSelectOpen, saveSelectedLyric }}
-        />
+        <SelectTopbar {...{ selectLines, saveSelectedLyric, closeModal }} />
         <Container>
           <Description>클릭하여 가사를 선택해 주세요.</Description>
           <TrackInfo>
-            <img src={selectedTrack.image} alt="album cover img" />
+            <img src={savedTrackInfo.image} alt="album cover img" />
             <div>
-              <span>{selectedTrack.name}</span>
-              <span>{selectedTrack.artist}</span>
+              <span>{savedTrackInfo.name}</span>
+              <span>{savedTrackInfo.artist}</span>
             </div>
           </TrackInfo>
-          <TrackLyric>
-            {lineData ? (
-              lineData.map((line, index) =>
+
+          {loading && (
+            <Loading>
+              <img src={Spinner} alt="loading" />
+            </Loading>
+          )}
+
+          {lineData ? (
+            <TrackLyric>
+              {lineData.map((line, index) =>
                 selectLines.find(
                   (selectedLine) => selectedLine.index === index
                 ) ? (
@@ -115,14 +141,14 @@ const SelectLyricModal = ({
                     {line.words}
                   </div>
                 )
-              )
-            ) : (
-              <NoResultContainer>
-                <NoResultEmoji />
-                <div>이 노래는 아직 등록된 가사가 없어요.</div>
-              </NoResultContainer>
-            )}
-          </TrackLyric>
+              )}
+            </TrackLyric>
+          ) : (
+            <NoResultContainer>
+              <NoResultEmoji />
+              <div>이 노래는 아직 등록된 가사가 없어요.</div>
+            </NoResultContainer>
+          )}
         </Container>
       </Wrapper>
       {showToast && <Toast onClose={() => setShowToast(false)} />}
@@ -242,4 +268,14 @@ const NoResultEmoji = styled(NoResultSvg)`
   width: 10.5rem;
   height: 10.5rem;
   flex-shrink: 0;
+`;
+
+const Loading = styled.div`
+  padding-top: 12rem;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 150px;
+  }
 `;
