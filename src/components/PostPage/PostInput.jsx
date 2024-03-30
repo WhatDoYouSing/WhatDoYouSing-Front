@@ -2,27 +2,25 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import EmotionList from "../common/EmotionList";
-import { LyricState, SpotifyToken } from "../../assets/recoil/apiRecoil";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { useToggleModal } from "../../hooks/useToggleModal";
-import { modalContent2, modalState2 } from "../../assets/recoil/modal";
-import LyricInput from "./LyricInput";
 import { ReactComponent as Delete } from "../../images/lyric-input-delete.svg";
 import { ReactComponent as NextBtn } from "../../images/nextBtn.svg";
+
+import { useSetRecoilState, useResetRecoilState } from "recoil";
+import {
+  SpotifyToken,
+  LyricState,
+  TrackState,
+} from "../../assets/recoil/apiRecoil";
 import { GetSpotifyToken } from "../../apis/openLyrics";
 
 const PostInput = ({
   onBtn,
-  lyricInputModal,
   setLyricInputModal,
-  isLyricSearchOpen,
-  setIsLyricSearchOpen,
-  newPost,
+  setSearchOpen,
+  setSelectOpen,
   selectedTrack,
   setSelectedTrack,
 }) => {
-  const setPostForm = useSetRecoilState(LyricState);
-
   //글자수
   const [detailCount, setDetailCount] = useState(0);
 
@@ -82,55 +80,56 @@ const PostInput = ({
     handleHeight(detailRef);
   };
 
-  //가사 검색하기
+  //가사 검색 모달 열기 & 스포티파이 토큰 받기
   const setToken = useSetRecoilState(SpotifyToken);
   const handleLyricSearchClick = async () => {
     const token = await GetSpotifyToken();
     setToken(token);
-    setIsLyricSearchOpen(!isLyricSearchOpen);
+    setSearchOpen(true);
   };
 
   //직접 가사 입력하기
-  const isOpen2 = useRecoilValue(modalState2);
-  const { openModal2 } = useToggleModal();
-  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
-
   const handleLyricWriteClick = () => {
-    setLyricModalItem(<LyricInput />);
-    openModal2();
     setLyricInputModal(true);
-    // console.log("handleLyricWriteClick", lyricInputModal, newPost);
   };
 
   useEffect(() => {
     const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setPostForm({
-        lyrics: selectedTrack.lyric,
-        title: selectedTrack.name,
-        singer: selectedTrack.artist,
+      setSelectedTrack((prevTrack) => ({
+        ...prevTrack,
         content: detail,
         link: link,
-        sings_emotion: emotion,
-      });
-    }, 500);
+        emotion: emotion,
+      }));
+    }, 1000);
 
-    // cleanup 함수
     return () => clearTimeout(delayTimer);
   }, [detail, link, emotion]);
 
-  useEffect(() => {
-    if (!isOpen2) {
-      setLyricInputModal(false);
-    }
-  }, [isOpen2, setLyricInputModal]);
-
   // 선택한 가사 초기화
-  const handleLyricDelete = () => {
+  const resetSavedLines = useResetRecoilState(LyricState);
+  const resetSavedTrack = useResetRecoilState(TrackState);
+  const handleLyricDelete = (e) => {
+    e.stopPropagation();
     setSelectedTrack((prevTrack) => ({
       ...prevTrack,
+      id: "",
       lyric: "",
+      name: "",
+      artist: "",
+      type: "",
     }));
+    resetSavedLines();
+    resetSavedTrack();
+  };
+
+  // 가사 수정을 위한 모달 열기
+  const handleLyricClick = () => {
+    if (selectedTrack?.type === "input") {
+      setLyricInputModal(true);
+    } else if (selectedTrack?.type === "search") {
+      setSelectOpen(true);
+    }
   };
 
   return (
@@ -155,9 +154,9 @@ const PostInput = ({
         </Lyric>
         {selectedTrack?.lyric && (
           <>
-            <LyricBox>
+            <LyricBox onClick={handleLyricClick}>
               <div>{selectedTrack.lyric}</div>
-              <Delete onClick={handleLyricDelete} />
+              <Delete onClick={(e) => handleLyricDelete(e)} />
             </LyricBox>
             <Line />
             <Title>
