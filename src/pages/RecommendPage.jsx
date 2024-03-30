@@ -7,28 +7,13 @@ import Topbar from "../components/common/MainPage/Topbar";
 
 import { ReactComponent as Reload } from "../images/reload.svg";
 
-//api
-import { GetRecommend } from "../apis/main";
-import { GetLyricsList } from "../apis/lyrics";
-
 const RecommendPage = () => {
-  const [savedList, setSavedList] = useState([]);
-
-  useEffect(() => {
-    const handleClick = async () => {
-      const savedList = await GetRecommend();
-      setSavedList(savedList.data);
-    };
-
-    handleClick();
-  }, []);
-
   return (
     <>
       <Topbar />
       <Wrapper>
         <ScrollContainer>
-          <RecCarousel savedList={savedList} />
+          <RecCarousel />
         </ScrollContainer>
         <Reload style={{ marginBottom: "7.6rem" }} />
       </Wrapper>
