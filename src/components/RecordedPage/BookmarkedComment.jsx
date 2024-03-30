@@ -32,6 +32,8 @@ const BookmarkedComment = () => {
 
     handleClick(currentPage);
     setMyEmotionState("");
+    console.log(bookmarkedList);
+    // console.log(savedList);
   }, [currentPage]);
 
   return (
@@ -39,7 +41,7 @@ const BookmarkedComment = () => {
       <CommentWrapper>
         {bookmarkedList.map((item) => (
           <CommentBox
-            // onClick={navigate(`/detail/${item.post}`)}
+            //onClick={navigate(`/detail/${item.post}`)}
             showReply={false}
             key={item.comment_id}
             content={item}
