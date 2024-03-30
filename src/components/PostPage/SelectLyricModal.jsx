@@ -38,9 +38,6 @@ const SelectLyricModal = ({
     };
 
     handleClick();
-
-    document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
   }, []);
 
   // 가사 문장별 선택
@@ -84,7 +81,6 @@ const SelectLyricModal = ({
 
     setSelectedTrack((prevTrack) => ({
       ...prevTrack,
-      id: savedTrackInfo.id,
       name: savedTrackInfo.name,
       artist: savedTrackInfo.artist,
       lyric: totalSelectedLine,

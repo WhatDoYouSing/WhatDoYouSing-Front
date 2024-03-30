@@ -83,12 +83,13 @@ const LyricInput = ({
 
   // 입력한 가사 저장
   const saveInputLyric = () => {
-    setSelectedTrack({
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
       lyric: lyric,
       name: song,
       artist: singer,
       type: "input",
-    });
+    }));
   };
 
   return (
