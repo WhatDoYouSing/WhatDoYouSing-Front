@@ -86,6 +86,7 @@ const PostInput = ({
     const token = await GetSpotifyToken();
     setToken(token);
     setSearchOpen(true);
+    resetTrack();
   };
 
   //직접 가사 입력하기
@@ -111,9 +112,12 @@ const PostInput = ({
   const resetSavedTrack = useResetRecoilState(TrackState);
   const handleLyricDelete = (e) => {
     e.stopPropagation();
+    resetTrack();
+  };
+
+  const resetTrack = () => {
     setSelectedTrack((prevTrack) => ({
       ...prevTrack,
-      id: "",
       lyric: "",
       name: "",
       artist: "",
