@@ -79,10 +79,12 @@ const FilterResult = () => {
   return (
     <>
       <Wrapper>
-        <TopDiv>
-          <div className="count">{totalItems}개의 가사를 찾았어요!</div>
-          <DropDownSearch />
-        </TopDiv>
+        <FixedBox>
+          <TopDiv>
+            <div className="count">{totalItems}개의 가사를 찾았어요!</div>
+            <DropDownSearch />
+          </TopDiv>
+        </FixedBox>
         {totalItems === 0 ? (
           <NoneDiv>
             <img src={noContent} alt="noContent" width={"105"} height={"105"} />
@@ -122,6 +124,15 @@ const FilterResult = () => {
 
 export default FilterResult;
 
+const FixedBox = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 13rem;
+  left: 0;
+  padding: 0 1.6rem;
+  z-index: 90;
+`;
+
 const Wrapper = styled.section`
   margin-top: 0.5rem;
   height: auto;
@@ -135,6 +146,7 @@ const TopDiv = styled.div`
   align-items: center;
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
   margin-bottom: 1.6rem;
+  background-color: white;
 
   .count {
     color: var(--veryDarkGray);
@@ -171,6 +183,8 @@ const ItemDiv = styled.div`
 
   width: 100%;
   gap: 2rem;
+
+  margin-top: 6.4rem;
 
   @media (min-width: 1000px) {
     gap: 3.2rem;
