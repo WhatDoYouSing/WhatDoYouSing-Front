@@ -62,7 +62,7 @@ const EmotionList = ({
 
     if (isSearch) {
       setSelectedChip(emotion.id - 1);
-      console.log(emotion.id - 1);
+      sessionStorage.setItem("search-from", window.location.pathname);
       navigate("/result");
     }
   };

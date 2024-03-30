@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import ModalTopbar from "./ModalTopbar";
-import PostInput from "./PostInput";
-import SearchTrackModal from "./SearchTrackModal";
-import SelectLyricModal from "./SelectLyricModal";
-import LyricInput from "./LyricInput";
-import PostCheckModal from "../PostCheckModal";
+import ModalTopbar from "../components/PostPage/ModalTopbar";
+import PostInput from "../components/PostPage/PostInput";
+import SearchTrackModal from "../components/PostPage/SearchTrackModal";
+import SelectLyricModal from "../components/PostPage/SelectLyricModal";
+import LyricInput from "../components/PostPage/LyricInput";
+import PostCheckModal from "../components/PostCheckModal";
 
-import useClickOutside from "../../hooks/useClickOutside";
+import useClickOutside from "../hooks/useClickOutside";
 
-const PostModal = ({ setNewPost }) => {
+const PostPage = () => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
   const onBtn = (requiredFieldsValid) => {
     setRequiredFieldsValid(requiredFieldsValid);
@@ -49,7 +49,6 @@ const PostModal = ({ setNewPost }) => {
           text="게시글 작성"
           btnText="게시하기"
           isFilled={requiredFieldsValid}
-          setNewPost={setNewPost}
           setUploCheckModal={setCheckModal}
           setSelectedTrack={setSelectedTrack}
           selectedTrack={selectedTrack}
@@ -95,12 +94,15 @@ const PostModal = ({ setNewPost }) => {
   );
 };
 
-export default PostModal;
+export default PostPage;
 
 const Wrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  position: fixed;
   overflow: scroll;
   background-color: white;
   z-index: 120;

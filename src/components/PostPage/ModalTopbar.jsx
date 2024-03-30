@@ -13,7 +13,6 @@ const ModalTopbar = ({
   del = true,
   btnText = "다음으로",
   isFilled = false,
-  setNewPost,
   setUploCheckModal,
   setSelectedTrack,
   selectedTrack,
@@ -23,8 +22,9 @@ const ModalTopbar = ({
   const navigate = useNavigate();
 
   const handlePostModal = () => {
-    setNewPost(false);
+    navigate(-1);
     setSelectedTrack(null);
+    window.sessionStorage.removeItem("from");
   };
 
   const handleLyricModal = () => {

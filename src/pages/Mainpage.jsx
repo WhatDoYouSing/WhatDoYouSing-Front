@@ -14,15 +14,12 @@ import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
 
 //recoil
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import {
   LikeListState,
   LankingListState,
   DropdownState,
 } from "../assets/recoil/apiRecoil";
-
-//modal
-import PostModal from "../components/PostPage/PostModal";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -76,8 +73,6 @@ const MainPage = () => {
     }
   }, []);
 
-  const [newPost, setNewPost] = useState(false);
-
   return (
     <>
       <Wrapper>
@@ -85,13 +80,7 @@ const MainPage = () => {
         <LikeSection />
         <ChartSection />
         <SearchSection />
-        <FloatingBtn newPost={newPost} setNewPost={setNewPost} />
-
-        {newPost && (
-          <PostModalWrapper>
-            <PostModal setNewPost={setNewPost} />
-          </PostModalWrapper>
-        )}
+        <FloatingBtn />
       </Wrapper>
       <Footer />
     </>
@@ -109,14 +98,4 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-const PostModalWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 110;
-  background-color: white;
 `;

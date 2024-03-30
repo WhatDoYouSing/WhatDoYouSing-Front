@@ -37,6 +37,11 @@ const SearchPage = () => {
     setSearchOption("최신순");
   }, []);
 
+  const handleSearch = () => {
+    sessionStorage.setItem("search-from", window.location.pathname);
+    navigate("/result");
+  };
+
   return (
     <>
       <Wrapper>
@@ -50,7 +55,7 @@ const SearchPage = () => {
               onChange={(e) => setKeyword(e.target.value)}
             />
             <ImgDiv>
-              <Search onClick={() => navigate("/result")} />
+              <Search onClick={handleSearch} />
             </ImgDiv>
           </InputDiv>
         </SearchDiv>

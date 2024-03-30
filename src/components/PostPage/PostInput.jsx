@@ -102,7 +102,7 @@ const PostInput = ({
         link: link,
         emotion: emotion,
       }));
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(delayTimer);
   }, [detail, link, emotion]);
