@@ -3,12 +3,7 @@ import { styled } from "styled-components";
 
 import { ReactComponent as Back } from "../../images/back.svg";
 
-const SelectTopbar = ({
-  selectLines,
-  setSearchOpen,
-  setSelectOpen,
-  saveSelectedLyric,
-}) => {
+const SelectTopbar = ({ selectLines, saveSelectedLyric, closeModal }) => {
   const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
@@ -18,8 +13,6 @@ const SelectTopbar = ({
   const handleCloseModal = () => {
     if (isFilled) {
       saveSelectedLyric();
-      setSearchOpen(false);
-      setSelectOpen(false);
     }
   };
 
@@ -27,7 +20,7 @@ const SelectTopbar = ({
     <Wrapper>
       <Container>
         <ImgDiv>
-          <Back onClick={() => setSelectOpen(false)} />
+          <Back onClick={closeModal} />
         </ImgDiv>
         <Title>가사 선택하기</Title>
         <NextBtn

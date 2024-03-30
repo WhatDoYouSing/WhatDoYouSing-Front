@@ -1,34 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import ModalTopbar from "./ModalTopbar";
 import PostInput from "./PostInput";
 import SearchTrackModal from "./SearchTrackModal";
 import SelectLyricModal from "./SelectLyricModal";
+import LyricInput from "./LyricInput";
+import PostCheckModal from "../PostCheckModal";
 
-const PostModal = ({
-  newPost,
-  setNewPost,
-  lyricInputModal,
-  setLyricInputModal,
-  selectedTrack,
-  setSelectedTrack,
-  uploCheckModal,
-  setUploCheckModal,
-}) => {
+import useClickOutside from "../../hooks/useClickOutside";
+
+const PostModal = ({ setNewPost }) => {
   const [requiredFieldsValid, setRequiredFieldsValid] = useState(false);
   const onBtn = (requiredFieldsValid) => {
     setRequiredFieldsValid(requiredFieldsValid);
   };
 
-  const [postId, setPostId] = useState("");
-  const handlePostIdReceived = (receivedPostId) => {
-    setPostId(receivedPostId);
-  };
-
-  // 가사 검색/선택 모달 관리
+  // 가사 검색/선택/입력 모달 관리
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isSelectOpen, setSelectOpen] = useState(false);
+  const [lyricInputModal, setInputModal] = useState(false);
+
+  // 사용자가 선택한 음악 정보 관리
+  const [selectedTrack, setSelectedTrack] = useState(null);
 
   // 외부 화면 스크롤 방지
   useEffect(() => {
@@ -39,31 +33,32 @@ const PostModal = ({
       document.body.style = `overflow: auto`;
       document.body.style.removeProperty("position");
     };
-  }, []);
+  }, [isSelectOpen, lyricInputModal]);
+
+  // 업로드 불가 모달
+  const postCheckModalRef = useRef();
+  const [uploCheckModal, setCheckModal] = useClickOutside(
+    postCheckModalRef,
+    false
+  );
 
   return (
     <>
       <Wrapper>
         <ModalTopbar
           text="게시글 작성"
-          delPath="/"
-          actBtn={true}
           btnText="게시하기"
           isFilled={requiredFieldsValid}
-          onPostIdReceived={handlePostIdReceived}
-          newPost={newPost}
           setNewPost={setNewPost}
-          uploCheckModal={uploCheckModal}
-          setUploCheckModal={setUploCheckModal}
+          setUploCheckModal={setCheckModal}
           setSelectedTrack={setSelectedTrack}
+          selectedTrack={selectedTrack}
         />
         <PostInput
           onBtn={onBtn}
-          lyricInputModal={lyricInputModal}
-          setLyricInputModal={setLyricInputModal}
-          isLyricSearchOpen={isSearchOpen}
-          setIsLyricSearchOpen={setSearchOpen}
-          newPost={newPost}
+          setLyricInputModal={setInputModal}
+          setSearchOpen={setSearchOpen}
+          setSelectOpen={setSelectOpen}
           selectedTrack={selectedTrack}
           setSelectedTrack={setSelectedTrack}
         />
@@ -71,20 +66,30 @@ const PostModal = ({
 
       {isSearchOpen && (
         <SearchTrackModal
-          {...{
-            setSearchOpen,
-            setSelectOpen,
-            isSelectOpen,
-            setSelectedTrack,
-            setLyricInputModal,
-          }}
+          {...{ setSearchOpen, setSelectOpen, setInputModal }}
         />
       )}
 
       {isSelectOpen && (
         <SelectLyricModal
-          {...{ setSearchOpen, setSelectOpen, selectedTrack, setSelectedTrack }}
+          {...{ setSearchOpen, setSelectOpen, setSelectedTrack }}
         />
+      )}
+
+      {lyricInputModal && (
+        <LyricInput
+          {...{ selectedTrack, setSelectedTrack, setCheckModal, setInputModal }}
+        />
+      )}
+
+      {uploCheckModal && (
+        <ModalWrapper>
+          <Background onClick={() => setCheckModal(!uploCheckModal)} />
+          <PostCheckModal
+            ref={postCheckModalRef}
+            {...{ uploCheckModal, setCheckModal }}
+          />
+        </ModalWrapper>
       )}
     </>
   );
@@ -109,4 +114,29 @@ const Wrapper = styled.div`
   @media (min-width: 1100px) {
     padding: 0 16.8rem;
   }
+`;
+
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 200;
 `;

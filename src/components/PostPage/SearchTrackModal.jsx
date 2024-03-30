@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { useDragControls } from "framer-motion";
@@ -6,13 +6,7 @@ import { useDragControls } from "framer-motion";
 import SearchContent from "./SearchContent";
 import { ReactComponent as HandlerIcon } from "../../images/bottomsheet-handler.svg";
 
-const SearchTrackModal = ({
-  setSearchOpen,
-  setSelectOpen,
-  isSelectOpen,
-  setSelectedTrack,
-  setLyricInputModal,
-}) => {
+const SearchTrackModal = ({ setSearchOpen, setSelectOpen, setInputModal }) => {
   // 바텀 시트 관리
   const [isOpen, setIsOpen] = useState(true);
   const dragControls = useDragControls();
@@ -44,17 +38,6 @@ const SearchTrackModal = ({
     }, 300);
   };
 
-  // 외부 화면 스크롤 방지
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.style = `overflow: hidden`;
-    document.body.style.position = "fixed";
-    return () => {
-      document.body.style = `overflow: auto`;
-      document.body.style.removeProperty("position");
-    };
-  }, []);
-
   return (
     <>
       <Container
@@ -79,14 +62,7 @@ const SearchTrackModal = ({
           <span>가사 검색하기</span>
           <CloseBtn onClick={handleCloseModal}>취소</CloseBtn>
         </Header>
-        <SearchContent
-          {...{
-            setSelectOpen,
-            setSelectedTrack,
-            setLyricInputModal,
-            setSearchOpen,
-          }}
-        />
+        <SearchContent {...{ setSelectOpen, setInputModal, setSearchOpen }} />
       </Container>
       <Overlay
         initial={false}
