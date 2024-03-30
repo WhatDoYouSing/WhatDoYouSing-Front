@@ -2,32 +2,44 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import ModalTopbar from "./ModalTopbar";
-// import IntroTopbar from "../IntroTopbar";
-import { LyricState } from "../../assets/recoil/apiRecoil";
-import { useSetRecoilState } from "recoil";
 
 const LyricInput = ({
   selectedTrack,
   setSelectedTrack,
-  uploCheckModal,
-  setUploCheckModal,
+  setCheckModal,
+  setInputModal,
 }) => {
-  const setPostForm = useSetRecoilState(LyricState);
+  // 글자수
+  const [lyricCount, setLyricCount] = useState(0);
+
+  // 유효성 검사
+  const [lyric, setLyric] = useState("");
+  const [song, setSong] = useState("");
+  const [singer, setSinger] = useState("");
+
+  useEffect(() => {
+    if (selectedTrack) {
+      setLyric(selectedTrack.lyric);
+      setSong(selectedTrack.name);
+      setSinger(selectedTrack.artist);
+    } else {
+      setLyric("");
+      setSong("");
+      setSinger("");
+    }
+  }, [selectedTrack]);
 
   const [fieldsValid, setFieldsValid] = useState(false);
   const completeBtn = (fieldsValid) => {
     setFieldsValid(fieldsValid);
   };
 
-  //글자수
-  const [lyricCount, setLyricCount] = useState(0);
+  useEffect(() => {
+    const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
+    completeBtn(!!isRequiredFields);
+  }, [lyric, song, singer]);
 
-  //유효성 검사
-  const [lyric, setLyric] = useState("");
-  const [song, setSong] = useState("");
-  const [singer, setSinger] = useState("");
-
-  //입력 값 관리 함수
+  // 입력 값 관리 함수
   const handleInputChange = (inputText, maxLength, setState, setCount) => {
     const textWithoutSpaces = inputText.replace(/\s+/g, "");
     const textLength = textWithoutSpaces.length;
@@ -58,7 +70,7 @@ const LyricInput = ({
     ref.current.style.height = ref.current.scrollHeight + "px";
   };
 
-  //가사 입력 값 관리
+  // 가사 입력 값 관리
   const lyricRef = useRef(null);
   const handleLyricChange = (e) => {
     const maxLength = 60;
@@ -69,33 +81,15 @@ const LyricInput = ({
     handleHeight(lyricRef);
   };
 
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setPostForm({
-        lyrics: lyric,
-        title: song,
-        singer: singer,
-      });
-    }, 500);
-
-    // cleanup 함수
-    return () => clearTimeout(delayTimer);
-  }, [lyric, song, singer]);
-
   // 입력한 가사 저장
   const saveInputLyric = () => {
     setSelectedTrack({
       lyric: lyric,
       name: song,
       artist: singer,
+      type: "input",
     });
   };
-
-  useEffect(() => {
-    const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
-    completeBtn(!!isRequiredFields);
-  }, [lyric, song, singer]);
 
   return (
     <>
@@ -103,12 +97,11 @@ const LyricInput = ({
         <ModalTopbar
           text="직접 가사 입력하기"
           del={false}
-          actBtn={true}
           isFilled={fieldsValid}
           btnText="입력완료"
           saveInputLyric={saveInputLyric}
-          uploCheckModal={uploCheckModal}
-          setUploCheckModal={setUploCheckModal}
+          setUploCheckModal={setCheckModal}
+          setLyricInputModal={setInputModal}
         />
         <Message>
           출처가 정확하지 않거나 법적 혹은 윤리적으로
