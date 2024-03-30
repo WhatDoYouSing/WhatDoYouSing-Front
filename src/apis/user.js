@@ -248,6 +248,7 @@ export const Logout = () => {
   window.localStorage.removeItem("user_profile");
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("refresh_token");
+  window.sessionStorage.clear();
 
   window.location.replace("/");
 };

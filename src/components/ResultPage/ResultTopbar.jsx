@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled, css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import EmotionSearch from "./EmotionSearch";
 
@@ -36,14 +36,16 @@ const ResultTopbar = () => {
     setPlaceholder(searchKeyword);
   }, []);
 
+  const goBack = () => {
+    const from = sessionStorage.getItem("search-from");
+    navigate(from || -1);
+    window.sessionStorage.removeItem("search-from");
+  };
+
   return (
     <Box>
       <Wrapper>
-        <Back
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
+        <Back onClick={goBack} />
         <input
           placeholder={placeholder ? placeholder : "가사를 검색해보세요!"}
           value={keyword}
