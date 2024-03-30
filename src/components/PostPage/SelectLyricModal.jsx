@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import SelectTopbar from "./SelectTopbar";
+import Toast from "./Toast";
+import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
 
 import { GetTrackLyric } from "../../apis/openLyrics";
 
@@ -12,12 +14,16 @@ const SelectLyricModal = ({
   setSelectedTrack,
 }) => {
   // 가사 받아오기
-  const [lineData, setLineData] = useState(null);
+  const [lineData, setLineData] = useState([]);
 
   useEffect(() => {
     const handleClick = async () => {
-      const lyricData = await GetTrackLyric(selectedTrack.id);
-      setLineData(lyricData);
+      try {
+        const lyricData = await GetTrackLyric(selectedTrack.id);
+        setLineData(lyricData);
+      } catch (error) {
+        setLineData(null);
+      }
     };
 
     handleClick();
@@ -41,6 +47,8 @@ const SelectLyricModal = ({
         ...prevSelectedLines,
         { index, words: line },
       ]);
+    } else {
+      setShowToast(true);
     }
   };
 
@@ -68,6 +76,9 @@ const SelectLyricModal = ({
     });
   };
 
+  // Toast 메시지 띄우기
+  const [showToast, setShowToast] = useState(false);
+
   return (
     <>
       <Wrapper>
@@ -84,7 +95,7 @@ const SelectLyricModal = ({
             </div>
           </TrackInfo>
           <TrackLyric>
-            {lineData &&
+            {lineData ? (
               lineData.map((line, index) =>
                 selectLines.find(
                   (selectedLine) => selectedLine.index === index
@@ -104,10 +115,17 @@ const SelectLyricModal = ({
                     {line.words}
                   </div>
                 )
-              )}
+              )
+            ) : (
+              <NoResultContainer>
+                <NoResultEmoji />
+                <div>이 노래는 아직 등록된 가사가 없어요.</div>
+              </NoResultContainer>
+            )}
           </TrackLyric>
         </Container>
       </Wrapper>
+      {showToast && <Toast onClose={() => setShowToast(false)} />}
     </>
   );
 };
@@ -123,6 +141,10 @@ const Wrapper = styled.div`
   height: 100vh;
   background-color: var(--white);
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -145,7 +167,8 @@ const Description = styled.div`
 `;
 
 const TrackInfo = styled.div`
-  margin: 20px 0 18px 0;
+  margin: 36px 0 24px 0;
+  padding: 8px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -160,14 +183,23 @@ const TrackInfo = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
 
-    color: var(--black);
-    font-size: 20px;
+    font-family: "FullAppleSDGothicNeo";
+    font-size: 18px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 130%; /* 26px */
-    letter-spacing: -0.2px;
+    line-height: 130%;
+    letter-spacing: -0.18px;
+
+    span:nth-child(1) {
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    span:nth-child(2) {
+      color: var(--veryDarkGray);
+      font-weight: 500;
+    }
   }
 `;
 
@@ -184,6 +216,30 @@ const TrackLyric = styled.div`
   letter-spacing: -0.36px;
 
   div {
+    width: fit-content;
     cursor: pointer;
   }
+`;
+
+const NoResultContainer = styled.div`
+  padding-top: 16rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+
+  color: var(--darkGray);
+  font-size: 1.6rem;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.032rem;
+`;
+
+const NoResultEmoji = styled(NoResultSvg)`
+  width: 10.5rem;
+  height: 10.5rem;
+  flex-shrink: 0;
 `;

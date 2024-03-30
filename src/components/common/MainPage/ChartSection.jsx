@@ -80,7 +80,7 @@ const TopDiv = styled.div`
 const ChartDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.4rem;
 
   @media (min-width: 1100px) {
     display: grid;
@@ -92,20 +92,15 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 20%;
-  gap: 2rem;
+  gap: 2.4rem;
 `;
 
 const ChartItem = styled.div`
   display: flex;
-  /* align-items: flex-start;
-  justify-content: flex-end; */
-
   width: 100%;
-
   gap: 1.6rem;
 
   color: var(--darkGray);
-
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.04rem;

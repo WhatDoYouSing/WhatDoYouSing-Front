@@ -48,8 +48,12 @@ const SearchTrackModal = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.style = `overflow: hidden`;
-    return () => (document.body.style = `overflow: auto`);
-  }, [isSelectOpen]);
+    document.body.style.position = "fixed";
+    return () => {
+      document.body.style = `overflow: auto`;
+      document.body.style.removeProperty("position");
+    };
+  }, []);
 
   return (
     <>
@@ -65,7 +69,7 @@ const SearchTrackModal = ({
         dragControls={dragControls}
         dragListener={false}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={0.2}
+        dragElastic={0.4}
         onDragEnd={handleDragEnd}
       >
         <HandlerContainer onPointerDown={(e) => dragControls.start(e)}>
@@ -106,8 +110,8 @@ const SearchTrackModal = ({
 export default SearchTrackModal;
 
 const Overlay = styled(motion.div)`
+  position: fixed;
   z-index: 130;
-  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -116,15 +120,15 @@ const Overlay = styled(motion.div)`
 `;
 
 const Container = styled(motion.div)`
+  position: fixed;
   z-index: 150;
-  position: absolute;
   bottom: 0;
   left: 0;
   width: 100vw;
   height: 90vh;
   background-color: var(--white);
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   padding: 0 16px;
   box-sizing: border-box;
 
@@ -170,7 +174,7 @@ const CloseBtn = styled.div`
   color: var(--black);
   font-size: 2rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 130%;
   letter-spacing: -0.2px;
   cursor: pointer;
