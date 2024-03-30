@@ -68,7 +68,7 @@ export const PostRefresh = async (refresh) => {
   } catch (error) {
     console.error("토큰 갱신 실패", error.response);
     alert("세션 만료. 다시 로그인해주세요.");
-    Logout();
+    // Logout();
   }
 };
 
