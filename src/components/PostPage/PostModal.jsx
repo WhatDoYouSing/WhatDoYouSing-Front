@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-// import IntroTopbar from "../IntroTopbar";
 import ModalTopbar from "./ModalTopbar";
 import PostInput from "./PostInput";
 import SearchTrackModal from "./SearchTrackModal";
@@ -30,6 +29,17 @@ const PostModal = ({
   // 가사 검색/선택 모달 관리
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [isSelectOpen, setSelectOpen] = useState(false);
+
+  // 외부 화면 스크롤 방지
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.style = `overflow: hidden`;
+    document.body.style.position = "fixed";
+    return () => {
+      document.body.style = `overflow: auto`;
+      document.body.style.removeProperty("position");
+    };
+  }, []);
 
   return (
     <>

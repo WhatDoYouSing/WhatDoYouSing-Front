@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 //components
-
 import Topbar from "../components/common/MainPage/Topbar";
 import Footer from "../components/common/Footer";
 import LikeSection from "../components/common/MainPage/LikeSection";
@@ -98,17 +97,6 @@ const MainPage = () => {
 
   const [newPost, setNewPost] = useState(false);
   const [lyricInputModal, setLyricInputModal] = useState(false);
-
-  useEffect(() => {
-    if (newPost) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [newPost]);
 
   // 사용자가 선택한 음악 정보 관리
   const [selectedTrack, setSelectedTrack] = useState(null);
