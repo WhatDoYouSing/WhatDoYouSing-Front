@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SelectTopbar from "./SelectTopbar";
 import Toast from "./Toast";
 import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
+import Spinner from "../../images/spinner.gif";
 
 import { GetTrackLyric } from "../../apis/openLyrics";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -18,14 +19,17 @@ const SelectLyricModal = ({
   const [lineData, setLineData] = useState([]);
   const savedLines = useRecoilValue(LyricState);
   const savedTrackInfo = useRecoilValue(TrackState);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleClick = async () => {
       try {
         const lyricData = await GetTrackLyric(savedTrackInfo.id);
         setLineData(lyricData);
+        setLoading(false);
       } catch (error) {
         setLineData(null);
+        setLoading(false);
       }
 
       if (savedLines !== "") {
@@ -113,6 +117,13 @@ const SelectLyricModal = ({
               <span>{savedTrackInfo.artist}</span>
             </div>
           </TrackInfo>
+
+          {loading && (
+            <Loading>
+              <img src={Spinner} alt="loading" />
+            </Loading>
+          )}
+
           {lineData ? (
             <TrackLyric>
               {lineData.map((line, index) =>
@@ -261,4 +272,14 @@ const NoResultEmoji = styled(NoResultSvg)`
   width: 10.5rem;
   height: 10.5rem;
   flex-shrink: 0;
+`;
+
+const Loading = styled.div`
+  padding-top: 12rem;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 150px;
+  }
 `;
