@@ -271,11 +271,13 @@ const NoResultEmoji = styled(NoResultSvg)`
 `;
 
 const Loading = styled.div`
-  padding-top: 12rem;
+  margin-top: 21.2rem;
   display: flex;
   justify-content: center;
 
   img {
-    width: 150px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
   }
 `;
