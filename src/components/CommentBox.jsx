@@ -120,7 +120,9 @@ const CommentBox = ({
                   color: isLiked ? "var(--pointPink)" : "var(--darkGray)",
                 }}
               >
-                {content.likes_count}
+                {content.hasOwnProperty("likes_count")
+                  ? content.likes_count
+                  : content.relikes_count}
               </Count>
               {showReply && (
                 <>
