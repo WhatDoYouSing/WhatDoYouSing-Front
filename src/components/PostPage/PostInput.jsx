@@ -31,6 +31,7 @@ const PostInput = ({
 
   const handleEmotionSelect = (selectedEmotion) => {
     setEmotion(selectedEmotion);
+    console.log(selectedEmotion);
   };
 
   //버튼 활성화

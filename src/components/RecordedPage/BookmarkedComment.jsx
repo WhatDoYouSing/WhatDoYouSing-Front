@@ -28,12 +28,12 @@ const BookmarkedComment = () => {
       setBookmarkedList(savedList["내가 쓴 댓글/대댓글 최신순 정렬"]);
       setCurrentPage(savedList.current_page);
       setTotalPage(savedList.total_page);
+
+      console.log(bookmarkedList);
     };
 
     handleClick(currentPage);
     setMyEmotionState("");
-    console.log(bookmarkedList);
-    // console.log(savedList);
   }, [currentPage]);
 
   return (
