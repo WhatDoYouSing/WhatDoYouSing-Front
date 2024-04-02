@@ -40,6 +40,8 @@ const FilterResult = () => {
     setTotalPage(searchList.total_page);
   };
 
+  console.log(selectedOption, selectedEmotion, selectedKeyword);
+
   useEffect(() => {
     const handleClick = async (currentPage) => {
       if (selectedOption === "최신순") {
@@ -87,7 +89,7 @@ const FilterResult = () => {
         </FixedBox>
         {totalItems === 0 ? (
           <NoneDiv>
-            <img src={noContent} alt="noContent" width={"105"} height={"105"} />
+            <img src={noContent} width={"105rem"} height={"105rem"} />
             <div className="noneMent">
               검색결과가 없어요.
               <br /> 사용자님이 등록해 보시는 건 어때요?
@@ -124,18 +126,23 @@ const FilterResult = () => {
 
 export default FilterResult;
 
-const FixedBox = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 13rem;
-  left: 0;
-  padding: 0 1.6rem;
-  z-index: 90;
-`;
-
 const Wrapper = styled.section`
   margin-top: 0.5rem;
   height: auto;
+`;
+
+const FixedBox = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 12.7rem;
+  left: 0;
+  padding: 0 1.6rem;
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem 1rem;
+  }
+
+  z-index: 90;
 `;
 
 const TopDiv = styled.div`
@@ -180,19 +187,13 @@ const NoneDiv = styled.div`
 const ItemDiv = styled.div`
   display: flex;
   flex-direction: column;
-
+  margin-top: 6.4rem;
   width: 100%;
   gap: 2rem;
-
-  margin-top: 6.4rem;
-
-  @media (min-width: 1000px) {
-    gap: 3.2rem;
-  }
-
   > div:nth-child(odd) {
     align-self: flex-start;
   }
+
   > div:nth-child(even) {
     align-self: flex-end;
   }
