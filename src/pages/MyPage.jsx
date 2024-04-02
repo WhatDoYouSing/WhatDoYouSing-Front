@@ -81,14 +81,12 @@ const MyPage = () => {
       navigate("/initial");
     } else if (isLogin) {
       const userNames = localStorage.getItem("username");
-      console.log(userNames);
       setUserID(userNames || "");
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
 
       if (userNames) {
         setIsKakaoUser(userNames.indexOf("kakao_") !== -1);
-        console.log(userNames.indexOf("kakao_") !== -1);
         setUserID(
           userNames.indexOf("kakao_") !== -1
             ? "카카오 로그인"
