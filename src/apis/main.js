@@ -40,7 +40,7 @@ export const GetSortLike = async () => {
 // GET : 추천 페이지
 export const GetRecommendUser = async (page) => {
   try {
-    const response = await axiosInstance.get(`/sings/recommend/?page=${1}`);
+    const response = await axiosInstance.get(`/sings/recommend/?page=${page}`);
     console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {

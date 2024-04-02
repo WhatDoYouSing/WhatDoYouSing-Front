@@ -62,13 +62,19 @@ export const PostRefresh = async (refresh) => {
       refresh: refresh,
     });
     console.log(response.data);
-    localStorage.setItem("token", response.data.data.access);
-    localStorage.setItem("refresh_token", response.data.data.refresh);
+    console.log("잘되나?");
+    localStorage.setItem("token", response.data.access);
+    localStorage.setItem("refresh_token", response.data.refresh);
+    console.log(
+      localStorage.getItem("token"),
+      localStorage.getItem("refresh_token")
+    );
+
     return Promise.resolve(response.data);
   } catch (error) {
+    Logout();
     console.error("토큰 갱신 실패", error.response);
     alert("세션 만료. 다시 로그인해주세요.");
-    // Logout();
   }
 };
 
@@ -242,13 +248,7 @@ export const DelKakaoAccount = async (navigate) => {
 
 //Logout
 export const Logout = () => {
-  window.localStorage.removeItem("user_id");
-  window.localStorage.removeItem("username");
-  window.localStorage.removeItem("nickname");
-  window.localStorage.removeItem("user_profile");
-  window.localStorage.removeItem("token");
-  window.localStorage.removeItem("refresh_token");
-
+  window.localStorage.clear();
   window.location.replace("/");
 };
 
@@ -257,6 +257,9 @@ export const isTokenExpired = async (error) => {
     const refreshToken = window.localStorage.getItem("refresh_token");
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("refresh_token");
-    PostRefresh(refreshToken);
+    console.log(refreshToken);
+    if (refreshToken !== null) {
+      await PostRefresh(refreshToken);
+    }
   }
 };
