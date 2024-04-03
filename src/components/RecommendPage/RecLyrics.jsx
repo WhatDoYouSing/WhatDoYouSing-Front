@@ -6,7 +6,7 @@ const RecLyrics = ({ showComment = true, item }) => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => navigate(`/detail/${item.id}`)}>
       <TitleLyrics showComment={showComment}>{item.lyrics}</TitleLyrics>
       {showComment && <LyricsComment>{item.content}</LyricsComment>}
       <SongDiv>
@@ -28,8 +28,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   scroll-snap-align: center;
-
-  border: 3px solid gray;
+  cursor: pointer;
 `;
 
 const TitleLyrics = styled.div`
