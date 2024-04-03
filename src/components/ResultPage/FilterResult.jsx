@@ -171,7 +171,7 @@ const NoneDiv = styled.div`
   justify-content: center;
   align-items: center;
   align-self: center;
-  margin: 6.4rem 0;
+  margin: 12.8rem 0;
   .noneMent {
     color: var(--Dark-Gray, #a0a0a0);
     text-align: center;

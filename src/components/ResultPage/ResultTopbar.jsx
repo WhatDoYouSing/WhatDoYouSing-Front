@@ -20,21 +20,15 @@ const ResultTopbar = () => {
   const [placeholder, setPlaceholder] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
 
+  //검색페이지에서 넘어올 때 placeholder에 검색어 들어있도록
   useEffect(() => {
-    if (isInputFocused) {
-      const delayTimer = setTimeout(() => {
-        // 입력이 0.5초 동안 멈추면 작업 수행
-        setSearchKeyword(keyword);
-      }, 300);
-
-      // cleanup 함수
-      return () => clearTimeout(delayTimer);
-    }
-  }, [keyword]);
-
-  useEffect(() => {
-    setPlaceholder(searchKeyword);
+    setKeyword(searchKeyword);
   }, []);
+
+  //결과페이지 내에서 새 검색어 작성 후 검색
+  const clickSearch = () => {
+    setSearchKeyword(keyword);
+  };
 
   const goBack = () => {
     const from = sessionStorage.getItem("search-from");
@@ -47,12 +41,12 @@ const ResultTopbar = () => {
       <Wrapper>
         <Back onClick={goBack} />
         <input
-          placeholder={placeholder ? placeholder : "가사를 검색해보세요!"}
+          placeholder={keyword ? keyword : "가사, 가수명, 제목을 검색해보세요!"}
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           onFocus={() => setIsInputFocused(true)}
         />
-        <Search />
+        <Search onClick={clickSearch} />
       </Wrapper>
       <EmotionSearch />
     </Box>
@@ -97,6 +91,7 @@ const Wrapper = styled.div`
     border-radius: 0;
     border-bottom: 0.15rem solid var(--black);
     background: var(--white);
+    color: black;
 
     font-size: 16px;
     font-style: normal;
