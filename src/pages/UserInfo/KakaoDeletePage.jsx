@@ -33,6 +33,19 @@ const KakaoDeletePage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    //트레킹 코드
+    (function (w, d, a) {
+      w.__beusablerumclient__ = {
+        load: function (src) {
+          var b = d.createElement("script");
+          b.src = src;
+          b.async = true;
+          b.type = "text/javascript";
+          d.getElementsByTagName("head")[0].appendChild(b);
+        },
+      };
+      w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
+    })(window, document, "//rum.beusable.net/load/b230311e131233u903");
   }, []);
 
   return (
