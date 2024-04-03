@@ -20,8 +20,11 @@ export const GetSortLatest = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
-    isTokenExpired(error);
-    return Promise.reject(error);
+    if (error.response && error.response.status === 401) {
+      isTokenExpired(error);
+    } else {
+      return Promise.reject(error);
+    }
   }
 };
 
@@ -38,6 +41,17 @@ export const GetSortLike = async () => {
 };
 
 // GET : 추천 페이지
+export const GetRecommendUser = async (page) => {
+  try {
+    const response = await axiosInstance.get(`/sings/recommend/?page=${page}`);
+    console.log(response.data);
+    return Promise.resolve(response.data);
+  } catch (error) {
+    isTokenExpired(error);
+    return Promise.reject(error);
+  }
+};
+
 export const GetRecommend = async () => {
   try {
     const response = await axiosInstance.get("/sings/recommend/");
