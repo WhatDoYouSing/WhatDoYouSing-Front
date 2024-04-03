@@ -73,7 +73,7 @@ const LyricInput = ({
   // 가사 입력 값 관리
   const lyricRef = useRef(null);
   const handleLyricChange = (e) => {
-    const maxLength = 60;
+    const maxLength = 64;
     handleInputChange(e.target.value, maxLength, setLyric, setLyricCount);
   };
   const handleLyricHeight = (e) => {
@@ -120,13 +120,13 @@ const LyricInput = ({
             ref={lyricRef}
             value={lyric}
             onChange={handleLyricChange}
-            placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
+            placeholder="인용하고 싶은 가사를 64자 이내로 적어주세요!"
             onBlur={(e) => handleLyricHeight(e)}
           />
         </Lyric>
         <Limit>
           <span>{lyricCount}</span>
-          <span> / 60 자</span>
+          <span> / 64 자</span>
           <span className="ex"> (공백 제외)</span>
         </Limit>
         <Line />
@@ -164,6 +164,8 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   overflow: scroll;
   background-color: white;
   z-index: 120;
@@ -175,7 +177,7 @@ const Wrapper = styled.div`
   padding: 7.9rem calc(100% * 1.6 / 39) 0;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem;
+    padding: 7.9rem 16.8rem 0;
   }
 `;
 
