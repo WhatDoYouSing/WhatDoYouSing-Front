@@ -94,7 +94,7 @@ const SongDiv = styled.div`
   display: flex;
   width: 171px;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.4rem;
 
   color: var(--gray);
   font-family: "FullAppleSDGothicNeo";
