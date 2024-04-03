@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //components
-import RecCarousel from "../components/RecCarousel";
+import RecCarousel from "../components/RecommendPage/RecCarousel";
 import Topbar from "../components/common/MainPage/Topbar";
 
 import { ReactComponent as Reload } from "../images/reload.svg";
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   gap: 4rem;
 `;

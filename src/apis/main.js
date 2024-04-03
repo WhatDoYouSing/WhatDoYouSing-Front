@@ -20,8 +20,11 @@ export const GetSortLatest = async () => {
 
     return Promise.resolve(response.data);
   } catch (error) {
-    isTokenExpired(error);
-    return Promise.reject(error);
+    if (error.response && error.response.status === 401) {
+      isTokenExpired(error);
+    } else {
+      return Promise.reject(error);
+    }
   }
 };
 

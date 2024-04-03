@@ -69,6 +69,7 @@ export const PostRefresh = async (refresh) => {
       localStorage.getItem("token"),
       localStorage.getItem("refresh_token")
     );
+    window.location.reload();
 
     return Promise.resolve(response.data);
   } catch (error) {
@@ -257,7 +258,6 @@ export const isTokenExpired = async (error) => {
     const refreshToken = window.localStorage.getItem("refresh_token");
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("refresh_token");
-    console.log(refreshToken);
     if (refreshToken !== null) {
       await PostRefresh(refreshToken);
     }

@@ -7,14 +7,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
+
 root.render(
-  // <QueryClientProvider client={QueryClient}>
-  //   <ReactQueryDevtools initialIsOpen={true} />
-  //   <React.StrictMode>
-  //     <App />
-  //   </React.StrictMode>
-  // </QueryClientProvider>
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      {/* <ReactQueryDevtools initialIsOpen={false}> */}
+      <App />
+      {/* </ReactQueryDevtools> */}
+    </QueryClientProvider>
   </React.StrictMode>
 );
