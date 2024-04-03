@@ -1,76 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { styled, css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Delete } from "../../images/delete.svg";
 import { ReactComponent as Back } from "../../images/back.svg";
 
-//recoil
-import { useRecoilValue, useRecoilState } from "recoil";
 import { PostLyrics } from "../../apis/lyrics";
-import {
-  SignupState,
-  ProfileState,
-  PasModifyState,
-  NicModifyState,
-  LyricState,
-  PasCheckState,
-  postCheckModal,
-  setPostCheckModal,
-} from "../../assets/recoil/apiRecoil";
-
-//modal
-import { useToggleModal } from "../../hooks/useToggleModal";
-import {
-  modalContent1,
-  modalContent2,
-  modalState1,
-  modalState2,
-} from "../../assets/recoil/modal";
-import PostModal from "./PostModal";
-import LyricInput from "./LyricInput";
+import { useResetRecoilState } from "recoil";
+import { LyricState } from "../../assets/recoil/apiRecoil";
 
 const ModalTopbar = ({
   text = "로그인",
   del = true,
-  actBtn = false,
   btnText = "다음으로",
   isFilled = false,
-  newPost,
-  setNewPost,
-  isOpen1,
-  saveInputLyric,
-  setCheckPost,
-  uploCheckModal,
   setUploCheckModal,
   setSelectedTrack,
+  selectedTrack,
+  setLyricInputModal,
+  saveInputLyric,
 }) => {
   const navigate = useNavigate();
-  const newLyricPost = useRecoilValue(LyricState);
-
-  // modal close
-  const { openModal } = useToggleModal();
-  const { openModal2 } = useToggleModal();
-
-  const [postModalItem, setPostModalItem] = useRecoilState(modalContent1);
-  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
 
   const handlePostModal = () => {
-    setPostModalItem(<PostModal />);
-    openModal();
-    // console.log("handlePostModal");
-    setSelectedTrack((prevTrack) => ({
-      ...prevTrack,
-      lyric: "",
-      name: "",
-      artist: "",
-    }));
+    navigate(-1);
+    setSelectedTrack(null);
+    window.sessionStorage.removeItem("from");
   };
 
   const handleLyricModal = () => {
-    setLyricModalItem(<LyricInput />);
-    openModal2();
-    // console.log("handleLyricModal");
+    setLyricInputModal(false);
+  };
+
+  const resetSavedLines = useResetRecoilState(LyricState);
+  const postLyric = async () => {
+    const response = await PostLyrics(
+      selectedTrack.lyric,
+      selectedTrack.content,
+      selectedTrack.name,
+      selectedTrack.artist,
+      selectedTrack.link,
+      selectedTrack.emotion
+    );
+
+    const postId = response.data.id;
+    resetSavedLines();
+    navigate(`/detail/${postId}`);
   };
 
   const handleClick = async () => {
@@ -81,28 +55,11 @@ const ModalTopbar = ({
           handleLyricModal();
           break;
         case "게시글 작성":
-          const response = await PostLyrics(
-            newLyricPost.lyrics,
-            newLyricPost.content,
-            newLyricPost.title,
-            newLyricPost.singer,
-            newLyricPost.link,
-            newLyricPost.sings_emotion
-          );
-          const postId = response.data.id;
-
-          if (response.data.message === "가사 작성 실패") {
-            setCheckPost(true);
-            console.log("setCheckPost: ", setCheckPost);
-          }
-          console.log(newLyricPost);
-          console.log(postId);
-          navigate(`/detail/${postId}`);
+          postLyric();
           break;
       }
     } else {
-      setUploCheckModal(!uploCheckModal);
-      console.log(uploCheckModal);
+      setUploCheckModal(true);
     }
   };
 
@@ -111,31 +68,19 @@ const ModalTopbar = ({
       <Container>
         <ImgDiv>
           {del ? (
-            <Delete
-              onClick={() => {
-                handlePostModal();
-              }}
-            />
+            <Delete onClick={handlePostModal} />
           ) : (
-            <Back
-              onClick={() => {
-                handleLyricModal();
-              }}
-            />
+            <Back onClick={handleLyricModal} />
           )}
         </ImgDiv>
         <Title>{text}</Title>
-        {actBtn ? (
-          <NextBtn
-            className="buttonDiv"
-            isFilled={isFilled}
-            onClick={handleClick}
-          >
-            {btnText}
-          </NextBtn>
-        ) : (
-          <></>
-        )}
+        <NextBtn
+          className="buttonDiv"
+          isFilled={isFilled}
+          onClick={handleClick}
+        >
+          {btnText}
+        </NextBtn>
       </Container>
     </Wrapper>
   );

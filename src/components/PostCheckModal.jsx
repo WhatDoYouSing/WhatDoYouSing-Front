@@ -1,14 +1,9 @@
-import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
-import { DelLyrics } from "../apis/lyrics";
 
 //게시글 삭제 모달
-const PostCheckModal = ({ uploCheckModal, setUploCheckModal }) => {
-  const navigate = useNavigate();
-
+const PostCheckModal = ({ uploCheckModal, setCheckModal }) => {
   const handleClick = () => {
-    setUploCheckModal(false);
+    setCheckModal(false);
     console.log(uploCheckModal);
   };
 

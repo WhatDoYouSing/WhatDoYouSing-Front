@@ -51,6 +51,11 @@ const SearchPage = () => {
     })(window, document, "//rum.beusable.net/load/b230311e131233u903");
   }, []);
 
+  const handleSearch = () => {
+    sessionStorage.setItem("search-from", window.location.pathname);
+    navigate("/result");
+  };
+
   return (
     <>
       <Wrapper>
@@ -59,12 +64,12 @@ const SearchPage = () => {
           <Title>무엇을 노래하나요?</Title>
           <InputDiv>
             <Input
-              placeholder="가사를 검색해보세요!"
+              placeholder="가사, 가수명, 제목을 검색해보세요!"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />
             <ImgDiv>
-              <Search onClick={() => navigate("/result")} />
+              <Search onClick={handleSearch} />
             </ImgDiv>
           </InputDiv>
         </SearchDiv>

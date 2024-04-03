@@ -20,7 +20,7 @@ const Toast = ({ onClose }) => {
           transition={{ duration: 0.3 }}
           onClick={onClose}
         >
-          <div>선택 가능한 최대 글자수 60자를 초과했습니다.</div>
+          <div>선택 가능한 최대 글자수 64자를 초과했습니다.</div>
         </Container>
       </AnimatePresence>
     </Wrapper>
@@ -30,7 +30,7 @@ const Toast = ({ onClose }) => {
 export default Toast;
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 `;
@@ -49,4 +49,8 @@ const Container = styled(motion.div)`
   font-weight: 500;
   line-height: 150%;
   letter-spacing: -0.32px;
+
+  div {
+    margin-top: -2px;
+  }
 `;
