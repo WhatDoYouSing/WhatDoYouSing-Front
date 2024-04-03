@@ -57,6 +57,7 @@ export default ResultTopbar;
 const Box = styled.div`
   position: fixed;
   width: 100%;
+  /* width: calc(100% + 1.6rem); */
   top: 0;
   left: 0;
   padding: 0 1.6rem;
@@ -64,7 +65,7 @@ const Box = styled.div`
   @media (min-width: 1100px) {
     padding: 0;
   }
-
+  background-color: white;
   z-index: 90;
 `;
 
