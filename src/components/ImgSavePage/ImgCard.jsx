@@ -103,7 +103,7 @@ const More = styled.div`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.164rem;
+  gap: 0.4rem;
 
   div {
     width: 152px;
