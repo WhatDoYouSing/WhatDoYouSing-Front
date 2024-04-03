@@ -1,18 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Back } from "../images/back.svg";
 import { ReactComponent as Share } from "../images/share.svg";
 import { ReactComponent as BookmarkOff } from "../images/bookmark-off.svg";
 import { ReactComponent as BookmarkOn } from "../images/bookmark-on.svg";
 import { ReactComponent as Meatball } from "../images/meatball.svg";
-import home from "../images/icons/home-s.svg";
 
 import MeatballSelect from "./DetailPage/MeatballSelect";
 
 import useClickOutside from "../hooks/useClickOutside";
 
-import { PostScrap, PostCancelScrap } from "../apis/archieve";
+import { PostScrap } from "../apis/archieve";
 
 const TopTab = ({
   share,
@@ -28,10 +27,9 @@ const TopTab = ({
 }) => {
   const navigate = useNavigate();
   const goBack = () => {
-    // const string = document.referrer;
-    // console.log("이전 경로 : ", document.referrer);
-
-    navigate(-1);
+    const from = sessionStorage.getItem("from");
+    navigate(from || -1);
+    window.sessionStorage.removeItem("from");
   };
 
   const handleShare = () => {
@@ -66,7 +64,6 @@ const TopTab = ({
       <Wrapper>
         <Back onClick={goBack} />
         <Others>
-          {/* <Home src={home} onClick={() => navigate("/")} /> */}
           <Share onClick={handleShare} />
           {isBookmarked ? (
             <BookmarkOn onClick={handleBookmark} />
@@ -117,24 +114,4 @@ const Others = styled.div`
   height: auto;
   flex-direction: row;
   cursor: pointer;
-`;
-
-const Home = styled.img`
-  width: 48px;
-  height: 48px;
-  flex-direction: row;
-  cursor: pointer;
-`;
-
-const ModalWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.25);
-  z-index: 100;
 `;

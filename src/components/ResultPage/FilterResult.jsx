@@ -40,6 +40,8 @@ const FilterResult = () => {
     setTotalPage(searchList.total_page);
   };
 
+  console.log(selectedOption, selectedEmotion, selectedKeyword);
+
   useEffect(() => {
     const handleClick = async (currentPage) => {
       if (selectedOption === "최신순") {
@@ -79,13 +81,15 @@ const FilterResult = () => {
   return (
     <>
       <Wrapper>
-        <TopDiv>
-          <div className="count">{totalItems}개의 가사를 찾았어요!</div>
-          <DropDownSearch />
-        </TopDiv>
+        <FixedBox>
+          <TopDiv>
+            <div className="count">{totalItems}개의 가사를 찾았어요!</div>
+            <DropDownSearch />
+          </TopDiv>
+        </FixedBox>
         {totalItems === 0 ? (
           <NoneDiv>
-            <img src={noContent} alt="noContent" width={"105"} height={"105"} />
+            <img src={noContent} width={"105rem"} height={"105rem"} />
             <div className="noneMent">
               검색결과가 없어요.
               <br /> 사용자님이 등록해 보시는 건 어때요?
@@ -127,6 +131,20 @@ const Wrapper = styled.section`
   height: auto;
 `;
 
+const FixedBox = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 12.7rem;
+  left: 0;
+  padding: 0 1.6rem;
+
+  @media (min-width: 1100px) {
+    padding: 0 16.8rem 1rem;
+  }
+
+  z-index: 90;
+`;
+
 const TopDiv = styled.div`
   display: flex;
   width: 100%;
@@ -135,6 +153,7 @@ const TopDiv = styled.div`
   align-items: center;
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
   margin-bottom: 1.6rem;
+  background-color: white;
 
   .count {
     color: var(--veryDarkGray);
@@ -152,7 +171,7 @@ const NoneDiv = styled.div`
   justify-content: center;
   align-items: center;
   align-self: center;
-  margin: 6.4rem 0;
+  margin: 12.8rem 0;
   .noneMent {
     color: var(--Dark-Gray, #a0a0a0);
     text-align: center;
@@ -168,17 +187,13 @@ const NoneDiv = styled.div`
 const ItemDiv = styled.div`
   display: flex;
   flex-direction: column;
-
+  margin-top: 6.4rem;
   width: 100%;
   gap: 2rem;
-
-  @media (min-width: 1000px) {
-    gap: 3.2rem;
-  }
-
   > div:nth-child(odd) {
     align-self: flex-start;
   }
+
   > div:nth-child(even) {
     align-self: flex-end;
   }
