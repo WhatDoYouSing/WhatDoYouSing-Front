@@ -50,7 +50,7 @@ const SelectLyricModal = ({
       .replace(/\s/g, "").length;
     const newWordLength = line.replace(/\s/g, "").length;
 
-    if (totalSelectedLineLength + newWordLength <= 60) {
+    if (totalSelectedLineLength + newWordLength <= 64) {
       setSelectedLines((prevSelectedLines) => [
         ...prevSelectedLines,
         { index, words: line },

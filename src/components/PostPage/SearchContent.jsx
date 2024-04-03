@@ -59,7 +59,7 @@ const SearchContent = ({ setSelectOpen, setInputModal, setSearchOpen }) => {
       <InputContainer>
         <input
           type="text"
-          placeholder="가수명이나 제목을 검색해보세요!"
+          placeholder="가수명, 제목을 검색해보세요!"
           value={keyword}
           onChange={handleChange}
         />

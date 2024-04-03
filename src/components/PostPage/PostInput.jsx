@@ -73,7 +73,7 @@ const PostInput = ({
   //해석 입력 값 관리
   const detailRef = useRef(null);
   const handleDetailChange = (e) => {
-    const maxLength = 150;
+    const maxLength = 152;
     handleInputChange(e.target.value, maxLength, setDetail, setDetailCount);
   };
   const handleDetailHeight = () => {
@@ -201,13 +201,13 @@ const PostInput = ({
             ref={detailRef}
             value={detail}
             onChange={handleDetailChange}
-            placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 150자 이내로 적어 주세요!"
+            placeholder="가사 해석, 감상, 노래에 얽힌 상황 등을 152자 이내로 적어 주세요!"
             onBlur={handleDetailHeight}
           />
         </Detail>
         <Limit>
           <span>{detailCount}</span>
-          <span> / 150 자</span>
+          <span> / 152 자</span>
           <span className="ex"> (공백 제외)</span>
         </Limit>
         <Line style={{ marginTop: "5rem" }} />
@@ -260,6 +260,7 @@ const Title = styled.div`
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
   .self-lyric {
     color: var(--black);
