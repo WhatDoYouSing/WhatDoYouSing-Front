@@ -8,8 +8,6 @@ import React, {
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { QueryObserver, useInfiniteQuery } from "@tanstack/react-query";
-import InfiniteScroll from "react-infinite-scroller";
 import { useInView } from "react-intersection-observer";
 
 //components
@@ -24,7 +22,6 @@ const RecCarousel = () => {
     threshold: 0.1,
     rootMargin: "100px",
   });
-  const [renderSkeleton, setRenderSkeleton] = useState(false);
 
   //드래그 가능
   const testBoxRef = useRef(null);
@@ -64,17 +61,13 @@ const RecCarousel = () => {
   } = useRecInfiniteQuery();
 
   useEffect(() => {
-    console.log("InView:", inView);
+    console.log("ref 보이나? :", inView);
     if (inView) {
       startTransition(() => {
         fetchNextPage();
       });
     }
   }, [inView]);
-
-  useEffect(() => {
-    console.log(hasNextPage);
-  }, [hasNextPage]);
 
   // 무한 스크롤로 데이터가 로드될 때 이전 스크롤 위치 유지
   useEffect(() => {
@@ -95,23 +88,19 @@ const RecCarousel = () => {
 
   return (
     <Wrapper>
-      {isLoading || isFetching ? (
-        <RecLyricsSkeleton />
-      ) : (
-        <TestBox
-          ref={testBoxRef}
-          onScroll={throttledHandleScroll}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          {lyrics.length > 0 &&
-            lyrics.map((item) => <RecLyrics key={item.id} item={item} />)}
-          {hasNextPage && <Observer ref={ref} />}
-          {/* {isFetchingNextPage ? <RecLyricsSkeleton /> : <div ref={ref} />} */}
-        </TestBox>
-      )}
+      <TestBox
+        ref={testBoxRef}
+        onScroll={throttledHandleScroll}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
+        {lyrics.length > 0 &&
+          lyrics.map((item) => <RecLyrics key={item.id} item={item} />)}
+        {hasNextPage &&
+          (isFetchingNextPage ? <RecLyricsSkeleton /> : <Observer ref={ref} />)}
+      </TestBox>
     </Wrapper>
   );
 };
@@ -138,7 +127,7 @@ const TestBox = styled.div`
 `;
 
 const Observer = styled.div`
-  width: 40px;
+  width: 80vw;
   height: 40px;
-  background-color: red;
+  background-color: var(--darkGray);
 `;
