@@ -9,9 +9,6 @@ import symbol from "../../images/change/animals.png";
 import wordmark from "../../images/change/wordmark-kor.png";
 import wordmarkE from "../../images/change/wormark-eng.png";
 
-//api
-// import { PostCheckPassword } from "../../apis/user";
-
 //recoil
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { PasCheckState } from "../../assets/recoil/apiRecoil";
@@ -52,7 +49,6 @@ const UserModifyIntroPage = () => {
   }, []);
 
   const handleNavigate = async () => {
-    console.log(password);
     if (type.id === "pas") {
       navigate("/pas-modify");
     } else if (type.id === "nic") {

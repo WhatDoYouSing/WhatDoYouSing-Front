@@ -1,18 +1,13 @@
-import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
 import { DelReply } from "../apis/comment";
 
 const DeleteReModal = ({ deleteRe, setDeleteRe, reNum, render, setRender }) => {
-  const navigate = useNavigate();
-
   const handleClickDel = () => {
     const DelReData = async (recomment_pk) => {
       const response = await DelReply(recomment_pk);
       setRender(render + 1);
       console.log(response);
       setDeleteRe(!deleteRe); //모달 닫기
-      console.log("답글삭제성공");
     };
     DelReData(reNum);
   };
