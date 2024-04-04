@@ -6,18 +6,10 @@ import { ReactComponent as DefaultEmoji } from "../../images/search-lyric-emoji.
 import { ReactComponent as NoResultSvg } from "../../images/noContent.svg";
 
 import { GetChartTracks } from "../../apis/openLyrics";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { modalContent2, modalState2 } from "../../assets/recoil/modal";
-import { SpotifyToken } from "../../assets/recoil/apiRecoil";
-import { useToggleModal } from "../../hooks/useToggleModal";
-import LyricInput from "./LyricInput";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { SpotifyToken, TrackState } from "../../assets/recoil/apiRecoil";
 
-const SearchContent = ({
-  setSelectOpen,
-  setSelectedTrack,
-  setLyricInputModal,
-  setSearchOpen,
-}) => {
+const SearchContent = ({ setSelectOpen, setInputModal, setSearchOpen }) => {
   const [keyword, setKeyword] = useState("");
   const [tracks, setTracks] = useState(null);
 
@@ -45,8 +37,9 @@ const SearchContent = ({
     return () => clearTimeout(debounce);
   }, [keyword]);
 
+  const setTrackInfo = useSetRecoilState(TrackState);
   const handleSelectTrack = (track) => {
-    setSelectedTrack({
+    setTrackInfo({
       id: track.id,
       image: track.album.images[1].url,
       name: track.name,
@@ -56,29 +49,17 @@ const SearchContent = ({
   };
 
   // 직접가사입력 모달열기
-  const isOpen2 = useRecoilValue(modalState2);
-  const { openModal2 } = useToggleModal();
-  const [lyricModalItem, setLyricModalItem] = useRecoilState(modalContent2);
-
   const handleLyricWriteClick = () => {
-    setLyricModalItem(<LyricInput />);
-    openModal2();
-    setLyricInputModal(true);
+    setInputModal(true);
     setSearchOpen(false);
   };
-
-  useEffect(() => {
-    if (!isOpen2) {
-      setLyricInputModal(false);
-    }
-  }, [isOpen2, setLyricInputModal]);
 
   return (
     <>
       <InputContainer>
         <input
           type="text"
-          placeholder="가수명이나 제목을 검색해보세요!"
+          placeholder="가수명, 제목을 검색해보세요!"
           value={keyword}
           onChange={handleChange}
         />
@@ -182,7 +163,7 @@ const ResultContainer = styled.div`
   height: calc(90vh - 204.5px);
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
@@ -195,14 +176,17 @@ const ResultBox = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 16px;
+  cursor: pointer;
 
   img {
     width: 50px;
     height: 50px;
     border-radius: 8px;
+    flex-shrink: 0;
   }
 
   div {
+    width: calc(100% - 66px);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -214,6 +198,12 @@ const ResultBox = styled.div`
     font-weight: 500;
     line-height: 130%; /* 20.8px */
     letter-spacing: -0.16px;
+
+    span {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 `;
 

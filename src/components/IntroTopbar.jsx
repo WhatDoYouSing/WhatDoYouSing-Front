@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { styled, css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Delete } from "../images/delete.svg";
 import { ReactComponent as Back } from "../images/back.svg";
@@ -12,7 +11,6 @@ import {
   ProfileState,
   PasModifyState,
   NicModifyState,
-  LyricState,
   PasCheckState,
 } from "../assets/recoil/apiRecoil";
 
@@ -23,7 +21,6 @@ import {
   PostSignup,
   PostProfile,
 } from "../apis/user";
-import { PostLyrics } from "../apis/lyrics";
 
 const IntroTopbar = ({
   text = "로그인",
@@ -34,14 +31,11 @@ const IntroTopbar = ({
   btnText = "다음으로",
   nextPath = "/",
   isFilled = false,
-  onPostIdReceived,
-  setCheckPost,
 }) => {
   const navigate = useNavigate();
   const existingPassword = useRecoilValue(PasCheckState);
   const newPassword = useRecoilValue(PasModifyState);
   const newNickname = useRecoilValue(NicModifyState);
-  const newLyricPost = useRecoilValue(LyricState);
   const signupForm = useRecoilValue(SignupState);
   const profile = useRecoilValue(ProfileState);
 
@@ -75,27 +69,6 @@ const IntroTopbar = ({
           PatchNickname(newNickname);
           navigate(nextPath);
           break;
-        case "게시글 작성":
-          const response = await PostLyrics(
-            newLyricPost.lyrics,
-            newLyricPost.content,
-            newLyricPost.title,
-            newLyricPost.singer,
-            newLyricPost.link,
-            newLyricPost.sings_emotion
-          );
-          const postId = response.data.id;
-
-          if (response.data.message === "가사 작성 실패") {
-            setCheckPost(true);
-            console.log("setCheckPost: ", setCheckPost);
-          }
-
-          console.log(newLyricPost);
-          console.log(postId);
-          navigate(`/detail/${postId}`);
-          break;
-
         default:
           navigate(nextPath);
       }

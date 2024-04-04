@@ -2,32 +2,44 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import ModalTopbar from "./ModalTopbar";
-// import IntroTopbar from "../IntroTopbar";
-import { LyricState } from "../../assets/recoil/apiRecoil";
-import { useSetRecoilState } from "recoil";
 
 const LyricInput = ({
   selectedTrack,
   setSelectedTrack,
-  uploCheckModal,
-  setUploCheckModal,
+  setCheckModal,
+  setInputModal,
 }) => {
-  const setPostForm = useSetRecoilState(LyricState);
+  // 글자수
+  const [lyricCount, setLyricCount] = useState(0);
+
+  // 유효성 검사
+  const [lyric, setLyric] = useState("");
+  const [song, setSong] = useState("");
+  const [singer, setSinger] = useState("");
+
+  useEffect(() => {
+    if (selectedTrack) {
+      setLyric(selectedTrack.lyric);
+      setSong(selectedTrack.name);
+      setSinger(selectedTrack.artist);
+    } else {
+      setLyric("");
+      setSong("");
+      setSinger("");
+    }
+  }, [selectedTrack]);
 
   const [fieldsValid, setFieldsValid] = useState(false);
   const completeBtn = (fieldsValid) => {
     setFieldsValid(fieldsValid);
   };
 
-  //글자수
-  const [lyricCount, setLyricCount] = useState(0);
+  useEffect(() => {
+    const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
+    completeBtn(!!isRequiredFields);
+  }, [lyric, song, singer]);
 
-  //유효성 검사
-  const [lyric, setLyric] = useState("");
-  const [song, setSong] = useState("");
-  const [singer, setSinger] = useState("");
-
-  //입력 값 관리 함수
+  // 입력 값 관리 함수
   const handleInputChange = (inputText, maxLength, setState, setCount) => {
     const textWithoutSpaces = inputText.replace(/\s+/g, "");
     const textLength = textWithoutSpaces.length;
@@ -58,10 +70,10 @@ const LyricInput = ({
     ref.current.style.height = ref.current.scrollHeight + "px";
   };
 
-  //가사 입력 값 관리
+  // 가사 입력 값 관리
   const lyricRef = useRef(null);
   const handleLyricChange = (e) => {
-    const maxLength = 60;
+    const maxLength = 64;
     handleInputChange(e.target.value, maxLength, setLyric, setLyricCount);
   };
   const handleLyricHeight = (e) => {
@@ -69,33 +81,16 @@ const LyricInput = ({
     handleHeight(lyricRef);
   };
 
-  useEffect(() => {
-    const delayTimer = setTimeout(() => {
-      // 입력이 0.5초 동안 멈추면 작업 수행
-      setPostForm({
-        lyrics: lyric,
-        title: song,
-        singer: singer,
-      });
-    }, 500);
-
-    // cleanup 함수
-    return () => clearTimeout(delayTimer);
-  }, [lyric, song, singer]);
-
   // 입력한 가사 저장
   const saveInputLyric = () => {
-    setSelectedTrack({
+    setSelectedTrack((prevTrack) => ({
+      ...prevTrack,
       lyric: lyric,
       name: song,
       artist: singer,
-    });
+      type: "input",
+    }));
   };
-
-  useEffect(() => {
-    const isRequiredFields = lyric !== "" && singer !== "" && song !== "";
-    completeBtn(!!isRequiredFields);
-  }, [lyric, song, singer]);
 
   return (
     <>
@@ -103,12 +98,11 @@ const LyricInput = ({
         <ModalTopbar
           text="직접 가사 입력하기"
           del={false}
-          actBtn={true}
           isFilled={fieldsValid}
           btnText="입력완료"
           saveInputLyric={saveInputLyric}
-          uploCheckModal={uploCheckModal}
-          setUploCheckModal={setUploCheckModal}
+          setUploCheckModal={setCheckModal}
+          setLyricInputModal={setInputModal}
         />
         <Message>
           출처가 정확하지 않거나 법적 혹은 윤리적으로
@@ -126,13 +120,13 @@ const LyricInput = ({
             ref={lyricRef}
             value={lyric}
             onChange={handleLyricChange}
-            placeholder="인용하고 싶은 가사를 60자 이내로 적어주세요!"
+            placeholder="인용하고 싶은 가사를 64자 이내로 적어주세요!"
             onBlur={(e) => handleLyricHeight(e)}
           />
         </Lyric>
         <Limit>
           <span>{lyricCount}</span>
-          <span> / 60 자</span>
+          <span> / 64 자</span>
           <span className="ex"> (공백 제외)</span>
         </Limit>
         <Line />
@@ -170,6 +164,8 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   overflow: scroll;
   background-color: white;
   z-index: 120;
@@ -181,7 +177,7 @@ const Wrapper = styled.div`
   padding: 7.9rem calc(100% * 1.6 / 39) 0;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem;
+    padding: 7.9rem 16.8rem 0;
   }
 `;
 
