@@ -44,7 +44,7 @@ const EmotionSearch = ({ isPadding = true }) => {
   };
   // console.log(selectedMyEmotion, selectedSearchEmotion);
   return (
-    <>
+    <Wrapper>
       <Emotions isPadding={isPadding}>
         {emotions.map((emotion, index) => (
           <EmotionChipWithNum
@@ -56,11 +56,15 @@ const EmotionSearch = ({ isPadding = true }) => {
           />
         ))}
       </Emotions>
-    </>
+    </Wrapper>
   );
 };
 
 export default EmotionSearch;
+
+const Wrapper = styled.div`
+  padding: 0 1.6rem;
+`;
 
 const Emotions = styled.div`
   display: flex;
