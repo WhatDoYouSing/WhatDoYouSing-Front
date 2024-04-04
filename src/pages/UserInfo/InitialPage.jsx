@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -9,14 +9,11 @@ import wordmark from "../../images/change/wordmark-kor.png";
 import wordmarkE from "../../images/change/wormark-eng.png";
 import { ReactComponent as Kakao } from "../../images/kakao.svg";
 
-//api
-import { KAKAO_AUTH_URL } from "../../apis/http";
-
 const InitialPage = () => {
   const navigate = useNavigate();
 
   const loginKakao = () => {
-    window.location.href = "http://whatdoyousing.com/accounts/kakao/";
+    window.location.href = process.env.REACT_APP_KAKAO_AUTH_URL;
   };
 
   useEffect(() => {
