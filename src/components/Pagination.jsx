@@ -20,7 +20,6 @@ const Pagination = ({ total, page, setPage }) => {
       : limit;
 
   useEffect(() => {
-    console.log(page, Math.ceil(page / limit));
     setPhase(Math.ceil(page / limit));
   }, [page]);
 

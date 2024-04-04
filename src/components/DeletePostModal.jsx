@@ -1,4 +1,3 @@
-import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { DelLyrics } from "../apis/lyrics";
@@ -13,7 +12,6 @@ const DeletePostModal = ({ deletePost, setDeletePost, postId }) => {
       console.log(response);
       setDeletePost(!deletePost); //모달 닫기
       navigate("/"); //메인페이지로 이동
-      console.log("가사삭제성공");
     };
     DelLyricData(postId);
   };
