@@ -361,7 +361,7 @@ const TopBarContainer = styled.div`
 
 const ImgDiv = styled.div`
   position: absolute;
-  left: 1.6rem;
+  left: 0;
 
   @media (min-width: 1200px) {
     left: 16.8rem;

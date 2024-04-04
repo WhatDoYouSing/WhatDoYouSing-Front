@@ -50,7 +50,7 @@ const ResultTopbar = () => {
           onChange={(e) => setKeyword(e.target.value)}
           onFocus={() => setIsInputFocused(true)}
         />
-        <Search />
+        <Search className="search" />
       </Wrapper>
       <EmotionSearch />
     </Box>
@@ -63,7 +63,7 @@ const Box = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  padding: 0 1.6rem;
+  padding: 0;
 
   @media (min-width: 1100px) {
     padding: 0;
@@ -75,10 +75,12 @@ const Box = styled.div`
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   padding-bottom: 1rem;
 
   width: 100%;
   height: 7.9rem;
+  gap: 0.8rem;
   background: var(--white);
   color: var(--black);
   z-index: 9999;
@@ -88,7 +90,7 @@ const Wrapper = styled.div`
   }
 
   input {
-    width: 100%;
+    width: 80vw;
     height: 4.8rem;
     border: none;
     outline: none;
@@ -99,5 +101,9 @@ const Wrapper = styled.div`
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
+  }
+
+  .search {
+    margin-right: 1.6rem;
   }
 `;

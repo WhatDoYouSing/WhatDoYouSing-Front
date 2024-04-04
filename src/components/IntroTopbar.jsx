@@ -172,7 +172,7 @@ const Container = styled.div`
 
 const ImgDiv = styled.div`
   position: absolute;
-  left: 1.6rem;
+  left: 0;
 
   cursor: pointer;
 
