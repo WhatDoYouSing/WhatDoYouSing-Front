@@ -2,32 +2,16 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-const RecLyrics = ({
-  onMouseDown,
-  onMouseUp,
-  showComment = true,
-  id = 1,
-  emotion = 1,
-  likes = 0,
-  lyrics = "이 시간도 결국엔 끝나버린다고 모두 말을 하지만 난 신경쓰지 않아",
-  content = "이 순간을 기억하고, 우리가 함께했음을 기억하고, 또 우리는 가리려해도 절대 가려지지 않는 존재들임을 기억하자!",
-  title = "1 + 1",
-  singer = "나상현씨밴드",
-}) => {
+const RecLyrics = ({ showComment = true, item }) => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper
-      onMouseDown={onMouseDown}
-      onMouseUp={() => {
-        onMouseUp(id);
-      }}
-    >
-      <TitleLyrics showComment={showComment}>{lyrics}</TitleLyrics>
-      {showComment && <LyricsComment>{content}</LyricsComment>}
+    <Wrapper onClick={() => navigate(`/detail/${item.id}`)}>
+      <TitleLyrics showComment={showComment}>{item.lyrics}</TitleLyrics>
+      {showComment && <LyricsComment>{item.content}</LyricsComment>}
       <SongDiv>
-        <SongTitle>{title}</SongTitle>
-        <SongSinger>{singer}</SongSinger>
+        <SongTitle>{item.title}</SongTitle>
+        <SongSinger>{item.singer}</SongSinger>
       </SongDiv>
     </Wrapper>
   );
@@ -37,11 +21,14 @@ export default RecLyrics;
 
 const Wrapper = styled.div`
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   justify-content: center;
 
   width: 100%;
-  height: 41.8rem;
+  height: 100%;
+  scroll-snap-align: center;
+  cursor: pointer;
 `;
 
 const TitleLyrics = styled.div`

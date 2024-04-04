@@ -2,25 +2,25 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //components
-import RecCarousel from "../components/RecCarousel";
+import RecCarousel from "../components/RecommendPage/RecCarousel";
 import Topbar from "../components/common/MainPage/Topbar";
 
 import { ReactComponent as Reload } from "../images/reload.svg";
 
-//api
-import { GetRecommend } from "../apis/main";
-import { GetLyricsList } from "../apis/lyrics";
-
 const RecommendPage = () => {
-  const [savedList, setSavedList] = useState([]);
-
   useEffect(() => {
-    const handleClick = async () => {
-      const savedList = await GetRecommend();
-      setSavedList(savedList.data);
-    };
-
-    handleClick();
+    (function (w, d, a) {
+      w.__beusablerumclient__ = {
+        load: function (src) {
+          var b = d.createElement("script");
+          b.src = src;
+          b.async = true;
+          b.type = "text/javascript";
+          d.getElementsByTagName("head")[0].appendChild(b);
+        },
+      };
+      w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
+    })(window, document, "//rum.beusable.net/load/b230311e131233u903");
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const RecommendPage = () => {
       <Topbar />
       <Wrapper>
         <ScrollContainer>
-          <RecCarousel savedList={savedList} />
+          <RecCarousel />
         </ScrollContainer>
         <Reload style={{ marginBottom: "7.6rem" }} />
       </Wrapper>
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   gap: 4rem;
 `;
