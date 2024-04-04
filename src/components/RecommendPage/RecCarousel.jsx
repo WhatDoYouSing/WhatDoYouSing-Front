@@ -1,8 +1,14 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  startTransition,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { QueryObserver, useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroller";
 import { useInView } from "react-intersection-observer";
 
@@ -14,7 +20,10 @@ import useThrottle from "../../hooks/useThrottle";
 
 const RecCarousel = () => {
   const navigate = useNavigate();
-  const [ref, inView] = useInView();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    rootMargin: "100px",
+  });
   const [renderSkeleton, setRenderSkeleton] = useState(false);
 
   //드래그 가능
@@ -23,29 +32,26 @@ const RecCarousel = () => {
   const [startPos, setStartPos] = useState(0);
   const [scrollPos, setScrollPos] = useState(0);
 
-  const handleMouseDown = useCallback((e) => {
+  const handleMouseDown = (e) => {
     setIsDragging(true);
     setStartPos(e.clientY);
     setScrollPos(testBoxRef.current.scrollTop);
     testBoxRef.current.style.userSelect = "none";
-  }, []);
+  };
 
-  const handleMouseMove = useCallback(
-    (e) => {
-      if (!isDragging) return;
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
 
-      requestAnimationFrame(() => {
-        const diff = e.clientY - startPos;
-        testBoxRef.current.scrollTop = scrollPos - diff;
-      });
-    },
-    [isDragging, startPos, scrollPos]
-  );
+    requestAnimationFrame(() => {
+      const diff = e.clientY - startPos;
+      testBoxRef.current.scrollTop = scrollPos - diff;
+    });
+  };
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = () => {
     setIsDragging(false);
     testBoxRef.current.style.userSelect = "auto";
-  }, []);
+  };
 
   //무한스크롤 관련 코드
   const {
@@ -58,10 +64,17 @@ const RecCarousel = () => {
   } = useRecInfiniteQuery();
 
   useEffect(() => {
+    console.log("InView:", inView);
     if (inView) {
-      fetchNextPage();
+      startTransition(() => {
+        fetchNextPage();
+      });
     }
   }, [inView]);
+
+  useEffect(() => {
+    console.log(hasNextPage);
+  }, [hasNextPage]);
 
   // 무한 스크롤로 데이터가 로드될 때 이전 스크롤 위치 유지
   useEffect(() => {
@@ -73,12 +86,12 @@ const RecCarousel = () => {
   }, [isFetchingNextPage]);
 
   // 스크롤 위치 저장
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     const scrollY = testBoxRef.current.scrollTop;
     sessionStorage.setItem("scrollPosition", scrollY);
-  }, []);
+  };
 
-  const throttledHandleScroll = useThrottle(handleScroll, 400);
+  const throttledHandleScroll = useThrottle(handleScroll, 300);
 
   return (
     <Wrapper>
@@ -95,7 +108,7 @@ const RecCarousel = () => {
         >
           {lyrics.length > 0 &&
             lyrics.map((item) => <RecLyrics key={item.id} item={item} />)}
-          {!inView && <div ref={ref} />}
+          {hasNextPage && <Observer ref={ref} />}
           {/* {isFetchingNextPage ? <RecLyricsSkeleton /> : <div ref={ref} />} */}
         </TestBox>
       )}
@@ -119,7 +132,13 @@ const TestBox = styled.div`
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
+`;
+
+const Observer = styled.div`
+  width: 40px;
+  height: 40px;
+  background-color: red;
 `;
