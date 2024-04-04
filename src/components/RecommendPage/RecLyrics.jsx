@@ -63,7 +63,7 @@ const LyricsComment = styled.div`
 const SongDiv = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.2rem;
 
   color: var(--gray);
 
