@@ -16,7 +16,7 @@ import {
 } from "../../apis/search";
 
 //recoil
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
   SelectEmotionState,
   SearchDropdownState,
@@ -89,7 +89,12 @@ const FilterResult = () => {
         </FixedBox>
         {totalItems === 0 ? (
           <NoneDiv>
-            <img src={noContent} width={"105rem"} height={"105rem"} />
+            <img
+              src={noContent}
+              alt="noContent"
+              width={"105rem"}
+              height={"105rem"}
+            />
             <div className="noneMent">
               검색결과가 없어요.
               <br /> 사용자님이 등록해 보시는 건 어때요?
@@ -196,5 +201,15 @@ const ItemDiv = styled.div`
 
   > div:nth-child(even) {
     align-self: flex-end;
+    margin-bottom: 2rem;
+
+    @media (min-width: 1100px) {
+      margin-top: 0.2rem;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    gap: 3rem;
   }
 `;
