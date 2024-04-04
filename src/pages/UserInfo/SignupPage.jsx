@@ -13,6 +13,7 @@ import { SignupState } from "../../assets/recoil/apiRecoil";
 import { PostCheckId } from "../../apis/user";
 
 import { ReactComponent as Back } from "../../images/back.svg";
+import { ReactComponent as Delete } from "../../images/delete.svg";
 import useClickOutside from "../../hooks/useClickOutside";
 
 const SignupPage = () => {
@@ -160,7 +161,7 @@ const SignupPage = () => {
         <TopBarWrapper>
           <TopBarContainer>
             <ImgDiv>
-              <Back
+              <Delete
                 onClick={() => {
                   navigate(-1);
                 }}
@@ -172,7 +173,7 @@ const SignupPage = () => {
               isFilled={requiredFieldsValid}
               onClick={() => (requiredFieldsValid ? setIsOpen(!isOpen) : null)}
             >
-              가입하기
+              다음으로
             </NextBtn>
           </TopBarContainer>
         </TopBarWrapper>
@@ -360,7 +361,7 @@ const TopBarContainer = styled.div`
 
 const ImgDiv = styled.div`
   position: absolute;
-  left: 1.6rem;
+  left: 0;
 
   @media (min-width: 1200px) {
     left: 16.8rem;

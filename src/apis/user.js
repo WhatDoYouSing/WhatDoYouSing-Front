@@ -60,13 +60,8 @@ export const PostRefresh = async (refresh) => {
     const response = await axiosInstance.post("/accounts/token/refresh/", {
       refresh: refresh,
     });
-    console.log(response.data);
     localStorage.setItem("token", response.data.access);
     localStorage.setItem("refresh_token", response.data.refresh);
-    console.log(
-      localStorage.getItem("token"),
-      localStorage.getItem("refresh_token")
-    );
     window.location.reload();
 
     return Promise.resolve(response.data);
@@ -236,6 +231,8 @@ export const DelKakaoAccount = async () => {
 
 //Logout
 export const Logout = () => {
+  window.localStorage.removeItem("token");
+  window.localStorage.removeItem("refresh_token");
   window.localStorage.clear();
   window.location.replace("/");
 };
