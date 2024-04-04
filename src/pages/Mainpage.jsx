@@ -84,6 +84,9 @@ const MainPage = () => {
       };
       w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
     })(window, document, "//rum.beusable.net/load/b230311e131233u903");
+
+    //세션 스토리지 초기화
+    sessionStorage.clear();
   }, []);
 
   return (

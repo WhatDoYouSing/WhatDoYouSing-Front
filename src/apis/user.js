@@ -1,5 +1,4 @@
 import { axiosInstance } from "../apis/http";
-import { useNavigate } from "react-router-dom";
 
 // POST : 로그인
 export const PostLogin = async (user_id, password) => {
@@ -62,7 +61,6 @@ export const PostRefresh = async (refresh) => {
       refresh: refresh,
     });
     console.log(response.data);
-    console.log("잘되나?");
     localStorage.setItem("token", response.data.access);
     localStorage.setItem("refresh_token", response.data.refresh);
     console.log(
@@ -201,20 +199,14 @@ export const PatchPassword = async (
 
 //DELETE
 // DELETE : 회원 탈퇴
-export const DelAccount = async (password, navigate) => {
+export const DelAccount = async (password) => {
   try {
     const response = await axiosInstance.post("/accounts/delete/", {
       password: password,
     });
     console.log(response.data);
     alert("회원탈퇴가 완료되었습니다.");
-    window.localStorage.removeItem("user_id");
-    window.localStorage.removeItem("username");
-    window.localStorage.removeItem("nickname");
-    window.localStorage.removeItem("user_profile");
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("refresh_token");
-
+    window.localStorage.clear();
     window.location.replace("/");
     return Promise.resolve(response.data);
   } catch (error) {
@@ -226,17 +218,12 @@ export const DelAccount = async (password, navigate) => {
 };
 
 // DELETE : 카카오 회원 탈퇴
-export const DelKakaoAccount = async (navigate) => {
+export const DelKakaoAccount = async () => {
   try {
     const response = await axiosInstance.post("/accounts/kakao/delete/");
     console.log(response.data);
     alert("회원탈퇴가 완료되었습니다.");
-    window.localStorage.removeItem("user_id");
-    window.localStorage.removeItem("username");
-    window.localStorage.removeItem("nickname");
-    window.localStorage.removeItem("user_profile");
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("refresh_token");
+    window.localStorage.clear();
     window.location.replace("/");
     return Promise.resolve(response.data);
   } catch (error) {
