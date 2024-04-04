@@ -1,6 +1,4 @@
-import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router";
 import { DelComment } from "../apis/comment";
 
 const DeleteComModal = ({
@@ -10,15 +8,12 @@ const DeleteComModal = ({
   render,
   setRender,
 }) => {
-  const navigate = useNavigate();
-
   const handleClickDel = () => {
     const DelComData = async (comment_pk) => {
       const response = await DelComment(comment_pk);
       setRender(render + 1);
       console.log(response);
       setDeleteCom(!deleteCom); //모달 닫기
-      console.log("댓글삭제성공");
     };
     DelComData(comNum);
   };
