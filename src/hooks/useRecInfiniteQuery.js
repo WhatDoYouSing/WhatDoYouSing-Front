@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 //api
-import { GetRecommendUser, GetRecommend } from "../apis/main";
+import { GetRecommendUser } from "../apis/main";
 
 const useRecInfiniteQuery = () => {
   const {
@@ -16,17 +16,11 @@ const useRecInfiniteQuery = () => {
     queryKey: ["getNewRecommend"],
     queryFn: ({ pageParam = 1 }) => {
       console.log(pageParam);
+      const isLogin = localStorage.getItem("token") !== null;
       return GetRecommendUser(pageParam);
     },
     getNextPageParam: (lastPage) =>
       lastPage.page !== lastPage.totalPage ? lastPage.page + 1 : undefined,
-    suspense: true,
-    staleTime: 90 * 1000,
-
-    retry: 0,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
   });
 
   const lyrics = useMemo(() => {

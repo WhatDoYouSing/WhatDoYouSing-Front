@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  width: 95vw;
+  width: 90vw;
   height: 41.8rem;
   scroll-snap-align: center;
 
