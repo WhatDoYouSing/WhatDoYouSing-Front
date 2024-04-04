@@ -81,14 +81,12 @@ const MyPage = () => {
       navigate("/initial");
     } else if (isLogin) {
       const userNames = localStorage.getItem("username");
-      console.log(userNames);
       setUserID(userNames || "");
       setUserName(localStorage.getItem("nickname") || "");
       setProfile(localStorage.getItem("user_profile") || "");
 
       if (userNames) {
         setIsKakaoUser(userNames.indexOf("kakao_") !== -1);
-        console.log(userNames.indexOf("kakao_") !== -1);
         setUserID(
           userNames.indexOf("kakao_") !== -1
             ? "카카오 로그인"
@@ -103,6 +101,20 @@ const MyPage = () => {
       window.scrollTo(0, 0);
     }
     setMyEmotionState("");
+
+    //저니맵 트레킹 코드
+    (function (w, d, a) {
+      w.__beusablerumclient__ = {
+        load: function (src) {
+          var b = d.createElement("script");
+          b.src = src;
+          b.async = true;
+          b.type = "text/javascript";
+          d.getElementsByTagName("head")[0].appendChild(b);
+        },
+      };
+      w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
+    })(window, document, "//rum.beusable.net/load/b230311e131233u903");
   }, []);
 
   const handlePasIsKakao = async () => {

@@ -163,7 +163,7 @@ const ResultContainer = styled.div`
   height: calc(90vh - 204.5px);
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
@@ -182,9 +182,11 @@ const ResultBox = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 8px;
+    flex-shrink: 0;
   }
 
   div {
+    width: calc(100% - 66px);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -196,6 +198,12 @@ const ResultBox = styled.div`
     font-weight: 500;
     line-height: 130%; /* 20.8px */
     letter-spacing: -0.16px;
+
+    span {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 `;
 
