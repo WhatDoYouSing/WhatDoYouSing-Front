@@ -59,7 +59,6 @@ const ProfileSettingPage = () => {
   const handleChipClick = (selectedIndex) => {
     setSelectedProfile(selectedIndex);
     selectedProfileIndex(selectedIndex + 1);
-    console.log(selectedProfiles);
   };
 
   return (
