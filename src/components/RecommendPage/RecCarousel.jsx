@@ -17,7 +17,6 @@ import useRecInfiniteQuery from "../../hooks/useRecInfiniteQuery";
 import useThrottle from "../../hooks/useThrottle";
 
 const RecCarousel = () => {
-  const navigate = useNavigate();
   const [ref, inView] = useInView({
     threshold: 0.1,
     rootMargin: "100px",
@@ -61,7 +60,6 @@ const RecCarousel = () => {
   } = useRecInfiniteQuery();
 
   useEffect(() => {
-    console.log("ref 보이나? :", inView);
     if (inView) {
       startTransition(() => {
         fetchNextPage();
@@ -121,9 +119,9 @@ const TestBox = styled.div`
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `;
 
 const Observer = styled.div`
