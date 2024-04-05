@@ -30,7 +30,9 @@ const LikeSection = () => {
 
   const moveSearchLikeList = () => {
     setSelectOption("좋아요순");
-    navigate("/result");
+    navigate("/result", {
+      state: "좋아요순",
+    });
   };
 
   return (
