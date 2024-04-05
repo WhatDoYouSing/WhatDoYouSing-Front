@@ -99,7 +99,7 @@ EmotionChip.defaultProps = {
 
 export default function EmotionChip({
   size,
-  text,
+  text = "",
   isSelected = false,
   src,
   onClick = () => {},
