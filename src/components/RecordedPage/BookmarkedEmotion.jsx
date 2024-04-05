@@ -82,12 +82,17 @@ const FixedBox = styled.div`
   top: 17rem;
   left: 0;
   display: flex;
+
   width: 100%;
   padding: 1rem 0 0;
   background-color: white;
   border-bottom: 1px solid var(--gray);
 
   z-index: 999;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ItemDiv = styled.div`

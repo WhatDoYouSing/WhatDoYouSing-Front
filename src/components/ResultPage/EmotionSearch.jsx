@@ -68,7 +68,7 @@ const Wrapper = styled.div`
 
 const Emotions = styled.div`
   display: flex;
-  padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0")};
+  padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0 1.6rem")};
   margin: ${(props) => (props.isPadding ? "" : "0 0 0")};
   align-items: flex-start;
   align-self: stretch;
