@@ -3,7 +3,6 @@ import EmotionChip from "../common/EmotionChip";
 
 import { useRecoilValue } from "recoil";
 import { emotionListAtom, profileListAtom } from "../../assets/recoil/recoil";
-import { useEffect } from "react";
 
 const LyricWithWriter = ({ lyricContent }) => {
   const emotions = useRecoilValue(emotionListAtom);
@@ -15,7 +14,9 @@ const LyricWithWriter = ({ lyricContent }) => {
     : 0;
   const profileImageSrc = profiles[profileIndex].none_filled;
 
-  const emotionBoolean = lyricContent.sings_emotion + 1;
+  const emotionBoolean = lyricContent.sings_emotion
+    ? lyricContent.sings_emotion + 1
+    : false;
 
   return (
     <Wrapper>
