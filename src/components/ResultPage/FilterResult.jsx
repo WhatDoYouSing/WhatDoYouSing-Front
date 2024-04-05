@@ -141,7 +141,6 @@ const FixedBox = styled.div`
   width: 100%;
   top: 12.7rem;
   left: 0;
-  padding: 0 1.6rem;
 
   @media (min-width: 1100px) {
     padding: 0 16.8rem 1rem;
@@ -156,6 +155,7 @@ const TopDiv = styled.div`
   height: auto;
   justify-content: space-between;
   align-items: center;
+  padding: 0 1.6rem;
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
   margin-bottom: 1.6rem;
   background-color: white;
