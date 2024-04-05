@@ -107,6 +107,6 @@ const Filter = styled.div`
     border: 1.5px solid var(--pointPink);
   }
   @media (min-width: 1200px) {
-    padding: 4rem 0;
+    padding: 1.6rem 39.4rem;
   }
 `;
