@@ -52,33 +52,29 @@ const RecordedPage = () => {
   }, []);
 
   return (
-    <div>
-      <Wrapper>
-        <IntroTopbar text="내활동" del={true} delPath="/my" />
-        <Filter>
-          <span
-            onClick={() => handleCategory("saved")}
-            className={selectedCategory === "saved" ? "selected" : "unselected"}
-          >
-            저장
-          </span>
-          <span
-            onClick={() => handleCategory("bookmarked")}
-            className={
-              selectedCategory === "bookmarked" ? "selected" : "unselected"
-            }
-          >
-            내가 남긴
-          </span>
-        </Filter>
-        <Line />
-        {selectedCategory === "saved" && <Saved />}
+    <Wrapper>
+      <IntroTopbar text="내활동" del={true} delPath="/my" />
+      <Filter>
+        <span
+          onClick={() => handleCategory("saved")}
+          className={selectedCategory === "saved" ? "selected" : "unselected"}
+        >
+          저장
+        </span>
+        <span
+          onClick={() => handleCategory("bookmarked")}
+          className={
+            selectedCategory === "bookmarked" ? "selected" : "unselected"
+          }
+        >
+          내가 남긴
+        </span>
+      </Filter>
+      {/* <Line /> */}
+      {selectedCategory === "saved" && <Saved />}
 
-        {selectedCategory === "bookmarked" && (
-          <Bookmarked pageType={pageType} />
-        )}
-      </Wrapper>
-    </div>
+      {selectedCategory === "bookmarked" && <Bookmarked pageType={pageType} />}
+    </Wrapper>
   );
 };
 
@@ -89,8 +85,18 @@ const Wrapper = styled.div`
 `;
 
 const Filter = styled.div`
+  position: fixed;
+  top: 7.9rem;
+  left: 0;
+  height: 3.1rem;
+  padding: 0 1.6rem;
   display: flex;
   flex-direction: row;
+  width: 100%;
+  border-bottom: 1px solid var(--gray);
+  background-color: white;
+
+  z-index: 999;
 
   /* @media (min-width: 1100px) {
     padding: 0 16.8rem;

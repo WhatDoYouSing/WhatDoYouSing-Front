@@ -73,11 +73,16 @@ const Wrapper = styled.div`
   }
 `;
 const Filter = styled.div`
+  position: fixed;
+  top: 11rem;
+  left: 0;
   display: flex;
   width: 100%;
   align-items: flex-start;
   gap: 1.4rem;
-  padding: 1.6rem 0;
+  padding: 1.6rem 1.6rem 0.5rem 1.6rem;
+  background-color: white;
+
   span {
     display: flex;
     padding: 1.9rem 2rem;
