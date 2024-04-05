@@ -18,12 +18,16 @@ const SearchSection = () => {
 
   const moveSearchLatest = () => {
     setSelectOption("최신순");
-    navigate("/result");
+    navigate("/result", {
+      state: "최신순",
+    });
   };
 
   const moveSearchComm = () => {
     setSelectOption("댓글순");
-    navigate("/result");
+    navigate("/result", {
+      state: "댓글순",
+    });
   };
 
   return (
