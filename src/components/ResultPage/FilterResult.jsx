@@ -178,7 +178,6 @@ const TopDiv = styled.div`
   align-items: center;
   padding: 0 1.6rem;
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
-  margin-bottom: 1.6rem;
   background-color: white;
 
   .count {
