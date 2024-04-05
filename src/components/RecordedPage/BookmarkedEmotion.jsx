@@ -31,8 +31,10 @@ const BookmarkedEmotion = () => {
   }, [emotionState, currentPage]);
 
   return (
-    <>
-      <EmotionSearch isPadding={false} />
+    <Box>
+      <FixedBox>
+        <EmotionSearch isPadding={false} />
+      </FixedBox>
       <Wrapper>
         <ItemDiv>
           {bookmarkedList.map((item) => (
@@ -56,11 +58,15 @@ const BookmarkedEmotion = () => {
           setPage={setCurrentPage}
         />
       </Wrapper>
-    </>
+    </Box>
   );
 };
 
 export default BookmarkedEmotion;
+
+const Box = styled.div`
+  padding-top: 10rem;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -68,6 +74,20 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding-top: 6.5rem;
+`;
+
+const FixedBox = styled.div`
+  position: fixed;
+  top: 17rem;
+  left: 0;
+  display: flex;
+  width: 100%;
+  padding: 1rem 0 0;
+  background-color: white;
+  border-bottom: 1px solid var(--gray);
+
+  z-index: 999;
 `;
 
 const ItemDiv = styled.div`

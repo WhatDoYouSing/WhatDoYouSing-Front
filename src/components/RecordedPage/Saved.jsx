@@ -107,7 +107,7 @@ const SearchBar = styled.div`
   flex-direction: row;
   align-items: flex-start;
   gap: 0.8rem;
-  padding: 1.5rem 0 0.8rem 0;
+  padding: 4.5rem 0 0.8rem 0;
 
   input {
     height: 4.8rem;
