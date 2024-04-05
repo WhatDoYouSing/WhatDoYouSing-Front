@@ -13,11 +13,7 @@ const Pagination = ({ total, page, setPage }) => {
   const totalPhase = Math.ceil(total / limit);
 
   const displayList =
-    phase === totalPhase
-      ? phase >= 2
-        ? page - (phase - 1) * limit
-        : total
-      : limit;
+    phase === totalPhase ? total - (totalPhase - 1) * limit : limit;
 
   useEffect(() => {
     setPhase(Math.ceil(page / limit));
