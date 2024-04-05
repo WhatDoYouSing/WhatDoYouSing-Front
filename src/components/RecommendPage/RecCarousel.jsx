@@ -119,9 +119,9 @@ const TestBox = styled.div`
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-  } */
+  }
 `;
 
 const Observer = styled.div`
