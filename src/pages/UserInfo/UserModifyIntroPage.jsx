@@ -238,7 +238,7 @@ const Input = styled.input`
   width: 100%;
   height: 4.8rem;
   background: var(--white);
-  padding: 0 1rem;
+  padding: 0;
 
   font-size: 1.6rem;
   font-style: normal;
