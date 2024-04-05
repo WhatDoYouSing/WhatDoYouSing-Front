@@ -123,6 +123,7 @@ const Input = styled.input`
 
   border: none;
   outline: none;
+  padding: none;
   border-radius: 0;
   border-bottom: 0.15rem solid var(--black);
   transition: border-bottom-color 0.3s ease;
