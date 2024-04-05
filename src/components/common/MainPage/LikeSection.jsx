@@ -28,14 +28,14 @@ const LikeSection = () => {
     setSelectOption("최신순");
   }, []);
 
-  const moveSearchLatest = () => {
+  const moveSearchLikeList = () => {
     setSelectOption("좋아요순");
     navigate("/result");
   };
 
   return (
     <Wrapper>
-      <NavLike onClick={moveSearchLatest}>
+      <NavLike onClick={moveSearchLikeList}>
         LIKE <More />
       </NavLike>
       <LikeCarousel />
@@ -63,4 +63,6 @@ const NavLike = styled.div`
   letter-spacing: -0.04rem;
 
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
+
+  cursor: pointer;
 `;
