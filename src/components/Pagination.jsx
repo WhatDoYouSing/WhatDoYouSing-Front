@@ -9,7 +9,7 @@ import nextAll from "../images/nextAllpage.svg";
 const Pagination = ({ total, page, setPage }) => {
   const [phase, setPhase] = useState(1);
 
-  const limit = window.innerWidth <= 1100 ? 5 : 10;
+  const limit = window.innerWidth <= 1100 ? 3 : 10;
   const totalPhase = Math.ceil(total / limit);
 
   const displayList =
@@ -33,20 +33,24 @@ const Pagination = ({ total, page, setPage }) => {
           <img src={beforeOne} alt="" />
         </Button>
       </div>
-      {Array(displayList)
-        .fill()
-        .map((_, i) => {
-          const displayPage = (phase - 1) * limit + (i + 1);
-          return (
-            <PageButton
-              key={displayPage}
-              onClick={() => setPage(displayPage)}
-              current={page === displayPage ? "page" : undefined}
-            >
-              {displayPage}
-            </PageButton>
-          );
-        })}
+
+      <div>
+        {Array(displayList)
+          .fill()
+          .map((_, i) => {
+            const displayPage = (phase - 1) * limit + (i + 1);
+            return (
+              <PageButton
+                key={displayPage}
+                onClick={() => setPage(displayPage)}
+                current={page === displayPage ? "page" : undefined}
+              >
+                {displayPage}
+              </PageButton>
+            );
+          })}
+      </div>
+
       <div>
         <Button onClick={() => setPage(page + 1)} disabled={page === total}>
           <img src={nextOne} alt="" />
@@ -64,7 +68,7 @@ export default Pagination;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 4px;
   width: 100%;
@@ -85,6 +89,8 @@ const Button = styled.button`
 `;
 
 const PageButton = styled.button`
+  width: 48px;
+  height: 48px;
   border: none;
   border-radius: 8px;
   margin: 0;
