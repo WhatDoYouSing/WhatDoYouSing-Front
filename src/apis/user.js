@@ -94,7 +94,7 @@ export const PostSignup = async (
     return Promise.resolve(response.data);
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      alert(error.response.data.error.non_field_errors);
+      alert(error.response.data.non_field_errors);
     }
     console.error("회원가입 실패", error.response);
   }

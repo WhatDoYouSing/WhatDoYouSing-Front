@@ -139,14 +139,18 @@ const Wrapper = styled.section`
 const FixedBox = styled.div`
   position: fixed;
   width: 100%;
-  top: 12.7rem;
+  top: 10.7rem;
   left: 0;
 
   @media (min-width: 1100px) {
-    padding: 0 16.8rem 1rem;
+    padding: 0 16.8rem;
+    top: 12rem;
   }
 
-  z-index: 90;
+  z-index: 50;
+
+  background-color: white;
+  padding-top: 1rem;
 `;
 
 const TopDiv = styled.div`
@@ -211,5 +215,6 @@ const ItemDiv = styled.div`
 
   @media (min-width: 1100px) {
     gap: 3rem;
+    margin-top: 10rem;
   }
 `;
