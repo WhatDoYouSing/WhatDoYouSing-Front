@@ -9,7 +9,7 @@ import nextAll from "../images/nextAllpage.svg";
 const Pagination = ({ total, page, setPage }) => {
   const [phase, setPhase] = useState(1);
 
-  const limit = window.innerWidth <= 1100 ? 3 : 10;
+  const limit = window.innerWidth <= 1100 ? 5 : 10;
   const totalPhase = Math.ceil(total / limit);
 
   const displayList =
@@ -30,7 +30,7 @@ const Pagination = ({ total, page, setPage }) => {
         </Button>
       </div>
 
-      <div>
+      <NumberDiv>
         {Array(displayList)
           .fill()
           .map((_, i) => {
@@ -45,7 +45,7 @@ const Pagination = ({ total, page, setPage }) => {
               </PageButton>
             );
           })}
-      </div>
+      </NumberDiv>
 
       <div>
         <Button onClick={() => setPage(page + 1)} disabled={page === total}>
@@ -84,11 +84,20 @@ const Button = styled.button`
   color: var(--black);
 `;
 
-const PageButton = styled.button`
-  width: 48px;
-  height: 48px;
+const NumberDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PageButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 6vw;
+  height: 40px;
   border: none;
-  border-radius: 8px;
   margin: 0;
   background: transparent;
   color: var(--black);
