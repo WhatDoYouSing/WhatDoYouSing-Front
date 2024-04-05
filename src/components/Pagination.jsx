@@ -25,12 +25,14 @@ const Pagination = ({ total, page, setPage }) => {
 
   return (
     <Wrapper>
-      <Button onClick={() => setPage(1)}>
-        <img src={beforeAll} alt="" />
-      </Button>
-      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
-        <img src={beforeOne} alt="" />
-      </Button>
+      <div>
+        <Button onClick={() => setPage(1)}>
+          <img src={beforeAll} alt="" />
+        </Button>
+        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          <img src={beforeOne} alt="" />
+        </Button>
+      </div>
       {Array(displayList)
         .fill()
         .map((_, i) => {
@@ -45,12 +47,14 @@ const Pagination = ({ total, page, setPage }) => {
             </PageButton>
           );
         })}
-      <Button onClick={() => setPage(page + 1)} disabled={page === total}>
-        <img src={nextOne} alt="" />
-      </Button>
-      <Button onClick={() => setPage(total)}>
-        <img src={nextAll} alt="" />
-      </Button>
+      <div>
+        <Button onClick={() => setPage(page + 1)} disabled={page === total}>
+          <img src={nextOne} alt="" />
+        </Button>
+        <Button onClick={() => setPage(total)}>
+          <img src={nextAll} alt="" />
+        </Button>
+      </div>
     </Wrapper>
   );
 };
