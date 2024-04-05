@@ -17,13 +17,15 @@ const SearchSection = () => {
   const setSelectOption = useSetRecoilState(SearchDropdownState);
 
   const moveSearchLatest = () => {
-    setSelectOption("최신순");
-    navigate("/result");
+    setSelectOption("최신순").then(() => {
+      navigate("/result");
+    });
   };
 
   const moveSearchComm = () => {
-    setSelectOption("댓글순");
-    navigate("/result");
+    setSelectOption("댓글순").then(() => {
+      navigate("/result");
+    });
   };
 
   return (
