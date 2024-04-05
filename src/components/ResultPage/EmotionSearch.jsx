@@ -68,10 +68,8 @@ const Wrapper = styled.div`
 
 const Emotions = styled.div`
   display: flex;
-  padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0 1.6rem")};
-  margin: ${(props) => (props.isPadding ? "" : "0 0 1.6rem")};
-  border-bottom: ${(props) =>
-    props.isPadding ? "none" : "1px solid var(--gray)"};
+  padding: ${(props) => (props.isPadding ? "1rem 0" : "0 0")};
+  margin: ${(props) => (props.isPadding ? "" : "0 0 0")};
   align-items: flex-start;
   align-self: stretch;
   overflow-x: scroll;
@@ -94,6 +92,6 @@ const Emotions = styled.div`
   }
 
   @media (min-width: 1100px) {
-    padding: ${(props) => (props.isPadding ? "1rem 16.8rem" : "0 0 1.6rem")};
+    padding: ${(props) => (props.isPadding ? "1rem 16.8rem" : "0 0")};
   }
 `;
