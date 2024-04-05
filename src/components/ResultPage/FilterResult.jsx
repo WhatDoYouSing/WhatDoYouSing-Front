@@ -44,10 +44,11 @@ const FilterResult = () => {
 
   console.log(selectedOption, selectedEmotion, selectedKeyword);
 
-  let locationState = location.state ? location.state : selectedOption;
-
   useEffect(() => {
     const handleClick = async (currentPage) => {
+      let locationState =
+        selectedOption === location.state ? location.state : selectedOption;
+
       switch (locationState) {
         case "최신순":
           const searchLatest = await GetSearchLatest(
