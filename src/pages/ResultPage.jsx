@@ -9,6 +9,7 @@ import FloatingBtn from "../components/common/MainPage/FloatingBtn";
 const ResultPage = () => {
   //트래킹 코드
   useEffect(() => {
+    window.scrollTo(0, 0);
     (function (w, d, a) {
       w.__beusablerumclient__ = {
         load: function (src) {
