@@ -13,6 +13,7 @@ import { MyEmotionState } from "../assets/recoil/apiRecoil";
 
 //api
 import { GetMyPage } from "../apis/my";
+import { Logout } from "../apis/user";
 
 const path_list = [
   {
@@ -60,16 +61,6 @@ const MyPage = () => {
   const isLogin = localStorage.getItem("token") !== null;
   const profileList = useRecoilValue(profileListAtom);
   const setMyEmotionState = useSetRecoilState(MyEmotionState);
-
-  const Logout = () => {
-    window.localStorage.removeItem("user_id");
-    window.localStorage.removeItem("username");
-    window.localStorage.removeItem("nickname");
-    window.localStorage.removeItem("user_profile");
-    window.localStorage.removeItem("token");
-
-    navigate("/");
-  };
 
   const [userID, setUserID] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -148,7 +139,7 @@ const MyPage = () => {
           </UserProfile>
           <div className="info">
             <UserID>{userName} 님</UserID>
-            <LogBtn onClick={Logout}>로그아웃</LogBtn>
+            <LogBtn onClick={() => Logout()}>로그아웃</LogBtn>
           </div>
         </UserInfo>
         <Grid>

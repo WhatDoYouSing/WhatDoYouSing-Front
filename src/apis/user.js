@@ -60,6 +60,7 @@ export const PostRefresh = async (refresh) => {
     const response = await axiosInstance.post("/accounts/token/refresh/", {
       refresh: refresh,
     });
+    window.localStorage.removeItem("refresh_token");
     localStorage.setItem("token", response.data.access);
     localStorage.setItem("refresh_token", response.data.refresh);
     window.location.reload();
