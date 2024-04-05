@@ -69,6 +69,7 @@ const Wrapper = styled.div`
 const Button = styled.button`
   border: none;
   margin: 0;
+  padding: 0;
   background: transparent;
   color: var(--black);
 `;
@@ -76,7 +77,6 @@ const Button = styled.button`
 const PageButton = styled.button`
   border: none;
   border-radius: 8px;
-  padding: 8px;
   margin: 0;
   background: transparent;
   color: var(--black);
