@@ -74,7 +74,7 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding-top: 6.5rem;
+  padding-top: 6.8rem;
 `;
 
 const FixedBox = styled.div`
@@ -84,12 +84,13 @@ const FixedBox = styled.div`
   display: flex;
 
   width: 100%;
-  padding: 1rem 0 0;
+  padding: 1rem 0 1.6rem;
   background-color: white;
   border-bottom: 1px solid var(--gray);
 
   z-index: 999;
   overflow-x: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   }
