@@ -67,6 +67,7 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding-top: 10rem;
 `;
 
 const LyricsWrapper = styled.div`
