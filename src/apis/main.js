@@ -44,7 +44,6 @@ export const GetSortLike = async () => {
 export const GetRecommendUser = async (page) => {
   try {
     const response = await axiosInstance.get(`/sings/recommend/?page=${page}`);
-    console.log(response.data);
     return Promise.resolve(response.data);
   } catch (error) {
     isTokenExpired(error);
