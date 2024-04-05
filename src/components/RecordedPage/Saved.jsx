@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 import { ReactComponent as Search } from "../../images/search.svg";
 import ResultLyrics from "../common/ResultLyrics";
@@ -164,5 +164,15 @@ const ItemDiv = styled.div`
 
   > div:nth-child(even) {
     align-self: flex-end;
+    margin-bottom: 2rem;
+
+    @media (min-width: 1100px) {
+      margin-top: 0.2rem;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    gap: 3rem;
   }
 `;
