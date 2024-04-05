@@ -48,7 +48,7 @@ const ResultTopbar = () => {
         />
         <Search onClick={clickSearch} />
       </Wrapper>
-      <EmotionSearch />
+      <EmotionSearch isPadding={true} />
     </Box>
   );
 };
@@ -57,7 +57,6 @@ export default ResultTopbar;
 const Box = styled.div`
   position: fixed;
   width: 100%;
-  /* width: calc(100% + 1.6rem); */
   top: 0;
   left: 0;
   padding: 0;

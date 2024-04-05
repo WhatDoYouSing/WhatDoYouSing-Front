@@ -103,7 +103,7 @@ const Filter = styled.div`
   } */
 
   @media (min-width: 1200px) {
-    padding: 0 22.6rem;
+    padding: 0 39.4rem;
   }
 
   span {
