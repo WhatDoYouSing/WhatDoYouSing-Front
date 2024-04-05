@@ -17,7 +17,7 @@ import {
 } from "../../apis/search";
 
 //recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   SelectEmotionState,
   SearchDropdownState,
@@ -43,13 +43,17 @@ const FilterResult = () => {
   };
 
   console.log(selectedOption, selectedEmotion, selectedKeyword);
+  const setSelectOption = useSetRecoilState(SearchDropdownState);
+
+  useEffect(() => {
+    if (location.state) {
+      setSelectOption(location.state);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClick = async (currentPage) => {
-      let locationState =
-        selectedOption === location.state ? location.state : selectedOption;
-
-      switch (locationState) {
+      switch (selectedOption) {
         case "최신순":
           const searchLatest = await GetSearchLatest(
             selectedKeyword,
