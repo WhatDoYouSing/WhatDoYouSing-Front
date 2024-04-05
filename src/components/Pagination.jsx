@@ -63,11 +63,17 @@ export default Pagination;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 4px;
   width: 100%;
   margin: 4rem 0;
+
+  div {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const Button = styled.button`
