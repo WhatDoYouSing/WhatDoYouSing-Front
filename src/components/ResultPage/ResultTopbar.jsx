@@ -86,7 +86,7 @@ const Wrapper = styled.div`
   }
 
   input {
-    width: 80vw;
+    width: 90%;
     height: 4.8rem;
     border: none;
     outline: none;
