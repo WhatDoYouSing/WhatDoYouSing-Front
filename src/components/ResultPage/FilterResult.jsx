@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 //components
 import DropDownSearch from "../common/DropDownSearch";
@@ -16,7 +17,7 @@ import {
 } from "../../apis/search";
 
 //recoil
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   SelectEmotionState,
   SearchDropdownState,
@@ -24,6 +25,7 @@ import {
 } from "../../assets/recoil/apiRecoil";
 
 const FilterResult = () => {
+  const location = useLocation();
   const [result, setResult] = useState("");
   const selectedEmotion = useRecoilValue(SelectEmotionState);
   const selectedOption = useRecoilValue(SearchDropdownState);
@@ -41,37 +43,52 @@ const FilterResult = () => {
   };
 
   console.log(selectedOption, selectedEmotion, selectedKeyword);
+  const setSelectOption = useSetRecoilState(SearchDropdownState);
+
+  useEffect(() => {
+    if (location.state) {
+      setSelectOption(location.state);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClick = async (currentPage) => {
-      if (selectedOption === "최신순") {
-        const searchLatest = await GetSearchLatest(
-          selectedKeyword,
-          selectedEmotion,
-          currentPage
-        );
-        setData(searchLatest.data);
-      } else if (selectedOption === "좋아요순") {
-        const sortedLikeList = await GetSearchLike(
-          selectedKeyword,
-          selectedEmotion,
-          currentPage
-        );
-        setData(sortedLikeList.data);
-      } else if (selectedOption === "댓글순") {
-        const sortedComeList = await GetSearchCom(
-          selectedKeyword,
-          selectedEmotion,
-          currentPage
-        );
-        setData(sortedComeList.data);
-      } else {
-        const searchDef = await GetSearchLatest(
-          selectedKeyword,
-          selectedEmotion,
-          currentPage
-        );
-        setResult(searchDef);
+      switch (selectedOption) {
+        case "최신순":
+          const searchLatest = await GetSearchLatest(
+            selectedKeyword,
+            selectedEmotion,
+            currentPage
+          );
+          setData(searchLatest.data);
+          break;
+
+        case "좋아요순":
+          const sortedLikeList = await GetSearchLike(
+            selectedKeyword,
+            selectedEmotion,
+            currentPage
+          );
+          setData(sortedLikeList.data);
+          break;
+
+        case "댓글순":
+          const sortedComeList = await GetSearchCom(
+            selectedKeyword,
+            selectedEmotion,
+            currentPage
+          );
+          setData(sortedComeList.data);
+          break;
+
+        default:
+          const searchDef = await GetSearchLatest(
+            selectedKeyword,
+            selectedEmotion,
+            currentPage
+          );
+          setResult(searchDef);
+          break;
       }
     };
 
@@ -161,7 +178,10 @@ const TopDiv = styled.div`
   align-items: center;
   padding: 0 1.6rem;
   border-bottom: 0.05rem solid rgba(38, 33, 33, 0.2);
+<<<<<<< HEAD
 
+=======
+>>>>>>> d8cef778d273a0df1b8a4171efaf67416157853b
   background-color: white;
 
   .count {
