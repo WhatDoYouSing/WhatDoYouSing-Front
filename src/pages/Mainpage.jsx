@@ -96,7 +96,16 @@ const MainPage = () => {
 
   //서비스 장애 안내 모달
   const errorModalRef = useRef();
-  const [errorModal, setErrorModal] = useClickOutside(errorModalRef, true);
+  const [errorModal, setErrorModal] = useClickOutside(errorModalRef, false);
+
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const popupCookie = cookieData.find((cookie) =>
+      cookie.trim().startsWith("popupCookie=")
+    );
+    popupCookie ? setErrorModal(false) : setErrorModal(true);
+    console.log("popupCookie: " + popupCookie);
+  }, []);
 
   return (
     <>

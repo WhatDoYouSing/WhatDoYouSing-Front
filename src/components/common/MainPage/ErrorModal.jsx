@@ -8,25 +8,26 @@ import { ReactComponent as CheckboxOff } from "../../../images/checkbox-off.svg"
 const ErrorModal = ({ errorModal, setErrorModal }) => {
   const [isChecked, setIsChecked] = useState(false); //하루 보지 않기 눌렀는지
 
-  useEffect(() => {
-    const cookieData = document.cookie.split(";");
-    const popupCookie = cookieData.find((cookie) =>
-      cookie.trim().startsWith("popupCookie=")
-    );
-    popupCookie ? setErrorModal(false) : setErrorModal(true);
-    console.log("popupCookie: " + popupCookie);
-  }, []);
-
   //확인 버튼 클릭
   const handleClose = () => {
     setErrorModal(false);
   };
   //오늘 하루 보지 않기 클릭
   const handleCloseToday = () => {
-    document.cookie = "max-age=30";
-    document.cookie = "popupCookie=valid";
+    const now = new Date(); //현재 시각
+    const midnight = new Date(); //자정 시각
+    midnight.setHours(24, 0, 0, 0);
+    const timeDiff = midnight - now;
+
+    //계산된 시간차를 초로 변환
+    const maxAgeSeconds = Math.ceil(timeDiff / 1000);
+    document.cookie = `popupCookie="valid"; max-age=${maxAgeSeconds}`;
     setIsChecked(true);
     setErrorModal(false);
+  };
+
+  const handleCheck = () => {
+    setIsChecked(true);
   };
 
   return (
@@ -52,7 +53,7 @@ const ErrorModal = ({ errorModal, setErrorModal }) => {
       <ButtonDiv onClick={handleClose}>
         <Button>확인</Button>
       </ButtonDiv>
-      <CheckDiv onClick={handleCloseToday}>
+      <CheckDiv onMouseDown={handleCheck} onClick={handleCloseToday}>
         {isChecked ? <CheckboxOn /> : <CheckboxOff />}
         <CheckMessage>오늘 하루 보지 않기</CheckMessage>
       </CheckDiv>
