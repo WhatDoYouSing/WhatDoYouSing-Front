@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,6 +20,10 @@ import {
   LankingListState,
   DropdownState,
 } from "../assets/recoil/apiRecoil";
+
+//modal
+import ErrorModal from "../components/common/MainPage/ErrorModal";
+import useClickOutside from "../hooks/useClickOutside";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -89,6 +93,19 @@ const MainPage = () => {
     sessionStorage.clear();
   }, []);
 
+  //서비스 장애 안내 모달
+  const errorModalRef = useRef();
+  const [errorModal, setErrorModal] = useClickOutside(errorModalRef, false);
+
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const popupCookie = cookieData.find((cookie) =>
+      cookie.trim().startsWith("popupCookie=")
+    );
+    popupCookie ? setErrorModal(false) : setErrorModal(true);
+    console.log("popupCookie: " + popupCookie);
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -99,6 +116,12 @@ const MainPage = () => {
         <FloatingBtn />
       </Wrapper>
       <Footer />
+      {errorModal && (
+        <ModalWrapper>
+          <Background onClick={() => setErrorModal(false)} />
+          <ErrorModal errorModal={errorModal} setErrorModal={setErrorModal} />
+        </ModalWrapper>
+      )}
     </>
   );
 };
@@ -114,4 +137,29 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 100;
 `;
