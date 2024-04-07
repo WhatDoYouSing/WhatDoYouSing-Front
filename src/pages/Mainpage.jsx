@@ -24,7 +24,6 @@ import {
 //modal
 import ErrorModal from "../components/common/MainPage/ErrorModal";
 import useClickOutside from "../hooks/useClickOutside";
-import { useCookies } from "react-cookie";
 
 const MainPage = () => {
   const navigate = useNavigate();
