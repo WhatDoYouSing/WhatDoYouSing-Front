@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { useCookies } from "react-cookie";
 
 import { ReactComponent as CheckboxOn } from "../../../images/checkbox-on.svg";
 import { ReactComponent as CheckboxOff } from "../../../images/checkbox-off.svg";
