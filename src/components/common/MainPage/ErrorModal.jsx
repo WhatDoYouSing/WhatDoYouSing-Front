@@ -52,7 +52,7 @@ const ErrorModal = ({ errorModal, setErrorModal }) => {
       <ButtonDiv onClick={handleClose}>
         <Button>확인</Button>
       </ButtonDiv>
-      <CheckDiv onMouseDown={handleCheck} onClick={handleCloseToday}>
+      <CheckDiv onMouseDown={handleCheck} onMouseUp={handleCloseToday}>
         {isChecked ? <CheckboxOn /> : <CheckboxOff />}
         <CheckMessage>오늘 하루 보지 않기</CheckMessage>
       </CheckDiv>
