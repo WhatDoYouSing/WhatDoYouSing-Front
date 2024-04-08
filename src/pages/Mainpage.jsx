@@ -116,12 +116,12 @@ const MainPage = () => {
         <FloatingBtn />
       </Wrapper>
       <Footer />
-      {errorModal && (
+      {/* {errorModal && (
         <ModalWrapper>
           <Background onClick={() => setErrorModal(false)} />
           <ErrorModal errorModal={errorModal} setErrorModal={setErrorModal} />
         </ModalWrapper>
-      )}
+      )} */}
     </>
   );
 };
