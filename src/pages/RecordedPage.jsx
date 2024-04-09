@@ -42,13 +42,16 @@ const RecordedPage = () => {
 
     if (category === "saved") {
       navigate("/recorded/1");
+      sessionStorage.setItem("from", window.location.pathname);
     } else if (category === "bookmarked") {
       navigate("/recorded/2");
+      sessionStorage.setItem("from", window.location.pathname);
     }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    sessionStorage.setItem("from", window.location.pathname);
   }, []);
 
   return (
