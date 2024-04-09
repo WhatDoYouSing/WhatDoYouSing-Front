@@ -28,8 +28,13 @@ const TopTab = ({
   const navigate = useNavigate();
   const goBack = () => {
     const from = sessionStorage.getItem("from");
-    navigate(from || -1);
-    window.sessionStorage.removeItem("from");
+    const referrer = document.referrer;
+    if (referrer === null) {
+      navigate(from || -1);
+      window.sessionStorage.removeItem("from");
+    } else {
+      navigate("/");
+    }
   };
 
   const handleShare = () => {
