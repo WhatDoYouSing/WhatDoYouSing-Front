@@ -29,10 +29,12 @@ const TopTab = ({
   const goBack = () => {
     const from = sessionStorage.getItem("from");
     const referrer = document.referrer;
-    if (referrer === null) {
+    if (referrer == null || referrer.includes("login" || "my")) {
+      console.log(referrer);
       navigate(from || -1);
       window.sessionStorage.removeItem("from");
     } else {
+      console.log(referrer);
       navigate("/");
     }
   };
