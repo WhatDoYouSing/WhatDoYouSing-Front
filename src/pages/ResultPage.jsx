@@ -22,6 +22,7 @@ const ResultPage = () => {
       };
       w.__beusablerumclient__.load(a + "?url=" + encodeURIComponent(d.URL));
     })(window, document, "//rum.beusable.net/load/b230311e131233u903");
+    sessionStorage.setItem("from", window.location.pathname);
   }, []);
 
   return (
