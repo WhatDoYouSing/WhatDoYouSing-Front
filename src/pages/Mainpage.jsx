@@ -91,6 +91,7 @@ const MainPage = () => {
 
     //세션 스토리지 초기화
     sessionStorage.clear();
+    sessionStorage.setItem("search-from", window.location.pathname);
   }, []);
 
   //서비스 장애 안내 모달
