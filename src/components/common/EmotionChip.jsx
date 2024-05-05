@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 const sizes = {
   small: {
@@ -19,12 +18,12 @@ const sizes = {
 
 const imgSizes = {
   small: {
-    width: "1.6rem",
-    height: "1.6rem",
+    width: "1.6014rem",
+    height: "1.2544rem",
   },
   medium: {
-    width: "1.6rem",
-    height: "1.6rem",
+    width: "1.6014rem",
+    height: "1.2544rem",
   },
   large: {
     width: "2.4rem",
@@ -82,11 +81,13 @@ const Wrapper = styled.div`
     `};
 `;
 
-const ImgDiv = styled.div``;
+const ImgDiv = styled.div`
+  display: flex;
+`;
 
 const EmotionText = styled.div`
   ${fontSizeStyles}
-  padding-bottom: 0.2rem;
+  padding-top: 0.1rem;
 `;
 
 const Img = styled.img`

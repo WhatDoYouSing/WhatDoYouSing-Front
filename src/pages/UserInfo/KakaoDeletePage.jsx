@@ -53,9 +53,7 @@ const KakaoDeletePage = () => {
       <Wrapper>
         <IntroTopbar text="회원탈퇴" delPath="/my" />
         <Box>
-          <ImgBoxS>
-            <Img src={symbol} />
-          </ImgBoxS>
+          <Img src={symbol} />
           <span>정말... 떠나시겠어요?</span>
         </Box>
         <SideBox>
@@ -95,16 +93,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Img = styled.img`
-  width: 105px;
-  height: 105px;
-
-  @media (min-width: 1200px) {
-    width: 18rem;
-    height: 17.83rem;
-  }
-`;
-
 const ColumnStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -113,7 +101,7 @@ const ColumnStyle = styled.div`
 
 const Box = styled(ColumnStyle)`
   margin: 23.7rem 0 6.4rem;
-  gap: 2.5rem;
+  gap: 1.766rem;
 
   span {
     font-size: 2rem;
@@ -127,7 +115,15 @@ const Box = styled(ColumnStyle)`
   }
 `;
 
-const ImgBoxS = styled.div``;
+const Img = styled.img`
+  width: 105px;
+  height: 76.34px;
+
+  @media (min-width: 1200px) {
+    width: 18rem;
+    height: 17.83rem;
+  }
+`;
 
 const SideBox = styled(ColumnStyle)`
   width: 100%;
@@ -164,6 +160,7 @@ const DelInfo = styled.span`
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
+  line-height: normal;
 
   word-break: keep-all;
 `;

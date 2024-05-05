@@ -156,8 +156,8 @@ const UserProfile = styled.div`
   cursor: pointer;
 `;
 const Img = styled.img`
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.5926rem;
+  height: 2.0722rem;
 `;
 
 const RoundDiv = styled.div`
