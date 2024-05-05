@@ -5,9 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import IntroTopbar from "../../components/IntroTopbar";
 import Footer from "../../components/common/Footer";
 
-import symbol from "../../images/change/animals.png";
-import wordmark from "../../images/change/wordmark-kor.png";
-import wordmarkE from "../../images/change/wormark-eng.png";
+import watermarkK from "../../images/change/watermark-kor.png";
+import watermarkE from "../../images/change/watermark-eng.png";
 
 //recoil
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -61,14 +60,8 @@ const UserModifyIntroPage = () => {
       <Wrapper>
         <IntroTopbar text="회원정보 수정" delPath="/my" />
         <Box>
-          <ImgBoxS>
-            <Symbol src={symbol} />
-          </ImgBoxS>
-          <ImgBoxW>
-            <Wordmark src={wordmark} />
-          </ImgBoxW>
           <ImgBoxE>
-            <WordmarkE src={wordmarkE} />
+            <WatermarkE src={watermarkE} />
           </ImgBoxE>
         </Box>
         <SideBox>
@@ -119,38 +112,8 @@ const ColumnStyle = styled.div`
 const Box = styled(ColumnStyle)`
   margin: 23.7rem 0 4.2rem;
   gap: 2.5rem;
-  /* 
-  @media (min-width: 1200px) {
-    margin: 0;
-    gap: 2.8rem;
-  } */
 
   @media (max-width: 1200px) {
-    display: none;
-  }
-`;
-
-const ImgBoxS = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12rem;
-  height: 12rem;
-
-  @media (min-width: 1200px) {
-    width: 18rem;
-    height: 17.83rem;
-  }
-`;
-
-const ImgBoxW = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12rem;
-  height: 2.7rem;
-
-  @media (min-width: 1200px) {
     display: none;
   }
 `;
@@ -166,24 +129,9 @@ const ImgBoxE = styled.div`
   }
 `;
 
-const WordmarkE = styled.img`
-  width: 18rem;
-  height: 166.01px;
-`;
-
-const Wordmark = styled.img`
-  width: 12rem;
-  height: 2.7rem;
-`;
-
-const Symbol = styled.img`
-  width: 12rem;
-  height: 12rem;
-
-  @media (min-width: 1200px) {
-    width: 18rem;
-    height: 17.83rem;
-  }
+const WatermarkE = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 const SideBox = styled(ColumnStyle)`

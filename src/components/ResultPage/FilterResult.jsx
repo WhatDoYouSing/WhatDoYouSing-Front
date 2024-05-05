@@ -106,12 +106,7 @@ const FilterResult = () => {
         </FixedBox>
         {totalItems === 0 ? (
           <NoneDiv>
-            <img
-              src={noContent}
-              alt="noContent"
-              width={"105rem"}
-              height={"105rem"}
-            />
+            <img src={noContent} alt="noContent" />
             <div className="noneMent">
               검색결과가 없어요.
               <br /> 사용자님이 등록해 보시는 건 어때요?
@@ -195,8 +190,9 @@ const NoneDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-self: center;
-  margin: 12.8rem 0;
+  margin: 18.5rem 0;
+  gap: 1.366rem;
+
   .noneMent {
     color: var(--Dark-Gray, #a0a0a0);
     text-align: center;
@@ -205,7 +201,6 @@ const NoneDiv = styled.div`
     font-weight: 500;
     line-height: 150%; /* 24px */
     letter-spacing: -0.032rem;
-    margin-top: 1.6rem;
   }
 `;
 
