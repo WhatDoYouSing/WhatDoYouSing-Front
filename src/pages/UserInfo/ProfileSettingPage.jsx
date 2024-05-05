@@ -8,15 +8,15 @@ import IntroTopbar from "../../components/IntroTopbar";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { ProfileState } from "../../assets/recoil/apiRecoil";
 
-import henry from "../../images/icons/henry-prof.svg";
-import cherry from "../../images/icons/cherry-prof.svg";
-import luke from "../../images/icons/luke-prof.svg";
-import doong_ee from "../../images/icons/doong-ee-prof.svg";
+import henry from "../../images/icons/henry-prof.png";
+import cherry from "../../images/icons/cherry-prof.png";
+import luke from "../../images/icons/luke-prof.png";
+import doong_ee from "../../images/icons/doong-ee-prof.png";
 
-import filled_henry from "../../images/icons/henry-prof-filled.svg";
-import filled_cherry from "../../images/icons/cherry-prof-filled.svg";
-import filled_luke from "../../images/icons/luke-prof-filled.svg";
-import filled_doong_ee from "../../images/icons/doong-ee-prof-filled.svg";
+import filled_henry from "../../images/icons/henry-prof-filled.png";
+import filled_cherry from "../../images/icons/cherry-prof-filled.png";
+import filled_luke from "../../images/icons/luke-prof-filled.png";
+import filled_doong_ee from "../../images/icons/doong-ee-prof-filled.png";
 
 const profiles = [
   { id: "Henry", none_filled: henry, filled: filled_henry },
@@ -126,8 +126,8 @@ const ProfileDiv = styled.div`
 `;
 
 const Image = styled.img`
-  width: 8.2rem;
-  height: 8.2rem;
+  width: 10.4681rem;
+  height: 8.1997rem;
 `;
 
 const ProfileBox = styled.div`
