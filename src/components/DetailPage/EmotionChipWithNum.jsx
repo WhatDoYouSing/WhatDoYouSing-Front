@@ -84,6 +84,7 @@ const Img = styled.img`
 `;
 
 const EmotionText = styled.div`
+  padding-top: 0.1rem;
   font-size: 1.4rem;
   font-weight: 500;
   white-space: nowrap;

@@ -206,8 +206,8 @@ const UserInfo = styled.div`
 `;
 
 const Img = styled.img`
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 4.4074rem;
+  height: 3.5227rem;
 `;
 
 const UserProfile = styled.div`
