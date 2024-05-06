@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { useNavigate } from "react-router-dom";
 import plus from "../../images/plus.svg";
 
 export default function EmotionChipWithNum({
@@ -75,12 +73,12 @@ const ImgDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 1.6rem;
-  height: 1.6rem;
+  height: 1.2529rem;
 `;
 
 const Img = styled.img`
   width: 1.6rem;
-  height: 1.6rem;
+  height: 1.2529rem;
 `;
 
 const EmotionText = styled.div`
