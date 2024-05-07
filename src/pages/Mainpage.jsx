@@ -24,6 +24,7 @@ import {
 //modal
 import ErrorModal from "../components/common/MainPage/ErrorModal";
 import useClickOutside from "../hooks/useClickOutside";
+import EventModal from "../components/common/MainPage/EventModal";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -107,6 +108,19 @@ const MainPage = () => {
     console.log("popupCookie: " + popupCookie);
   }, []);
 
+  //서비스 장애 안내 모달
+  const eventModalRef = useRef();
+  const [eventModal, setEventModal] = useClickOutside(eventModalRef, false);
+
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const eventCookie = cookieData.find((cookie) =>
+      cookie.trim().startsWith("eventCookie=")
+    );
+    eventCookie ? setEventModal(false) : setEventModal(true);
+    console.log("eventCookie: " + eventCookie);
+  }, []);
+
   return (
     <>
       <Wrapper>
@@ -123,6 +137,12 @@ const MainPage = () => {
           <ErrorModal errorModal={errorModal} setErrorModal={setErrorModal} />
         </ModalWrapper>
       )} */}
+      {eventModal && (
+        <ModalWrapper>
+          <Background onClick={() => setEventModal(false)} />
+          <EventModal setEventModal={setEventModal} />
+        </ModalWrapper>
+      )}
     </>
   );
 };
