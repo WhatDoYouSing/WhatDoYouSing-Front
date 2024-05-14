@@ -8,15 +8,15 @@ const LyricWithWriter = ({ lyricContent }) => {
   const emotions = useRecoilValue(emotionListAtom);
   const profiles = useRecoilValue(profileListAtom);
 
+  console.log(lyricContent);
   // 프로필 이미지 설정
   const profileIndex = lyricContent?.author_profile
     ? lyricContent.author_profile - 1
     : 0;
   const profileImageSrc = profiles[profileIndex].none_filled;
 
-  const emotionBoolean = lyricContent.sings_emotion
-    ? lyricContent.sings_emotion + 1
-    : false;
+  const emotionBoolean =
+    lyricContent.sings_emotion + 1 ? lyricContent.sings_emotion + 1 : false;
 
   return (
     <Wrapper>
@@ -67,8 +67,8 @@ const ProfileContainer = styled.div`
   background-color: var(--lightGray);
 
   img {
-    width: 21px;
-    height: 21px;
+    width: 25.926px;
+    height: 20.722px;
   }
 `;
 

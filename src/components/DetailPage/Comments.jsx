@@ -96,7 +96,7 @@ const Comments = ({
       </CommentInput>
       {commentList.length === 0 ? (
         <NoneDiv>
-          <img src={noContent} width={"105rem"} height={"105rem"} />
+          <img src={noContent} alt="noContent" />
           <div className="noneMent">
             댓글이 없어요.
             <br /> 첫 댓글을 남겨보시는 건 어때요?
@@ -177,6 +177,8 @@ const NoneDiv = styled.div`
   align-items: center;
   align-self: center;
   margin: 6.4rem 0;
+  gap: 1.366rem;
+
   .noneMent {
     color: var(--Dark-Gray, #a0a0a0);
     text-align: center;
@@ -185,7 +187,6 @@ const NoneDiv = styled.div`
     font-weight: 500;
     line-height: 150%; /* 24px */
     letter-spacing: -0.032rem;
-    margin-top: 1.6rem;
   }
 `;
 

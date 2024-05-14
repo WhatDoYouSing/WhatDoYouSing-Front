@@ -191,8 +191,8 @@ const Profile = styled.div`
   background-color: var(--lightGray);
 
   img {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.5847rem;
+    height: 2.0246rem;
   }
 `;
 

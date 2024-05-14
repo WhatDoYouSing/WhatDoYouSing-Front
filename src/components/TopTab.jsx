@@ -28,7 +28,7 @@ const TopTab = ({
   const navigate = useNavigate();
   const goBack = () => {
     const from = sessionStorage.getItem("from");
-    navigate(from || -1 || "/");
+    navigate(from || "/");
     window.sessionStorage.removeItem("from");
   };
 

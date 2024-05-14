@@ -58,9 +58,7 @@ const KakaoDeletePage = () => {
       <Wrapper>
         <IntroTopbar text="회원탈퇴" delPath="/my" />
         <Box>
-          <ImgBoxS>
-            <Img src={symbol} />
-          </ImgBoxS>
+          <Img src={symbol} />
           <span>정말... 떠나시겠어요?</span>
         </Box>
         <SideBox>
@@ -120,7 +118,7 @@ const ColumnStyle = styled.div`
 
 const Box = styled(ColumnStyle)`
   margin: 17.8rem 0 6.4rem;
-  gap: 2.5rem;
+  gap: 1.766rem;
 
   span {
     font-size: 2rem;
@@ -134,11 +132,9 @@ const Box = styled(ColumnStyle)`
   }
 `;
 
-const ImgBoxS = styled.div``;
-
 const Img = styled.img`
   width: 105px;
-  height: 105px;
+  height: 76.34px;
 
   @media (min-width: 1200px) {
     width: 18rem;
@@ -230,6 +226,7 @@ const DelInfo = styled.span`
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
+  line-height: normal;
 
   word-break: keep-all;
 `;

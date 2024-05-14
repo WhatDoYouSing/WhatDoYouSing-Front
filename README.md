@@ -16,10 +16,10 @@
 <br/>
 
 ## 🧙‍♂️ 프론트엔드 개발자 소개
- |변지혜|최지원|
- |:------:|:------:|
-|<img src="https://github.com/mod-siw/11th-CloneCoding-Front/assets/127821462/6dc314ca-65ca-48ac-aebe-894e44ffe48c" width="100" height="100"/>|<img src= "https://github.com/JiwonChoi0805/Ewha-Market/assets/126451052/d4c2cfd3-40ac-45b6-bffd-e295eb429451" width="100" height="100"/>|
-|로그인 & 회원가입 <br /> 마이페이지 <br /> 메인페이지 <br/> 탐색 페이지|게시글 작성 <br /> 가사 상세페이지 <br /> 검색 결과페이지 <br/> 내활동 페이지|
+ |변지혜|최지원|유서연|
+ |:------:|:------:|:------:|
+|<img src="https://github.com/mod-siw/11th-CloneCoding-Front/assets/127821462/6dc314ca-65ca-48ac-aebe-894e44ffe48c" width="100" height="100"/>|<img src= "https://github.com/JiwonChoi0805/Ewha-Market/assets/126451052/d4c2cfd3-40ac-45b6-bffd-e295eb429451" width="100" height="100"/>|<img src= "https://avatars.githubusercontent.com/youtheyeon" width="100" height="100"/>|
+|로그인 & 회원가입 <br /> 마이페이지 <br /> 메인페이지 <br/> 탐색 페이지|게시글 작성 <br /> 가사 상세페이지 <br /> 검색 결과페이지 <br/> 내활동 페이지|이미지 저장 페이지 <br /> Spotify⁠ API 가사 검색 <br /> 게시글 작성 프로세스|
 <br/>
 
 ## 🛠️ 사용 스택

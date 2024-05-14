@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,6 +20,11 @@ import {
   LankingListState,
   DropdownState,
 } from "../assets/recoil/apiRecoil";
+
+//modal
+import ErrorModal from "../components/common/MainPage/ErrorModal";
+import useClickOutside from "../hooks/useClickOutside";
+import EventModal from "../components/common/MainPage/EventModal";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -87,6 +92,33 @@ const MainPage = () => {
 
     //세션 스토리지 초기화
     sessionStorage.clear();
+    sessionStorage.setItem("search-from", window.location.pathname);
+  }, []);
+
+  //서비스 장애 안내 모달
+  const errorModalRef = useRef();
+  const [errorModal, setErrorModal] = useClickOutside(errorModalRef, false);
+
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const popupCookie = cookieData.find((cookie) =>
+      cookie.trim().startsWith("popupCookie=")
+    );
+    popupCookie ? setErrorModal(false) : setErrorModal(true);
+    console.log("popupCookie: " + popupCookie);
+  }, []);
+
+  //서비스 장애 안내 모달
+  const eventModalRef = useRef();
+  const [eventModal, setEventModal] = useClickOutside(eventModalRef, false);
+
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const eventCookie = cookieData.find((cookie) =>
+      cookie.trim().startsWith("eventCookie=")
+    );
+    eventCookie ? setEventModal(false) : setEventModal(true);
+    console.log("eventCookie: " + eventCookie);
   }, []);
 
   return (
@@ -99,6 +131,18 @@ const MainPage = () => {
         <FloatingBtn />
       </Wrapper>
       <Footer />
+      {/* {errorModal && (
+        <ModalWrapper>
+          <Background onClick={() => setErrorModal(false)} />
+          <ErrorModal errorModal={errorModal} setErrorModal={setErrorModal} />
+        </ModalWrapper>
+      )} */}
+      {eventModal && (
+        <ModalWrapper>
+          <Background onClick={() => setEventModal(false)} />
+          <EventModal setEventModal={setEventModal} />
+        </ModalWrapper>
+      )}
     </>
   );
 };
@@ -114,4 +158,29 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 100;
 `;
