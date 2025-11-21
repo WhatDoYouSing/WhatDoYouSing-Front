@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+
+    <title>왓두유씽?</title>
+    <meta
+      name="description"
+      content="당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스"
+    />
+    <meta
+      name="keywords"
+      content="음악, 노래, 가사, 인용, 공유, 탐색, 해석, 감정, 이야기"
+    />
+
+    <meta property="og:site_name" content="왓두유씽?" />
+    <meta property="og:title" content="왓두유씽?" />
+    <meta
+      property="og:description"
+      content="당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.whatdoyousing.com" />
+    <meta property="og:image" content="/thumbnail.png" />
+
+    <meta name="twitter:title" content="왓두유씽?" />
+    <meta
+      name="twitter:description"
+      content="당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스"
+    />
+    <meta name="twitter:type" content="website" />
+    <meta name="twitter:url" content="https://www.whatdoyousing.com" />
+    <meta name="twitter:image" content="/thumbnail.png" />
+
+    <style>
+      body {
+        background-color: #fffcfd;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+          Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .logo {
+        width: 150px;
+        height: auto;
+        margin-bottom: 24px;
+      }
+
+      .btn {
+        padding: 12px 36px;
+        background-color: #ff005c;
+        color: #fffcfd;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        display: none;
+        transition: opacity 0.3s;
+        box-shadow: 0 4px 10px rgba(255, 0, 92, 0.2);
+      }
+    </style>
+
+    <script>
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        const id = params.get('id');
+
+        if (!type || !id) return;
+
+        const appUrl = `whatdoyousing://community/${type}/${id}`;
+
+        window.location.href = appUrl;
+
+        setTimeout(function () {
+          const btnElement = document.getElementById('manual-btn');
+          if (btnElement) {
+            btnElement.style.display = 'block';
+            btnElement.href = appUrl;
+          }
+        }, 3000);
+      };
+    </script>
+  </head>
+  <body>
+    <img
+      src="/logo.png"
+      alt="왓두유씽?"
+      class="logo"
+      onerror="this.style.display='none'"
+    />
+
+    <a id="manual-btn" class="btn" href="#">앱 열기</a>
+  </body>
+</html>
