@@ -1,9 +1,7 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 
-// ... (스타일 컴포넌트들은 아까와 동일하거나 취향껏 수정) ...
 const Container = styled.div`
   display: flex;
   flex-direction: column;
