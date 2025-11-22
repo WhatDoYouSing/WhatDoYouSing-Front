@@ -15,15 +15,11 @@ import { GetSortLatest, GetSortLike, GetSortCom } from "../apis/main";
 
 //recoil
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  LikeListState,
-  LankingListState,
-  DropdownState,
-} from "../assets/recoil/apiRecoil";
+import { LikeListState, LankingListState, DropdownState } from "../assets/recoil/apiRecoil";
 
 //modal
-// import ErrorModal from "../components/common/MainPage/ErrorModal";
-// import useClickOutside from "../hooks/useClickOutside";
+import ShutdownModal from "../components/common/MainPage/ShutdownModal";
+import useClickOutside from "../hooks/useClickOutside";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -94,18 +90,15 @@ const MainPage = () => {
     sessionStorage.setItem("search-from", window.location.pathname);
   }, []);
 
-  //서비스 장애 안내 모달
-  // const errorModalRef = useRef();
-  // const [errorModal, setErrorModal] = useClickOutside(errorModalRef, false);
+  //서비스 종료 안내 모달
+  const modalRef = useRef();
+  const [isModalOpen, setModalOpen] = useClickOutside(modalRef, false);
 
-  // useEffect(() => {
-  //   const cookieData = document.cookie.split(";");
-  //   const popupCookie = cookieData.find((cookie) =>
-  //     cookie.trim().startsWith("popupCookie=")
-  //   );
-  //   popupCookie ? setErrorModal(false) : setErrorModal(true);
-  //   console.log("popupCookie: " + popupCookie);
-  // }, []);
+  useEffect(() => {
+    const cookieData = document.cookie.split(";");
+    const popupCookie = cookieData.find((cookie) => cookie.trim().startsWith("popupCookie="));
+    popupCookie ? setModalOpen(false) : setModalOpen(true);
+  }, []);
 
   return (
     <>
@@ -117,12 +110,12 @@ const MainPage = () => {
         <FloatingBtn />
       </Wrapper>
       <Footer />
-      {/* {errorModal && (
+      {isModalOpen && (
         <ModalWrapper>
-          <Background onClick={() => setErrorModal(false)} />
-          <ErrorModal errorModal={errorModal} setErrorModal={setErrorModal} />
+          <Background onClick={() => setModalOpen(false)} />
+          <ShutdownModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
         </ModalWrapper>
-      )} */}
+      )}
     </>
   );
 };
@@ -140,27 +133,27 @@ const Wrapper = styled.div`
   }
 `;
 
-// const ModalWrapper = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 200;
-// `;
+const ModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+`;
 
-// const Background = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background: rgba(0, 0, 0, 0.25);
-//   z-index: 100;
-// `;
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 100;
+`;

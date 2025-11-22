@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "framework": null,
+  "installCommand": "echo 'Skip Install'",
+  "buildCommand": "mkdir -p build && cp -r public/* build/",
+  "outputDirectory": "build"
+}
