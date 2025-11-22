@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3T83V4GY2B.com.whatdoyousing",
+        "paths": [
+          "*",
+          "/community/*",
+          "/share/*"
+        ]
+      }
+    ]
+  }
+}
